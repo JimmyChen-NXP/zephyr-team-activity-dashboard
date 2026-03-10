@@ -241,20 +241,20 @@ erDiagram
 ## Acceptance Criteria
 
 - [ ] Users can configure a roster of GitHub usernames and save it as the team source of truth.
-- [ ] Users can select preset or custom date ranges and see the active timezone used for calculations.
-- [ ] The dashboard shows team-level and per-user counts for open assigned issues across `zephyrproject-rtos`.
-- [ ] The dashboard shows authored PR counts by state: open, draft, merged in period, and closed-unmerged in period.
-- [ ] The dashboard shows PR review activity per team member with review outcome breakdown.
-- [ ] The dashboard shows open review requests currently pending on team members.
-- [ ] The dashboard includes at least three additional signals: stale work, repository distribution, and review responsiveness.
+- [x] Users can select preset or custom date ranges and see the active timezone used for calculations.
+- [x] The dashboard shows team-level and per-user counts for open assigned issues across `zephyrproject-rtos`.
+- [x] The dashboard shows authored PR counts by state: open, draft, merged in period, and closed-unmerged in period.
+- [x] The dashboard shows PR review activity per team member with review outcome breakdown.
+- [x] The dashboard shows open review requests currently pending on team members.
+- [x] The dashboard includes at least three additional signals: stale work, repository distribution, and review responsiveness.
 - [ ] Summary view loads in 5 seconds or less for up to 50 users across a 90-day range on cached data.
 - [ ] Drill-down detail loads in 2 seconds or less on cached data.
 - [ ] Newly captured activity appears within 15 minutes of the most recent successful sync.
-- [ ] The UI always shows `last updated` and indicates when any data is partial or stale.
+- [x] The UI always shows `last updated` and indicates when any data is partial or stale.
 - [ ] Invalid or inaccessible usernames are listed explicitly and do not block valid results.
-- [ ] CSV export matches the currently filtered detail view.
-- [ ] If no qualifying activity exists, the dashboard shows a clear zero-state instead of an empty or broken layout.
-- [ ] Metric definitions are documented in-product or in supporting docs so stakeholders understand what each number means.
+- [x] CSV export matches the currently filtered detail view.
+- [x] If no qualifying activity exists, the dashboard shows a clear zero-state instead of an empty or broken layout.
+- [x] Metric definitions are documented in-product or in supporting docs so stakeholders understand what each number means.
 
 ## Success Metrics
 
