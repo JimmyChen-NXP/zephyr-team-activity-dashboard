@@ -29,6 +29,27 @@ export type ReviewOutcomeBreakdown = {
   commented: number;
 };
 
+export type ReviewSourceBreakdown = {
+  teamPr: number;
+  extPr: number;
+};
+
+export type ActivityMetricDelta = {
+  openAssignedIssues: number;
+  openAuthoredPrs: number;
+  draftPrs: number;
+  mergedPrs: number;
+  closedUnmergedPrs: number;
+  reviewsSubmitted: number;
+  pendingReviewRequests: number;
+  staleItems: number;
+  reviewApproved: number;
+  reviewChangesRequested: number;
+  reviewCommented: number;
+  reviewTeamPr: number;
+  reviewExtPr: number;
+};
+
 export type ContributorMetrics = {
   login: string;
   name: string;
@@ -53,7 +74,9 @@ export type RepoActivity = {
   contributors: number;
 };
 
-export type ActivityItemType = "issue" | "pull_request" | "review";
+export type ActivityItemType = "issue" | "pull_request" | "review" | "review_request";
+
+export type ReviewedPrKind = "team-pr" | "ext-pr";
 
 export type ActivityItem = {
   id: string;
@@ -67,6 +90,8 @@ export type ActivityItem = {
   updatedAt: string;
   ageDays: number;
   statusLabel: string;
+  reviewedPrKind?: ReviewedPrKind;
+  metrics: ActivityMetricDelta;
 };
 
 export type SyncHealth = {
@@ -94,13 +119,23 @@ export type DashboardData = {
   range: RangeOption;
   generatedAt: string;
   rosterSize: number;
+  rosterMembers: RosterMember[];
   warnings: DashboardWarning[];
   summary: DashboardSummary;
   reviewOutcomes: ReviewOutcomeBreakdown;
+  reviewSources: ReviewSourceBreakdown;
   contributors: ContributorMetrics[];
   repoActivity: RepoActivity[];
   activityItems: ActivityItem[];
   syncHealth: SyncHealth;
+  filterOptions: {
+    contributors: Array<{ login: string; name: string }>;
+    repos: string[];
+  };
+  auth: {
+    hasToken: boolean;
+    tokenSource: "none" | "env" | "cookie";
+  };
 };
 
 export type DashboardFilters = {

@@ -142,6 +142,7 @@ label {
 }
 
 select,
+.token-form input,
 .primary-button,
 .secondary-button,
 .ghost-button {
@@ -247,6 +248,47 @@ select,
   grid-template-columns: minmax(0, 1fr) 220px;
   align-items: center;
   gap: 16px;
+}
+
+.review-side-panel,
+.token-panel,
+.token-form {
+  display: grid;
+  gap: 16px;
+}
+
+.mini-metric-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.mini-metric-card {
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.mini-metric-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.25rem;
+}
+
+.token-panel {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.token-copy {
+  color: #c1cee7;
+  margin: 8px 0 0;
+}
+
+.token-form {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
 }
 
 .legend-list,
@@ -365,6 +407,7 @@ th {
 
   .hero,
   .filter-form,
+  .token-form,
   .summary-grid,
   .chart-grid,
   .content-grid,

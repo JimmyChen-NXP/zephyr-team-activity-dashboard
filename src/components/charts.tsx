@@ -2,26 +2,32 @@
 
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-import type { RepoActivity, ReviewOutcomeBreakdown } from "@/lib/types";
+import type { RepoActivity, ReviewOutcomeBreakdown, ReviewSourceBreakdown } from "@/lib/types";
 
 type ChartsProps = {
   repos: RepoActivity[];
   reviewOutcomes: ReviewOutcomeBreakdown;
+  reviewSources: ReviewSourceBreakdown;
 };
 
 const COLORS = ["#7c3aed", "#38bdf8", "#f97316", "#10b981"];
 
-export function DashboardCharts({ repos, reviewOutcomes }: ChartsProps) {
+export function DashboardCharts({ repos, reviewOutcomes, reviewSources }: ChartsProps) {
   const repoData = repos.slice(0, 6).map((repo) => ({
     name: repo.name.replace("zephyrproject-rtos/", ""),
     activity: repo.prs + repo.reviews + repo.issues,
   }));
 
   const reviewData = [
-    { name: "Approved", value: reviewOutcomes.approved },
-    { name: "Changes requested", value: reviewOutcomes.changesRequested },
-    { name: "Commented", value: reviewOutcomes.commented },
+    { name: "Team PR", value: reviewSources.teamPr },
+    { name: "External PR", value: reviewSources.extPr },
   ].filter((item) => item.value > 0);
+
+  const outcomeCards = [
+    { label: "Approved", value: reviewOutcomes.approved },
+    { label: "Changes requested", value: reviewOutcomes.changesRequested },
+    { label: "Commented", value: reviewOutcomes.commented },
+  ];
 
   return (
     <div className="chart-grid">
@@ -47,8 +53,8 @@ export function DashboardCharts({ repos, reviewOutcomes }: ChartsProps) {
       <section className="panel chart-panel">
         <div className="panel-header">
           <div>
-            <p className="eyebrow">Review mix</p>
-            <h3>Outcome breakdown</h3>
+            <p className="eyebrow">Review split</p>
+            <h3>Team PR vs external PR</h3>
           </div>
         </div>
         <div className="chart-frame donut-frame">
@@ -62,15 +68,25 @@ export function DashboardCharts({ repos, reviewOutcomes }: ChartsProps) {
               <Tooltip contentStyle={{ background: "#111827", border: "1px solid rgba(148, 163, 184, 0.15)", borderRadius: 16 }} />
             </PieChart>
           </ResponsiveContainer>
-          <ul className="legend-list">
-            {reviewData.map((entry, index) => (
-              <li key={entry.name}>
-                <span className="legend-dot" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
-                <span>{entry.name}</span>
-                <strong>{entry.value}</strong>
-              </li>
-            ))}
-          </ul>
+          <div className="review-side-panel">
+            <ul className="legend-list">
+              {reviewData.map((entry, index) => (
+                <li key={entry.name}>
+                  <span className="legend-dot" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+                  <span>{entry.name}</span>
+                  <strong>{entry.value}</strong>
+                </li>
+              ))}
+            </ul>
+            <div className="mini-metric-grid">
+              {outcomeCards.map((card) => (
+                <article key={card.label} className="mini-metric-card">
+                  <span>{card.label}</span>
+                  <strong>{card.value}</strong>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>

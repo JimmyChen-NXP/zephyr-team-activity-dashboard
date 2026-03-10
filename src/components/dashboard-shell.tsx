@@ -24,8 +24,9 @@ function formatMetric(value: number | null, suffix = "") {
 }
 
 export function DashboardShell({ data, filters }: DashboardShellProps) {
-  const contributorOptions = [{ login: "all", name: "All contributors" }, ...data.contributors.map((contributor) => ({ login: contributor.login, name: contributor.name }))];
-  const repoOptions = [{ name: "all" }, ...data.repoActivity.map((repo) => ({ name: repo.name }))];
+  const contributorOptions = [{ login: "all", name: "All contributors" }, ...data.filterOptions.contributors];
+  const repoOptions = [{ name: "all" }, ...data.filterOptions.repos.map((repo) => ({ name: repo }))];
+  const currentLocation = `/?preset=${filters.preset}&contributor=${filters.contributor}&repo=${encodeURIComponent(filters.repo)}`;
 
   const summaryCards = [
     { label: "Open assigned issues", value: data.summary.openAssignedIssues, accent: "violet" },
@@ -128,6 +129,32 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
             </a>
           </div>
         </form>
+
+        <div className="token-panel">
+          <div>
+            <p className="eyebrow">GitHub authentication</p>
+            <h3>Provide or replace the GitHub token</h3>
+            <p className="token-copy">
+              Current source: <strong>{data.auth.tokenSource}</strong>. A token entered here is stored in a secure cookie and is used for live refreshes.
+            </p>
+          </div>
+
+          <form className="token-form" action="/api/token" method="post">
+            <input type="hidden" name="returnTo" value={currentLocation} />
+            <label>
+              <span>GitHub token</span>
+              <input name="token" type="password" placeholder="ghp_..." autoComplete="off" />
+            </label>
+            <div className="filter-actions">
+              <button type="submit" className="primary-button" name="action" value="save">
+                Save token
+              </button>
+              <button type="submit" className="ghost-button" name="action" value="clear">
+                Clear token
+              </button>
+            </div>
+          </form>
+        </div>
       </section>
 
       <section className="summary-grid">
@@ -139,7 +166,7 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
         ))}
       </section>
 
-      <DashboardCharts repos={data.repoActivity} reviewOutcomes={data.reviewOutcomes} />
+      <DashboardCharts repos={data.repoActivity} reviewOutcomes={data.reviewOutcomes} reviewSources={data.reviewSources} />
 
       <div className="content-grid">
         <section className="panel table-panel">
@@ -290,14 +317,14 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
                   </td>
                 </tr>
               ) : (
-                data.activityItems.map((item) => (
+                data.activityItems.slice(0, 60).map((item) => (
                   <tr key={item.id}>
                     <td>
                       <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
                         {item.title}
                       </a>
                     </td>
-                    <td>{item.type.replace("_", " ")}</td>
+                    <td>{item.reviewedPrKind ? `${item.type.replace("_", " ")} · ${item.reviewedPrKind}` : item.type.replace("_", " ")}</td>
                     <td>@{item.contributor}</td>
                     <td>{item.repo}</td>
                     <td>{formatISO9075(new Date(item.updatedAt))}</td>

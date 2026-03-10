@@ -6,6 +6,7 @@ import type {
   DashboardData,
   DashboardWarning,
   RepoActivity,
+  ReviewSourceBreakdown,
   ReviewOutcomeBreakdown,
   RosterMember,
   RangeOption,
@@ -25,6 +26,24 @@ function hashSeed(value: string): number {
 
 function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
+}
+
+function emptyMetrics() {
+  return {
+    openAssignedIssues: 0,
+    openAuthoredPrs: 0,
+    draftPrs: 0,
+    mergedPrs: 0,
+    closedUnmergedPrs: 0,
+    reviewsSubmitted: 0,
+    pendingReviewRequests: 0,
+    staleItems: 0,
+    reviewApproved: 0,
+    reviewChangesRequested: 0,
+    reviewCommented: 0,
+    reviewTeamPr: 0,
+    reviewExtPr: 0,
+  };
 }
 
 export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): DashboardData {
@@ -71,6 +90,30 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
     const repo = DEMO_REPOS[index % DEMO_REPOS.length];
     const createdAt = new Date(Date.parse(range.from) + index * 86400000).toISOString();
     const updatedAt = new Date(Date.parse(createdAt) + 3600000 * ((index % 6) + 2)).toISOString();
+    const isTeamPr = index % 2 === 0;
+    const reviewState = index % 3 === 0 ? "APPROVED" : index % 3 === 1 ? "CHANGES_REQUESTED" : "COMMENTED";
+    const reviewRequestItems: ActivityItem[] =
+      contributor.pendingReviewRequests > 0
+        ? [
+            {
+              id: `${contributor.login}-review-request`,
+              type: "review_request",
+              title: `Review request for ${contributor.name}`,
+              url: `https://github.com/${repo}/pull/${400 + index}`,
+              repo,
+              contributor: contributor.login,
+              state: "open",
+              createdAt,
+              updatedAt,
+              ageDays: differenceInCalendarDays(new Date(), parseISO(createdAt)),
+              statusLabel: "Pending review request",
+              metrics: {
+                ...emptyMetrics(),
+                pendingReviewRequests: contributor.pendingReviewRequests,
+              },
+            },
+          ]
+        : [];
 
     return [
       {
@@ -85,6 +128,11 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
         updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(createdAt)),
         statusLabel: contributor.staleItems > 0 ? "Needs attention" : "Active",
+        metrics: {
+          ...emptyMetrics(),
+          openAssignedIssues: contributor.openAssignedIssues,
+          staleItems: Math.ceil(contributor.staleItems / 2),
+        },
       },
       {
         id: `${contributor.login}-pr`,
@@ -98,7 +146,39 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
         updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(createdAt)),
         statusLabel: contributor.pendingReviewRequests > 1 ? "Awaiting review" : "Moving",
+        metrics: {
+          ...emptyMetrics(),
+          openAuthoredPrs: contributor.openAuthoredPrs,
+          draftPrs: contributor.draftPrs,
+          mergedPrs: contributor.mergedPrs,
+          closedUnmergedPrs: contributor.closedUnmergedPrs,
+          staleItems: Math.floor(contributor.staleItems / 2),
+        },
       },
+      {
+        id: `${contributor.login}-review`,
+        type: "review",
+        title: `Review by ${contributor.name}`,
+        url: `https://github.com/${repo}/pull/${300 + index}`,
+        repo,
+        contributor: contributor.login,
+        state: reviewState.toLowerCase(),
+        createdAt,
+        updatedAt,
+        ageDays: differenceInCalendarDays(new Date(), parseISO(createdAt)),
+        statusLabel: isTeamPr ? "Team PR" : "External PR",
+        reviewedPrKind: isTeamPr ? "team-pr" : "ext-pr",
+        metrics: {
+          ...emptyMetrics(),
+          reviewsSubmitted: contributor.reviewsSubmitted,
+          reviewApproved: Math.max(1, Math.floor(contributor.reviewsSubmitted * 0.5)),
+          reviewChangesRequested: Math.floor(contributor.reviewsSubmitted * 0.2),
+          reviewCommented: Math.ceil(contributor.reviewsSubmitted * 0.3),
+          reviewTeamPr: isTeamPr ? contributor.reviewsSubmitted : 0,
+          reviewExtPr: isTeamPr ? 0 : contributor.reviewsSubmitted,
+        },
+      },
+      ...reviewRequestItems,
     ];
   });
 
@@ -106,6 +186,11 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
     approved: contributors.reduce((total, contributor) => total + Math.max(1, Math.floor(contributor.reviewsSubmitted * 0.5)), 0),
     changesRequested: contributors.reduce((total, contributor) => total + Math.floor(contributor.reviewsSubmitted * 0.2), 0),
     commented: contributors.reduce((total, contributor) => total + Math.ceil(contributor.reviewsSubmitted * 0.3), 0),
+  };
+
+  const reviewSources: ReviewSourceBreakdown = {
+    teamPr: activityItems.reduce((total, item) => total + item.metrics.reviewTeamPr, 0),
+    extPr: activityItems.reduce((total, item) => total + item.metrics.reviewExtPr, 0),
   };
 
   const warnings: DashboardWarning[] = [
@@ -120,6 +205,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
     range,
     generatedAt,
     rosterSize: roster.length,
+    rosterMembers: roster,
     warnings,
     summary: {
       openAssignedIssues: contributors.reduce((total, contributor) => total + contributor.openAssignedIssues, 0),
@@ -133,9 +219,10 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       medianMergeHours: 41.2,
     },
     reviewOutcomes,
+    reviewSources,
     contributors: contributors.sort((left, right) => right.activityScore - left.activityScore),
     repoActivity: repoActivity.sort((left, right) => right.prs + right.reviews - (left.prs + left.reviews)),
-    activityItems: activityItems.slice(0, 24),
+    activityItems,
     syncHealth: {
       source: "demo",
       generatedAt,
@@ -143,6 +230,14 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       searchSamples: 0,
       detailSamples: activityItems.length,
       liveEnabled: false,
+    },
+    filterOptions: {
+      contributors: roster.map((member) => ({ login: member.login, name: member.name })),
+      repos: [...DEMO_REPOS],
+    },
+    auth: {
+      hasToken: false,
+      tokenSource: "none",
     },
   };
 }

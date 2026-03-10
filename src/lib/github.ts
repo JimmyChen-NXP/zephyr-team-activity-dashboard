@@ -7,6 +7,7 @@ import type {
   DashboardData,
   DashboardWarning,
   RepoActivity,
+  ReviewSourceBreakdown,
   ReviewOutcomeBreakdown,
   RosterMember,
   RangeOption,
@@ -71,23 +72,41 @@ const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 5);
 const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? 40);
 const limit = pLimit(4);
 
-function getHeaders(): HeadersInit {
+function emptyMetrics() {
+  return {
+    openAssignedIssues: 0,
+    openAuthoredPrs: 0,
+    draftPrs: 0,
+    mergedPrs: 0,
+    closedUnmergedPrs: 0,
+    reviewsSubmitted: 0,
+    pendingReviewRequests: 0,
+    staleItems: 0,
+    reviewApproved: 0,
+    reviewChangesRequested: 0,
+    reviewCommented: 0,
+    reviewTeamPr: 0,
+    reviewExtPr: 0,
+  };
+}
+
+function getHeaders(token?: string): HeadersInit {
   const headers: HeadersInit = {
     Accept: "application/vnd.github+json",
     "User-Agent": "zephyr-team-activity-dashboard",
     "X-GitHub-Api-Version": "2022-11-28",
   };
 
-  if (process.env.GITHUB_TOKEN) {
-    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
   }
 
   return headers;
 }
 
-async function fetchGitHub<T>(path: string): Promise<T> {
+async function fetchGitHub<T>(path: string, token?: string): Promise<T> {
   const response = await fetch(`${API_ROOT}${path}`, {
-    headers: getHeaders(),
+    headers: getHeaders(token),
     next: { revalidate: 0 },
   });
 
@@ -98,17 +117,17 @@ async function fetchGitHub<T>(path: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-async function searchIssues(query: string, page: number): Promise<SearchResponse> {
-  return fetchGitHub<SearchResponse>(`/search/issues?q=${encodeURIComponent(query)}&per_page=100&page=${page}`);
+async function searchIssues(query: string, page: number, token?: string): Promise<SearchResponse> {
+  return fetchGitHub<SearchResponse>(`/search/issues?q=${encodeURIComponent(query)}&per_page=100&page=${page}`, token);
 }
 
-async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT) {
+async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT, token?: string) {
   const allItems: SearchItem[] = [];
   let totalCount = 0;
   let incompleteResults = false;
 
   for (let page = 1; page <= maxPages; page += 1) {
-    const response = await searchIssues(query, page);
+    const response = await searchIssues(query, page, token);
     totalCount = response.total_count;
     incompleteResults = incompleteResults || response.incomplete_results;
     allItems.push(...response.items);
@@ -126,13 +145,13 @@ async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT) {
   };
 }
 
-async function fetchPullRequestDetails(pullRequestUrl: string): Promise<PullRequestDetail> {
+async function fetchPullRequestDetails(pullRequestUrl: string, token?: string): Promise<PullRequestDetail> {
   const url = new URL(pullRequestUrl);
-  return fetchGitHub<PullRequestDetail>(url.pathname);
+  return fetchGitHub<PullRequestDetail>(url.pathname, token);
 }
 
-async function fetchPullRequestReviews(owner: string, repo: string, number: number): Promise<PullRequestReview[]> {
-  return fetchGitHub<PullRequestReview[]>(`/repos/${owner}/${repo}/pulls/${number}/reviews?per_page=100`);
+async function fetchPullRequestReviews(owner: string, repo: string, number: number, token?: string): Promise<PullRequestReview[]> {
+  return fetchGitHub<PullRequestReview[]>(`/repos/${owner}/${repo}/pulls/${number}/reviews?per_page=100`, token);
 }
 
 function repoFullNameFromSearchItem(item: SearchItem): string {
@@ -162,7 +181,13 @@ function createContributorMap(roster: RosterMember[]): Map<string, ContributorAc
   );
 }
 
-function asActivityItem(item: SearchItem, contributor: string, type: ActivityItem["type"], statusLabel: string): ActivityItem {
+function asActivityItem(
+  item: SearchItem,
+  contributor: string,
+  type: ActivityItem["type"],
+  statusLabel: string,
+  metrics = emptyMetrics(),
+): ActivityItem {
   return {
     id: `${type}-${item.id}-${contributor}`,
     type,
@@ -175,10 +200,11 @@ function asActivityItem(item: SearchItem, contributor: string, type: ActivityIte
     updatedAt: item.updated_at,
     ageDays: differenceInCalendarDays(new Date(), parseISO(item.created_at)),
     statusLabel,
+    metrics,
   };
 }
 
-export async function collectLiveDashboard(roster: RosterMember[], range: RangeOption): Promise<DashboardData> {
+export async function collectLiveDashboard(roster: RosterMember[], range: RangeOption, token: string): Promise<DashboardData> {
   const rosterLogins = new Set(roster.map((member) => member.login.toLowerCase()));
   const contributorMap = createContributorMap(roster);
   const repoMap = new Map<string, RepoAccumulator>();
@@ -187,6 +213,10 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     approved: 0,
     changesRequested: 0,
     commented: 0,
+  };
+  const reviewSources: ReviewSourceBreakdown = {
+    teamPr: 0,
+    extPr: 0,
   };
   const activityItems: ActivityItem[] = [];
   const firstReviewHours: number[] = [];
@@ -197,10 +227,10 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
   const staleCutoff = parseISO(range.to).getTime() - 7 * 86400000;
 
   const [openIssuesResult, openPrsResult, mergedPrsResult, closedPrsResult] = await Promise.all([
-    searchAcrossPages(`org:${ORG} is:issue is:open archived:false sort:updated-desc`),
-    searchAcrossPages(`org:${ORG} is:pr is:open archived:false sort:updated-desc`, Math.max(2, SEARCH_PAGE_LIMIT - 1)),
-    searchAcrossPages(`org:${ORG} is:pr merged:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} archived:false sort:updated-desc`, 3),
-    searchAcrossPages(`org:${ORG} is:pr is:closed closed:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} -is:merged archived:false sort:updated-desc`, 2),
+    searchAcrossPages(`org:${ORG} is:issue is:open archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
+    searchAcrossPages(`org:${ORG} is:pr is:open archived:false sort:updated-desc`, Math.max(2, SEARCH_PAGE_LIMIT - 1), token),
+    searchAcrossPages(`org:${ORG} is:pr merged:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} archived:false sort:updated-desc`, 3, token),
+    searchAcrossPages(`org:${ORG} is:pr is:closed closed:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} -is:merged archived:false sort:updated-desc`, 2, token),
   ]);
 
   searchSamples +=
@@ -243,7 +273,13 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     repoEntry.contributors.add(contributor.login);
     repoMap.set(repo, repoEntry);
 
-    activityItems.push(asActivityItem(item, contributor.login, "issue", Date.parse(item.updated_at) < staleCutoff ? "Stale issue" : "Assigned"));
+    activityItems.push(
+      asActivityItem(item, contributor.login, "issue", Date.parse(item.updated_at) < staleCutoff ? "Stale issue" : "Assigned", {
+        ...emptyMetrics(),
+        openAssignedIssues: 1,
+        staleItems: Date.parse(item.updated_at) < staleCutoff ? 1 : 0,
+      }),
+    );
   }
 
   const allTeamPrItems = [...openPrsResult.items, ...mergedPrsResult.items, ...closedPrsResult.items].filter((item) =>
@@ -279,12 +315,20 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       }
     }
 
+    const isMerged = mergedPrsResult.items.some((candidate) => candidate.id === item.id);
     activityItems.push(
       asActivityItem(
         item,
         contributor.login,
         "pull_request",
-        item.state === "open" ? "Open PR" : mergedPrsResult.items.some((candidate) => candidate.id === item.id) ? "Merged" : "Closed",
+        item.state === "open" ? "Open PR" : isMerged ? "Merged" : "Closed",
+        {
+          ...emptyMetrics(),
+          openAuthoredPrs: item.state === "open" ? 1 : 0,
+          mergedPrs: isMerged ? 1 : 0,
+          closedUnmergedPrs: item.closed_at && !isMerged ? 1 : 0,
+          staleItems: item.state === "open" && Date.parse(item.updated_at) < staleCutoff ? 1 : 0,
+        },
       ),
     );
   }
@@ -294,13 +338,13 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
   const detailResults = await Promise.all(
     detailTargets.map((item) =>
       limit(async () => {
-        const detail = await fetchPullRequestDetails(item.pull_request!.url);
+        const detail = await fetchPullRequestDetails(item.pull_request!.url, token);
         const repoFullName = detail.base.repo?.full_name ?? detail.head.repo?.full_name;
         if (!repoFullName) {
           return null;
         }
         const [owner, repo] = repoFullName.split("/");
-        const reviews = await fetchPullRequestReviews(owner, repo, detail.number);
+        const reviews = await fetchPullRequestReviews(owner, repo, detail.number, token);
         return { item, detail, reviews, repoFullName };
       }),
     ),
@@ -320,6 +364,11 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
 
     if (detail.draft) {
       contributor.draftPrs += 1;
+      const prItem = activityItems.find((activityItem) => activityItem.type === "pull_request" && activityItem.url === item.html_url);
+      if (prItem) {
+        prItem.metrics.draftPrs += 1;
+        prItem.statusLabel = "Draft PR";
+      }
     }
 
     const matchingRequests = detail.requested_reviewers.filter((reviewer) => rosterLogins.has(reviewer.login.toLowerCase()));
@@ -327,6 +376,23 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       const reviewerMetrics = contributorMap.get(reviewer.login.toLowerCase());
       if (reviewerMetrics) {
         reviewerMetrics.pendingReviewRequests += 1;
+        activityItems.push({
+          id: `review-request-${detail.id}-${reviewer.login}`,
+          type: "review_request",
+          title: `Review requested from ${reviewerMetrics.name}`,
+          url: item.html_url,
+          repo: repoFullName,
+          contributor: reviewerMetrics.login,
+          state: "open",
+          createdAt: detail.created_at,
+          updatedAt: detail.updated_at,
+          ageDays: differenceInCalendarDays(new Date(), parseISO(detail.updated_at)),
+          statusLabel: "Pending review request",
+          metrics: {
+            ...emptyMetrics(),
+            pendingReviewRequests: 1,
+          },
+        });
       }
     }
 
@@ -362,6 +428,8 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         continue;
       }
 
+      const reviewedPrKind = rosterLogins.has(item.user.login.toLowerCase()) ? "team-pr" : "ext-pr";
+
       reviewer.reviewsSubmitted += 1;
       repoEntry.reviews += 1;
       repoEntry.contributors.add(reviewer.login);
@@ -376,7 +444,17 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         createdAt: detail.created_at,
         updatedAt: review.submitted_at,
         ageDays: differenceInCalendarDays(new Date(), parseISO(review.submitted_at)),
-        statusLabel: review.state,
+        statusLabel: reviewedPrKind === "team-pr" ? `${review.state} · Team PR` : `${review.state} · External PR`,
+        reviewedPrKind,
+        metrics: {
+          ...emptyMetrics(),
+          reviewsSubmitted: 1,
+          reviewApproved: review.state.toUpperCase() === "APPROVED" ? 1 : 0,
+          reviewChangesRequested: review.state.toUpperCase() === "CHANGES_REQUESTED" ? 1 : 0,
+          reviewCommented: review.state.toUpperCase() === "APPROVED" || review.state.toUpperCase() === "CHANGES_REQUESTED" ? 0 : 1,
+          reviewTeamPr: reviewedPrKind === "team-pr" ? 1 : 0,
+          reviewExtPr: reviewedPrKind === "ext-pr" ? 1 : 0,
+        },
       });
 
       const state = review.state.toUpperCase();
@@ -386,6 +464,12 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         reviewOutcomes.changesRequested += 1;
       } else {
         reviewOutcomes.commented += 1;
+      }
+
+      if (reviewedPrKind === "team-pr") {
+        reviewSources.teamPr += 1;
+      } else {
+        reviewSources.extPr += 1;
       }
     }
 
@@ -434,6 +518,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     range,
     generatedAt,
     rosterSize: roster.length,
+    rosterMembers: roster,
     warnings,
     summary: {
       openAssignedIssues: contributors.reduce((total, contributor) => total + contributor.openAssignedIssues, 0),
@@ -447,9 +532,10 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       medianMergeHours: median(mergeHours),
     },
     reviewOutcomes,
+    reviewSources,
     contributors,
     repoActivity,
-    activityItems: activityItems.sort((left, right) => (left.updatedAt > right.updatedAt ? -1 : 1)).slice(0, 40),
+    activityItems: activityItems.sort((left, right) => (left.updatedAt > right.updatedAt ? -1 : 1)),
     syncHealth: {
       source: "live",
       generatedAt,
@@ -457,6 +543,14 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       searchSamples,
       detailSamples,
       liveEnabled: true,
+    },
+    filterOptions: {
+      contributors: roster.map((member) => ({ login: member.login, name: member.name })),
+      repos: Array.from(new Set(repoActivity.map((repo) => repo.name))).sort(),
+    },
+    auth: {
+      hasToken: true,
+      tokenSource: "env",
     },
   };
 }
