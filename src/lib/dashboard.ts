@@ -45,17 +45,25 @@ function scoreContributor(metrics: ReturnType<typeof emptyMetrics>) {
 async function getGitHubAuth() {
   const cookieStore = await cookies();
   const cookieToken = cookieStore.get("github_token")?.value?.trim();
+  const authNoticeCookie = cookieStore.get("auth_notice")?.value;
+  let authNotice: { level: "info" | "warn" | "error"; message: string } | null = null;
+
+  if (authNoticeCookie) {
+    try {
+      authNotice = JSON.parse(authNoticeCookie) as { level: "info" | "warn" | "error"; message: string };
+    } catch {}
+  }
 
   if (cookieToken) {
-    return { token: cookieToken, source: "cookie" as const };
+    return { token: cookieToken, source: "cookie" as const, notice: authNotice };
   }
 
   const envToken = process.env.GITHUB_TOKEN?.trim();
   if (envToken) {
-    return { token: envToken, source: "env" as const };
+    return { token: envToken, source: "env" as const, notice: authNotice };
   }
 
-  return { token: "", source: "none" as const };
+  return { token: "", source: "none" as const, notice: authNotice };
 }
 
 function getSnapshotPath(preset: DashboardFilters["preset"]) {
@@ -206,8 +214,10 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
   const range = resolveRange(filters.preset);
   const roster = await loadRoster();
   const auth = await getGitHubAuth();
+  const baseDemoData = buildDemoDashboard(roster, range);
   const demoData = {
-    ...buildDemoDashboard(roster, range),
+    ...baseDemoData,
+    warnings: auth.notice ? [auth.notice, ...baseDemoData.warnings] : baseDemoData.warnings,
     auth: {
       hasToken: auth.source !== "none",
       tokenSource: auth.source,
@@ -226,6 +236,7 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
         {
           ...snapshot,
           warnings: [
+            ...(auth.notice ? [auth.notice] : []),
             ...snapshot.warnings,
             {
               level: "info",
@@ -244,8 +255,10 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
   }
 
   try {
+    const collectedLiveData = await collectLiveDashboard(roster, range, auth.token);
     const liveData = {
-      ...(await collectLiveDashboard(roster, range, auth.token)),
+      ...collectedLiveData,
+      warnings: auth.notice ? [auth.notice, ...collectedLiveData.warnings] : collectedLiveData.warnings,
       auth: {
         hasToken: true,
         tokenSource: auth.source,
@@ -262,6 +275,7 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
         {
           ...snapshot,
           warnings: [
+            ...(auth.notice ? [auth.notice] : []),
             {
               level: "error",
               message: `Live sync failed (${message}). Falling back to the latest cached snapshot.`,
