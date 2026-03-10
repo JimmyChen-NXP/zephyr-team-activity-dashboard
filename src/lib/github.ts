@@ -1,6 +1,7 @@
 import { differenceInHours, differenceInMinutes, differenceInCalendarDays, parseISO } from "date-fns";
 import pLimit from "p-limit";
 
+import { calculateActivityScore } from "@/lib/scoring";
 import type {
   ActivityItem,
   ContributorMetrics,
@@ -479,13 +480,14 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
   const contributors = Array.from(contributorMap.values())
     .map((contributor) => {
       contributor.repositoriesTouched = Array.from(repoMap.values()).filter((repo) => repo.contributors.has(contributor.login)).length;
-      contributor.activityScore =
-        contributor.openAssignedIssues * 3 +
-        contributor.openAuthoredPrs * 3 +
-        contributor.mergedPrs * 2 +
-        contributor.reviewsSubmitted +
-        contributor.pendingReviewRequests * 2 +
-        contributor.staleItems;
+      contributor.activityScore = calculateActivityScore({
+        openAssignedIssues: contributor.openAssignedIssues,
+        openAuthoredPrs: contributor.openAuthoredPrs,
+        mergedPrs: contributor.mergedPrs,
+        reviewsSubmitted: contributor.reviewsSubmitted,
+        pendingReviewRequests: contributor.pendingReviewRequests,
+        staleItems: contributor.staleItems,
+      });
       return contributor;
     })
     .filter((contributor) => contributor.activityScore > 0)

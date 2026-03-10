@@ -247,6 +247,9 @@ erDiagram
 - [x] The dashboard shows PR review activity per team member with review outcome breakdown.
 - [x] The dashboard shows open review requests currently pending on team members.
 - [x] The dashboard includes at least three additional signals: stale work, repository distribution, and review responsiveness.
+- [x] Users can click a contributor row or use the contributor filter to update authored PR, reviewed PR, and issue detail tables for that contributor.
+- [x] The reviewed PR table distinguishes `team-pr` from `ext-pr` based on whether the PR author is in the team roster.
+- [x] The activity score formula is explained in the UI or supporting metric documentation.
 - [ ] Summary view loads in 5 seconds or less for up to 50 users across a 90-day range on cached data.
 - [ ] Drill-down detail loads in 2 seconds or less on cached data.
 - [ ] Newly captured activity appears within 15 minutes of the most recent successful sync.

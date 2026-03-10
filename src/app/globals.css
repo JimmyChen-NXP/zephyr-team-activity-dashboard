@@ -117,7 +117,9 @@ label span,
 .filter-actions,
 .summary-grid,
 .chart-grid,
-.content-grid {
+.content-grid,
+.detail-table-grid,
+.detail-focus-meta {
   display: grid;
   gap: 16px;
 }
@@ -214,6 +216,35 @@ select,
 
 .summary-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.detail-table-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.detail-span-full {
+  grid-column: 1 / -1;
+}
+
+.detail-focus-panel {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.detail-focus-meta {
+  grid-auto-flow: column;
+}
+
+.detail-focus-meta span,
+.help-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #d8e2f3;
+}
+
+.help-label {
+  cursor: help;
 }
 
 .summary-card {
@@ -410,10 +441,15 @@ th {
   .token-form,
   .summary-grid,
   .chart-grid,
+  .detail-table-grid,
   .content-grid,
   .donut-frame,
   .hero-meta {
     grid-template-columns: 1fr;
+  }
+
+  .detail-focus-meta {
+    grid-auto-flow: row;
   }
 
   .filter-actions {

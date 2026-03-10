@@ -1,5 +1,6 @@
 import { differenceInCalendarDays, parseISO } from "date-fns";
 
+import { calculateActivityScore } from "@/lib/scoring";
 import type {
   ActivityItem,
   ContributorMetrics,
@@ -73,8 +74,14 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       pendingReviewRequests,
       staleItems,
       repositoriesTouched,
-      activityScore:
-        openAssignedIssues * 3 + openAuthoredPrs * 3 + mergedPrs * 2 + reviewsSubmitted + pendingReviewRequests * 2,
+      activityScore: calculateActivityScore({
+        openAssignedIssues,
+        openAuthoredPrs,
+        mergedPrs,
+        reviewsSubmitted,
+        pendingReviewRequests,
+        staleItems,
+      }),
     };
   });
 

@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { formatDistanceToNow, formatISO9075 } from "date-fns";
 
 import { DashboardCharts } from "@/components/charts";
+import { ACTIVITY_SCORE_FORMULA } from "@/lib/scoring";
 import type { DashboardData, DashboardFilters } from "@/lib/types";
 
 type DashboardShellProps = {
@@ -23,10 +24,30 @@ function formatMetric(value: number | null, suffix = "") {
   return `${value}${suffix}`;
 }
 
+function formatTypeLabel(value: string) {
+  return value.replaceAll("_", " ");
+}
+
+function formatReviewKind(value?: "team-pr" | "ext-pr") {
+  if (value === "team-pr") {
+    return "Team PR";
+  }
+
+  if (value === "ext-pr") {
+    return "External PR";
+  }
+
+  return "—";
+}
+
 export function DashboardShell({ data, filters }: DashboardShellProps) {
   const contributorOptions = [{ login: "all", name: "All contributors" }, ...data.filterOptions.contributors];
   const repoOptions = [{ name: "all" }, ...data.filterOptions.repos.map((repo) => ({ name: repo }))];
   const currentLocation = `/?preset=${filters.preset}&contributor=${filters.contributor}&repo=${encodeURIComponent(filters.repo)}`;
+  const selectedContributor = contributorOptions.find((option) => option.login === filters.contributor)?.name ?? "All contributors";
+  const authoredPrs = data.activityItems.filter((item) => item.type === "pull_request");
+  const reviewedPrs = data.activityItems.filter((item) => item.type === "review");
+  const issues = data.activityItems.filter((item) => item.type === "issue");
 
   const summaryCards = [
     { label: "Open assigned issues", value: data.summary.openAssignedIssues, accent: "violet" },
@@ -168,6 +189,23 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
 
       <DashboardCharts repos={data.repoActivity} reviewOutcomes={data.reviewOutcomes} reviewSources={data.reviewSources} />
 
+      <section className="panel detail-focus-panel">
+        <div className="panel-header compact">
+          <div>
+            <p className="eyebrow">Contributor focus</p>
+            <h2>{selectedContributor}</h2>
+          </div>
+          <div className="detail-focus-meta">
+            <span>{authoredPrs.length} PR rows</span>
+            <span>{reviewedPrs.length} reviewed rows</span>
+            <span>{issues.length} issue rows</span>
+          </div>
+        </div>
+        <p className="token-copy">
+          Click a contributor row or use the filter dropdown to narrow these tables. Reviewed rows mark whether the PR author is in the team roster.
+        </p>
+      </section>
+
       <div className="content-grid">
         <section className="panel table-panel">
           <div className="panel-header compact">
@@ -187,7 +225,11 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
                   <th>Reviews</th>
                   <th>Pending requests</th>
                   <th>Repos</th>
-                  <th>Activity score</th>
+                  <th>
+                    <span className="help-label" title={ACTIVITY_SCORE_FORMULA}>
+                      Activity score ⓘ
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -202,7 +244,12 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
                     <tr key={contributor.login}>
                       <td>
                         <div className="person-cell">
-                          <strong>{contributor.name}</strong>
+                          <a
+                            className="table-link"
+                            href={`/?preset=${filters.preset}&contributor=${contributor.login}&repo=${encodeURIComponent(filters.repo)}`}
+                          >
+                            <strong>{contributor.name}</strong>
+                          </a>
                           <span>@{contributor.login}</span>
                         </div>
                       </td>
@@ -290,54 +337,144 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
         </aside>
       </div>
 
-      <section className="panel table-panel">
-        <div className="panel-header compact">
-          <div>
-            <p className="eyebrow">Drill-down</p>
-            <h2>Recent activity detail</h2>
+      <div className="detail-table-grid">
+        <section className="panel table-panel">
+          <div className="panel-header compact">
+            <div>
+              <p className="eyebrow">Authored PRs</p>
+              <h2>Pull requests</h2>
+            </div>
           </div>
-        </div>
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Type</th>
-                <th>Contributor</th>
-                <th>Repository</th>
-                <th>Updated</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.activityItems.length === 0 ? (
+          <div className="table-wrap">
+            <table>
+              <thead>
                 <tr>
-                  <td colSpan={6} className="empty-state-cell">
-                    No qualifying activity exists for the current filter selection.
-                  </td>
+                  <th>PR</th>
+                  <th>Repository</th>
+                  <th>Contributor</th>
+                  <th>State</th>
+                  <th>Updated</th>
                 </tr>
-              ) : (
-                data.activityItems.slice(0, 60).map((item) => (
-                  <tr key={item.id}>
-                    <td>
-                      <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
-                        {item.title}
-                      </a>
-                    </td>
-                    <td>{item.reviewedPrKind ? `${item.type.replace("_", " ")} · ${item.reviewedPrKind}` : item.type.replace("_", " ")}</td>
-                    <td>@{item.contributor}</td>
-                    <td>{item.repo}</td>
-                    <td>{formatISO9075(new Date(item.updatedAt))}</td>
-                    <td>
-                      <span className="status-pill">{item.statusLabel}</span>
+              </thead>
+              <tbody>
+                {authoredPrs.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="empty-state-cell">
+                      No authored PRs matched the current selection.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
+                ) : (
+                  authoredPrs.slice(0, 40).map((item) => (
+                    <tr key={item.id}>
+                      <td>
+                        <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
+                          {item.title}
+                        </a>
+                      </td>
+                      <td>{item.repo}</td>
+                      <td>@{item.contributor}</td>
+                      <td>{item.statusLabel}</td>
+                      <td>{formatISO9075(new Date(item.updatedAt))}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="panel table-panel">
+          <div className="panel-header compact">
+            <div>
+              <p className="eyebrow">Reviewed PRs</p>
+              <h2>Reviews with team/external split</h2>
+            </div>
+          </div>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Reviewed PR</th>
+                  <th>Repository</th>
+                  <th>Reviewer</th>
+                  <th>PR type</th>
+                  <th>Outcome</th>
+                  <th>Updated</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reviewedPrs.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="empty-state-cell">
+                      No reviewed PRs matched the current selection.
+                    </td>
+                  </tr>
+                ) : (
+                  reviewedPrs.slice(0, 40).map((item) => (
+                    <tr key={item.id}>
+                      <td>
+                        <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
+                          {item.title}
+                        </a>
+                      </td>
+                      <td>{item.repo}</td>
+                      <td>@{item.contributor}</td>
+                      <td>{formatReviewKind(item.reviewedPrKind)}</td>
+                      <td>{formatTypeLabel(item.state)}</td>
+                      <td>{formatISO9075(new Date(item.updatedAt))}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="panel table-panel detail-span-full">
+          <div className="panel-header compact">
+            <div>
+              <p className="eyebrow">Assigned issues</p>
+              <h2>Issue list</h2>
+            </div>
+          </div>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Issue</th>
+                  <th>Repository</th>
+                  <th>Contributor</th>
+                  <th>State</th>
+                  <th>Updated</th>
+                </tr>
+              </thead>
+              <tbody>
+                {issues.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="empty-state-cell">
+                      No issues matched the current selection.
+                    </td>
+                  </tr>
+                ) : (
+                  issues.slice(0, 40).map((item) => (
+                    <tr key={item.id}>
+                      <td>
+                        <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
+                          {item.title}
+                        </a>
+                      </td>
+                      <td>{item.repo}</td>
+                      <td>@{item.contributor}</td>
+                      <td>{item.statusLabel}</td>
+                      <td>{formatISO9075(new Date(item.updatedAt))}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
