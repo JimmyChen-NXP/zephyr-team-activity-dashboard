@@ -1,13 +1,28 @@
 import clsx from "clsx";
 import { formatDistanceToNow, formatISO9075 } from "date-fns";
 
+import { ActivityPageNav } from "@/components/activity-page-nav";
+import { AuthoredPrsTable } from "@/components/authored-prs-table";
 import { DashboardCharts } from "@/components/charts";
-import { ACTIVITY_SCORE_FORMULA } from "@/lib/scoring";
+import { IssuesTable } from "@/components/issues-table";
+import { ReviewedPrsTable } from "@/components/reviewed-prs-table";
+import {
+  buildViewDashboardData,
+  getContributorColumns,
+  getDetailCountLabel,
+  getSummaryCards,
+  getViewScoreFormula,
+  getViewScoreLabel,
+} from "@/lib/dashboard-aggregates";
+import { buildDashboardHref, buildExportHref } from "@/lib/dashboard-links";
+import { getActivityPageDescription, getActivityPageTitle, type DashboardView } from "@/lib/dashboard-views";
 import type { DashboardData, DashboardFilters } from "@/lib/types";
 
 type DashboardShellProps = {
   data: DashboardData;
   filters: DashboardFilters;
+  view: DashboardView;
+  pathname: string;
 };
 
 const PRESET_OPTIONS: Array<{ value: DashboardFilters["preset"]; label: string }> = [
@@ -24,41 +39,20 @@ function formatMetric(value: number | null, suffix = "") {
   return `${value}${suffix}`;
 }
 
-function formatTypeLabel(value: string) {
-  return value.replaceAll("_", " ");
-}
-
-function formatReviewKind(value?: "team-pr" | "ext-pr") {
-  if (value === "team-pr") {
-    return "Team PR";
-  }
-
-  if (value === "ext-pr") {
-    return "External PR";
-  }
-
-  return "—";
-}
-
-export function DashboardShell({ data, filters }: DashboardShellProps) {
-  const contributorOptions = [{ login: "all", name: "All contributors" }, ...data.filterOptions.contributors];
-  const repoOptions = [{ name: "all" }, ...data.filterOptions.repos.map((repo) => ({ name: repo }))];
-  const currentLocation = `/?preset=${filters.preset}&contributor=${filters.contributor}&repo=${encodeURIComponent(filters.repo)}`;
+export function DashboardShell({ data, filters, view, pathname }: DashboardShellProps) {
+  const viewData = buildViewDashboardData(data, view);
+  const contributorOptions = [{ login: "all", name: "All contributors" }, ...viewData.filterOptions.contributors];
+  const repoOptions = [{ name: "all" }, ...viewData.filterOptions.repos.map((repo) => ({ name: repo }))];
+  const currentLocation = buildDashboardHref(pathname, filters);
   const selectedContributor = contributorOptions.find((option) => option.login === filters.contributor)?.name ?? "All contributors";
-  const authoredPrs = data.activityItems.filter((item) => item.type === "pull_request");
-  const reviewedPrs = data.activityItems.filter((item) => item.type === "review");
-  const issues = data.activityItems.filter((item) => item.type === "issue");
-
-  const summaryCards = [
-    { label: "Open assigned issues", value: data.summary.openAssignedIssues, accent: "violet" },
-    { label: "Open authored PRs", value: data.summary.openAuthoredPrs, accent: "blue" },
-    { label: "Reviews submitted", value: data.summary.reviewsSubmitted, accent: "emerald" },
-    { label: "Pending review requests", value: data.summary.pendingReviewRequests, accent: "amber" },
-    { label: "Stale items", value: data.summary.staleItems, accent: "rose" },
-    { label: "Merged PRs", value: data.summary.mergedPrs, accent: "violet" },
-    { label: "Median first review", value: formatMetric(data.summary.medianFirstReviewHours, "h"), accent: "blue" },
-    { label: "Median merge time", value: formatMetric(data.summary.medianMergeHours, "h"), accent: "emerald" },
-  ];
+  const summaryCards = getSummaryCards(viewData, view);
+  const contributorColumns = getContributorColumns(view);
+  const scoreLabel = getViewScoreLabel(view);
+  const scoreFormula = getViewScoreFormula(view);
+  const detailCountLabel = getDetailCountLabel(viewData, view);
+  const pageTitle = getActivityPageTitle(view);
+  const pageDescription = getActivityPageDescription(view);
+  const summaryHighlights = summaryCards.slice(0, 3).map((card) => ({ label: card.label, value: card.value }));
 
   return (
     <div className="dashboard-shell">
@@ -94,14 +88,14 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
             <h2>Filter and refresh</h2>
           </div>
           <div className="sync-pill">
-            <span className={clsx("sync-dot", data.syncHealth.source)} />
+            <span className={clsx("sync-dot", viewData.syncHealth.source)} />
             <span>
-              {data.syncHealth.source === "demo" ? "Demo snapshot" : data.syncHealth.source === "cache" ? "Cached snapshot" : "Live sync"}
+              {viewData.syncHealth.source === "demo" ? "Demo snapshot" : viewData.syncHealth.source === "cache" ? "Cached snapshot" : "Live sync"}
             </span>
           </div>
         </div>
 
-        <form className="filter-form" action="/" method="get">
+        <form className="filter-form" action={pathname} method="get">
           <label>
             <span>Range</span>
             <select name="preset" defaultValue={filters.preset}>
@@ -142,10 +136,7 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
             <button type="submit" className="secondary-button" name="refresh" value="1">
               Refresh now
             </button>
-            <a
-              className="ghost-button"
-              href={`/api/export?preset=${filters.preset}&contributor=${filters.contributor}&repo=${filters.repo}`}
-            >
+            <a className="ghost-button" href={buildExportHref(view, filters)}>
               Export CSV
             </a>
           </div>
@@ -156,7 +147,7 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
             <p className="eyebrow">GitHub authentication</p>
             <h3>Provide or replace the GitHub token</h3>
             <p className="token-copy">
-              Current source: <strong>{data.auth.tokenSource}</strong>. A token entered here is stored in a secure cookie and is used for live refreshes.
+              Current source: <strong>{viewData.auth.tokenSource}</strong>. A token entered here is stored in a secure cookie and is used for live refreshes.
             </p>
           </div>
 
@@ -178,6 +169,22 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
         </div>
       </section>
 
+      <ActivityPageNav currentView={view} filters={filters} />
+
+      <section className="panel detail-focus-panel">
+        <div className="panel-header compact">
+          <div>
+            <p className="eyebrow">Activity context</p>
+            <h2>{pageTitle}</h2>
+          </div>
+          <div className="detail-focus-meta">
+            <span>{detailCountLabel}</span>
+            <span>{viewData.contributors.length} active contributors</span>
+          </div>
+        </div>
+        <p className="token-copy">{pageDescription}</p>
+      </section>
+
       <section className="summary-grid">
         {summaryCards.map((card) => (
           <article key={card.label} className={clsx("summary-card", card.accent)}>
@@ -187,7 +194,13 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
         ))}
       </section>
 
-      <DashboardCharts repos={data.repoActivity} reviewOutcomes={data.reviewOutcomes} reviewSources={data.reviewSources} />
+      <DashboardCharts
+        view={view}
+        repos={viewData.repoActivity}
+        reviewOutcomes={viewData.reviewOutcomes}
+        reviewSources={viewData.reviewSources}
+        summaryHighlights={summaryHighlights}
+      />
 
       <section className="panel detail-focus-panel">
         <div className="panel-header compact">
@@ -196,13 +209,12 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
             <h2>{selectedContributor}</h2>
           </div>
           <div className="detail-focus-meta">
-            <span>{authoredPrs.length} PR rows</span>
-            <span>{reviewedPrs.length} reviewed rows</span>
-            <span>{issues.length} issue rows</span>
+            <span>{detailCountLabel}</span>
+            <span>{scoreLabel} ranking</span>
           </div>
         </div>
         <p className="token-copy">
-          Click a contributor row or use the filter dropdown to narrow these tables. Reviewed rows mark whether the PR author is in the team roster.
+          Click a contributor row or use the filter dropdown to narrow this page. All summary cards, charts, and contributor ranking are scoped to the active activity type.
         </p>
       </section>
 
@@ -219,47 +231,43 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
               <thead>
                 <tr>
                   <th>Contributor</th>
-                  <th>Issues</th>
-                  <th>Open PRs</th>
-                  <th>Merged</th>
-                  <th>Reviews</th>
-                  <th>Pending requests</th>
-                  <th>Repos</th>
-                  <th>
-                    <span className="help-label" title={ACTIVITY_SCORE_FORMULA}>
-                      Activity score ⓘ
-                    </span>
-                  </th>
+                  {contributorColumns.map((column) => (
+                    <th key={column.key}>
+                      {column.label === scoreLabel ? (
+                        <span className="help-label" title={scoreFormula}>
+                          {column.label} ⓘ
+                        </span>
+                      ) : (
+                        column.label
+                      )}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
-                {data.contributors.length === 0 ? (
+                {viewData.contributors.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="empty-state-cell">
-                      No contributors matched the current filters for this range.
+                    <td colSpan={1 + contributorColumns.length} className="empty-state-cell">
+                      No contributors matched the current filters for this activity view.
                     </td>
                   </tr>
                 ) : (
-                  data.contributors.map((contributor) => (
+                  viewData.contributors.map((contributor) => (
                     <tr key={contributor.login}>
                       <td>
                         <div className="person-cell">
                           <a
                             className="table-link"
-                            href={`/?preset=${filters.preset}&contributor=${contributor.login}&repo=${encodeURIComponent(filters.repo)}`}
+                            href={buildDashboardHref(pathname, { ...filters, contributor: contributor.login, refresh: false })}
                           >
                             <strong>{contributor.name}</strong>
                           </a>
                           <span>@{contributor.login}</span>
                         </div>
                       </td>
-                      <td>{contributor.openAssignedIssues}</td>
-                      <td>{contributor.openAuthoredPrs}</td>
-                      <td>{contributor.mergedPrs}</td>
-                      <td>{contributor.reviewsSubmitted}</td>
-                      <td>{contributor.pendingReviewRequests}</td>
-                      <td>{contributor.repositoriesTouched}</td>
-                      <td>{contributor.activityScore}</td>
+                      {contributorColumns.map((column) => (
+                        <td key={column.key}>{column.value(contributor)}</td>
+                      ))}
                     </tr>
                   ))
                 )}
@@ -277,10 +285,10 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
               </div>
             </div>
             <div className="warning-list">
-              {data.warnings.length === 0 ? (
+              {viewData.warnings.length === 0 ? (
                 <div className="warning-item info">No warnings. Coverage looks healthy.</div>
               ) : (
-                data.warnings.map((warning) => (
+                viewData.warnings.map((warning) => (
                   <div key={warning.message} className={clsx("warning-item", warning.level)}>
                     {warning.message}
                   </div>
@@ -290,19 +298,19 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
             <div className="sync-card">
               <div>
                 <span className="meta-label">Generated</span>
-                <strong>{formatISO9075(new Date(data.generatedAt))}</strong>
+                <strong>{formatISO9075(new Date(viewData.generatedAt))}</strong>
               </div>
               <div>
                 <span className="meta-label">Freshness</span>
-                <strong>{formatDistanceToNow(new Date(data.generatedAt), { addSuffix: true })}</strong>
+                <strong>{formatDistanceToNow(new Date(viewData.generatedAt), { addSuffix: true })}</strong>
               </div>
               <div>
                 <span className="meta-label">Search samples</span>
-                <strong>{data.syncHealth.searchSamples}</strong>
+                <strong>{viewData.syncHealth.searchSamples}</strong>
               </div>
               <div>
                 <span className="meta-label">Detail samples</span>
-                <strong>{data.syncHealth.detailSamples}</strong>
+                <strong>{viewData.syncHealth.detailSamples}</strong>
               </div>
             </div>
           </section>
@@ -315,10 +323,10 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
               </div>
             </div>
             <ul className="repo-list">
-              {data.repoActivity.length === 0 ? (
+              {viewData.repoActivity.length === 0 ? (
                 <li className="empty-state-item">No repositories matched the current filters.</li>
               ) : (
-                data.repoActivity.slice(0, 8).map((repo) => (
+                viewData.repoActivity.slice(0, 8).map((repo) => (
                   <li key={repo.name}>
                     <div>
                       <strong>{repo.name}</strong>
@@ -337,144 +345,9 @@ export function DashboardShell({ data, filters }: DashboardShellProps) {
         </aside>
       </div>
 
-      <div className="detail-table-grid">
-        <section className="panel table-panel">
-          <div className="panel-header compact">
-            <div>
-              <p className="eyebrow">Authored PRs</p>
-              <h2>Pull requests</h2>
-            </div>
-          </div>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>PR</th>
-                  <th>Repository</th>
-                  <th>Contributor</th>
-                  <th>State</th>
-                  <th>Updated</th>
-                </tr>
-              </thead>
-              <tbody>
-                {authoredPrs.length === 0 ? (
-                  <tr>
-                    <td colSpan={5} className="empty-state-cell">
-                      No authored PRs matched the current selection.
-                    </td>
-                  </tr>
-                ) : (
-                  authoredPrs.slice(0, 40).map((item) => (
-                    <tr key={item.id}>
-                      <td>
-                        <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
-                          {item.title}
-                        </a>
-                      </td>
-                      <td>{item.repo}</td>
-                      <td>@{item.contributor}</td>
-                      <td>{item.statusLabel}</td>
-                      <td>{formatISO9075(new Date(item.updatedAt))}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="panel table-panel">
-          <div className="panel-header compact">
-            <div>
-              <p className="eyebrow">Reviewed PRs</p>
-              <h2>Reviews with team/external split</h2>
-            </div>
-          </div>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Reviewed PR</th>
-                  <th>Repository</th>
-                  <th>Reviewer</th>
-                  <th>PR type</th>
-                  <th>Outcome</th>
-                  <th>Updated</th>
-                </tr>
-              </thead>
-              <tbody>
-                {reviewedPrs.length === 0 ? (
-                  <tr>
-                    <td colSpan={6} className="empty-state-cell">
-                      No reviewed PRs matched the current selection.
-                    </td>
-                  </tr>
-                ) : (
-                  reviewedPrs.slice(0, 40).map((item) => (
-                    <tr key={item.id}>
-                      <td>
-                        <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
-                          {item.title}
-                        </a>
-                      </td>
-                      <td>{item.repo}</td>
-                      <td>@{item.contributor}</td>
-                      <td>{formatReviewKind(item.reviewedPrKind)}</td>
-                      <td>{formatTypeLabel(item.state)}</td>
-                      <td>{formatISO9075(new Date(item.updatedAt))}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="panel table-panel detail-span-full">
-          <div className="panel-header compact">
-            <div>
-              <p className="eyebrow">Assigned issues</p>
-              <h2>Issue list</h2>
-            </div>
-          </div>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Issue</th>
-                  <th>Repository</th>
-                  <th>Contributor</th>
-                  <th>State</th>
-                  <th>Updated</th>
-                </tr>
-              </thead>
-              <tbody>
-                {issues.length === 0 ? (
-                  <tr>
-                    <td colSpan={5} className="empty-state-cell">
-                      No issues matched the current selection.
-                    </td>
-                  </tr>
-                ) : (
-                  issues.slice(0, 40).map((item) => (
-                    <tr key={item.id}>
-                      <td>
-                        <a href={item.url} target="_blank" rel="noreferrer" className="table-link">
-                          {item.title}
-                        </a>
-                      </td>
-                      <td>{item.repo}</td>
-                      <td>@{item.contributor}</td>
-                      <td>{item.statusLabel}</td>
-                      <td>{formatISO9075(new Date(item.updatedAt))}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
+      {view === "issues" ? <IssuesTable items={viewData.activityItems} /> : null}
+      {view === "pull-requests" ? <AuthoredPrsTable items={viewData.activityItems} /> : null}
+      {view === "reviews" ? <ReviewedPrsTable items={viewData.activityItems} /> : null}
     </div>
   );
 }

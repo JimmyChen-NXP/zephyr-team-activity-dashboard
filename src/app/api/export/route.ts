@@ -1,23 +1,21 @@
 import { NextResponse } from "next/server";
 
 import { getDashboardData } from "@/lib/dashboard";
-import { DEFAULT_PRESET } from "@/lib/range";
-import type { DashboardFilters, DashboardPreset } from "@/lib/types";
-
-function parsePreset(value: string | null): DashboardPreset {
-  return value === "7d" || value === "90d" || value === "30d" ? value : DEFAULT_PRESET;
-}
+import { buildViewDashboardData } from "@/lib/dashboard-aggregates";
+import { parseDashboardFilters } from "@/lib/dashboard-filters";
+import { isDashboardView } from "@/lib/dashboard-views";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const filters: DashboardFilters = {
-    preset: parsePreset(searchParams.get("preset")),
-    contributor: searchParams.get("contributor") ?? "all",
-    repo: searchParams.get("repo") ?? "all",
-    refresh: false,
-  };
+  const filters = parseDashboardFilters({
+    preset: searchParams.get("preset") ?? undefined,
+    contributor: searchParams.get("contributor") ?? undefined,
+    repo: searchParams.get("repo") ?? undefined,
+  });
+  const viewParam = searchParams.get("view") ?? "issues";
+  const view = isDashboardView(viewParam) ? viewParam : "issues";
 
-  const data = await getDashboardData(filters);
+  const data = buildViewDashboardData(await getDashboardData(filters), view);
   const header = ["Type", "Title", "Contributor", "Repository", "State", "Created At", "Updated At", "URL"];
   const rows = data.activityItems.map((item) => [item.type, item.title, item.contributor, item.repo, item.state, item.createdAt, item.updatedAt, item.url]);
 
@@ -28,7 +26,7 @@ export async function GET(request: Request) {
   return new NextResponse(csv, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="zephyr-team-activity-${filters.preset}.csv"`,
+      "Content-Disposition": `attachment; filename="zephyr-team-activity-${view}-${filters.preset}.csv"`,
     },
   });
 }

@@ -1,10 +1,12 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+import { sanitizeDashboardReturnTo } from "@/lib/dashboard-links";
+
 export async function POST(request: Request) {
   const formData = await request.formData();
   const token = String(formData.get("token") ?? "").trim();
-  const returnTo = String(formData.get("returnTo") ?? "/");
+  const returnTo = sanitizeDashboardReturnTo(String(formData.get("returnTo") ?? "/issues"));
   const action = String(formData.get("action") ?? "save");
   const cookieStore = await cookies();
 

@@ -2,17 +2,20 @@
 
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
+import type { DashboardView } from "@/lib/dashboard-views";
 import type { RepoActivity, ReviewOutcomeBreakdown, ReviewSourceBreakdown } from "@/lib/types";
 
 type ChartsProps = {
+  view: DashboardView;
   repos: RepoActivity[];
   reviewOutcomes: ReviewOutcomeBreakdown;
   reviewSources: ReviewSourceBreakdown;
+  summaryHighlights: Array<{ label: string; value: number | string }>;
 };
 
 const COLORS = ["#7c3aed", "#38bdf8", "#f97316", "#10b981"];
 
-export function DashboardCharts({ repos, reviewOutcomes, reviewSources }: ChartsProps) {
+export function DashboardCharts({ view, repos, reviewOutcomes, reviewSources, summaryHighlights }: ChartsProps) {
   const repoData = repos.slice(0, 6).map((repo) => ({
     name: repo.name.replace("zephyrproject-rtos/", ""),
     activity: repo.prs + repo.reviews + repo.issues,
@@ -28,6 +31,14 @@ export function DashboardCharts({ repos, reviewOutcomes, reviewSources }: Charts
     { label: "Changes requested", value: reviewOutcomes.changesRequested },
     { label: "Commented", value: reviewOutcomes.commented },
   ];
+
+  const metricPanelTitle = view === "issues" ? "Issue signals" : view === "pull-requests" ? "PR signals" : "Review split";
+  const metricPanelSubtitle =
+    view === "issues"
+      ? "Issue-only highlights for the active filters"
+      : view === "pull-requests"
+        ? "PR-only highlights for the active filters"
+        : "Team PR vs external PR";
 
   return (
     <div className="chart-grid">
@@ -53,33 +64,46 @@ export function DashboardCharts({ repos, reviewOutcomes, reviewSources }: Charts
       <section className="panel chart-panel">
         <div className="panel-header">
           <div>
-            <p className="eyebrow">Review split</p>
-            <h3>Team PR vs external PR</h3>
+            <p className="eyebrow">{metricPanelTitle}</p>
+            <h3>{metricPanelSubtitle}</h3>
           </div>
         </div>
-        <div className="chart-frame donut-frame">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie data={reviewData} dataKey="value" nameKey="name" innerRadius={68} outerRadius={110} paddingAngle={4}>
+        {view === "reviews" ? (
+          <div className="chart-frame donut-frame">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie data={reviewData} dataKey="value" nameKey="name" innerRadius={68} outerRadius={110} paddingAngle={4}>
+                  {reviewData.map((entry, index) => (
+                    <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip contentStyle={{ background: "#111827", border: "1px solid rgba(148, 163, 184, 0.15)", borderRadius: 16 }} />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className="review-side-panel">
+              <ul className="legend-list">
                 {reviewData.map((entry, index) => (
-                  <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
+                  <li key={entry.name}>
+                    <span className="legend-dot" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+                    <span>{entry.name}</span>
+                    <strong>{entry.value}</strong>
+                  </li>
                 ))}
-              </Pie>
-              <Tooltip contentStyle={{ background: "#111827", border: "1px solid rgba(148, 163, 184, 0.15)", borderRadius: 16 }} />
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="review-side-panel">
-            <ul className="legend-list">
-              {reviewData.map((entry, index) => (
-                <li key={entry.name}>
-                  <span className="legend-dot" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
-                  <span>{entry.name}</span>
-                  <strong>{entry.value}</strong>
-                </li>
-              ))}
-            </ul>
-            <div className="mini-metric-grid">
-              {outcomeCards.map((card) => (
+              </ul>
+              <div className="mini-metric-grid">
+                {outcomeCards.map((card) => (
+                  <article key={card.label} className="mini-metric-card">
+                    <span>{card.label}</span>
+                    <strong>{card.value}</strong>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="chart-frame highlight-panel">
+            <div className="mini-metric-grid highlight-grid">
+              {summaryHighlights.map((card) => (
                 <article key={card.label} className="mini-metric-card">
                   <span>{card.label}</span>
                   <strong>{card.value}</strong>
@@ -87,7 +111,7 @@ export function DashboardCharts({ repos, reviewOutcomes, reviewSources }: Charts
               ))}
             </div>
           </div>
-        </div>
+        )}
       </section>
     </div>
   );
