@@ -83,6 +83,45 @@ const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? 40);
 const REVIEW_DETAIL_LIMIT = Number(process.env.REVIEW_DETAIL_LIMIT ?? 120);
 const limit = pLimit(4);
 
+const DEFAULT_SEARCH_MIN_INTERVAL_MS = 2200;
+let searchThrottleChain: Promise<void> = Promise.resolve();
+let lastSearchRequestAt = 0;
+
+function getSearchMinIntervalMs() {
+  const configured = Number(process.env.GITHUB_SEARCH_MIN_INTERVAL_MS ?? "");
+  if (Number.isFinite(configured) && configured > 0) {
+    return configured;
+  }
+
+  return process.env.GITHUB_ACTIONS ? DEFAULT_SEARCH_MIN_INTERVAL_MS : 0;
+}
+
+function sleep(ms: number) {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+function throttleGitHubSearch() {
+  const minIntervalMs = getSearchMinIntervalMs();
+  if (minIntervalMs <= 0) {
+    return Promise.resolve();
+  }
+
+  searchThrottleChain = searchThrottleChain
+    .catch(() => {})
+    .then(async () => {
+      const now = Date.now();
+      const waitMs = Math.max(0, lastSearchRequestAt + minIntervalMs - now);
+      if (waitMs > 0) {
+        await sleep(waitMs);
+      }
+      lastSearchRequestAt = Date.now();
+    });
+
+  return searchThrottleChain;
+}
+
 function emptyMetrics() {
   return {
     openAssignedIssues: 0,
@@ -179,6 +218,7 @@ export async function probeGitHubConnection(token: string) {
 }
 
 async function searchIssues(query: string, page: number, token?: string): Promise<SearchResponse> {
+  await throttleGitHubSearch();
   return fetchGitHub<SearchResponse>(`/search/issues?q=${encodeURIComponent(query)}&per_page=100&page=${page}`, token);
 }
 
