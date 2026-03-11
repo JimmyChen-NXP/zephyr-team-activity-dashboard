@@ -1,8 +1,22 @@
 import { GitHubRequestError, probeGitHubConnection } from "@/lib/github";
 import type { DashboardAuth } from "@/lib/types";
 
+function sanitizeGitHubEnvToken(raw: string): string {
+  let token = raw.trim();
+
+  token = token.replace(/[\r\n]/g, "");
+
+  if ((token.startsWith("\"") && token.endsWith("\"")) || (token.startsWith("'") && token.endsWith("'"))) {
+    token = token.slice(1, -1).trim();
+  }
+
+  token = token.replace(/^(bearer|token)\s+/i, "");
+
+  return token;
+}
+
 export function getGitHubEnvToken() {
-  return process.env.GITHUB_TOKEN?.trim() ?? "";
+  return sanitizeGitHubEnvToken(process.env.GITHUB_TOKEN ?? "");
 }
 
 export function buildMissingGitHubAuthState(): DashboardAuth {
@@ -47,7 +61,7 @@ export function buildGitHubAuthStateFromError(error: unknown, checkedAt = new Da
       return {
         hasToken: true,
         connectionStatus: "invalid",
-        message: "GitHub rejected GITHUB_TOKEN. Update .env.local and restart the dev server.",
+        message: "GitHub rejected GITHUB_TOKEN. Ensure .env.local contains the raw token value (no 'Bearer ' prefix) and restart the dev server.",
         checkedAt,
       };
     }

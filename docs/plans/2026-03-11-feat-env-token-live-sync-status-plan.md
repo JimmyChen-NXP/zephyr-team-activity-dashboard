@@ -1,7 +1,7 @@
 ---
 title: feat: Simplify env token management and live sync status
 type: feat
-status: active
+status: completed
 date: 2026-03-11
 ---
 
@@ -225,28 +225,28 @@ The shared shell is used by all three activity pages, so the new status model mu
 
 ### Functional requirements
 
-- [ ] The dashboard no longer renders a token input, save token, or clear token UI.
-- [ ] Dashboard auth no longer depends on the `github_token` cookie path.
-- [ ] The UI clearly states when GitHub live sync is unavailable because `GITHUB_TOKEN` is missing.
-- [ ] The UI distinguishes token configuration state from token validity and from active data source.
-- [ ] A user can run a lightweight token connection test, or an equivalent explicit validation signal is surfaced.
-- [ ] Connection-test feedback is human-readable and actionable.
-- [ ] The compact top status area is visibly smaller than the current token + signals presentation.
-- [ ] Detailed warnings remain available without dominating the page.
+- [x] The dashboard no longer renders a token input, save token, or clear token UI.
+- [x] Dashboard auth no longer depends on the `github_token` cookie path.
+- [x] The UI clearly states when GitHub live sync is unavailable because `GITHUB_TOKEN` is missing.
+- [x] The UI distinguishes token configuration state from token validity and from active data source.
+- [x] A user can run a lightweight token connection test, or an equivalent explicit validation signal is surfaced.
+- [x] Connection-test feedback is human-readable and actionable.
+- [x] The compact top status area is visibly smaller than the current token + signals presentation.
+- [x] Detailed warnings remain available without dominating the page.
 
 ### Non-functional requirements
 
-- [ ] Connection test uses a lightweight GitHub request rather than full live collection.
-- [ ] No token value is ever rendered, logged, or returned to the browser.
-- [ ] The new status model works consistently across all three dashboard routes.
-- [ ] Snapshot fallback behavior remains unchanged except for clearer messaging.
+- [x] Connection test uses a lightweight GitHub request rather than full live collection.
+- [x] No token value is ever rendered, logged, or returned to the browser.
+- [x] The new status model works consistently across all three dashboard routes.
+- [x] Snapshot fallback behavior remains unchanged except for clearer messaging.
 
 ### Quality gates
 
-- [ ] Tests cover env-only auth resolution.
-- [ ] Tests cover missing, valid, invalid, and rate-limited connection states.
-- [ ] Tests cover fallback combinations for live, cache, and demo with the new status model.
-- [ ] README and `.env` setup documentation are updated.
+- [x] Tests cover env-only auth resolution.
+- [x] Tests cover missing, valid, invalid, and rate-limited connection states.
+- [x] Tests cover fallback combinations for live, cache, and demo with the new status model.
+- [x] README and `.env` setup documentation are updated.
 
 ## Success Metrics
 
@@ -281,27 +281,27 @@ The shared shell is used by all three activity pages, so the new status model mu
 
 ### Slice 1 — Auth model cleanup
 
-- [ ] Update [src/lib/dashboard.ts](src/lib/dashboard.ts) to resolve env-only auth
-- [ ] Update [src/lib/types.ts](src/lib/types.ts) to represent connection state clearly
-- [ ] Remove or retire [src/app/api/token/route.ts](src/app/api/token/route.ts)
+- [x] Update [src/lib/dashboard.ts](src/lib/dashboard.ts) to resolve env-only auth
+- [x] Update [src/lib/types.ts](src/lib/types.ts) to represent connection state clearly
+- [x] Remove or retire [src/app/api/token/route.ts](src/app/api/token/route.ts)
 
 ### Slice 2 — Lightweight validation
 
-- [ ] Add lightweight GitHub connection validation in [src/lib/github.ts](src/lib/github.ts) or a new focused helper file
-- [ ] Expose validation through a dedicated server route/action if the UI needs an explicit test button
-- [ ] Map GitHub failures to stable user-facing states and messages
+- [x] Add lightweight GitHub connection validation in [src/lib/github.ts](src/lib/github.ts) or a new focused helper file
+- [x] Expose validation through a dedicated server route/action if the UI needs an explicit test button
+- [x] Map GitHub failures to stable user-facing states and messages
 
 ### Slice 3 — Shared shell simplification
 
-- [ ] Remove token form UI from [src/components/dashboard-shell.tsx](src/components/dashboard-shell.tsx)
-- [ ] Add compact status surface for connection, source, and freshness
-- [ ] Update [src/app/globals.css](src/app/globals.css) to reduce status-area footprint
+- [x] Remove token form UI from [src/components/dashboard-shell.tsx](src/components/dashboard-shell.tsx)
+- [x] Add compact status surface for connection, source, and freshness
+- [x] Update [src/app/globals.css](src/app/globals.css) to reduce status-area footprint
 
 ### Slice 4 — Docs and tests
 
-- [ ] Update [README.md](README.md)
-- [ ] Update [.env.example](.env.example) if wording needs clarification
-- [ ] Add tests for connection-state mapping and fallback rendering
+- [x] Update [README.md](README.md)
+- [x] Update [.env.example](.env.example) if wording needs clarification
+- [x] Add tests for connection-state mapping and fallback rendering
 
 ## Sources & References
 

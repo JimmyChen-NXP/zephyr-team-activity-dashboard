@@ -52,11 +52,14 @@ describe("testGitHubConnectionFromEnv", () => {
   });
 
   it("returns valid when the GitHub probe succeeds", async () => {
-    process.env.GITHUB_TOKEN = "ghp_valid";
+    process.env.GITHUB_TOKEN = "Bearer ghp_valid";
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValueOnce(
-        jsonResponse(
+      vi.fn().mockImplementationOnce(async (_url: unknown, init?: RequestInit) => {
+        const headers = (init?.headers ?? {}) as Record<string, string>;
+        expect(headers.Authorization).toBe("Bearer ghp_valid");
+
+        return jsonResponse(
           {
             resources: {
               core: {
@@ -65,8 +68,8 @@ describe("testGitHubConnectionFromEnv", () => {
             },
           },
           { "x-ratelimit-remaining": "4999" },
-        ),
-      ),
+        );
+      }),
     );
 
     await expect(testGitHubConnectionFromEnv()).resolves.toMatchObject({
