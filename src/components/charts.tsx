@@ -3,11 +3,12 @@
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import type { DashboardView } from "@/lib/dashboard-views";
-import type { RepoActivity, ReviewOutcomeBreakdown, ReviewSourceBreakdown } from "@/lib/types";
+import type { ActivityItem, ContributorMetrics, ReviewOutcomeBreakdown, ReviewSourceBreakdown } from "@/lib/types";
 
 type ChartsProps = {
   view: DashboardView;
-  repos: RepoActivity[];
+  contributors: ContributorMetrics[];
+  items: ActivityItem[];
   reviewOutcomes: ReviewOutcomeBreakdown;
   reviewSources: ReviewSourceBreakdown;
   summaryHighlights: Array<{ label: string; value: number | string }>;
@@ -15,16 +16,33 @@ type ChartsProps = {
 
 const COLORS = ["#7c3aed", "#38bdf8", "#f97316", "#10b981"];
 
-export function DashboardCharts({ view, repos, reviewOutcomes, reviewSources, summaryHighlights }: ChartsProps) {
-  const repoData = repos.slice(0, 6).map((repo) => ({
-    name: repo.name.replace("zephyrproject-rtos/", ""),
-    activity: repo.prs + repo.reviews + repo.issues,
+export function DashboardCharts({ view, contributors, items, reviewOutcomes, reviewSources, summaryHighlights }: ChartsProps) {
+  const contributorData = contributors.slice(0, 6).map((contributor) => ({
+    name: contributor.name,
+    activity: contributor.activityScore,
   }));
 
+  const reviewItems = items.filter((item) => item.type === "review");
+  const teamAuthoredItems = reviewItems.filter((item) => item.reviewedPrKind === "authored-by-them");
+  const externalAuthoredItems = reviewItems.filter((item) => item.reviewedPrKind === "authored-external");
+  const selfAuthoredItems = reviewItems.filter((item) => item.reviewedPrKind === "authored-by-self");
+
   const reviewData = [
-    { name: "Authored by self", value: reviewSources.selfAuthored },
-    { name: "Authored by teammate", value: reviewSources.teamAuthored },
-    { name: "Authored externally", value: reviewSources.externalAuthored },
+    {
+      name: "Authored by self",
+      value: reviewSources.selfAuthored,
+      uniquePrs: new Set(selfAuthoredItems.map((item) => item.url)).size,
+    },
+    {
+      name: "Authored by teammate",
+      value: reviewSources.teamAuthored,
+      uniquePrs: new Set(teamAuthoredItems.map((item) => item.url)).size,
+    },
+    {
+      name: "Authored externally",
+      value: reviewSources.externalAuthored,
+      uniquePrs: new Set(externalAuthoredItems.map((item) => item.url)).size,
+    },
   ].filter((item) => item.value > 0);
 
   const outcomeCards = [
@@ -39,20 +57,20 @@ export function DashboardCharts({ view, repos, reviewOutcomes, reviewSources, su
       ? "Issue-only highlights for the active filters"
       : view === "pull-requests"
         ? "PR-only highlights for the active filters"
-        : "Self vs teammate vs external author split";
+        : "Unique PRs / reviews by PR author";
 
   return (
     <div className="chart-grid">
       <section className="panel chart-panel">
         <div className="panel-header">
           <div>
-            <p className="eyebrow">Repository concentration</p>
-            <h3>Where the team is spending time</h3>
+            <p className="eyebrow">Contributor concentration</p>
+            <h3>Who is driving activity</h3>
           </div>
         </div>
         <div className="chart-frame">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={repoData} margin={{ left: 0, right: 8, top: 12, bottom: 0 }}>
+            <BarChart data={contributorData} margin={{ left: 0, right: 8, top: 12, bottom: 0 }}>
               <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: "#b8c2d9", fontSize: 12 }} />
               <YAxis tickLine={false} axisLine={false} tick={{ fill: "#7f8aa3", fontSize: 12 }} />
               <Tooltip cursor={{ fill: "rgba(124, 58, 237, 0.08)" }} contentStyle={{ background: "#111827", border: "1px solid rgba(148, 163, 184, 0.15)", borderRadius: 16 }} />
@@ -87,7 +105,9 @@ export function DashboardCharts({ view, repos, reviewOutcomes, reviewSources, su
                   <li key={entry.name}>
                     <span className="legend-dot" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
                     <span>{entry.name}</span>
-                    <strong>{entry.value}</strong>
+                    <strong>
+                      {entry.uniquePrs} / {entry.value}
+                    </strong>
                   </li>
                 ))}
               </ul>

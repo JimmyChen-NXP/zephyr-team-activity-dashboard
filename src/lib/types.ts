@@ -65,6 +65,9 @@ export type ContributorMetrics = {
   pendingReviewRequests: number;
   staleItems: number;
   uniqueReviewedPrs: number;
+  uniqueReviewedPrsSelfAuthored?: number;
+  uniqueReviewedPrsTeamAuthored?: number;
+  uniqueReviewedPrsExternalAuthored?: number;
   reviewSelfAuthored: number;
   reviewTeamAuthored: number;
   reviewExternalAuthored: number;

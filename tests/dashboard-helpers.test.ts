@@ -235,5 +235,156 @@ describe("dashboard view aggregates", () => {
     expect(viewData.summary.pendingReviewRequests).toBe(0);
     expect(viewData.reviewSources.teamAuthored).toBe(1);
     expect(cards.map((card) => card.label)).toContain("Unique PRs reviewed");
+    expect(cards.map((card) => card.label)).not.toContain("Authored by self");
+    expect(cards.find((card) => card.label === "Teammate PRs / reviews")?.value).toBe("1 / 1");
+  });
+
+  it("excludes self-authored review items and tracks unique PRs by author type", () => {
+    const reviewData: DashboardData = {
+      ...baseData,
+      activityItems: [
+        {
+          id: "review-self",
+          type: "review",
+          title: "Self review",
+          url: "https://example.com/pr-self",
+          repo: "zephyrproject-rtos/repo-b",
+          contributor: "alice",
+          author: "alice",
+          state: "commented",
+          createdAt: "2026-03-04T00:00:00.000Z",
+          updatedAt: "2026-03-09T12:00:00.000Z",
+          ageDays: 1,
+          statusLabel: "COMMENTED · Authored by self",
+          reviewedPrKind: "authored-by-self",
+          metrics: {
+            openAssignedIssues: 0,
+            openAuthoredPrs: 0,
+            draftPrs: 0,
+            mergedPrs: 0,
+            closedUnmergedPrs: 0,
+            reviewsSubmitted: 1,
+            pendingReviewRequests: 0,
+            staleItems: 0,
+            reviewApproved: 0,
+            reviewChangesRequested: 0,
+            reviewCommented: 1,
+            reviewSelfAuthored: 1,
+            reviewTeamAuthored: 0,
+            reviewExternalAuthored: 0,
+          },
+        },
+        {
+          id: "review-team-1",
+          type: "review",
+          title: "Team review 1",
+          url: "https://example.com/pr-team",
+          repo: "zephyrproject-rtos/repo-b",
+          contributor: "alice",
+          author: "bob",
+          state: "approved",
+          createdAt: "2026-03-04T00:00:00.000Z",
+          updatedAt: "2026-03-09T12:00:00.000Z",
+          ageDays: 1,
+          statusLabel: "APPROVED · Authored by teammate",
+          reviewedPrKind: "authored-by-them",
+          metrics: {
+            openAssignedIssues: 0,
+            openAuthoredPrs: 0,
+            draftPrs: 0,
+            mergedPrs: 0,
+            closedUnmergedPrs: 0,
+            reviewsSubmitted: 1,
+            pendingReviewRequests: 0,
+            staleItems: 0,
+            reviewApproved: 1,
+            reviewChangesRequested: 0,
+            reviewCommented: 0,
+            reviewSelfAuthored: 0,
+            reviewTeamAuthored: 1,
+            reviewExternalAuthored: 0,
+          },
+        },
+        {
+          id: "review-team-2",
+          type: "review",
+          title: "Team review 2",
+          url: "https://example.com/pr-team",
+          repo: "zephyrproject-rtos/repo-b",
+          contributor: "alice",
+          author: "bob",
+          state: "commented",
+          createdAt: "2026-03-04T00:00:00.000Z",
+          updatedAt: "2026-03-09T13:00:00.000Z",
+          ageDays: 1,
+          statusLabel: "COMMENTED · Authored by teammate",
+          reviewedPrKind: "authored-by-them",
+          metrics: {
+            openAssignedIssues: 0,
+            openAuthoredPrs: 0,
+            draftPrs: 0,
+            mergedPrs: 0,
+            closedUnmergedPrs: 0,
+            reviewsSubmitted: 1,
+            pendingReviewRequests: 0,
+            staleItems: 0,
+            reviewApproved: 0,
+            reviewChangesRequested: 0,
+            reviewCommented: 1,
+            reviewSelfAuthored: 0,
+            reviewTeamAuthored: 1,
+            reviewExternalAuthored: 0,
+          },
+        },
+        {
+          id: "review-external-1",
+          type: "review",
+          title: "External review",
+          url: "https://example.com/pr-external",
+          repo: "zephyrproject-rtos/repo-b",
+          contributor: "alice",
+          author: "external-author",
+          state: "changes_requested",
+          createdAt: "2026-03-04T00:00:00.000Z",
+          updatedAt: "2026-03-09T14:00:00.000Z",
+          ageDays: 1,
+          statusLabel: "CHANGES_REQUESTED · Authored externally",
+          reviewedPrKind: "authored-external",
+          metrics: {
+            openAssignedIssues: 0,
+            openAuthoredPrs: 0,
+            draftPrs: 0,
+            mergedPrs: 0,
+            closedUnmergedPrs: 0,
+            reviewsSubmitted: 1,
+            pendingReviewRequests: 0,
+            staleItems: 0,
+            reviewApproved: 0,
+            reviewChangesRequested: 1,
+            reviewCommented: 0,
+            reviewSelfAuthored: 0,
+            reviewTeamAuthored: 0,
+            reviewExternalAuthored: 1,
+          },
+        },
+      ],
+    };
+
+    const viewData = buildViewDashboardData(reviewData, "reviews");
+
+    expect(viewData.activityItems).toHaveLength(3);
+    expect(viewData.reviewSources.selfAuthored).toBe(0);
+    expect(viewData.reviewSources.teamAuthored).toBe(2);
+    expect(viewData.reviewSources.externalAuthored).toBe(1);
+    expect(viewData.summary.uniqueReviewedPrs).toBe(2);
+
+    const alice = viewData.contributors.find((contributor) => contributor.login === "alice");
+    expect(alice).toBeDefined();
+    expect(alice?.reviewsSubmitted).toBe(3);
+    expect(alice?.uniqueReviewedPrs).toBe(2);
+    expect(alice?.uniqueReviewedPrsTeamAuthored).toBe(1);
+    expect(alice?.reviewTeamAuthored).toBe(2);
+    expect(alice?.uniqueReviewedPrsExternalAuthored).toBe(1);
+    expect(alice?.reviewExternalAuthored).toBe(1);
   });
 });

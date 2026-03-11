@@ -245,7 +245,8 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
 
       <DashboardCharts
         view={view}
-        repos={viewData.repoActivity}
+        contributors={viewData.contributors}
+        items={viewData.activityItems}
         reviewOutcomes={viewData.reviewOutcomes}
         reviewSources={viewData.reviewSources}
         summaryHighlights={summaryHighlights}

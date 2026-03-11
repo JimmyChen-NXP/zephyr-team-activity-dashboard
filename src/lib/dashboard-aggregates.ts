@@ -28,6 +28,9 @@ function buildEmptyContributor(member: DashboardData["rosterMembers"][number]): 
     pendingReviewRequests: 0,
     staleItems: 0,
     uniqueReviewedPrs: 0,
+    uniqueReviewedPrsSelfAuthored: 0,
+    uniqueReviewedPrsTeamAuthored: 0,
+    uniqueReviewedPrsExternalAuthored: 0,
     reviewSelfAuthored: 0,
     reviewTeamAuthored: 0,
     reviewExternalAuthored: 0,
@@ -74,7 +77,13 @@ export function getActivityItemsForView(activityItems: ActivityItem[], view: Das
 }
 
 export function buildViewDashboardData(data: DashboardData, view: DashboardView): DashboardData {
-  const activityItems = getActivityItemsForView(data.activityItems, view);
+  const activityItems = getActivityItemsForView(data.activityItems, view).filter((item) => {
+    if (view !== "reviews") {
+      return true;
+    }
+
+    return item.reviewedPrKind !== "authored-by-self";
+  });
   const contributorMap = new Map(data.rosterMembers.map((member) => [member.login.toLowerCase(), buildEmptyContributor(member)]));
   const contributorRepos = new Map<string, Set<string>>();
   const repoMap = new Map<string, { issues: number; prs: number; reviews: number; contributors: Set<string> }>();
@@ -118,6 +127,15 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
       const contributorReviewItems = activityItems.filter((item) => item.type === "review" && item.contributor === contributor.login);
       contributor.repositoriesTouched = contributorRepos.get(contributor.login)?.size ?? 0;
       contributor.uniqueReviewedPrs = new Set(contributorReviewItems.map((item) => item.url)).size;
+      contributor.uniqueReviewedPrsSelfAuthored = new Set(
+        contributorReviewItems.filter((item) => item.reviewedPrKind === "authored-by-self").map((item) => item.url),
+      ).size;
+      contributor.uniqueReviewedPrsTeamAuthored = new Set(
+        contributorReviewItems.filter((item) => item.reviewedPrKind === "authored-by-them").map((item) => item.url),
+      ).size;
+      contributor.uniqueReviewedPrsExternalAuthored = new Set(
+        contributorReviewItems.filter((item) => item.reviewedPrKind === "authored-external").map((item) => item.url),
+      ).size;
       contributor.activityScore = calculateViewScore(view, contributor);
       return contributor;
     })
@@ -183,12 +201,19 @@ export function getSummaryCards(data: DashboardData, view: DashboardView): Summa
         { label: "Repositories touched", value: data.summary.repositoriesTouched, accent: "emerald" },
       ];
     case "reviews":
+      const reviewItems = data.activityItems.filter((item) => item.type === "review");
+      const uniqueTeamAuthoredPrs = new Set(
+        reviewItems.filter((item) => item.reviewedPrKind === "authored-by-them").map((item) => item.url),
+      ).size;
+      const uniqueExternalAuthoredPrs = new Set(
+        reviewItems.filter((item) => item.reviewedPrKind === "authored-external").map((item) => item.url),
+      ).size;
+
       return [
         { label: "Reviews submitted", value: data.summary.reviewsSubmitted, accent: "emerald" },
         { label: "Unique PRs reviewed", value: data.summary.uniqueReviewedPrs, accent: "blue" },
-        { label: "Authored by self", value: data.reviewSources.selfAuthored, accent: "violet" },
-        { label: "Authored by teammates", value: data.reviewSources.teamAuthored, accent: "emerald" },
-        { label: "Authored externally", value: data.reviewSources.externalAuthored, accent: "amber" },
+        { label: "Teammate PRs / reviews", value: `${uniqueTeamAuthoredPrs} / ${data.reviewSources.teamAuthored}`, accent: "emerald" },
+        { label: "External PRs / reviews", value: `${uniqueExternalAuthoredPrs} / ${data.reviewSources.externalAuthored}`, accent: "amber" },
       ];
   }
 }
@@ -214,8 +239,16 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
         { key: "reviews", label: "Reviews", value: (contributor) => contributor.reviewsSubmitted },
         { key: "unique-prs", label: "Unique PRs", value: (contributor) => contributor.uniqueReviewedPrs },
         { key: "self", label: "Self", value: (contributor) => contributor.reviewSelfAuthored },
-        { key: "team", label: "Teammate", value: (contributor) => contributor.reviewTeamAuthored },
-        { key: "external", label: "External", value: (contributor) => contributor.reviewExternalAuthored },
+        {
+          key: "team",
+          label: "Teammate",
+          value: (contributor) => `${contributor.uniqueReviewedPrsTeamAuthored ?? 0} / ${contributor.reviewTeamAuthored}`,
+        },
+        {
+          key: "external",
+          label: "External",
+          value: (contributor) => `${contributor.uniqueReviewedPrsExternalAuthored ?? 0} / ${contributor.reviewExternalAuthored}`,
+        },
         { key: "repos", label: "Repos", value: (contributor) => contributor.repositoriesTouched },
         { key: "score", label: getViewScoreLabel(view), value: (contributor) => contributor.activityScore },
       ];
