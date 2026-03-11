@@ -6,3 +6,4 @@ coverage/
 .env.local
 .env
 public/snapshots/
+scripts/git-askpass.cmd

@@ -22,15 +22,47 @@ function Get-Token {
   throw "Missing token. Set `$env:GITHUB_TOKEN (or `$env:GITHUB_PAT) in your terminal before running this script."
 }
 
-$token = Get-Token
+$token = (Get-Token).Trim()
 
-$headers = @{
-  Authorization = "Bearer $token"
-  Accept        = "application/vnd.github+json"
-  "X-GitHub-Api-Version" = "2022-11-28"
+function New-Headers([string]$authorizationValue) {
+  return @{
+    Authorization         = $authorizationValue
+    Accept                = "application/vnd.github+json"
+    "X-GitHub-Api-Version" = "2022-11-28"
+  }
 }
 
-$user = Invoke-RestMethod -Method Get -Uri "https://api.github.com/user" -Headers $headers
+function Invoke-GhRestMethod {
+  param(
+    [Parameter(Mandatory = $true)][ValidateSet('Get', 'Post', 'Put', 'Patch', 'Delete')][string]$Method,
+    [Parameter(Mandatory = $true)][string]$Uri,
+    [Parameter(Mandatory = $false)][string]$Body
+  )
+
+  $attempts = @(
+    (New-Headers -authorizationValue "Bearer $token"),
+    (New-Headers -authorizationValue "token $token")
+  )
+
+  foreach ($headers in $attempts) {
+    try {
+      if ($PSBoundParameters.ContainsKey('Body') -and $null -ne $Body) {
+        return Invoke-RestMethod -Method $Method -Uri $Uri -Headers $headers -Body $Body
+      }
+      return Invoke-RestMethod -Method $Method -Uri $Uri -Headers $headers
+    } catch {
+      $message = $_.Exception.Message
+      if ($message -match '\(401\) Unauthorized') {
+        continue
+      }
+      throw
+    }
+  }
+
+  throw "GitHub API returned 401 Unauthorized for both Bearer and token auth schemes. Your GITHUB_TOKEN may be expired/invalid or not permitted by your org SSO settings."
+}
+
+$user = Invoke-GhRestMethod -Method Get -Uri "https://api.github.com/user"
 if (-not $user.login) {
   throw "Failed to identify the authenticated GitHub user."
 }
@@ -44,7 +76,7 @@ $private = $Visibility -eq 'private'
 $body = @{ name = $Repo; private = $private; description = $Description } | ConvertTo-Json
 
 try {
-  $created = Invoke-RestMethod -Method Post -Uri "https://api.github.com/user/repos" -Headers $headers -Body $body
+  $created = Invoke-GhRestMethod -Method Post -Uri "https://api.github.com/user/repos" -Body $body
   Write-Host "Created repo: $($created.full_name)" -ForegroundColor Green
 } catch {
   $message = $_.Exception.Message
