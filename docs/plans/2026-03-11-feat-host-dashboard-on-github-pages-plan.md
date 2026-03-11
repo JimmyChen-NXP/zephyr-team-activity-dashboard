@@ -1,7 +1,7 @@
 ---
 title: feat: Host Zephyr dashboard on GitHub Pages (static snapshots)
 type: feat
-status: active
+status: completed
 date: 2026-03-11
 ---
 
@@ -175,26 +175,26 @@ Notes:
 
 ### Functional
 
-- [ ] Site is accessible at `https://JimmyChen-NXP.github.io/<dashboard-repo>/` (project site) and loads the dashboard UI.
-- [ ] Hosted site shows snapshot-backed data (no runtime GitHub calls).
-- [ ] Hosted site clearly displays `generatedAt` ("Last updated") from snapshot metadata.
-- [ ] “Test connection” is removed/disabled on the hosted site.
-- [ ] “Refresh now” is replaced with an **Update data** button that opens the GitHub Actions workflow page.
-- [ ] After running the workflow, the hosted site shows updated `generatedAt`.
-- [ ] CSV export works without server routes (static CSV link or client-generated export).
+- [x] Site is accessible at `https://JimmyChen-NXP.github.io/<dashboard-repo>/` (project site) and loads the dashboard UI.
+- [x] Hosted site shows snapshot-backed data (no runtime GitHub calls).
+- [x] Hosted site clearly displays `generatedAt` ("Last updated") from snapshot metadata.
+- [x] “Test connection” is removed/disabled on the hosted site.
+- [x] “Refresh now” is replaced with an **Update data** button that opens the GitHub Actions workflow page.
+- [x] After running the workflow, the hosted site shows updated `generatedAt`.
+- [x] CSV export works without server routes (static CSV link or client-generated export).
 
 ### Quality / Safety
 
-- [ ] No secrets are shipped to the browser bundle.
-- [ ] CI build is reproducible and succeeds from a clean checkout.
-- [ ] Existing unit tests still pass.
+- [x] No secrets are shipped to the browser bundle.
+- [x] CI build is reproducible and succeeds from a clean checkout.
+- [x] Existing unit tests still pass.
 
 ## Implementation Plan (Slices)
 
 ### Slice 1 — Hosting decision plumbing
 
 - [x] Confirm this repo name (needed for `basePath` / final URL): `zephyr-team-activity-dashboard`.
-- [ ] Ensure the repo’s Pages setting is set to **GitHub Actions**.
+- [x] Ensure the repo’s Pages setting is set to **GitHub Actions**.
 
 ### Slice 2 — Static export readiness
 
@@ -219,8 +219,8 @@ Notes:
 
 ### Slice 5 — Validation
 
-- [ ] Verify Pages URL loads.
-- [ ] Verify snapshot timestamp updates after a workflow run.
+- [x] Verify Pages URL loads.
+- [x] Verify snapshot timestamp updates after a workflow run.
 - [x] Verify no token material appears in built artifacts.
 
 ## Post-Deploy Monitoring & Validation
