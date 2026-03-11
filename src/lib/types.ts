@@ -110,6 +110,15 @@ export type SyncHealth = {
   liveEnabled: boolean;
 };
 
+export type GitHubConnectionStatus = "missing" | "configured" | "valid" | "invalid" | "rate-limited" | "error";
+
+export type DashboardAuth = {
+  hasToken: boolean;
+  connectionStatus: GitHubConnectionStatus;
+  message: string;
+  checkedAt: string | null;
+};
+
 export type DashboardSummary = {
   openAssignedIssues: number;
   openAuthoredPrs: number;
@@ -140,10 +149,7 @@ export type DashboardData = {
     contributors: Array<{ login: string; name: string }>;
     repos: string[];
   };
-  auth: {
-    hasToken: boolean;
-    tokenSource: "none" | "env" | "cookie";
-  };
+  auth: DashboardAuth;
 };
 
 export type DashboardFilters = {

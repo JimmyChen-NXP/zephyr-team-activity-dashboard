@@ -3,6 +3,7 @@ import { formatDistanceToNow, formatISO9075 } from "date-fns";
 
 import { ActivityPageNav } from "@/components/activity-page-nav";
 import { AuthoredPrsTable } from "@/components/authored-prs-table";
+import { ConnectionTestButton } from "@/components/connection-test-button";
 import { DashboardCharts } from "@/components/charts";
 import { IssuesTable } from "@/components/issues-table";
 import { ReviewedPrsTable } from "@/components/reviewed-prs-table";
@@ -16,7 +17,7 @@ import {
 } from "@/lib/dashboard-aggregates";
 import { buildDashboardHref, buildExportHref } from "@/lib/dashboard-links";
 import { getActivityPageDescription, getActivityPageTitle, type DashboardView } from "@/lib/dashboard-views";
-import type { DashboardData, DashboardFilters } from "@/lib/types";
+import type { DashboardData, DashboardFilters, DashboardAuth } from "@/lib/types";
 
 type DashboardShellProps = {
   data: DashboardData;
@@ -39,11 +40,38 @@ function formatMetric(value: number | null, suffix = "") {
   return `${value}${suffix}`;
 }
 
+function getAuthStatusLabel(auth: DashboardAuth) {
+  switch (auth.connectionStatus) {
+    case "missing":
+      return "Missing";
+    case "configured":
+      return "Configured";
+    case "valid":
+      return "Connected";
+    case "invalid":
+      return "Invalid";
+    case "rate-limited":
+      return "Rate limited";
+    case "error":
+      return "Connection error";
+  }
+}
+
+function getSyncSourceLabel(source: DashboardData["syncHealth"]["source"]) {
+  switch (source) {
+    case "demo":
+      return "Demo snapshot";
+    case "cache":
+      return "Cached snapshot";
+    case "live":
+      return "Live sync";
+  }
+}
+
 export function DashboardShell({ data, filters, view, pathname }: DashboardShellProps) {
   const viewData = buildViewDashboardData(data, view);
   const contributorOptions = viewData.filterOptions.contributors;
   const repoOptions = [{ name: "all" }, ...viewData.filterOptions.repos.map((repo) => ({ name: repo }))];
-  const currentLocation = buildDashboardHref(pathname, filters);
   const selectedContributor =
     filters.contributors.length === 0
       ? "All contributors"
@@ -95,9 +123,7 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
           </div>
           <div className="sync-pill">
             <span className={clsx("sync-dot", viewData.syncHealth.source)} />
-            <span>
-              {viewData.syncHealth.source === "demo" ? "Demo snapshot" : viewData.syncHealth.source === "cache" ? "Cached snapshot" : "Live sync"}
-            </span>
+            <span>{getSyncSourceLabel(viewData.syncHealth.source)}</span>
           </div>
         </div>
 
@@ -148,30 +174,47 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
           </div>
         </form>
 
-        <div className="token-panel">
-          <div>
-            <p className="eyebrow">GitHub authentication</p>
-            <h3>Provide or replace the GitHub token</h3>
-            <p className="token-copy">
-              Current source: <strong>{viewData.auth.tokenSource}</strong>. A token entered here is stored in a secure cookie and is used for live refreshes.
-            </p>
-          </div>
-
-          <form className="token-form" action="/api/token" method="post">
-            <input type="hidden" name="returnTo" value={currentLocation} />
-            <label>
-              <span>GitHub token</span>
-              <input name="token" type="password" placeholder="ghp_..." autoComplete="off" />
-            </label>
-            <div className="filter-actions">
-              <button type="submit" className="primary-button" name="action" value="save">
-                Save token
-              </button>
-              <button type="submit" className="ghost-button" name="action" value="clear">
-                Clear token
-              </button>
+        <div className="status-strip">
+          <article className="status-card">
+            <div className="status-card-header">
+              <div>
+                <p className="eyebrow">GitHub connection</p>
+                <h3>{getAuthStatusLabel(viewData.auth)}</h3>
+              </div>
+              <span className={clsx("status-pill", `status-pill-${viewData.auth.connectionStatus}`)}>{getAuthStatusLabel(viewData.auth)}</span>
             </div>
-          </form>
+            <p className="token-copy">{viewData.auth.message}</p>
+            <ConnectionTestButton />
+          </article>
+
+          <article className="status-card">
+            <div className="status-card-header">
+              <div>
+                <p className="eyebrow">Active source</p>
+                <h3>{getSyncSourceLabel(viewData.syncHealth.source)}</h3>
+              </div>
+            </div>
+            <p className="token-copy">
+              {viewData.syncHealth.source === "live"
+                ? "This page was built from a live GitHub sync."
+                : viewData.syncHealth.source === "cache"
+                  ? "This page is currently using the latest cached snapshot."
+                  : "This page is currently using demo data."}
+            </p>
+          </article>
+
+          <article className="status-card">
+            <div className="status-card-header">
+              <div>
+                <p className="eyebrow">Last update</p>
+                <h3>{formatDistanceToNow(new Date(viewData.generatedAt), { addSuffix: true })}</h3>
+              </div>
+            </div>
+            <p className="token-copy">
+              Generated {formatISO9075(new Date(viewData.generatedAt))}
+              {viewData.auth.checkedAt ? ` · Connection checked ${formatDistanceToNow(new Date(viewData.auth.checkedAt), { addSuffix: true })}` : ""}
+            </p>
+          </article>
         </div>
       </section>
 

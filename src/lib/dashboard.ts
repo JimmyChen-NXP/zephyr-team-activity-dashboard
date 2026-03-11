@@ -2,9 +2,15 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { differenceInMinutes } from "date-fns";
-import { cookies } from "next/headers";
 
 import { buildDemoDashboard } from "@/lib/demo-data";
+import {
+  buildConfiguredGitHubAuthState,
+  buildGitHubAuthStateFromError,
+  buildMissingGitHubAuthState,
+  buildValidGitHubAuthState,
+  getGitHubEnvToken,
+} from "@/lib/github-auth";
 import { collectLiveDashboard } from "@/lib/github";
 import { resolveRange } from "@/lib/range";
 import { loadRoster } from "@/lib/roster";
@@ -31,22 +37,6 @@ function emptyMetrics() {
     reviewTeamAuthored: 0,
     reviewExternalAuthored: 0,
   };
-}
-
-async function getGitHubAuth() {
-  const cookieStore = await cookies();
-  const cookieToken = cookieStore.get("github_token")?.value?.trim();
-
-  if (cookieToken) {
-    return { token: cookieToken, source: "cookie" as const };
-  }
-
-  const envToken = process.env.GITHUB_TOKEN?.trim();
-  if (envToken) {
-    return { token: envToken, source: "env" as const };
-  }
-
-  return { token: "", source: "none" as const };
 }
 
 function getSnapshotPath(preset: DashboardFilters["preset"]) {
@@ -202,16 +192,16 @@ function filterDashboard(data: DashboardData, filters: DashboardFilters): Dashbo
 export async function getDashboardData(filters: DashboardFilters): Promise<DashboardData> {
   const range = resolveRange(filters.preset);
   const roster = await loadRoster();
-  const auth = await getGitHubAuth();
+  const token = getGitHubEnvToken();
+  const configuredAuth = token
+    ? buildConfiguredGitHubAuthState("Token loaded from environment. Run Test connection to verify GitHub access.")
+    : buildMissingGitHubAuthState();
   const demoData = {
     ...buildDemoDashboard(roster, range),
-    auth: {
-      hasToken: auth.source !== "none",
-      tokenSource: auth.source,
-    },
+    auth: configuredAuth,
   };
 
-  if (!auth.token) {
+  if (!token) {
     return filterDashboard(demoData, filters);
   }
 
@@ -222,6 +212,7 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
       return filterDashboard(
         {
           ...snapshot,
+          auth: buildConfiguredGitHubAuthState("Token loaded from environment. Showing cached data until live sync is requested or the connection is tested."),
           warnings: [
             ...snapshot.warnings,
             {
@@ -242,22 +233,24 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
 
   try {
     const liveData = {
-      ...(await collectLiveDashboard(roster, range, auth.token)),
-      auth: {
-        hasToken: true,
-        tokenSource: auth.source,
-      },
+      ...(await collectLiveDashboard(roster, range, token)),
+      auth: buildValidGitHubAuthState({
+        checkedAt: new Date().toISOString(),
+        message: "Connected to GitHub. Live sync completed successfully.",
+      }),
     };
     await writeSnapshot(filters.preset, liveData);
 
     return filterDashboard(liveData, filters);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown GitHub sync failure";
+    const authState = buildGitHubAuthStateFromError(error);
 
     if (snapshot) {
       return filterDashboard(
         {
           ...snapshot,
+          auth: authState,
           warnings: [
             {
               level: "error",
@@ -278,6 +271,7 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
     return filterDashboard(
       {
         ...demoData,
+        auth: authState,
         warnings: [
           {
             level: "error",

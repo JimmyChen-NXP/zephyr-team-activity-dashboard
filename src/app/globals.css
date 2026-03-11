@@ -323,8 +323,10 @@ select[multiple] {
 }
 
 .review-side-panel,
-.token-panel,
-.token-form {
+.token-form,
+.status-strip,
+.status-card,
+.connection-test {
   display: grid;
   gap: 16px;
 }
@@ -357,15 +359,40 @@ select[multiple] {
   font-size: 1.25rem;
 }
 
-.token-panel {
+.status-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.status-card {
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  background: rgba(15, 23, 42, 0.38);
+}
+
+.status-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
 }
 
 .token-copy {
   color: #c1cee7;
   margin: 8px 0 0;
+}
+
+.connection-test {
+  align-items: start;
+}
+
+.connection-test .ghost-button {
+  min-width: 0;
+}
+
+.connection-test-copy strong {
+  color: #f8fbff;
 }
 
 .token-form {
@@ -486,6 +513,24 @@ th {
   border: 1px solid rgba(139, 92, 246, 0.22);
 }
 
+.status-pill-missing,
+.status-pill-invalid,
+.status-pill-error {
+  background: rgba(251, 113, 133, 0.14);
+  border-color: rgba(251, 113, 133, 0.28);
+}
+
+.status-pill-configured,
+.status-pill-rate-limited {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.28);
+}
+
+.status-pill-valid {
+  background: rgba(52, 211, 153, 0.14);
+  border-color: rgba(52, 211, 153, 0.28);
+}
+
 @media (max-width: 1100px) {
   body {
     padding: 18px;
@@ -493,6 +538,7 @@ th {
 
   .hero,
   .filter-form,
+  .status-strip,
   .token-form,
   .summary-grid,
   .chart-grid,

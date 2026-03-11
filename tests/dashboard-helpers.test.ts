@@ -176,7 +176,9 @@ const baseData: DashboardData = {
   },
   auth: {
     hasToken: true,
-    tokenSource: "env",
+    connectionStatus: "valid",
+    message: "Connected to GitHub.",
+    checkedAt: "2026-03-10T00:00:00.000Z",
   },
 };
 

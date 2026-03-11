@@ -65,6 +65,14 @@ type RepoAccumulator = {
   contributors: Set<string>;
 };
 
+type RateLimitResponse = {
+  resources?: {
+    core?: {
+      remaining?: number;
+    };
+  };
+};
+
 type ContributorAccumulator = ContributorMetrics;
 
 const API_ROOT = "https://api.github.com";
@@ -107,6 +115,16 @@ function getHeaders(token?: string): HeadersInit {
   return headers;
 }
 
+export class GitHubRequestError extends Error {
+  constructor(
+    public readonly status: number,
+    public readonly statusText: string,
+    public readonly rateLimitRemaining: number | null = null,
+  ) {
+    super(`GitHub request failed: ${status} ${statusText}`);
+  }
+}
+
 async function fetchGitHub<T>(path: string, token?: string): Promise<T> {
   const response = await fetch(`${API_ROOT}${path}`, {
     headers: getHeaders(token),
@@ -114,10 +132,39 @@ async function fetchGitHub<T>(path: string, token?: string): Promise<T> {
   });
 
   if (!response.ok) {
-    throw new Error(`GitHub request failed: ${response.status} ${response.statusText}`);
+    const rateLimitRemainingHeader = response.headers.get("x-ratelimit-remaining");
+    throw new GitHubRequestError(
+      response.status,
+      response.statusText,
+      rateLimitRemainingHeader === null ? null : Number(rateLimitRemainingHeader),
+    );
   }
 
   return (await response.json()) as T;
+}
+
+export async function probeGitHubConnection(token: string) {
+  const checkedAt = new Date().toISOString();
+  const response = await fetch(`${API_ROOT}/rate_limit`, {
+    headers: getHeaders(token),
+    next: { revalidate: 0 },
+  });
+
+  if (!response.ok) {
+    const rateLimitRemainingHeader = response.headers.get("x-ratelimit-remaining");
+    throw new GitHubRequestError(
+      response.status,
+      response.statusText,
+      rateLimitRemainingHeader === null ? null : Number(rateLimitRemainingHeader),
+    );
+  }
+
+  const body = (await response.json()) as RateLimitResponse;
+
+  return {
+    checkedAt,
+    rateLimitRemaining: body.resources?.core?.remaining ?? null,
+  };
 }
 
 async function searchIssues(query: string, page: number, token?: string): Promise<SearchResponse> {
@@ -590,7 +637,9 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     },
     auth: {
       hasToken: true,
-      tokenSource: "env",
+      connectionStatus: "valid",
+      message: "Connected to GitHub.",
+      checkedAt: generatedAt,
     },
   };
 }

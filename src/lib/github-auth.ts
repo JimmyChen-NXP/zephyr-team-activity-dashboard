@@ -1,0 +1,89 @@
+import { GitHubRequestError, probeGitHubConnection } from "@/lib/github";
+import type { DashboardAuth } from "@/lib/types";
+
+export function getGitHubEnvToken() {
+  return process.env.GITHUB_TOKEN?.trim() ?? "";
+}
+
+export function buildMissingGitHubAuthState(): DashboardAuth {
+  return {
+    hasToken: false,
+    connectionStatus: "missing",
+    message: "Set GITHUB_TOKEN in .env.local and restart the dev server to enable live GitHub sync.",
+    checkedAt: null,
+  };
+}
+
+export function buildConfiguredGitHubAuthState(message = "Token loaded from environment. Run Test connection to verify GitHub access."): DashboardAuth {
+  return {
+    hasToken: true,
+    connectionStatus: "configured",
+    message,
+    checkedAt: null,
+  };
+}
+
+type ValidAuthOptions = {
+  checkedAt?: string | null;
+  rateLimitRemaining?: number | null;
+  message?: string;
+};
+
+export function buildValidGitHubAuthState(options: ValidAuthOptions = {}): DashboardAuth {
+  const checkedAt = options.checkedAt ?? new Date().toISOString();
+  const remainingText = typeof options.rateLimitRemaining === "number" ? ` ${options.rateLimitRemaining} requests remaining in the current window.` : "";
+
+  return {
+    hasToken: true,
+    connectionStatus: "valid",
+    message: options.message ?? `Connected to GitHub.${remainingText}`.trim(),
+    checkedAt,
+  };
+}
+
+export function buildGitHubAuthStateFromError(error: unknown, checkedAt = new Date().toISOString()): DashboardAuth {
+  if (error instanceof GitHubRequestError) {
+    if (error.status === 401) {
+      return {
+        hasToken: true,
+        connectionStatus: "invalid",
+        message: "GitHub rejected GITHUB_TOKEN. Update .env.local and restart the dev server.",
+        checkedAt,
+      };
+    }
+
+    if (error.status === 403 && error.rateLimitRemaining === 0) {
+      return {
+        hasToken: true,
+        connectionStatus: "rate-limited",
+        message: "GitHub rate limit reached. Wait for reset or use cached data.",
+        checkedAt,
+      };
+    }
+  }
+
+  return {
+    hasToken: true,
+    connectionStatus: "error",
+    message: error instanceof Error ? error.message : "GitHub connection test failed.",
+    checkedAt,
+  };
+}
+
+export async function testGitHubConnectionFromEnv(): Promise<DashboardAuth> {
+  const token = getGitHubEnvToken();
+  if (!token) {
+    return buildMissingGitHubAuthState();
+  }
+
+  try {
+    const probe = await probeGitHubConnection(token);
+    return buildValidGitHubAuthState({
+      checkedAt: probe.checkedAt,
+      rateLimitRemaining: probe.rateLimitRemaining,
+      message: probe.rateLimitRemaining === null ? "Connected to GitHub." : `Connected to GitHub. ${probe.rateLimitRemaining} requests remaining in the current window.`,
+    });
+  } catch (error) {
+    return buildGitHubAuthStateFromError(error);
+  }
+}
