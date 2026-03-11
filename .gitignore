@@ -5,3 +5,4 @@ coverage/
 .data/
 .env.local
 .env
+public/snapshots/

@@ -1,5 +1,6 @@
 import type { DashboardFilters } from "@/lib/types";
 import type { DashboardView } from "@/lib/dashboard-views";
+import { withBasePath } from "@/lib/base-path";
 
 const SAFE_RETURN_PATHS = new Set(["/issues", "/pull-requests", "/reviews"]);
 
@@ -34,7 +35,8 @@ export function buildDashboardSearchParams(filters: DashboardFilters, options: B
 export function buildDashboardHref(pathname: string, filters: DashboardFilters, options: BuildHrefOptions = {}) {
   const params = buildDashboardSearchParams(filters, options);
   const query = params.toString();
-  return query ? `${pathname}?${query}` : pathname;
+  const href = query ? `${pathname}?${query}` : pathname;
+  return withBasePath(href);
 }
 
 export function buildExportHref(view: DashboardView, filters: DashboardFilters) {
@@ -47,17 +49,17 @@ export function buildExportHref(view: DashboardView, filters: DashboardFilters) 
 
 export function sanitizeDashboardReturnTo(returnTo: string | null | undefined) {
   if (!returnTo) {
-    return "/issues";
+    return withBasePath("/issues");
   }
 
   try {
     const url = new URL(returnTo, "http://localhost");
     if (!SAFE_RETURN_PATHS.has(url.pathname)) {
-      return "/issues";
+      return withBasePath("/issues");
     }
 
-    return `${url.pathname}${url.search}`;
+    return withBasePath(`${url.pathname}${url.search}`);
   } catch {
-    return "/issues";
+    return withBasePath("/issues");
   }
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { formatISO9075 } from "date-fns";
 
 import type { ActivityItem } from "@/lib/types";

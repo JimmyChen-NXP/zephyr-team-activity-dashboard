@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { formatDistanceToNow, formatISO9075 } from "date-fns";
 
@@ -5,6 +7,7 @@ import { ActivityPageNav } from "@/components/activity-page-nav";
 import { AuthoredPrsTable } from "@/components/authored-prs-table";
 import { ConnectionTestButton } from "@/components/connection-test-button";
 import { DashboardCharts } from "@/components/charts";
+import { ExportCsvButton } from "@/components/export-csv-button";
 import { IssuesTable } from "@/components/issues-table";
 import { ReviewedPrsTable } from "@/components/reviewed-prs-table";
 import {
@@ -15,6 +18,7 @@ import {
   getViewScoreFormula,
   getViewScoreLabel,
 } from "@/lib/dashboard-aggregates";
+import { withBasePath } from "@/lib/base-path";
 import { buildDashboardHref, buildExportHref } from "@/lib/dashboard-links";
 import { getActivityPageDescription, getActivityPageTitle, type DashboardView } from "@/lib/dashboard-views";
 import type { DashboardData, DashboardFilters, DashboardAuth } from "@/lib/types";
@@ -24,6 +28,8 @@ type DashboardShellProps = {
   filters: DashboardFilters;
   view: DashboardView;
   pathname: string;
+  isHostedSnapshot?: boolean;
+  updateDataUrl?: string;
 };
 
 const PRESET_OPTIONS: Array<{ value: DashboardFilters["preset"]; label: string }> = [
@@ -68,7 +74,8 @@ function getSyncSourceLabel(source: DashboardData["syncHealth"]["source"]) {
   }
 }
 
-export function DashboardShell({ data, filters, view, pathname }: DashboardShellProps) {
+export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot = false, updateDataUrl }: DashboardShellProps) {
+  const actionPath = withBasePath(pathname);
   const viewData = buildViewDashboardData(data, view);
   const contributorOptions = viewData.filterOptions.contributors;
   const repoOptions = [{ name: "all" }, ...viewData.filterOptions.repos.map((repo) => ({ name: repo }))];
@@ -127,7 +134,7 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
           </div>
         </div>
 
-        <form className="filter-form" action={pathname} method="get">
+        <form className="filter-form" action={actionPath} method="get">
           <label>
             <span>Range</span>
             <select name="preset" defaultValue={filters.preset}>
@@ -165,12 +172,24 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
             <button type="submit" className="primary-button">
               Apply filters
             </button>
-            <button type="submit" className="secondary-button" name="refresh" value="1">
-              Refresh now
-            </button>
-            <a className="ghost-button" href={buildExportHref(view, filters)}>
-              Export CSV
-            </a>
+            {isHostedSnapshot ? (
+              updateDataUrl ? (
+                <a className="secondary-button" href={updateDataUrl} target="_blank" rel="noreferrer">
+                  Update data
+                </a>
+              ) : null
+            ) : (
+              <button type="submit" className="secondary-button" name="refresh" value="1">
+                Refresh now
+              </button>
+            )}
+            {isHostedSnapshot ? (
+              <ExportCsvButton filename={`zephyr-team-activity-${view}-${filters.preset}.csv`} items={viewData.activityItems} />
+            ) : (
+              <a className="ghost-button" href={buildExportHref(view, filters)}>
+                Export CSV
+              </a>
+            )}
           </div>
         </form>
 
@@ -184,7 +203,11 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
               <span className={clsx("status-pill", `status-pill-${viewData.auth.connectionStatus}`)}>{getAuthStatusLabel(viewData.auth)}</span>
             </div>
             <p className="token-copy">{viewData.auth.message}</p>
-            <ConnectionTestButton />
+            {isHostedSnapshot ? (
+              <p className="token-copy connection-test-copy">Snapshot mode. Use Update data to run the GitHub Action and refresh this page after it finishes.</p>
+            ) : (
+              <ConnectionTestButton />
+            )}
           </article>
 
           <article className="status-card">
