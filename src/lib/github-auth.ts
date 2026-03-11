@@ -1,6 +1,9 @@
 import { GitHubRequestError, probeGitHubConnection } from "@/lib/github";
 import type { DashboardAuth } from "@/lib/types";
 
+import fs from "node:fs";
+import path from "node:path";
+
 function sanitizeGitHubEnvToken(raw: string): string {
   let token = raw.trim();
 
@@ -15,8 +18,33 @@ function sanitizeGitHubEnvToken(raw: string): string {
   return token;
 }
 
+let cachedEnvLocalToken: string | null | undefined;
+
+function readGitHubTokenFromEnvLocal(): string | null {
+  if (process.env.NODE_ENV === "test" || process.env.VITEST) {
+    cachedEnvLocalToken = null;
+    return cachedEnvLocalToken;
+  }
+
+  if (cachedEnvLocalToken !== undefined) {
+    return cachedEnvLocalToken;
+  }
+
+  try {
+    const envPath = path.join(process.cwd(), ".env.local");
+    const content = fs.readFileSync(envPath, "utf8");
+    const match = content.match(/^\s*GITHUB_TOKEN\s*=\s*(.+)\s*$/m);
+    const token = match ? sanitizeGitHubEnvToken(match[1]) : "";
+    cachedEnvLocalToken = token ? token : null;
+    return cachedEnvLocalToken;
+  } catch {
+    cachedEnvLocalToken = null;
+    return cachedEnvLocalToken;
+  }
+}
+
 export function getGitHubEnvToken() {
-  return sanitizeGitHubEnvToken(process.env.GITHUB_TOKEN ?? "");
+  return readGitHubTokenFromEnvLocal() ?? sanitizeGitHubEnvToken(process.env.GITHUB_TOKEN ?? "");
 }
 
 export function buildMissingGitHubAuthState(): DashboardAuth {
