@@ -19,7 +19,7 @@ export function parseRosterCsv(csvText: string): RosterMember[] {
       login: record.Login,
       name: record.Name && record.Name !== "null" ? record.Name : record.Login,
       email: record.Email ? record.Email : null,
-      createdAt: record["Created At"] ?? "",
+      createdAt: record["Created At"] ? record["Created At"] : null,
       role: record.Role,
     }))
     .filter((member) => Boolean(member.login));

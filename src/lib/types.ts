@@ -4,7 +4,7 @@ export type RosterMember = {
   login: string;
   name: string;
   email: string | null;
-  createdAt: string;
+  createdAt: string | null;
   role: string;
 };
 
