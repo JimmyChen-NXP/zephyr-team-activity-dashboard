@@ -77,7 +77,8 @@ type ContributorAccumulator = ContributorMetrics;
 
 const API_ROOT = "https://api.github.com";
 const ORG = process.env.GITHUB_ORG ?? "zephyrproject-rtos";
-const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 15);
+const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 10);
+const SEARCH_API_MAX_PAGES = 10;
 const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? 40);
 const REVIEW_DETAIL_LIMIT = Number(process.env.REVIEW_DETAIL_LIMIT ?? 120);
 const limit = pLimit(4);
@@ -120,8 +121,12 @@ export class GitHubRequestError extends Error {
     public readonly status: number,
     public readonly statusText: string,
     public readonly rateLimitRemaining: number | null = null,
+    public readonly requestPath: string | null = null,
+    public readonly responseBody: string | null = null,
   ) {
-    super(`GitHub request failed: ${status} ${statusText}`);
+    const pathText = requestPath ? ` (${requestPath})` : "";
+    const bodyText = responseBody ? `: ${responseBody}` : "";
+    super(`GitHub request failed: ${status} ${statusText}${pathText}${bodyText}`);
   }
 }
 
@@ -133,10 +138,16 @@ async function fetchGitHub<T>(path: string, token?: string): Promise<T> {
 
   if (!response.ok) {
     const rateLimitRemainingHeader = response.headers.get("x-ratelimit-remaining");
+    const responseBody = await response
+      .text()
+      .then((text) => (text ? text.replace(/\s+/g, " ").slice(0, 500) : null))
+      .catch(() => null);
     throw new GitHubRequestError(
       response.status,
       response.statusText,
       rateLimitRemainingHeader === null ? null : Number(rateLimitRemainingHeader),
+      path,
+      responseBody,
     );
   }
 
@@ -175,8 +186,9 @@ async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT, to
   const allItems: SearchItem[] = [];
   let totalCount = 0;
   let incompleteResults = false;
+  const pagesToFetch = Math.min(maxPages, SEARCH_API_MAX_PAGES);
 
-  for (let page = 1; page <= maxPages; page += 1) {
+  for (let page = 1; page <= pagesToFetch; page += 1) {
     const response = await searchIssues(query, page, token);
     totalCount = response.total_count;
     incompleteResults = incompleteResults || response.incomplete_results;
@@ -191,7 +203,7 @@ async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT, to
     totalCount,
     incompleteResults,
     items: allItems,
-    capped: allItems.length >= maxPages * 100,
+    capped: maxPages > pagesToFetch || totalCount > allItems.length,
   };
 }
 
@@ -299,7 +311,8 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
   if (openIssuesResult.capped || openPrsResult.capped || mergedPrsResult.capped || closedPrsResult.capped) {
     warnings.push({
       level: "warn",
-      message: "Collection hit the configured search page limit. Increase SEARCH_PAGE_LIMIT for fuller org-wide coverage.",
+      message:
+        "Collection hit the GitHub Search cap (max 1000 results per query) or SEARCH_PAGE_LIMIT. Narrow the query scope for fuller coverage.",
     });
   }
 
