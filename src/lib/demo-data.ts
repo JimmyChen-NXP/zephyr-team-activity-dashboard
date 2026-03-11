@@ -278,7 +278,9 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
     },
     auth: {
       hasToken: false,
-      tokenSource: "none",
+      connectionStatus: "missing",
+      message: "Set GITHUB_TOKEN in .env.local to enable live GitHub sync.",
+      checkedAt: null,
     },
   };
 }
