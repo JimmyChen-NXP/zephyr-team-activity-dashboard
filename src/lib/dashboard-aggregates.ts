@@ -237,8 +237,6 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
     case "reviews":
       return [
         { key: "reviews", label: "Reviews", value: (contributor) => contributor.reviewsSubmitted },
-        { key: "unique-prs", label: "Unique PRs", value: (contributor) => contributor.uniqueReviewedPrs },
-        { key: "self", label: "Self", value: (contributor) => contributor.reviewSelfAuthored },
         {
           key: "team",
           label: "Teammate",
@@ -249,7 +247,6 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
           label: "External",
           value: (contributor) => `${contributor.uniqueReviewedPrsExternalAuthored ?? 0} / ${contributor.reviewExternalAuthored}`,
         },
-        { key: "repos", label: "Repos", value: (contributor) => contributor.repositoriesTouched },
         { key: "score", label: getViewScoreLabel(view), value: (contributor) => contributor.activityScore },
       ];
   }
