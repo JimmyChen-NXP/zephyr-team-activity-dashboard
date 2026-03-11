@@ -5,7 +5,7 @@ import { parse } from "csv-parse/sync";
 
 import type { RosterMember } from "@/lib/types";
 
-const ROSTER_FILE = "nxp-upstream_members_2026-03-09.csv";
+const ROSTER_FILE = "upstream_member.csv";
 
 export function parseRosterCsv(csvText: string): RosterMember[] {
   const records = parse(csvText, {
@@ -19,7 +19,7 @@ export function parseRosterCsv(csvText: string): RosterMember[] {
       login: record.Login,
       name: record.Name && record.Name !== "null" ? record.Name : record.Login,
       email: record.Email ? record.Email : null,
-      createdAt: record["Created At"],
+      createdAt: record["Created At"] ?? "",
       role: record.Role,
     }))
     .filter((member) => Boolean(member.login));

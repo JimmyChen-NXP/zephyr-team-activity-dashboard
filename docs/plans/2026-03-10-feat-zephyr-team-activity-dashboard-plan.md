@@ -9,7 +9,7 @@ date: 2026-03-10
 ## Overview
 ## Team Member Source
 
-The team roster is sourced from [nxp-upstream_members_2026-03-09.csv](nxp-upstream_members_2026-03-09.csv), which contains GitHub logins, names, emails, creation dates, and roles. This file is updated periodically and serves as the authoritative list for dashboard metrics and filtering. The dashboard must support dynamic updates as the CSV changes, ensuring all metrics reflect the latest roster.
+The team roster is sourced from [upstream_member.csv](upstream_member.csv), which contains GitHub logins, names, and roles. This file is updated periodically and serves as the authoritative list for dashboard metrics and filtering. The dashboard must support dynamic updates as the CSV changes, ensuring all metrics reflect the latest roster.
 
 Build a dashboard that shows activity for a defined team roster across the `zephyrproject-rtos` GitHub organization for a user-selected period.
 

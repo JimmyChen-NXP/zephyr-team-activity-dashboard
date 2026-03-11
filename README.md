@@ -9,7 +9,7 @@ A snapshot-first internal dashboard for understanding issue, pull request, and r
 - Recharts for visualizations
 
 ## Features
-- CSV-backed team roster using [nxp-upstream_members_2026-03-09.csv](nxp-upstream_members_2026-03-09.csv)
+- CSV-backed team roster using [upstream_member.csv](upstream_member.csv) (Login/Name/Role)
 - Preset date ranges for 7, 30, and 90 days
 - Hybrid refresh model with cached snapshots and manual live refresh
 - Environment-based GitHub authentication via `.env.local`
