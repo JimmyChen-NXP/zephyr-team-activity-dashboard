@@ -146,16 +146,31 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
             </select>
           </label>
 
-          <label>
-            <span>Contributors</span>
-            <select name="contributor" defaultValue={filters.contributors} multiple size={Math.min(8, Math.max(4, contributorOptions.length))}>
-              {contributorOptions.map((option) => (
-                <option key={option.login} value={option.login}>
-                  {option.name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="filter-field">
+            <span id="contributors-filter-label">Contributors</span>
+            <details className="filter-dropdown" aria-labelledby="contributors-filter-label">
+              <summary>{selectedContributor}</summary>
+              <div className="filter-dropdown-panel">
+                <a className="filter-dropdown-clear" href={buildDashboardHref(pathname, { ...filters, contributors: [], refresh: false })}>
+                  All contributors
+                </a>
+                <div className="filter-dropdown-options">
+                  {contributorOptions.map((option) => (
+                    <div key={option.login} className="filter-dropdown-option">
+                      <input
+                        id={`contributor-${option.login}`}
+                        type="checkbox"
+                        name="contributor"
+                        value={option.login}
+                        defaultChecked={filters.contributors.includes(option.login)}
+                      />
+                      <label htmlFor={`contributor-${option.login}`}>{option.name}</label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </details>
+          </div>
 
           <label>
             <span>Repository</span>
@@ -237,6 +252,26 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
               Generated {formatISO9075(new Date(viewData.generatedAt))}
               {viewData.auth.checkedAt ? ` · Connection checked ${formatDistanceToNow(new Date(viewData.auth.checkedAt), { addSuffix: true })}` : ""}
             </p>
+          </article>
+
+          <article className="status-card">
+            <div className="status-card-header">
+              <div>
+                <p className="eyebrow">Warnings</p>
+                <h3>{viewData.warnings.length === 0 ? "No warnings" : `${viewData.warnings.length} warning${viewData.warnings.length === 1 ? "" : "s"}`}</h3>
+              </div>
+            </div>
+            <div className="warning-list">
+              {viewData.warnings.length === 0 ? (
+                <div className="warning-item info">No warnings. Coverage looks healthy.</div>
+              ) : (
+                viewData.warnings.map((warning) => (
+                  <div key={warning.message} className={clsx("warning-item", warning.level)}>
+                    {warning.message}
+                  </div>
+                ))
+              )}
+            </div>
           </article>
         </div>
       </section>
@@ -348,74 +383,6 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
             </table>
           </div>
         </section>
-
-        <aside className="stack-column">
-          <section className="panel warning-panel">
-            <div className="panel-header compact">
-              <div>
-                <p className="eyebrow">Signals</p>
-                <h2>Warnings and sync health</h2>
-              </div>
-            </div>
-            <div className="warning-list">
-              {viewData.warnings.length === 0 ? (
-                <div className="warning-item info">No warnings. Coverage looks healthy.</div>
-              ) : (
-                viewData.warnings.map((warning) => (
-                  <div key={warning.message} className={clsx("warning-item", warning.level)}>
-                    {warning.message}
-                  </div>
-                ))
-              )}
-            </div>
-            <div className="sync-card">
-              <div>
-                <span className="meta-label">Generated</span>
-                <strong>{formatISO9075(new Date(viewData.generatedAt))}</strong>
-              </div>
-              <div>
-                <span className="meta-label">Freshness</span>
-                <strong>{formatDistanceToNow(new Date(viewData.generatedAt), { addSuffix: true })}</strong>
-              </div>
-              <div>
-                <span className="meta-label">Search samples</span>
-                <strong>{viewData.syncHealth.searchSamples}</strong>
-              </div>
-              <div>
-                <span className="meta-label">Detail samples</span>
-                <strong>{viewData.syncHealth.detailSamples}</strong>
-              </div>
-            </div>
-          </section>
-
-          <section className="panel repo-panel">
-            <div className="panel-header compact">
-              <div>
-                <p className="eyebrow">Repo coverage</p>
-                <h2>Top touched repositories</h2>
-              </div>
-            </div>
-            <ul className="repo-list">
-              {viewData.repoActivity.length === 0 ? (
-                <li className="empty-state-item">No repositories matched the current filters.</li>
-              ) : (
-                viewData.repoActivity.slice(0, 8).map((repo) => (
-                  <li key={repo.name}>
-                    <div>
-                      <strong>{repo.name}</strong>
-                      <span>{repo.contributors} contributors</span>
-                    </div>
-                    <div className="repo-metrics">
-                      <span>{repo.issues} issues</span>
-                      <span>{repo.prs} PRs</span>
-                      <span>{repo.reviews} reviews</span>
-                    </div>
-                  </li>
-                ))
-              )}
-            </ul>
-          </section>
-        </aside>
       </div>
 
       {view === "issues" ? <IssuesTable items={viewData.activityItems} /> : null}
