@@ -41,10 +41,16 @@ function formatMetric(value: number | null, suffix = "") {
 
 export function DashboardShell({ data, filters, view, pathname }: DashboardShellProps) {
   const viewData = buildViewDashboardData(data, view);
-  const contributorOptions = [{ login: "all", name: "All contributors" }, ...viewData.filterOptions.contributors];
+  const contributorOptions = viewData.filterOptions.contributors;
   const repoOptions = [{ name: "all" }, ...viewData.filterOptions.repos.map((repo) => ({ name: repo }))];
   const currentLocation = buildDashboardHref(pathname, filters);
-  const selectedContributor = contributorOptions.find((option) => option.login === filters.contributor)?.name ?? "All contributors";
+  const selectedContributor =
+    filters.contributors.length === 0
+      ? "All contributors"
+      : contributorOptions
+          .filter((option) => filters.contributors.includes(option.login))
+          .map((option) => option.name)
+          .join(", ");
   const summaryCards = getSummaryCards(viewData, view);
   const contributorColumns = getContributorColumns(view);
   const scoreLabel = getViewScoreLabel(view);
@@ -108,8 +114,8 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
           </label>
 
           <label>
-            <span>Contributor</span>
-            <select name="contributor" defaultValue={filters.contributor}>
+            <span>Contributors</span>
+            <select name="contributor" defaultValue={filters.contributors} multiple size={Math.min(8, Math.max(4, contributorOptions.length))}>
               {contributorOptions.map((option) => (
                 <option key={option.login} value={option.login}>
                   {option.name}
@@ -258,7 +264,7 @@ export function DashboardShell({ data, filters, view, pathname }: DashboardShell
                         <div className="person-cell">
                           <a
                             className="table-link"
-                            href={buildDashboardHref(pathname, { ...filters, contributor: contributor.login, refresh: false })}
+                            href={buildDashboardHref(pathname, { ...filters, contributors: [contributor.login], refresh: false })}
                           >
                             <strong>{contributor.name}</strong>
                           </a>

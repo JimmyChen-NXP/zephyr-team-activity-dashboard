@@ -71,6 +71,7 @@ const API_ROOT = "https://api.github.com";
 const ORG = process.env.GITHUB_ORG ?? "zephyrproject-rtos";
 const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 5);
 const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? 40);
+const REVIEW_DETAIL_LIMIT = Number(process.env.REVIEW_DETAIL_LIMIT ?? 120);
 const limit = pLimit(4);
 
 function emptyMetrics() {
@@ -86,8 +87,9 @@ function emptyMetrics() {
     reviewApproved: 0,
     reviewChangesRequested: 0,
     reviewCommented: 0,
-    reviewTeamPr: 0,
-    reviewExtPr: 0,
+    reviewSelfAuthored: 0,
+    reviewTeamAuthored: 0,
+    reviewExternalAuthored: 0,
   };
 }
 
@@ -175,6 +177,10 @@ function createContributorMap(roster: RosterMember[]): Map<string, ContributorAc
         reviewsSubmitted: 0,
         pendingReviewRequests: 0,
         staleItems: 0,
+        uniqueReviewedPrs: 0,
+        reviewSelfAuthored: 0,
+        reviewTeamAuthored: 0,
+        reviewExternalAuthored: 0,
         repositoriesTouched: 0,
         activityScore: 0,
       },
@@ -196,6 +202,7 @@ function asActivityItem(
     url: item.html_url,
     repo: repoFullNameFromSearchItem(item),
     contributor,
+    author: item.user.login,
     state: item.state,
     createdAt: item.created_at,
     updatedAt: item.updated_at,
@@ -216,8 +223,9 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     commented: 0,
   };
   const reviewSources: ReviewSourceBreakdown = {
-    teamPr: 0,
-    extPr: 0,
+    selfAuthored: 0,
+    teamAuthored: 0,
+    externalAuthored: 0,
   };
   const activityItems: ActivityItem[] = [];
   const firstReviewHours: number[] = [];
@@ -283,11 +291,14 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     );
   }
 
-  const allTeamPrItems = [...openPrsResult.items, ...mergedPrsResult.items, ...closedPrsResult.items].filter((item) =>
+  const allPrItems = [...openPrsResult.items, ...mergedPrsResult.items, ...closedPrsResult.items];
+
+  const allTeamPrItems = allPrItems.filter((item) =>
     rosterLogins.has(item.user.login.toLowerCase()),
   );
 
   const uniquePrs = Array.from(new Map(allTeamPrItems.map((item) => [item.pull_request?.url ?? item.html_url, item])).values()).slice(0, PR_DETAIL_LIMIT);
+  const reviewDetailTargets = Array.from(new Map(allPrItems.map((item) => [item.pull_request?.url ?? item.html_url, item])).values()).slice(0, REVIEW_DETAIL_LIMIT);
 
   for (const item of uniquePrs) {
     const contributor = contributorMap.get(item.user.login.toLowerCase());
@@ -334,7 +345,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     );
   }
 
-  const detailTargets = uniquePrs.filter((item) => item.pull_request?.url).slice(0, PR_DETAIL_LIMIT);
+  const detailTargets = reviewDetailTargets.filter((item) => item.pull_request?.url).slice(0, REVIEW_DETAIL_LIMIT);
 
   const detailResults = await Promise.all(
     detailTargets.map((item) =>
@@ -358,13 +369,10 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
 
     detailSamples += 1;
     const { item, detail, reviews, repoFullName } = result;
-    const contributor = contributorMap.get(item.user.login.toLowerCase());
-    if (!contributor) {
-      continue;
-    }
+    const authorContributor = contributorMap.get(item.user.login.toLowerCase());
 
-    if (detail.draft) {
-      contributor.draftPrs += 1;
+    if (authorContributor && detail.draft) {
+      authorContributor.draftPrs += 1;
       const prItem = activityItems.find((activityItem) => activityItem.type === "pull_request" && activityItem.url === item.html_url);
       if (prItem) {
         prItem.metrics.draftPrs += 1;
@@ -372,33 +380,38 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       }
     }
 
-    const matchingRequests = detail.requested_reviewers.filter((reviewer) => rosterLogins.has(reviewer.login.toLowerCase()));
-    for (const reviewer of matchingRequests) {
-      const reviewerMetrics = contributorMap.get(reviewer.login.toLowerCase());
-      if (reviewerMetrics) {
-        reviewerMetrics.pendingReviewRequests += 1;
-        activityItems.push({
-          id: `review-request-${detail.id}-${reviewer.login}`,
-          type: "review_request",
-          title: `Review requested from ${reviewerMetrics.name}`,
-          url: item.html_url,
-          repo: repoFullName,
-          contributor: reviewerMetrics.login,
-          state: "open",
-          createdAt: detail.created_at,
-          updatedAt: detail.updated_at,
-          ageDays: differenceInCalendarDays(new Date(), parseISO(detail.updated_at)),
-          statusLabel: "Pending review request",
-          metrics: {
-            ...emptyMetrics(),
-            pendingReviewRequests: 1,
-          },
-        });
+    if (authorContributor) {
+      const matchingRequests = detail.requested_reviewers.filter((reviewer) => rosterLogins.has(reviewer.login.toLowerCase()));
+      for (const reviewer of matchingRequests) {
+        const reviewerMetrics = contributorMap.get(reviewer.login.toLowerCase());
+        if (reviewerMetrics) {
+          reviewerMetrics.pendingReviewRequests += 1;
+          activityItems.push({
+            id: `review-request-${detail.id}-${reviewer.login}`,
+            type: "review_request",
+            title: `Review requested from ${reviewerMetrics.name}`,
+            url: item.html_url,
+            repo: repoFullName,
+            contributor: reviewerMetrics.login,
+            author: detail.user.login,
+            state: "open",
+            createdAt: detail.created_at,
+            updatedAt: detail.updated_at,
+            ageDays: differenceInCalendarDays(new Date(), parseISO(detail.updated_at)),
+            statusLabel: "Pending review request",
+            metrics: {
+              ...emptyMetrics(),
+              pendingReviewRequests: 1,
+            },
+          });
+        }
       }
     }
 
     const repoEntry = repoMap.get(repoFullName) ?? { issues: 0, prs: 0, reviews: 0, contributors: new Set<string>() };
-    repoEntry.contributors.add(contributor.login);
+    if (authorContributor) {
+      repoEntry.contributors.add(authorContributor.login);
+    }
 
     const rangedTeamReviews = reviews.filter(
       (review) =>
@@ -419,7 +432,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       }
     }
 
-    if (detail.merged_at) {
+    if (authorContributor && detail.merged_at) {
       mergeHours.push(Math.abs(differenceInHours(parseISO(detail.merged_at), parseISO(detail.created_at))));
     }
 
@@ -429,9 +442,22 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         continue;
       }
 
-      const reviewedPrKind = rosterLogins.has(item.user.login.toLowerCase()) ? "team-pr" : "ext-pr";
+      const reviewAuthorLogin = detail.user.login;
+      const reviewedPrKind =
+        reviewAuthorLogin.toLowerCase() === reviewer.login.toLowerCase()
+          ? "authored-by-self"
+          : rosterLogins.has(reviewAuthorLogin.toLowerCase())
+            ? "authored-by-them"
+            : "authored-external";
 
       reviewer.reviewsSubmitted += 1;
+      if (reviewedPrKind === "authored-by-self") {
+        reviewer.reviewSelfAuthored += 1;
+      } else if (reviewedPrKind === "authored-by-them") {
+        reviewer.reviewTeamAuthored += 1;
+      } else {
+        reviewer.reviewExternalAuthored += 1;
+      }
       repoEntry.reviews += 1;
       repoEntry.contributors.add(reviewer.login);
       activityItems.push({
@@ -441,11 +467,17 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         url: item.html_url,
         repo: repoFullName,
         contributor: reviewer.login,
+        author: reviewAuthorLogin,
         state: review.state.toLowerCase(),
         createdAt: detail.created_at,
         updatedAt: review.submitted_at,
         ageDays: differenceInCalendarDays(new Date(), parseISO(review.submitted_at)),
-        statusLabel: reviewedPrKind === "team-pr" ? `${review.state} · Team PR` : `${review.state} · External PR`,
+        statusLabel:
+          reviewedPrKind === "authored-by-self"
+            ? `${review.state} · Authored by self`
+            : reviewedPrKind === "authored-by-them"
+              ? `${review.state} · Authored by teammate`
+              : `${review.state} · Authored externally`,
         reviewedPrKind,
         metrics: {
           ...emptyMetrics(),
@@ -453,8 +485,9 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
           reviewApproved: review.state.toUpperCase() === "APPROVED" ? 1 : 0,
           reviewChangesRequested: review.state.toUpperCase() === "CHANGES_REQUESTED" ? 1 : 0,
           reviewCommented: review.state.toUpperCase() === "APPROVED" || review.state.toUpperCase() === "CHANGES_REQUESTED" ? 0 : 1,
-          reviewTeamPr: reviewedPrKind === "team-pr" ? 1 : 0,
-          reviewExtPr: reviewedPrKind === "ext-pr" ? 1 : 0,
+          reviewSelfAuthored: reviewedPrKind === "authored-by-self" ? 1 : 0,
+          reviewTeamAuthored: reviewedPrKind === "authored-by-them" ? 1 : 0,
+          reviewExternalAuthored: reviewedPrKind === "authored-external" ? 1 : 0,
         },
       });
 
@@ -467,10 +500,12 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         reviewOutcomes.commented += 1;
       }
 
-      if (reviewedPrKind === "team-pr") {
-        reviewSources.teamPr += 1;
+      if (reviewedPrKind === "authored-by-self") {
+        reviewSources.selfAuthored += 1;
+      } else if (reviewedPrKind === "authored-by-them") {
+        reviewSources.teamAuthored += 1;
       } else {
-        reviewSources.extPr += 1;
+        reviewSources.externalAuthored += 1;
       }
     }
 
@@ -479,7 +514,9 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
 
   const contributors = Array.from(contributorMap.values())
     .map((contributor) => {
+      const contributorReviewItems = activityItems.filter((item) => item.type === "review" && item.contributor === contributor.login);
       contributor.repositoriesTouched = Array.from(repoMap.values()).filter((repo) => repo.contributors.has(contributor.login)).length;
+      contributor.uniqueReviewedPrs = new Set(contributorReviewItems.map((item) => item.url)).size;
       contributor.activityScore = calculateActivityScore({
         openAssignedIssues: contributor.openAssignedIssues,
         openAuthoredPrs: contributor.openAuthoredPrs,
@@ -528,6 +565,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       mergedPrs: contributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
       reviewsSubmitted: contributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),
       pendingReviewRequests: contributors.reduce((total, contributor) => total + contributor.pendingReviewRequests, 0),
+      uniqueReviewedPrs: new Set(activityItems.filter((item) => item.type === "review").map((item) => item.url)).size,
       staleItems: contributors.reduce((total, contributor) => total + contributor.staleItems, 0),
       repositoriesTouched: repoActivity.length,
       medianFirstReviewHours: median(firstReviewHours),

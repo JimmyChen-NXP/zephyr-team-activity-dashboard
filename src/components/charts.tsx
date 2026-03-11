@@ -22,8 +22,9 @@ export function DashboardCharts({ view, repos, reviewOutcomes, reviewSources, su
   }));
 
   const reviewData = [
-    { name: "Team PR", value: reviewSources.teamPr },
-    { name: "External PR", value: reviewSources.extPr },
+    { name: "Authored by self", value: reviewSources.selfAuthored },
+    { name: "Authored by teammate", value: reviewSources.teamAuthored },
+    { name: "Authored externally", value: reviewSources.externalAuthored },
   ].filter((item) => item.value > 0);
 
   const outcomeCards = [
@@ -38,7 +39,7 @@ export function DashboardCharts({ view, repos, reviewOutcomes, reviewSources, su
       ? "Issue-only highlights for the active filters"
       : view === "pull-requests"
         ? "PR-only highlights for the active filters"
-        : "Team PR vs external PR";
+        : "Self vs teammate vs external author split";
 
   return (
     <div className="chart-grid">

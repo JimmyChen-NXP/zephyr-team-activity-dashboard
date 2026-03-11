@@ -17,10 +17,23 @@ export function parseDashboardPreset(value: string | undefined): DashboardPreset
 
 export function parseDashboardFilters(searchParams?: DashboardSearchParams): DashboardFilters {
   const params = searchParams ?? {};
+  const contributorValues = Array.isArray(params.contributor)
+    ? params.contributor
+    : params.contributor
+      ? [params.contributor]
+      : [];
+  const contributors = Array.from(
+    new Set(
+      contributorValues
+        .flatMap((value) => value.split(","))
+        .map((value) => value.trim())
+        .filter((value) => value.length > 0 && value !== "all"),
+    ),
+  );
 
   return {
     preset: parseDashboardPreset(firstSearchParamValue(params.preset)),
-    contributor: firstSearchParamValue(params.contributor) ?? "all",
+    contributors,
     repo: firstSearchParamValue(params.repo) ?? "all",
     refresh: firstSearchParamValue(params.refresh) === "1",
   };

@@ -42,8 +42,9 @@ function emptyMetrics() {
     reviewApproved: 0,
     reviewChangesRequested: 0,
     reviewCommented: 0,
-    reviewTeamPr: 0,
-    reviewExtPr: 0,
+    reviewSelfAuthored: 0,
+    reviewTeamAuthored: 0,
+    reviewExternalAuthored: 0,
   };
 }
 
@@ -73,6 +74,10 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       reviewsSubmitted,
       pendingReviewRequests,
       staleItems,
+      uniqueReviewedPrs: 0,
+      reviewSelfAuthored: 0,
+      reviewTeamAuthored: 0,
+      reviewExternalAuthored: 0,
       repositoriesTouched,
       activityScore: calculateActivityScore({
         openAssignedIssues,
@@ -97,8 +102,14 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
     const repo = DEMO_REPOS[index % DEMO_REPOS.length];
     const createdAt = new Date(Date.parse(range.from) + index * 86400000).toISOString();
     const updatedAt = new Date(Date.parse(createdAt) + 3600000 * ((index % 6) + 2)).toISOString();
-    const isTeamPr = index % 2 === 0;
     const reviewState = index % 3 === 0 ? "APPROVED" : index % 3 === 1 ? "CHANGES_REQUESTED" : "COMMENTED";
+    const reviewAuthorKind = index % 3 === 0 ? "authored-by-self" : index % 3 === 1 ? "authored-by-them" : "authored-external";
+    const reviewAuthor =
+      reviewAuthorKind === "authored-by-self"
+        ? contributor.login
+        : reviewAuthorKind === "authored-by-them"
+          ? contributors[(index + 1) % contributors.length]?.login ?? contributor.login
+          : `external-${index}`;
     const reviewRequestItems: ActivityItem[] =
       contributor.pendingReviewRequests > 0
         ? [
@@ -109,6 +120,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
               url: `https://github.com/${repo}/pull/${400 + index}`,
               repo,
               contributor: contributor.login,
+              author: reviewAuthor,
               state: "open",
               createdAt,
               updatedAt,
@@ -130,6 +142,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
         url: `https://github.com/${repo}/issues/${100 + index}`,
         repo,
         contributor: contributor.login,
+        author: contributor.login,
         state: "open",
         createdAt,
         updatedAt,
@@ -148,6 +161,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
         url: `https://github.com/${repo}/pull/${200 + index}`,
         repo,
         contributor: contributor.login,
+        author: contributor.login,
         state: contributor.draftPrs > 0 ? "draft" : "open",
         createdAt,
         updatedAt,
@@ -169,20 +183,27 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
         url: `https://github.com/${repo}/pull/${300 + index}`,
         repo,
         contributor: contributor.login,
+        author: reviewAuthor,
         state: reviewState.toLowerCase(),
         createdAt,
         updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(createdAt)),
-        statusLabel: isTeamPr ? "Team PR" : "External PR",
-        reviewedPrKind: isTeamPr ? "team-pr" : "ext-pr",
+        statusLabel:
+          reviewAuthorKind === "authored-by-self"
+            ? "Authored by self"
+            : reviewAuthorKind === "authored-by-them"
+              ? "Authored by teammate"
+              : "Authored externally",
+        reviewedPrKind: reviewAuthorKind,
         metrics: {
           ...emptyMetrics(),
           reviewsSubmitted: contributor.reviewsSubmitted,
           reviewApproved: Math.max(1, Math.floor(contributor.reviewsSubmitted * 0.5)),
           reviewChangesRequested: Math.floor(contributor.reviewsSubmitted * 0.2),
           reviewCommented: Math.ceil(contributor.reviewsSubmitted * 0.3),
-          reviewTeamPr: isTeamPr ? contributor.reviewsSubmitted : 0,
-          reviewExtPr: isTeamPr ? 0 : contributor.reviewsSubmitted,
+          reviewSelfAuthored: reviewAuthorKind === "authored-by-self" ? contributor.reviewsSubmitted : 0,
+          reviewTeamAuthored: reviewAuthorKind === "authored-by-them" ? contributor.reviewsSubmitted : 0,
+          reviewExternalAuthored: reviewAuthorKind === "authored-external" ? contributor.reviewsSubmitted : 0,
         },
       },
       ...reviewRequestItems,
@@ -196,9 +217,21 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
   };
 
   const reviewSources: ReviewSourceBreakdown = {
-    teamPr: activityItems.reduce((total, item) => total + item.metrics.reviewTeamPr, 0),
-    extPr: activityItems.reduce((total, item) => total + item.metrics.reviewExtPr, 0),
+    selfAuthored: activityItems.reduce((total, item) => total + item.metrics.reviewSelfAuthored, 0),
+    teamAuthored: activityItems.reduce((total, item) => total + item.metrics.reviewTeamAuthored, 0),
+    externalAuthored: activityItems.reduce((total, item) => total + item.metrics.reviewExternalAuthored, 0),
   };
+
+  const contributorsWithReviewDetails = contributors.map((contributor) => {
+    const reviewedItems = activityItems.filter((item) => item.type === "review" && item.contributor === contributor.login);
+    return {
+      ...contributor,
+      uniqueReviewedPrs: new Set(reviewedItems.map((item) => item.url)).size,
+      reviewSelfAuthored: reviewedItems.reduce((total, item) => total + item.metrics.reviewSelfAuthored, 0),
+      reviewTeamAuthored: reviewedItems.reduce((total, item) => total + item.metrics.reviewTeamAuthored, 0),
+      reviewExternalAuthored: reviewedItems.reduce((total, item) => total + item.metrics.reviewExternalAuthored, 0),
+    };
+  });
 
   const warnings: DashboardWarning[] = [
     {
@@ -220,6 +253,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       mergedPrs: contributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
       reviewsSubmitted: contributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),
       pendingReviewRequests: contributors.reduce((total, contributor) => total + contributor.pendingReviewRequests, 0),
+      uniqueReviewedPrs: contributorsWithReviewDetails.reduce((total, contributor) => total + contributor.uniqueReviewedPrs, 0),
       staleItems: contributors.reduce((total, contributor) => total + contributor.staleItems, 0),
       repositoriesTouched: new Set(repoActivity.filter((repo) => repo.contributors > 0).map((repo) => repo.name)).size,
       medianFirstReviewHours: 13.5,
@@ -227,7 +261,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
     },
     reviewOutcomes,
     reviewSources,
-    contributors: contributors.sort((left, right) => right.activityScore - left.activityScore),
+    contributors: contributorsWithReviewDetails.sort((left, right) => right.activityScore - left.activityScore),
     repoActivity: repoActivity.sort((left, right) => right.prs + right.reviews - (left.prs + left.reviews)),
     activityItems,
     syncHealth: {

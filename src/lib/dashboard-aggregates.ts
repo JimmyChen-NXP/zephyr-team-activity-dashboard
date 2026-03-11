@@ -27,6 +27,10 @@ function buildEmptyContributor(member: DashboardData["rosterMembers"][number]): 
     reviewsSubmitted: 0,
     pendingReviewRequests: 0,
     staleItems: 0,
+    uniqueReviewedPrs: 0,
+    reviewSelfAuthored: 0,
+    reviewTeamAuthored: 0,
+    reviewExternalAuthored: 0,
     repositoriesTouched: 0,
     activityScore: 0,
   };
@@ -39,7 +43,7 @@ function calculateViewScore(view: DashboardView, contributor: ContributorMetrics
     case "pull-requests":
       return contributor.openAuthoredPrs * 3 + contributor.mergedPrs * 2 + contributor.staleItems;
     case "reviews":
-      return contributor.reviewsSubmitted;
+      return contributor.reviewsSubmitted + contributor.uniqueReviewedPrs;
   }
 }
 
@@ -61,7 +65,7 @@ export function getViewScoreFormula(view: DashboardView) {
     case "pull-requests":
       return "pr score = (open authored PRs × 3) + (merged PRs × 2) + stale items";
     case "reviews":
-      return "review score = reviews submitted";
+      return "review score = reviews submitted + unique PRs reviewed";
   }
 }
 
@@ -86,6 +90,9 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
       contributor.reviewsSubmitted += item.metrics.reviewsSubmitted;
       contributor.pendingReviewRequests += item.metrics.pendingReviewRequests;
       contributor.staleItems += item.metrics.staleItems;
+      contributor.reviewSelfAuthored += item.metrics.reviewSelfAuthored;
+      contributor.reviewTeamAuthored += item.metrics.reviewTeamAuthored;
+      contributor.reviewExternalAuthored += item.metrics.reviewExternalAuthored;
 
       const repos = contributorRepos.get(contributor.login) ?? new Set<string>();
       repos.add(item.repo);
@@ -108,7 +115,9 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
 
   const contributors = Array.from(contributorMap.values())
     .map((contributor) => {
+      const contributorReviewItems = activityItems.filter((item) => item.type === "review" && item.contributor === contributor.login);
       contributor.repositoriesTouched = contributorRepos.get(contributor.login)?.size ?? 0;
+      contributor.uniqueReviewedPrs = new Set(contributorReviewItems.map((item) => item.url)).size;
       contributor.activityScore = calculateViewScore(view, contributor);
       return contributor;
     })
@@ -131,6 +140,7 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
     mergedPrs: contributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
     reviewsSubmitted: contributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),
     pendingReviewRequests: contributors.reduce((total, contributor) => total + contributor.pendingReviewRequests, 0),
+    uniqueReviewedPrs: new Set(activityItems.filter((item) => item.type === "review").map((item) => item.url)).size,
     staleItems: contributors.reduce((total, contributor) => total + contributor.staleItems, 0),
     repositoriesTouched: repoActivity.length,
     medianFirstReviewHours: view === "reviews" ? data.summary.medianFirstReviewHours : null,
@@ -149,8 +159,9 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
       commented: activityItems.reduce((total, item) => total + item.metrics.reviewCommented, 0),
     },
     reviewSources: {
-      teamPr: activityItems.reduce((total, item) => total + item.metrics.reviewTeamPr, 0),
-      extPr: activityItems.reduce((total, item) => total + item.metrics.reviewExtPr, 0),
+      selfAuthored: activityItems.reduce((total, item) => total + item.metrics.reviewSelfAuthored, 0),
+      teamAuthored: activityItems.reduce((total, item) => total + item.metrics.reviewTeamAuthored, 0),
+      externalAuthored: activityItems.reduce((total, item) => total + item.metrics.reviewExternalAuthored, 0),
     },
   };
 }
@@ -174,9 +185,10 @@ export function getSummaryCards(data: DashboardData, view: DashboardView): Summa
     case "reviews":
       return [
         { label: "Reviews submitted", value: data.summary.reviewsSubmitted, accent: "emerald" },
-        { label: "Team PR reviews", value: data.reviewSources.teamPr, accent: "violet" },
-        { label: "External PR reviews", value: data.reviewSources.extPr, accent: "amber" },
-        { label: "Active reviewers", value: data.contributors.length, accent: "blue" },
+        { label: "Unique PRs reviewed", value: data.summary.uniqueReviewedPrs, accent: "blue" },
+        { label: "Authored by self", value: data.reviewSources.selfAuthored, accent: "violet" },
+        { label: "Authored by teammates", value: data.reviewSources.teamAuthored, accent: "emerald" },
+        { label: "Authored externally", value: data.reviewSources.externalAuthored, accent: "amber" },
       ];
   }
 }
@@ -200,6 +212,10 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
     case "reviews":
       return [
         { key: "reviews", label: "Reviews", value: (contributor) => contributor.reviewsSubmitted },
+        { key: "unique-prs", label: "Unique PRs", value: (contributor) => contributor.uniqueReviewedPrs },
+        { key: "self", label: "Self", value: (contributor) => contributor.reviewSelfAuthored },
+        { key: "team", label: "Teammate", value: (contributor) => contributor.reviewTeamAuthored },
+        { key: "external", label: "External", value: (contributor) => contributor.reviewExternalAuthored },
         { key: "repos", label: "Repos", value: (contributor) => contributor.repositoriesTouched },
         { key: "score", label: getViewScoreLabel(view), value: (contributor) => contributor.activityScore },
       ];

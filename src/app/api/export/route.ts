@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const filters = parseDashboardFilters({
     preset: searchParams.get("preset") ?? undefined,
-    contributor: searchParams.get("contributor") ?? undefined,
+    contributor: searchParams.getAll("contributor"),
     repo: searchParams.get("repo") ?? undefined,
   });
   const viewParam = searchParams.get("view") ?? "issues";

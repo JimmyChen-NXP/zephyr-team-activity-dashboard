@@ -191,6 +191,13 @@ select,
   font-size: 0.96rem;
 }
 
+select[multiple] {
+  height: auto;
+  min-height: 168px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
 .primary-button,
 .secondary-button,
 .ghost-button {

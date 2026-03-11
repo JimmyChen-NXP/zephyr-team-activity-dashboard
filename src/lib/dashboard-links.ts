@@ -11,9 +11,12 @@ type BuildHrefOptions = {
 export function buildDashboardSearchParams(filters: DashboardFilters, options: BuildHrefOptions = {}) {
   const params = new URLSearchParams({
     preset: filters.preset,
-    contributor: filters.contributor,
     repo: filters.repo,
   });
+
+  for (const contributor of filters.contributors) {
+    params.append("contributor", contributor);
+  }
 
   if (options.includeRefresh && filters.refresh) {
     params.set("refresh", "1");

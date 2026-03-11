@@ -26,7 +26,7 @@ export function getActivityPageDescription(view: DashboardView) {
     case "pull-requests":
       return "Focus on authored pull requests only, with PR-scoped totals, repository activity, and contributor ranking.";
     case "reviews":
-      return "Focus on submitted reviews only, with review-scoped totals, team/external split, and reviewer ranking.";
+      return "Focus on submitted reviews only, with review-scoped totals, self/teammate/external author split, and reviewer ranking.";
   }
 }
 

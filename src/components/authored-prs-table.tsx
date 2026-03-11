@@ -22,6 +22,7 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
               <th>PR</th>
               <th>Repository</th>
               <th>Contributor</th>
+              <th>Created</th>
               <th>State</th>
               <th>Updated</th>
             </tr>
@@ -29,7 +30,7 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colSpan={5} className="empty-state-cell">
+                <td colSpan={6} className="empty-state-cell">
                   No authored PRs matched the current selection.
                 </td>
               </tr>
@@ -43,6 +44,7 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
                   </td>
                   <td>{item.repo}</td>
                   <td>@{item.contributor}</td>
+                  <td>{formatISO9075(new Date(item.createdAt))}</td>
                   <td>{item.statusLabel}</td>
                   <td>{formatISO9075(new Date(item.updatedAt))}</td>
                 </tr>

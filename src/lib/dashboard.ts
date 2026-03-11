@@ -27,8 +27,9 @@ function emptyMetrics() {
     reviewApproved: 0,
     reviewChangesRequested: 0,
     reviewCommented: 0,
-    reviewTeamPr: 0,
-    reviewExtPr: 0,
+    reviewSelfAuthored: 0,
+    reviewTeamAuthored: 0,
+    reviewExternalAuthored: 0,
   };
 }
 
@@ -73,8 +74,10 @@ async function writeSnapshot(preset: DashboardFilters["preset"], data: Dashboard
 }
 
 function filterDashboard(data: DashboardData, filters: DashboardFilters): DashboardData {
+  const contributorFilter = new Set(filters.contributors.map((login) => login.toLowerCase()));
+  const hasContributorFilter = contributorFilter.size > 0;
   const filteredItems = data.activityItems.filter((item) => {
-    const contributorMatch = filters.contributor === "all" || item.contributor === filters.contributor;
+    const contributorMatch = !hasContributorFilter || contributorFilter.has(item.contributor.toLowerCase());
     const repoMatch = filters.repo === "all" || item.repo === filters.repo;
     return contributorMatch && repoMatch;
   });
@@ -94,6 +97,10 @@ function filterDashboard(data: DashboardData, filters: DashboardFilters): Dashbo
         reviewsSubmitted: 0,
         pendingReviewRequests: 0,
         staleItems: 0,
+        uniqueReviewedPrs: 0,
+        reviewSelfAuthored: 0,
+        reviewTeamAuthored: 0,
+        reviewExternalAuthored: 0,
         repositoriesTouched: 0,
         activityScore: 0,
       },
@@ -113,6 +120,9 @@ function filterDashboard(data: DashboardData, filters: DashboardFilters): Dashbo
       contributor.reviewsSubmitted += item.metrics.reviewsSubmitted;
       contributor.pendingReviewRequests += item.metrics.pendingReviewRequests;
       contributor.staleItems += item.metrics.staleItems;
+      contributor.reviewSelfAuthored += item.metrics.reviewSelfAuthored;
+      contributor.reviewTeamAuthored += item.metrics.reviewTeamAuthored;
+      contributor.reviewExternalAuthored += item.metrics.reviewExternalAuthored;
 
       const touchedRepos = contributorRepos.get(contributor.login) ?? new Set<string>();
       touchedRepos.add(item.repo);
@@ -133,7 +143,9 @@ function filterDashboard(data: DashboardData, filters: DashboardFilters): Dashbo
 
   const filteredContributors = Array.from(contributorMap.values())
     .map((contributor) => {
+      const contributorReviewItems = filteredItems.filter((item) => item.type === "review" && item.contributor === contributor.login);
       contributor.repositoriesTouched = contributorRepos.get(contributor.login)?.size ?? 0;
+      contributor.uniqueReviewedPrs = new Set(contributorReviewItems.map((item) => item.url)).size;
       contributor.activityScore = calculateActivityScore({
         openAssignedIssues: contributor.openAssignedIssues,
         openAuthoredPrs: contributor.openAuthoredPrs,
@@ -168,6 +180,7 @@ function filterDashboard(data: DashboardData, filters: DashboardFilters): Dashbo
       mergedPrs: filteredContributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
       reviewsSubmitted: filteredContributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),
       pendingReviewRequests: filteredContributors.reduce((total, contributor) => total + contributor.pendingReviewRequests, 0),
+      uniqueReviewedPrs: new Set(filteredItems.filter((item) => item.type === "review").map((item) => item.url)).size,
       staleItems: filteredContributors.reduce((total, contributor) => total + contributor.staleItems, 0),
       repositoriesTouched: filteredRepoActivity.length,
       medianFirstReviewHours: data.summary.medianFirstReviewHours,
@@ -179,8 +192,9 @@ function filterDashboard(data: DashboardData, filters: DashboardFilters): Dashbo
       commented: filteredItems.reduce((total, item) => total + item.metrics.reviewCommented, 0),
     },
     reviewSources: {
-      teamPr: filteredItems.reduce((total, item) => total + item.metrics.reviewTeamPr, 0),
-      extPr: filteredItems.reduce((total, item) => total + item.metrics.reviewExtPr, 0),
+      selfAuthored: filteredItems.reduce((total, item) => total + item.metrics.reviewSelfAuthored, 0),
+      teamAuthored: filteredItems.reduce((total, item) => total + item.metrics.reviewTeamAuthored, 0),
+      externalAuthored: filteredItems.reduce((total, item) => total + item.metrics.reviewExternalAuthored, 0),
     },
   };
 }

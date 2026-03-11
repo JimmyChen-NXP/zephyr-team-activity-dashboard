@@ -2,13 +2,17 @@ import { formatISO9075 } from "date-fns";
 
 import type { ActivityItem } from "@/lib/types";
 
-function formatReviewKind(value?: "team-pr" | "ext-pr") {
-  if (value === "team-pr") {
-    return "Team PR";
+function formatReviewKind(value?: "authored-by-self" | "authored-by-them" | "authored-external") {
+  if (value === "authored-by-self") {
+    return "Authored by self";
   }
 
-  if (value === "ext-pr") {
-    return "External PR";
+  if (value === "authored-by-them") {
+    return "Authored by teammate";
+  }
+
+  if (value === "authored-external") {
+    return "Authored externally";
   }
 
   return "—";
@@ -38,7 +42,10 @@ export function ReviewedPrsTable({ items }: ReviewedPrsTableProps) {
               <th>Reviewed PR</th>
               <th>Repository</th>
               <th>Reviewer</th>
-              <th>PR type</th>
+              <th>Author</th>
+              <th>Author type</th>
+              <th>Created</th>
+              <th>Status</th>
               <th>Outcome</th>
               <th>Updated</th>
             </tr>
@@ -46,7 +53,7 @@ export function ReviewedPrsTable({ items }: ReviewedPrsTableProps) {
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colSpan={6} className="empty-state-cell">
+                <td colSpan={9} className="empty-state-cell">
                   No reviewed PRs matched the current selection.
                 </td>
               </tr>
@@ -60,7 +67,10 @@ export function ReviewedPrsTable({ items }: ReviewedPrsTableProps) {
                   </td>
                   <td>{item.repo}</td>
                   <td>@{item.contributor}</td>
+                  <td>@{item.author}</td>
                   <td>{formatReviewKind(item.reviewedPrKind)}</td>
+                  <td>{formatISO9075(new Date(item.createdAt))}</td>
+                  <td>{item.statusLabel}</td>
                   <td>{formatTypeLabel(item.state)}</td>
                   <td>{formatISO9075(new Date(item.updatedAt))}</td>
                 </tr>

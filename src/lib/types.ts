@@ -30,8 +30,9 @@ export type ReviewOutcomeBreakdown = {
 };
 
 export type ReviewSourceBreakdown = {
-  teamPr: number;
-  extPr: number;
+  selfAuthored: number;
+  teamAuthored: number;
+  externalAuthored: number;
 };
 
 export type ActivityMetricDelta = {
@@ -46,8 +47,9 @@ export type ActivityMetricDelta = {
   reviewApproved: number;
   reviewChangesRequested: number;
   reviewCommented: number;
-  reviewTeamPr: number;
-  reviewExtPr: number;
+  reviewSelfAuthored: number;
+  reviewTeamAuthored: number;
+  reviewExternalAuthored: number;
 };
 
 export type ContributorMetrics = {
@@ -62,6 +64,10 @@ export type ContributorMetrics = {
   reviewsSubmitted: number;
   pendingReviewRequests: number;
   staleItems: number;
+  uniqueReviewedPrs: number;
+  reviewSelfAuthored: number;
+  reviewTeamAuthored: number;
+  reviewExternalAuthored: number;
   repositoriesTouched: number;
   activityScore: number;
 };
@@ -76,7 +82,7 @@ export type RepoActivity = {
 
 export type ActivityItemType = "issue" | "pull_request" | "review" | "review_request";
 
-export type ReviewedPrKind = "team-pr" | "ext-pr";
+export type ReviewedPrKind = "authored-by-self" | "authored-by-them" | "authored-external";
 
 export type ActivityItem = {
   id: string;
@@ -85,6 +91,7 @@ export type ActivityItem = {
   url: string;
   repo: string;
   contributor: string;
+  author: string;
   state: string;
   createdAt: string;
   updatedAt: string;
@@ -109,6 +116,7 @@ export type DashboardSummary = {
   mergedPrs: number;
   reviewsSubmitted: number;
   pendingReviewRequests: number;
+  uniqueReviewedPrs: number;
   staleItems: number;
   repositoriesTouched: number;
   medianFirstReviewHours: number | null;
@@ -140,7 +148,7 @@ export type DashboardData = {
 
 export type DashboardFilters = {
   preset: DashboardPreset;
-  contributor: string;
+  contributors: string[];
   repo: string;
   refresh: boolean;
 };
