@@ -1,6 +1,9 @@
 name: Publish GitHub Pages (static snapshots)
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
   schedule:
     - cron: "13 5 * * *"
