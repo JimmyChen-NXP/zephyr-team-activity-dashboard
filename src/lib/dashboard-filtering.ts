@@ -18,6 +18,7 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
         name: member.name,
         role: member.role,
         openAssignedIssues: 0,
+        closedIssues: 0,
         openAuthoredPrs: 0,
         draftPrs: 0,
         mergedPrs: 0,
@@ -41,6 +42,7 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
     const contributor = contributorMap.get(item.contributor.toLowerCase());
     if (contributor) {
       contributor.openAssignedIssues += item.metrics.openAssignedIssues;
+      contributor.closedIssues += item.metrics.closedIssues;
       contributor.openAuthoredPrs += item.metrics.openAuthoredPrs;
       contributor.draftPrs += item.metrics.draftPrs;
       contributor.mergedPrs += item.metrics.mergedPrs;
@@ -78,6 +80,7 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
       contributor.uniqueReviewedPrs = new Set(contributorReviewItems.map((item) => item.url)).size;
       contributor.activityScore = calculateActivityScore({
         openAssignedIssues: contributor.openAssignedIssues,
+        closedIssues: contributor.closedIssues,
         openAuthoredPrs: contributor.openAuthoredPrs,
         mergedPrs: contributor.mergedPrs,
         reviewsSubmitted: contributor.reviewsSubmitted,
@@ -106,6 +109,7 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
     activityItems: filteredItems,
     summary: {
       openAssignedIssues: filteredContributors.reduce((total, contributor) => total + contributor.openAssignedIssues, 0),
+      closedIssues: filteredContributors.reduce((total, contributor) => total + contributor.closedIssues, 0),
       openAuthoredPrs: filteredContributors.reduce((total, contributor) => total + contributor.openAuthoredPrs, 0),
       mergedPrs: filteredContributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
       reviewsSubmitted: filteredContributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),

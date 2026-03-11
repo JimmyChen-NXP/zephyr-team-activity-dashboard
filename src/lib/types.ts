@@ -37,6 +37,7 @@ export type ReviewSourceBreakdown = {
 
 export type ActivityMetricDelta = {
   openAssignedIssues: number;
+  closedIssues: number;
   openAuthoredPrs: number;
   draftPrs: number;
   mergedPrs: number;
@@ -57,6 +58,7 @@ export type ContributorMetrics = {
   name: string;
   role: string;
   openAssignedIssues: number;
+  closedIssues: number;
   openAuthoredPrs: number;
   draftPrs: number;
   mergedPrs: number;
@@ -124,6 +126,7 @@ export type DashboardAuth = {
 
 export type DashboardSummary = {
   openAssignedIssues: number;
+  closedIssues: number;
   openAuthoredPrs: number;
   mergedPrs: number;
   reviewsSubmitted: number;

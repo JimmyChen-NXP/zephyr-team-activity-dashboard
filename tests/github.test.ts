@@ -34,6 +34,7 @@ describe("collectLiveDashboard", () => {
   it("includes team reviews on external-authored pull requests", async () => {
     const fetchMock = vi.fn()
       .mockResolvedValueOnce(jsonResponse({ total_count: 0, incomplete_results: false, items: [] }))
+      .mockResolvedValueOnce(jsonResponse({ total_count: 0, incomplete_results: false, items: [] }))
       .mockResolvedValueOnce(
         jsonResponse({
           total_count: 1,
@@ -107,6 +108,101 @@ describe("collectLiveDashboard", () => {
           author: "external-author",
           reviewedPrKind: "authored-external",
           url: "https://github.com/zephyrproject-rtos/zephyr/pull/101",
+        }),
+      ]),
+    );
+  });
+
+  it("counts merged PRs and closed issues in the selected range", async () => {
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce(jsonResponse({ total_count: 0, incomplete_results: false, items: [] }))
+      .mockResolvedValueOnce(
+        jsonResponse({
+          total_count: 1,
+          incomplete_results: false,
+          items: [
+            {
+              id: 201,
+              number: 201,
+              title: "Closed issue",
+              html_url: "https://github.com/zephyrproject-rtos/zephyr/issues/201",
+              repository_url: "https://api.github.com/repos/zephyrproject-rtos/zephyr",
+              created_at: "2026-03-03T00:00:00.000Z",
+              updated_at: "2026-03-07T00:00:00.000Z",
+              closed_at: "2026-03-07T00:00:00.000Z",
+              state: "closed",
+              user: { login: "external-author" },
+              assignees: [{ login: "alice" }],
+            },
+          ],
+        }),
+      )
+      .mockResolvedValueOnce(jsonResponse({ total_count: 0, incomplete_results: false, items: [] }))
+      .mockResolvedValueOnce(
+        jsonResponse({
+          total_count: 1,
+          incomplete_results: false,
+          items: [
+            {
+              id: 301,
+              number: 301,
+              title: "Merged PR",
+              html_url: "https://github.com/zephyrproject-rtos/zephyr/pull/301",
+              repository_url: "https://api.github.com/repos/zephyrproject-rtos/zephyr",
+              created_at: "2026-03-01T00:00:00.000Z",
+              updated_at: "2026-03-08T00:00:00.000Z",
+              closed_at: "2026-03-08T00:00:00.000Z",
+              state: "closed",
+              user: { login: "bob" },
+              pull_request: { url: "https://api.github.com/repos/zephyrproject-rtos/zephyr/pulls/301" },
+            },
+          ],
+        }),
+      )
+      .mockResolvedValueOnce(jsonResponse({ total_count: 0, incomplete_results: false, items: [] }))
+      .mockResolvedValueOnce(
+        jsonResponse({
+          id: 301,
+          number: 301,
+          html_url: "https://github.com/zephyrproject-rtos/zephyr/pull/301",
+          draft: false,
+          created_at: "2026-03-01T00:00:00.000Z",
+          updated_at: "2026-03-08T00:00:00.000Z",
+          merged_at: "2026-03-08T00:00:00.000Z",
+          state: "closed",
+          requested_reviewers: [],
+          user: { login: "bob" },
+          head: { repo: { full_name: "zephyrproject-rtos/zephyr" } },
+          base: { repo: { full_name: "zephyrproject-rtos/zephyr" } },
+        }),
+      )
+      .mockResolvedValueOnce(jsonResponse([]));
+
+    vi.stubGlobal("fetch", fetchMock);
+
+    const data = await collectLiveDashboard(roster, range, "token");
+
+    expect(data.summary.closedIssues).toBe(1);
+    expect(data.summary.mergedPrs).toBe(1);
+
+    const alice = data.contributors.find((contributor) => contributor.login === "alice");
+    const bob = data.contributors.find((contributor) => contributor.login === "bob");
+
+    expect(alice?.closedIssues).toBe(1);
+    expect(bob?.mergedPrs).toBe(1);
+
+    expect(data.activityItems).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          type: "issue",
+          contributor: "alice",
+          state: "closed",
+          statusLabel: "Closed",
+        }),
+        expect.objectContaining({
+          type: "pull_request",
+          contributor: "bob",
+          statusLabel: "Merged",
         }),
       ]),
     );

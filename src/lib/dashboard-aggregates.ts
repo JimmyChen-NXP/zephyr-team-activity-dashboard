@@ -20,6 +20,7 @@ function buildEmptyContributor(member: DashboardData["rosterMembers"][number]): 
     name: member.name,
     role: member.role,
     openAssignedIssues: 0,
+    closedIssues: 0,
     openAuthoredPrs: 0,
     draftPrs: 0,
     mergedPrs: 0,
@@ -42,7 +43,7 @@ function buildEmptyContributor(member: DashboardData["rosterMembers"][number]): 
 function calculateViewScore(view: DashboardView, contributor: ContributorMetrics) {
   switch (view) {
     case "issues":
-      return contributor.openAssignedIssues * 3 + contributor.staleItems;
+      return contributor.openAssignedIssues * 3 + contributor.closedIssues * 2 + contributor.staleItems;
     case "pull-requests":
       return contributor.openAuthoredPrs * 3 + contributor.mergedPrs * 2 + contributor.staleItems;
     case "reviews":
@@ -64,7 +65,7 @@ export function getViewScoreLabel(view: DashboardView) {
 export function getViewScoreFormula(view: DashboardView) {
   switch (view) {
     case "issues":
-      return "issue score = (open assigned issues × 3) + stale items";
+      return "issue score = (open assigned issues × 3) + (closed issues × 2) + stale items";
     case "pull-requests":
       return "pr score = (open authored PRs × 3) + (merged PRs × 2) + stale items";
     case "reviews":
@@ -92,6 +93,7 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
     const contributor = contributorMap.get(item.contributor.toLowerCase());
     if (contributor) {
       contributor.openAssignedIssues += item.metrics.openAssignedIssues;
+      contributor.closedIssues += item.metrics.closedIssues;
       contributor.openAuthoredPrs += item.metrics.openAuthoredPrs;
       contributor.draftPrs += item.metrics.draftPrs;
       contributor.mergedPrs += item.metrics.mergedPrs;
@@ -154,6 +156,7 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
 
   const summary: DashboardSummary = {
     openAssignedIssues: contributors.reduce((total, contributor) => total + contributor.openAssignedIssues, 0),
+    closedIssues: contributors.reduce((total, contributor) => total + contributor.closedIssues, 0),
     openAuthoredPrs: contributors.reduce((total, contributor) => total + contributor.openAuthoredPrs, 0),
     mergedPrs: contributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
     reviewsSubmitted: contributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),
@@ -188,10 +191,11 @@ export function getSummaryCards(data: DashboardData, view: DashboardView): Summa
   switch (view) {
     case "issues":
       return [
-        { label: "Open assigned issues", value: data.summary.openAssignedIssues, accent: "violet" },
+        { label: "Issues in range", value: data.summary.openAssignedIssues + data.summary.closedIssues, accent: "violet" },
+        { label: "Closed in range", value: data.summary.closedIssues, accent: "blue" },
         { label: "Stale issues", value: data.summary.staleItems, accent: "rose" },
-        { label: "Repositories touched", value: data.summary.repositoriesTouched, accent: "blue" },
-        { label: "Active contributors", value: data.contributors.length, accent: "emerald" },
+        { label: "Repositories touched", value: data.summary.repositoriesTouched, accent: "emerald" },
+        { label: "Active contributors", value: data.contributors.length, accent: "amber" },
       ];
     case "pull-requests":
       return [
@@ -222,9 +226,9 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
   switch (view) {
     case "issues":
       return [
-        { key: "issues", label: "Issues", value: (contributor) => contributor.openAssignedIssues },
+        { key: "issues", label: "Issues", value: (contributor) => contributor.openAssignedIssues + contributor.closedIssues },
+        { key: "closed", label: "Closed", value: (contributor) => contributor.closedIssues },
         { key: "stale", label: "Stale", value: (contributor) => contributor.staleItems },
-        { key: "repos", label: "Repos", value: (contributor) => contributor.repositoriesTouched },
         { key: "score", label: getViewScoreLabel(view), value: (contributor) => contributor.activityScore },
       ];
     case "pull-requests":

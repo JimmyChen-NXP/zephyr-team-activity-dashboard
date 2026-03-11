@@ -32,6 +32,7 @@ function clamp(value: number, min: number, max: number): number {
 function emptyMetrics() {
   return {
     openAssignedIssues: 0,
+    closedIssues: 0,
     openAuthoredPrs: 0,
     draftPrs: 0,
     mergedPrs: 0,
@@ -53,6 +54,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
   const contributors: ContributorMetrics[] = roster.slice(0, 18).map((member) => {
     const seed = hashSeed(member.login);
     const openAssignedIssues = seed % 7;
+    const closedIssues = seed % 4;
     const openAuthoredPrs = seed % 5;
     const draftPrs = seed % 3;
     const mergedPrs = clamp(Math.floor(seed / 17) % 9, 0, 8);
@@ -67,6 +69,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       name: member.name,
       role: member.role,
       openAssignedIssues,
+      closedIssues,
       openAuthoredPrs,
       draftPrs,
       mergedPrs,
@@ -81,6 +84,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       repositoriesTouched,
       activityScore: calculateActivityScore({
         openAssignedIssues,
+        closedIssues,
         openAuthoredPrs,
         mergedPrs,
         reviewsSubmitted,
@@ -151,6 +155,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
         metrics: {
           ...emptyMetrics(),
           openAssignedIssues: contributor.openAssignedIssues,
+          closedIssues: contributor.closedIssues,
           staleItems: Math.ceil(contributor.staleItems / 2),
         },
       },
@@ -249,6 +254,7 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
     warnings,
     summary: {
       openAssignedIssues: contributors.reduce((total, contributor) => total + contributor.openAssignedIssues, 0),
+      closedIssues: contributors.reduce((total, contributor) => total + contributor.closedIssues, 0),
       openAuthoredPrs: contributors.reduce((total, contributor) => total + contributor.openAuthoredPrs, 0),
       mergedPrs: contributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
       reviewsSubmitted: contributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),

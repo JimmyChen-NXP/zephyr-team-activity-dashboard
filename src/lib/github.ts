@@ -125,6 +125,7 @@ function throttleGitHubSearch() {
 function emptyMetrics() {
   return {
     openAssignedIssues: 0,
+    closedIssues: 0,
     openAuthoredPrs: 0,
     draftPrs: 0,
     mergedPrs: 0,
@@ -269,6 +270,7 @@ function createContributorMap(roster: RosterMember[]): Map<string, ContributorAc
         name: member.name,
         role: member.role,
         openAssignedIssues: 0,
+        closedIssues: 0,
         openAuthoredPrs: 0,
         draftPrs: 0,
         mergedPrs: 0,
@@ -334,21 +336,22 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
 
   const staleCutoff = parseISO(range.to).getTime() - 7 * 86400000;
 
-  const [openIssuesResult, openPrsResult, mergedPrsResult, closedPrsResult] = await Promise.all([
+  const [openIssuesResult, closedIssuesResult, openPrsResult, mergedPrsResult, closedPrsResult] = await Promise.all([
     searchAcrossPages(`org:${ORG} is:issue is:open archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
-    searchAcrossPages(`org:${ORG} is:pr is:open archived:false sort:updated-desc`, Math.max(2, SEARCH_PAGE_LIMIT - 1), token),
-    searchAcrossPages(`org:${ORG} is:pr merged:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} archived:false sort:updated-desc`, 3, token),
-    searchAcrossPages(`org:${ORG} is:pr is:closed closed:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} -is:merged archived:false sort:updated-desc`, 2, token),
+    searchAcrossPages(`org:${ORG} is:issue is:closed closed:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
+    searchAcrossPages(`org:${ORG} is:pr is:open archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
+    searchAcrossPages(`org:${ORG} is:pr merged:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
+    searchAcrossPages(`org:${ORG} is:pr is:closed closed:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} -is:merged archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
   ]);
 
   searchSamples +=
-    openIssuesResult.items.length + openPrsResult.items.length + mergedPrsResult.items.length + closedPrsResult.items.length;
+    openIssuesResult.items.length + closedIssuesResult.items.length + openPrsResult.items.length + mergedPrsResult.items.length + closedPrsResult.items.length;
 
-  if (openIssuesResult.incompleteResults || openPrsResult.incompleteResults || mergedPrsResult.incompleteResults || closedPrsResult.incompleteResults) {
+  if (openIssuesResult.incompleteResults || closedIssuesResult.incompleteResults || openPrsResult.incompleteResults || mergedPrsResult.incompleteResults || closedPrsResult.incompleteResults) {
     warnings.push({ level: "warn", message: "GitHub Search returned incomplete results for one or more queries. Totals may be partial." });
   }
 
-  if (openIssuesResult.capped || openPrsResult.capped || mergedPrsResult.capped || closedPrsResult.capped) {
+  if (openIssuesResult.capped || closedIssuesResult.capped || openPrsResult.capped || mergedPrsResult.capped || closedPrsResult.capped) {
     warnings.push({
       level: "warn",
       message:
@@ -387,6 +390,37 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         ...emptyMetrics(),
         openAssignedIssues: 1,
         staleItems: Date.parse(item.updated_at) < staleCutoff ? 1 : 0,
+      }),
+    );
+  }
+
+  const teamClosedIssues = closedIssuesResult.items.filter((item) =>
+    (item.assignees ?? []).some((assignee) => rosterLogins.has(assignee.login.toLowerCase())),
+  );
+
+  for (const item of teamClosedIssues) {
+    const assignee = (item.assignees ?? []).find((candidate) => rosterLogins.has(candidate.login.toLowerCase()));
+    if (!assignee) {
+      continue;
+    }
+
+    const contributor = contributorMap.get(assignee.login.toLowerCase());
+    if (!contributor) {
+      continue;
+    }
+
+    contributor.closedIssues += 1;
+
+    const repo = repoFullNameFromSearchItem(item);
+    const repoEntry = repoMap.get(repo) ?? { issues: 0, prs: 0, reviews: 0, contributors: new Set<string>() };
+    repoEntry.issues += 1;
+    repoEntry.contributors.add(contributor.login);
+    repoMap.set(repo, repoEntry);
+
+    activityItems.push(
+      asActivityItem(item, contributor.login, "issue", "Closed", {
+        ...emptyMetrics(),
+        closedIssues: 1,
       }),
     );
   }
@@ -619,6 +653,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       contributor.uniqueReviewedPrs = new Set(contributorReviewItems.map((item) => item.url)).size;
       contributor.activityScore = calculateActivityScore({
         openAssignedIssues: contributor.openAssignedIssues,
+        closedIssues: contributor.closedIssues,
         openAuthoredPrs: contributor.openAuthoredPrs,
         mergedPrs: contributor.mergedPrs,
         reviewsSubmitted: contributor.reviewsSubmitted,
@@ -661,6 +696,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     warnings,
     summary: {
       openAssignedIssues: contributors.reduce((total, contributor) => total + contributor.openAssignedIssues, 0),
+      closedIssues: contributors.reduce((total, contributor) => total + contributor.closedIssues, 0),
       openAuthoredPrs: contributors.reduce((total, contributor) => total + contributor.openAuthoredPrs, 0),
       mergedPrs: contributors.reduce((total, contributor) => total + contributor.mergedPrs, 0),
       reviewsSubmitted: contributors.reduce((total, contributor) => total + contributor.reviewsSubmitted, 0),

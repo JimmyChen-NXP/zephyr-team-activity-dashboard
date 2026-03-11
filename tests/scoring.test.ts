@@ -7,12 +7,13 @@ describe("calculateActivityScore", () => {
     expect(
       calculateActivityScore({
         openAssignedIssues: 2,
+        closedIssues: 1,
         openAuthoredPrs: 1,
         mergedPrs: 3,
         reviewsSubmitted: 4,
         pendingReviewRequests: 2,
         staleItems: 1,
       }),
-    ).toBe(24);
+    ).toBe(26);
   });
 });

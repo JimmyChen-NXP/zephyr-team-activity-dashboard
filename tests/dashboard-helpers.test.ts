@@ -22,6 +22,7 @@ const baseData: DashboardData = {
   warnings: [],
   summary: {
     openAssignedIssues: 1,
+    closedIssues: 1,
     openAuthoredPrs: 1,
     mergedPrs: 1,
     reviewsSubmitted: 1,
@@ -52,6 +53,7 @@ const baseData: DashboardData = {
       statusLabel: "Open",
       metrics: {
         openAssignedIssues: 1,
+        closedIssues: 0,
         openAuthoredPrs: 0,
         draftPrs: 0,
         mergedPrs: 0,
@@ -59,6 +61,37 @@ const baseData: DashboardData = {
         reviewsSubmitted: 0,
         pendingReviewRequests: 0,
         staleItems: 1,
+        reviewApproved: 0,
+        reviewChangesRequested: 0,
+        reviewCommented: 0,
+        reviewSelfAuthored: 0,
+        reviewTeamAuthored: 0,
+        reviewExternalAuthored: 0,
+      },
+    },
+    {
+      id: "issue-2",
+      type: "issue",
+      title: "Issue two",
+      url: "https://example.com/issue-2",
+      repo: "zephyrproject-rtos/repo-a",
+      contributor: "alice",
+      author: "external-issue-author",
+      state: "closed",
+      createdAt: "2026-03-02T00:00:00.000Z",
+      updatedAt: "2026-03-09T00:00:00.000Z",
+      ageDays: 6,
+      statusLabel: "Closed",
+      metrics: {
+        openAssignedIssues: 0,
+        closedIssues: 1,
+        openAuthoredPrs: 0,
+        draftPrs: 0,
+        mergedPrs: 0,
+        closedUnmergedPrs: 0,
+        reviewsSubmitted: 0,
+        pendingReviewRequests: 0,
+        staleItems: 0,
         reviewApproved: 0,
         reviewChangesRequested: 0,
         reviewCommented: 0,
@@ -82,6 +115,7 @@ const baseData: DashboardData = {
       statusLabel: "Open",
       metrics: {
         openAssignedIssues: 0,
+        closedIssues: 0,
         openAuthoredPrs: 1,
         draftPrs: 0,
         mergedPrs: 1,
@@ -113,6 +147,7 @@ const baseData: DashboardData = {
       reviewedPrKind: "authored-by-them",
       metrics: {
         openAssignedIssues: 0,
+        closedIssues: 0,
         openAuthoredPrs: 0,
         draftPrs: 0,
         mergedPrs: 0,
@@ -143,6 +178,7 @@ const baseData: DashboardData = {
       statusLabel: "Pending",
       metrics: {
         openAssignedIssues: 0,
+        closedIssues: 0,
         openAuthoredPrs: 0,
         draftPrs: 0,
         mergedPrs: 0,
@@ -205,13 +241,16 @@ describe("dashboard filters and links", () => {
 describe("dashboard view aggregates", () => {
   it("builds issue-only data", () => {
     const viewData = buildViewDashboardData(baseData, "issues");
+    const cards = getSummaryCards(viewData, "issues");
 
-    expect(viewData.activityItems).toHaveLength(1);
+    expect(viewData.activityItems).toHaveLength(2);
     expect(viewData.summary.openAssignedIssues).toBe(1);
+    expect(viewData.summary.closedIssues).toBe(1);
     expect(viewData.summary.openAuthoredPrs).toBe(0);
     expect(viewData.contributors[0]?.login).toBe("alice");
-    expect(viewData.contributors[0]?.activityScore).toBe(4);
+    expect(viewData.contributors[0]?.activityScore).toBe(6);
     expect(getViewScoreFormula("issues")).toContain("open assigned issues");
+    expect(cards.find((card) => card.label === "Issues in range")?.value).toBe(2);
   });
 
   it("builds pull-request-only data", () => {
@@ -259,6 +298,7 @@ describe("dashboard view aggregates", () => {
           reviewedPrKind: "authored-by-self",
           metrics: {
             openAssignedIssues: 0,
+            closedIssues: 0,
             openAuthoredPrs: 0,
             draftPrs: 0,
             mergedPrs: 0,
@@ -290,6 +330,7 @@ describe("dashboard view aggregates", () => {
           reviewedPrKind: "authored-by-them",
           metrics: {
             openAssignedIssues: 0,
+            closedIssues: 0,
             openAuthoredPrs: 0,
             draftPrs: 0,
             mergedPrs: 0,
@@ -321,6 +362,7 @@ describe("dashboard view aggregates", () => {
           reviewedPrKind: "authored-by-them",
           metrics: {
             openAssignedIssues: 0,
+            closedIssues: 0,
             openAuthoredPrs: 0,
             draftPrs: 0,
             mergedPrs: 0,
@@ -352,6 +394,7 @@ describe("dashboard view aggregates", () => {
           reviewedPrKind: "authored-external",
           metrics: {
             openAssignedIssues: 0,
+            closedIssues: 0,
             openAuthoredPrs: 0,
             draftPrs: 0,
             mergedPrs: 0,
