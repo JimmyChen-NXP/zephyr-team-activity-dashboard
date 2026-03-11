@@ -77,7 +77,7 @@ type ContributorAccumulator = ContributorMetrics;
 
 const API_ROOT = "https://api.github.com";
 const ORG = process.env.GITHUB_ORG ?? "zephyrproject-rtos";
-const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 5);
+const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 15);
 const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? 40);
 const REVIEW_DETAIL_LIMIT = Number(process.env.REVIEW_DETAIL_LIMIT ?? 120);
 const limit = pLimit(4);
