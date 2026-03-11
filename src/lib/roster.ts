@@ -8,7 +8,9 @@ import type { RosterMember } from "@/lib/types";
 const ROSTER_FILE = "upstream_member.csv";
 
 export function parseRosterCsv(csvText: string): RosterMember[] {
-  const records = parse(csvText, {
+  const normalizedCsvText = csvText.replace(/^\uFEFF/, "");
+
+  const records = parse(normalizedCsvText, {
     columns: true,
     skip_empty_lines: true,
     trim: true,
