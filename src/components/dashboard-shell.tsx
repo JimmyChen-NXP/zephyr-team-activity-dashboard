@@ -103,7 +103,7 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
           <h1>Zephyr team activity dashboard</h1>
           <p className="hero-copy">
             Track workload, review pressure, and repo concentration across the configured NXP upstream roster. Snapshot-first,
-            with selective live refresh for the views that drift fastest.
+            with manual live refresh when you explicitly want a new GitHub sync.
           </p>
         </div>
         <div className="hero-meta">
@@ -126,7 +126,7 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
         <div className="panel-header compact">
           <div>
             <p className="eyebrow">Controls</p>
-            <h2>Filter and refresh</h2>
+            <h2>Filter and sync</h2>
           </div>
           <div className="sync-pill">
             <span className={clsx("sync-dot", viewData.syncHealth.source)} />

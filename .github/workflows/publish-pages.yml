@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - master
+  workflow_run:
+    workflows: ["Collect GitHub Data"]
+    types: [completed]
   workflow_dispatch:
-  schedule:
-    - cron: "13 5 * * *"
 
 permissions:
   contents: read
@@ -20,10 +21,25 @@ concurrency:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    if: >
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Checkout snapshots from data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          path: _data
+          sparse-checkout: |
+            public/snapshots
+          sparse-checkout-cone-mode: false
+
+      - name: Copy snapshots into public/
+        run: cp -r _data/public/snapshots public/snapshots
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -33,11 +49,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Generate snapshots
-        run: npm run snapshots
-        env:
-          GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
 
       - name: Remove runtime API routes (static export)
         run: rm -rf src/app/api
@@ -49,7 +60,7 @@ jobs:
           NEXT_PUBLIC_DEPLOY_TARGET: github-pages
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           GITHUB_PAGES_BASE_PATH: /${{ github.event.repository.name }}
-          NEXT_PUBLIC_UPDATE_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/workflows/publish-pages.yml
+          NEXT_PUBLIC_UPDATE_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/workflows/collect-data.yml
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

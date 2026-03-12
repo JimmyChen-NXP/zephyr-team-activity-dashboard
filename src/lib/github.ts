@@ -36,6 +36,13 @@ type SearchResponse = {
   items: SearchItem[];
 };
 
+type SearchCollection = {
+  totalCount: number;
+  incompleteResults: boolean;
+  items: SearchItem[];
+  capped: boolean;
+};
+
 type PullRequestDetail = {
   id: number;
   number: number;
@@ -81,19 +88,47 @@ const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 10);
 const SEARCH_API_MAX_PAGES = 10;
 const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? 40);
 const REVIEW_DETAIL_LIMIT = Number(process.env.REVIEW_DETAIL_LIMIT ?? 120);
+const SEARCH_QUERY_CONCURRENCY = Number(process.env.SEARCH_QUERY_CONCURRENCY ?? 4);
+const SEARCH_PARTITION_MIN_WINDOW_MS = Number(process.env.SEARCH_PARTITION_MIN_WINDOW_MS ?? 60000);
 const limit = pLimit(4);
+const searchQueryLimit = pLimit(SEARCH_QUERY_CONCURRENCY);
 
 const DEFAULT_SEARCH_MIN_INTERVAL_MS = 2200;
 let searchThrottleChain: Promise<void> = Promise.resolve();
 let lastSearchRequestAt = 0;
 
+function shouldLogGitHubRequests() {
+  if (process.env.VITEST || process.env.NODE_ENV === "test") {
+    return false;
+  }
+
+  const configured = process.env.GITHUB_LOG_REQUESTS;
+  if (configured) {
+    return configured === "1" || configured.toLowerCase() === "true";
+  }
+
+  return process.env.NODE_ENV !== "production";
+}
+
+function logGitHubRequest(message: string) {
+  if (!shouldLogGitHubRequests()) {
+    return;
+  }
+
+  console.info(`[github] ${message}`);
+}
+
 function getSearchMinIntervalMs() {
+  if (process.env.VITEST || process.env.NODE_ENV === "test") {
+    return 0;
+  }
+
   const configured = Number(process.env.GITHUB_SEARCH_MIN_INTERVAL_MS ?? "");
-  if (Number.isFinite(configured) && configured > 0) {
+  if (Number.isFinite(configured) && configured >= 0) {
     return configured;
   }
 
-  return process.env.GITHUB_ACTIONS ? DEFAULT_SEARCH_MIN_INTERVAL_MS : 0;
+  return DEFAULT_SEARCH_MIN_INTERVAL_MS;
 }
 
 function sleep(ms: number) {
@@ -171,17 +206,25 @@ export class GitHubRequestError extends Error {
 }
 
 async function fetchGitHub<T>(path: string, token?: string): Promise<T> {
+  const startedAt = Date.now();
+  logGitHubRequest(`GET ${path}`);
+
   const response = await fetch(`${API_ROOT}${path}`, {
     headers: getHeaders(token),
     next: { revalidate: 0 },
   });
 
+  const rateLimitRemainingHeader = response.headers?.get("x-ratelimit-remaining") ?? null;
+  const durationMs = Date.now() - startedAt;
+
   if (!response.ok) {
-    const rateLimitRemainingHeader = response.headers.get("x-ratelimit-remaining");
     const responseBody = await response
       .text()
       .then((text) => (text ? text.replace(/\s+/g, " ").slice(0, 500) : null))
       .catch(() => null);
+    logGitHubRequest(
+      `ERROR ${response.status} ${response.statusText} ${path} remaining=${rateLimitRemainingHeader ?? "unknown"} duration=${durationMs}ms`,
+    );
     throw new GitHubRequestError(
       response.status,
       response.statusText,
@@ -190,6 +233,8 @@ async function fetchGitHub<T>(path: string, token?: string): Promise<T> {
       responseBody,
     );
   }
+
+  logGitHubRequest(`OK ${response.status} ${path} remaining=${rateLimitRemainingHeader ?? "unknown"} duration=${durationMs}ms`);
 
   return (await response.json()) as T;
 }
@@ -224,14 +269,25 @@ async function searchIssues(query: string, page: number, token?: string): Promis
 }
 
 async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT, token?: string) {
-  const allItems: SearchItem[] = [];
-  let totalCount = 0;
-  let incompleteResults = false;
   const pagesToFetch = Math.min(maxPages, SEARCH_API_MAX_PAGES);
+  logGitHubRequest(`search window start pages=${pagesToFetch} query=${query}`);
+  const firstPage = await searchIssues(query, 1, token);
+  const allItems: SearchItem[] = [...firstPage.items];
+  const totalCount = firstPage.total_count;
+  let incompleteResults = firstPage.incomplete_results;
 
-  for (let page = 1; page <= pagesToFetch; page += 1) {
+  if (totalCount > pagesToFetch * 100) {
+    logGitHubRequest(`search capped total=${totalCount} pages=${pagesToFetch} query=${query}`);
+    return {
+      totalCount,
+      incompleteResults,
+      items: allItems,
+      capped: true,
+    };
+  }
+
+  for (let page = 2; page <= pagesToFetch; page += 1) {
     const response = await searchIssues(query, page, token);
-    totalCount = response.total_count;
     incompleteResults = incompleteResults || response.incomplete_results;
     allItems.push(...response.items);
 
@@ -246,6 +302,76 @@ async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT, to
     items: allItems,
     capped: maxPages > pagesToFetch || totalCount > allItems.length,
   };
+}
+
+function searchItemKey(item: SearchItem) {
+  return item.pull_request?.url ?? item.html_url;
+}
+
+function dedupeSearchItems(items: SearchItem[]) {
+  return Array.from(new Map(items.map((item) => [searchItemKey(item), item])).values());
+}
+
+function combineSearchCollections(results: SearchCollection[]): SearchCollection {
+  return {
+    totalCount: results.reduce((total, result) => total + result.totalCount, 0),
+    incompleteResults: results.some((result) => result.incompleteResults),
+    items: dedupeSearchItems(results.flatMap((result) => result.items)),
+    capped: results.some((result) => result.capped),
+  };
+}
+
+async function searchAcrossQueries(queries: string[], token?: string): Promise<SearchCollection> {
+  if (queries.length === 0) {
+    return {
+      totalCount: 0,
+      incompleteResults: false,
+      items: [],
+      capped: false,
+    };
+  }
+
+  const results = await Promise.all(
+    queries.map((query) =>
+      searchQueryLimit(() => searchAcrossPages(query, SEARCH_PAGE_LIMIT, token)),
+    ),
+  );
+
+  return combineSearchCollections(results);
+}
+
+function buildSearchDateRangeQuery(baseQuery: string, qualifier: string, from: string, to: string) {
+  return `${baseQuery} ${qualifier}:${from}..${to}`;
+}
+
+async function searchAcrossDatePartitions(
+  baseQuery: string,
+  qualifier: "updated" | "closed",
+  from: string,
+  to: string,
+  token?: string,
+): Promise<SearchCollection> {
+  const query = buildSearchDateRangeQuery(baseQuery, qualifier, from, to);
+  const result = await searchAcrossPages(query, SEARCH_PAGE_LIMIT, token);
+
+  const fromMs = Date.parse(from);
+  const toMs = Date.parse(to);
+  if (!result.capped || !Number.isFinite(fromMs) || !Number.isFinite(toMs) || toMs - fromMs <= SEARCH_PARTITION_MIN_WINDOW_MS) {
+    return result;
+  }
+
+  logGitHubRequest(`split partition qualifier=${qualifier} from=${from} to=${to} total=${result.totalCount}`);
+
+  const midpointMs = Math.floor((fromMs + toMs) / 2);
+  const leftTo = new Date(midpointMs).toISOString();
+  const rightFrom = new Date(midpointMs + 1).toISOString();
+
+  const [left, right] = await Promise.all([
+    searchAcrossDatePartitions(baseQuery, qualifier, from, leftTo, token),
+    searchAcrossDatePartitions(baseQuery, qualifier, rightFrom, to, token),
+  ]);
+
+  return combineSearchCollections([left, right]);
 }
 
 async function fetchPullRequestDetails(pullRequestUrl: string, token?: string): Promise<PullRequestDetail> {
@@ -336,22 +462,60 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
 
   const staleCutoff = parseISO(range.to).getTime() - 7 * 86400000;
 
-  const [openIssuesResult, closedIssuesResult, openPrsResult, mergedPrsResult, closedPrsResult] = await Promise.all([
-    searchAcrossPages(`org:${ORG} is:issue is:open archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
-    searchAcrossPages(`org:${ORG} is:issue is:closed closed:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
-    searchAcrossPages(`org:${ORG} is:pr is:open archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
-    searchAcrossPages(`org:${ORG} is:pr merged:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
-    searchAcrossPages(`org:${ORG} is:pr is:closed closed:${range.from.slice(0, 10)}..${range.to.slice(0, 10)} -is:merged archived:false sort:updated-desc`, SEARCH_PAGE_LIMIT, token),
+  // Chunk the roster so each search query stays within GitHub's query-length limits.
+  const ROSTER_CHUNK_SIZE = 10;
+  const rosterChunks: RosterMember[][] = [];
+  for (let i = 0; i < roster.length; i += ROSTER_CHUNK_SIZE) {
+    rosterChunks.push(roster.slice(i, i + ROSTER_CHUNK_SIZE));
+  }
+
+  const assigneeQueries = (base: string) =>
+    rosterChunks.map((chunk) => {
+      const or = chunk.map((m) => `assignee:${m.login}`).join(" OR ");
+      return `${base} (${or})`;
+    });
+  const authorQueries = (base: string) =>
+    rosterChunks.map((chunk) => {
+      const or = chunk.map((m) => `author:${m.login}`).join(" OR ");
+      return `${base} (${or})`;
+    });
+  const reviewerQueries = (base: string) =>
+    rosterChunks.map((chunk) => {
+      const or = chunk.map((m) => `reviewer:${m.login}`).join(" OR ");
+      return `${base} (${or})`;
+    });
+
+  const [openIssuesResult, closedIssuesResult, openPrsResult, closedPrsResult, updatedPrsResult, reviewResult] = await Promise.all([
+    // Open issues: chunked assignee queries, updated in range
+    searchAcrossQueries(assigneeQueries(`org:${ORG} is:issue is:open archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
+    // Closed issues: chunked assignee queries, closed in range
+    searchAcrossQueries(assigneeQueries(`org:${ORG} is:issue is:closed archived:false sort:updated-desc`).map((q) => `${q} closed:${range.from}..${range.to}`), token),
+    // Open PRs: chunked author queries, updated in range
+    searchAcrossQueries(authorQueries(`org:${ORG} is:pr is:open archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
+    // Merged/closed PRs: chunked author queries, closed in range
+    searchAcrossQueries(authorQueries(`org:${ORG} is:pr is:closed archived:false sort:updated-desc`).map((q) => `${q} closed:${range.from}..${range.to}`), token),
+    // Updated PRs: chunked author queries, updated in range
+    searchAcrossQueries(authorQueries(`org:${ORG} is:pr archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
+    // Reviews: chunked reviewer queries, updated in range
+    searchAcrossQueries(reviewerQueries(`org:${ORG} is:pr archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
   ]);
 
-  searchSamples +=
-    openIssuesResult.items.length + closedIssuesResult.items.length + openPrsResult.items.length + mergedPrsResult.items.length + closedPrsResult.items.length;
+  const searchResults = [
+    openIssuesResult,
+    closedIssuesResult,
+    openPrsResult,
+    closedPrsResult,
+    updatedPrsResult,
+  ];
 
-  if (openIssuesResult.incompleteResults || closedIssuesResult.incompleteResults || openPrsResult.incompleteResults || mergedPrsResult.incompleteResults || closedPrsResult.incompleteResults) {
+  searchSamples +=
+    searchResults.reduce((total, result) => total + result.items.length, 0);
+
+  if (searchResults.some((result) => result.incompleteResults)) {
     warnings.push({ level: "warn", message: "GitHub Search returned incomplete results for one or more queries. Totals may be partial." });
   }
 
-  if (openIssuesResult.capped || closedIssuesResult.capped || openPrsResult.capped || mergedPrsResult.capped || closedPrsResult.capped) {
+  if (searchResults.some((result) => result.capped)) {
     warnings.push({
       level: "warn",
       message:
@@ -425,14 +589,21 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     );
   }
 
-  const allPrItems = [...openPrsResult.items, ...mergedPrsResult.items, ...closedPrsResult.items];
+  const authoredPrItems = dedupeSearchItems([...openPrsResult.items, ...closedPrsResult.items]);
+  // Include reviewer-discovered PRs and boundary activity
+  const reviewTargetPrItems = dedupeSearchItems([
+    ...updatedPrsResult.items,
+    ...authoredPrItems,
+    ...openPrsResult.items,
+    ...reviewResult.items,
+  ]);
 
-  const allTeamPrItems = allPrItems.filter((item) =>
+  const allTeamPrItems = authoredPrItems.filter((item) =>
     rosterLogins.has(item.user.login.toLowerCase()),
   );
 
-  const uniquePrs = Array.from(new Map(allTeamPrItems.map((item) => [item.pull_request?.url ?? item.html_url, item])).values()).slice(0, PR_DETAIL_LIMIT);
-  const reviewDetailTargets = Array.from(new Map(allPrItems.map((item) => [item.pull_request?.url ?? item.html_url, item])).values()).slice(0, REVIEW_DETAIL_LIMIT);
+  const uniquePrs = dedupeSearchItems(allTeamPrItems).slice(0, PR_DETAIL_LIMIT);
+  const reviewDetailTargets = reviewTargetPrItems.slice(0, REVIEW_DETAIL_LIMIT);
 
   for (const item of uniquePrs) {
     const contributor = contributorMap.get(item.user.login.toLowerCase());
@@ -453,26 +624,15 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       }
     }
 
-    if (item.closed_at && item.html_url.includes("/pull/")) {
-      if (mergedPrsResult.items.some((candidate) => candidate.id === item.id)) {
-        contributor.mergedPrs += 1;
-      } else {
-        contributor.closedUnmergedPrs += 1;
-      }
-    }
-
-    const isMerged = mergedPrsResult.items.some((candidate) => candidate.id === item.id);
     activityItems.push(
       asActivityItem(
         item,
         contributor.login,
         "pull_request",
-        item.state === "open" ? "Open PR" : isMerged ? "Merged" : "Closed",
+        item.state === "open" ? "Open PR" : "Closed",
         {
           ...emptyMetrics(),
           openAuthoredPrs: item.state === "open" ? 1 : 0,
-          mergedPrs: isMerged ? 1 : 0,
-          closedUnmergedPrs: item.closed_at && !isMerged ? 1 : 0,
           staleItems: item.state === "open" && Date.parse(item.updated_at) < staleCutoff ? 1 : 0,
         },
       ),
@@ -514,31 +674,47 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
       }
     }
 
-    if (authorContributor) {
-      const matchingRequests = detail.requested_reviewers.filter((reviewer) => rosterLogins.has(reviewer.login.toLowerCase()));
-      for (const reviewer of matchingRequests) {
-        const reviewerMetrics = contributorMap.get(reviewer.login.toLowerCase());
-        if (reviewerMetrics) {
-          reviewerMetrics.pendingReviewRequests += 1;
-          activityItems.push({
-            id: `review-request-${detail.id}-${reviewer.login}`,
-            type: "review_request",
-            title: `Review requested from ${reviewerMetrics.name}`,
-            url: item.html_url,
-            repo: repoFullName,
-            contributor: reviewerMetrics.login,
-            author: detail.user.login,
-            state: "open",
-            createdAt: detail.created_at,
-            updatedAt: detail.updated_at,
-            ageDays: differenceInCalendarDays(new Date(), parseISO(detail.updated_at)),
-            statusLabel: "Pending review request",
-            metrics: {
-              ...emptyMetrics(),
-              pendingReviewRequests: 1,
-            },
-          });
+    if (authorContributor && detail.state === "closed") {
+      const prItem = activityItems.find((activityItem) => activityItem.type === "pull_request" && activityItem.url === item.html_url);
+      if (detail.merged_at) {
+        authorContributor.mergedPrs += 1;
+        if (prItem) {
+          prItem.metrics.mergedPrs += 1;
+          prItem.statusLabel = "Merged";
         }
+      } else {
+        authorContributor.closedUnmergedPrs += 1;
+        if (prItem) {
+          prItem.metrics.closedUnmergedPrs += 1;
+          prItem.statusLabel = "Closed";
+        }
+      }
+    }
+
+    // Pending review requests
+    const matchingRequests = detail.requested_reviewers.filter((reviewer) => rosterLogins.has(reviewer.login.toLowerCase()));
+    for (const reviewer of matchingRequests) {
+      const reviewerMetrics = contributorMap.get(reviewer.login.toLowerCase());
+      if (reviewerMetrics) {
+        reviewerMetrics.pendingReviewRequests += 1;
+        activityItems.push({
+          id: `review-request-${detail.id}-${reviewer.login}`,
+          type: "review_request",
+          title: `Review requested from ${reviewerMetrics.name}`,
+          url: item.html_url,
+          repo: repoFullName,
+          contributor: reviewerMetrics.login,
+          author: detail.user.login,
+          state: "open",
+          createdAt: detail.created_at,
+          updatedAt: detail.updated_at,
+          ageDays: differenceInCalendarDays(new Date(), parseISO(detail.updated_at)),
+          statusLabel: "Pending review request",
+          metrics: {
+            ...emptyMetrics(),
+            pendingReviewRequests: 1,
+          },
+        });
       }
     }
 

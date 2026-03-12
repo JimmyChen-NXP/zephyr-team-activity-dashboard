@@ -8,10 +8,11 @@ import {
   buildConfiguredGitHubAuthState,
   buildGitHubAuthStateFromError,
   buildMissingGitHubAuthState,
+  buildRateLimitedGitHubAuthState,
   buildValidGitHubAuthState,
   getGitHubEnvToken,
 } from "@/lib/github-auth";
-import { collectLiveDashboard } from "@/lib/github";
+import { collectLiveDashboard, GitHubRequestError } from "@/lib/github";
 import { resolveRange } from "@/lib/range";
 import { loadRoster } from "@/lib/roster";
 import { filterDashboardData } from "@/lib/dashboard-filtering";
@@ -19,6 +20,8 @@ import type { DashboardData, DashboardFilters } from "@/lib/types";
 
 const SNAPSHOT_DIR = path.join(process.cwd(), ".data", "snapshots");
 const SNAPSHOT_TTL_MINUTES = Number(process.env.SNAPSHOT_TTL_MINUTES ?? 15);
+const RATE_LIMIT_COOLDOWN_MINUTES = Number(process.env.GITHUB_RATE_LIMIT_COOLDOWN_MINUTES ?? 5);
+let liveSyncBlockedUntil: number | null = null;
 
 function emptyMetrics() {
   return {
@@ -63,6 +66,97 @@ async function writeSnapshot(preset: DashboardFilters["preset"], data: Dashboard
   await writeFile(getSnapshotPath(preset), JSON.stringify(data, null, 2), "utf8");
 }
 
+function annotateSnapshotWarnings(data: DashboardData["warnings"]) {
+  return data.map((warning) => ({
+    ...warning,
+    message: `Cached snapshot: ${warning.message}`,
+  }));
+}
+
+function formatLiveSyncFailure(error: unknown) {
+  if (error instanceof GitHubRequestError && error.status === 403 && error.responseBody?.includes("API rate limit exceeded")) {
+    return "GitHub Search rate limit exceeded. Falling back to the latest cached snapshot. Wait a minute and refresh again.";
+  }
+
+  const message = error instanceof Error ? error.message : "Unknown GitHub sync failure";
+  return `Live sync failed (${message}). Falling back to the latest cached snapshot.`;
+}
+
+function isSearchRateLimitError(error: unknown) {
+  return error instanceof GitHubRequestError
+    && error.status === 403
+    && (error.rateLimitRemaining === 0 || error.responseBody?.includes("API rate limit exceeded") === true);
+}
+
+function isLiveSyncCooldownActive() {
+  return liveSyncBlockedUntil !== null && Date.now() < liveSyncBlockedUntil;
+}
+
+function startLiveSyncCooldown() {
+  if (RATE_LIMIT_COOLDOWN_MINUTES <= 0) {
+    liveSyncBlockedUntil = Date.now();
+    return;
+  }
+
+  liveSyncBlockedUntil = Date.now() + RATE_LIMIT_COOLDOWN_MINUTES * 60_000;
+}
+
+function clearLiveSyncCooldown() {
+  liveSyncBlockedUntil = null;
+}
+
+function buildCooldownWarningMessage() {
+  return "GitHub Search rate limit cooldown active. Showing cached data instead of retrying live sync on every page load.";
+}
+
+function buildCachedSnapshotResponse(snapshot: DashboardData, freshnessMinutes: number, auth = buildConfiguredGitHubAuthState("Token loaded from environment. Showing cached data until live sync is requested or the connection is tested."), extraWarnings: DashboardData["warnings"] = []) {
+  return {
+    ...snapshot,
+    auth,
+    warnings: [
+      ...extraWarnings,
+      ...annotateSnapshotWarnings(snapshot.warnings),
+      {
+        level: "info" as const,
+        message: `Showing cached snapshot from ${snapshot.generatedAt}. Use Refresh now for a live sync.`,
+      },
+    ],
+    syncHealth: {
+      ...snapshot.syncHealth,
+      source: "cache" as const,
+      freshnessMinutes,
+    },
+  };
+}
+
+function buildCooldownDemoData(data: DashboardData) {
+  return {
+    ...data,
+    auth: buildRateLimitedGitHubAuthState("GitHub Search rate limit cooldown active. Showing demo data until the next retry window."),
+    warnings: [
+      {
+        level: "warn" as const,
+        message: buildCooldownWarningMessage(),
+      },
+      ...data.warnings,
+    ],
+  };
+}
+
+function buildDefaultDemoData(data: DashboardData) {
+  return {
+    ...data,
+    auth: buildConfiguredGitHubAuthState("Token loaded from environment. Showing demo data until Refresh now runs a live GitHub sync."),
+    warnings: [
+      {
+        level: "info" as const,
+        message: "No cached snapshot is available yet. Showing demo data until you run Refresh now.",
+      },
+      ...data.warnings,
+    ],
+  };
+}
+
 export async function getDashboardData(filters: DashboardFilters): Promise<DashboardData> {
   const range = resolveRange(filters.preset);
   const roster = await loadRoster();
@@ -80,29 +174,37 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
   }
 
   const snapshot = await readSnapshot(filters.preset);
-  if (!filters.refresh && snapshot) {
-    const freshness = differenceInMinutes(new Date(), new Date(snapshot.generatedAt));
-    if (freshness <= SNAPSHOT_TTL_MINUTES) {
-      return filterDashboardData(
-        {
-          ...snapshot,
-          auth: buildConfiguredGitHubAuthState("Token loaded from environment. Showing cached data until live sync is requested or the connection is tested."),
-          warnings: [
-            ...snapshot.warnings,
-            {
-              level: "info",
-              message: `Showing cached snapshot from ${snapshot.generatedAt}. Use Refresh now for a live sync.`,
-            },
-          ],
-          syncHealth: {
-            ...snapshot.syncHealth,
-            source: "cache",
-            freshnessMinutes: freshness,
-          },
-        },
-        filters,
-      );
+  const snapshotFreshness = snapshot ? differenceInMinutes(new Date(), new Date(snapshot.generatedAt)) : null;
+
+  if (!filters.refresh) {
+    if (snapshot) {
+      return filterDashboardData(buildCachedSnapshotResponse(snapshot, snapshotFreshness ?? 0), filters);
     }
+
+    if (isLiveSyncCooldownActive()) {
+      return filterDashboardData(buildCooldownDemoData(demoData), filters);
+    }
+
+    return filterDashboardData(buildDefaultDemoData(demoData), filters);
+  }
+
+  if (snapshot && isLiveSyncCooldownActive()) {
+    return filterDashboardData(
+      buildCachedSnapshotResponse(
+        snapshot,
+        snapshotFreshness ?? 0,
+        buildRateLimitedGitHubAuthState("GitHub Search rate limit cooldown active. Showing cached snapshot until the next retry window."),
+        [{
+          level: "warn",
+          message: buildCooldownWarningMessage(),
+        }],
+      ),
+      filters,
+    );
+  }
+
+  if (!snapshot && isLiveSyncCooldownActive()) {
+    return filterDashboardData(buildCooldownDemoData(demoData), filters);
   }
 
   try {
@@ -113,34 +215,28 @@ export async function getDashboardData(filters: DashboardFilters): Promise<Dashb
         message: "Connected to GitHub. Live sync completed successfully.",
       }),
     };
+    clearLiveSyncCooldown();
     await writeSnapshot(filters.preset, liveData);
 
     return filterDashboardData(liveData, filters);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown GitHub sync failure";
+    if (isSearchRateLimitError(error)) {
+      startLiveSyncCooldown();
+    }
+
     const authState = buildGitHubAuthStateFromError(error);
 
     if (snapshot) {
       return filterDashboardData(
-        {
-          ...snapshot,
-          auth: authState,
-          warnings: [
-            {
-              level: "error",
-              message: `Live sync failed (${message}). Falling back to the latest cached snapshot.`,
-            },
-            ...snapshot.warnings,
-          ],
-          syncHealth: {
-            ...snapshot.syncHealth,
-            source: "cache",
-            freshnessMinutes: differenceInMinutes(new Date(), new Date(snapshot.generatedAt)),
-          },
-        },
+        buildCachedSnapshotResponse(snapshot, snapshotFreshness ?? differenceInMinutes(new Date(), new Date(snapshot.generatedAt)), authState, [{
+          level: "error",
+          message: formatLiveSyncFailure(error),
+        }]),
         filters,
       );
     }
+
+    const message = error instanceof Error ? error.message : "Unknown GitHub sync failure";
 
     return filterDashboardData(
       {
