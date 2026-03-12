@@ -33,6 +33,7 @@ jobs:
         run: npm run snapshots
         env:
           GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
+          SEARCH_PAGE_LIMIT: 5
 
       - name: Push snapshots to data branch
         run: |
