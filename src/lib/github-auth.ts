@@ -65,6 +65,15 @@ export function buildConfiguredGitHubAuthState(message = "Token loaded from envi
   };
 }
 
+export function buildRateLimitedGitHubAuthState(message = "GitHub rate limit reached. Wait for reset or use cached data.", checkedAt = new Date().toISOString()): DashboardAuth {
+  return {
+    hasToken: true,
+    connectionStatus: "rate-limited",
+    message,
+    checkedAt,
+  };
+}
+
 type ValidAuthOptions = {
   checkedAt?: string | null;
   rateLimitRemaining?: number | null;
@@ -95,12 +104,7 @@ export function buildGitHubAuthStateFromError(error: unknown, checkedAt = new Da
     }
 
     if (error.status === 403 && error.rateLimitRemaining === 0) {
-      return {
-        hasToken: true,
-        connectionStatus: "rate-limited",
-        message: "GitHub rate limit reached. Wait for reset or use cached data.",
-        checkedAt,
-      };
+      return buildRateLimitedGitHubAuthState("GitHub rate limit reached. Wait for reset or use cached data.", checkedAt);
     }
   }
 

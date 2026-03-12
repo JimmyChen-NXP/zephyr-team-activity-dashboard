@@ -11,7 +11,7 @@ A snapshot-first internal dashboard for understanding issue, pull request, and r
 ## Features
 - CSV-backed team roster using [upstream_member.csv](upstream_member.csv)
 - Preset date ranges for 7, 30, and 90 days
-- Hybrid refresh model with cached snapshots and manual live refresh
+- Cache-first refresh model with cached snapshots and explicit live refresh
 - Environment-based GitHub authentication via `.env.local`
 - Compact live-sync status with a lightweight GitHub connection test
 - Team summary cards, contributor table, repo concentration chart, and recent activity drill-down
@@ -27,9 +27,22 @@ A snapshot-first internal dashboard for understanding issue, pull request, and r
 6. If you change `GITHUB_TOKEN`, restart the dev server before re-testing the connection
 
 ## Operational notes
+- Normal page loads are cache-first and do not hit GitHub live unless `refresh=1` is requested.
 - Live GitHub collection uses a sampled search strategy to stay inside API limits.
 - Cached snapshots are stored in `.data/snapshots`.
+- Set `GITHUB_LOG_REQUESTS=1` to print GitHub API requests in the Next.js server console during local debugging.
 - Metric definitions live in [docs/metrics/team-activity-metrics.md](docs/metrics/team-activity-metrics.md).
+
+## GitHub Pages deployment
+
+Two workflows handle the static site:
+
+- **`collect-data.yml`** — runs daily at 05:13 UTC (or manually via `workflow_dispatch`). Fetches GitHub API data using `DASHBOARD_GITHUB_TOKEN`, writes snapshots to `public/snapshots/`, and force-pushes them to the `data` branch (orphan, single commit — no history accumulation on `master`).
+- **`publish-pages.yml`** — runs on push to `master` and after a successful `collect-data` run. Checks out `public/snapshots/` from the `data` branch, builds the static export, and deploys to GitHub Pages. Does **not** call the GitHub API.
+
+**First-time setup:** run `collect-data.yml` via `workflow_dispatch` before the first pages deploy so the `data` branch exists.
+
+**To refresh data manually:** trigger `collect-data.yml` via `workflow_dispatch` in the Actions tab. A pages redeploy follows automatically.
 
 ## Post-Deploy Monitoring & Validation
 - **What to monitor/search**
