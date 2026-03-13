@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-03-13T14:04:10.220Z",
+  "presets": [
+    {
+      "preset": "7d",
+      "path": "/snapshots/7d.json",
+      "label": "Last 7 days"
+    },
+    {
+      "preset": "30d",
+      "path": "/snapshots/30d.json",
+      "label": "Last 30 days"
+    },
+    {
+      "preset": "90d",
+      "path": "/snapshots/90d.json",
+      "label": "Last 90 days"
+    }
+  ]
+}
