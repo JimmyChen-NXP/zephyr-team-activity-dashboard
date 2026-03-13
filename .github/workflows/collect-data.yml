@@ -34,6 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
           SEARCH_PAGE_LIMIT: 5
+          GITHUB_SEARCH_MIN_INTERVAL_MS: 3000
 
       - name: Push snapshots to data branch
         run: |

@@ -463,7 +463,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
   const staleCutoff = parseISO(range.to).getTime() - 7 * 86400000;
 
   // Chunk the roster so each search query stays within GitHub's query-length limits.
-  const ROSTER_CHUNK_SIZE = 10;
+  const ROSTER_CHUNK_SIZE = 20;
   const rosterChunks: RosterMember[][] = [];
   for (let i = 0; i < roster.length; i += ROSTER_CHUNK_SIZE) {
     rosterChunks.push(roster.slice(i, i + ROSTER_CHUNK_SIZE));
