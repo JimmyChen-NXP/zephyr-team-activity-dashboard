@@ -270,14 +270,14 @@ async function searchIssues(query: string, page: number, token?: string): Promis
 
 async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT, token?: string) {
   const pagesToFetch = Math.min(maxPages, SEARCH_API_MAX_PAGES);
-  logGitHubRequest(`search window start pages=${pagesToFetch} query=${query}`);
+  logGitHubRequest(`search start pages=${pagesToFetch}`);
   const firstPage = await searchIssues(query, 1, token);
   const allItems: SearchItem[] = [...firstPage.items];
   const totalCount = firstPage.total_count;
   let incompleteResults = firstPage.incomplete_results;
 
   if (totalCount > pagesToFetch * 100) {
-    logGitHubRequest(`search capped total=${totalCount} pages=${pagesToFetch} query=${query}`);
+    logGitHubRequest(`search capped total=${totalCount} pages=${pagesToFetch}`);
     return {
       totalCount,
       incompleteResults,

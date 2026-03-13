@@ -90,9 +90,10 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
     throw new Error("[collect-daily] GITHUB_REPOS must be set. No repos configured.");
   }
 
-  // Single UTC day range: midnight..23:59:59
-  const from = `${date}T00:00:00Z`;
-  const to = `${date}T23:59:59Z`;
+  // Single UTC day range — use date-only format (YYYY-MM-DD) which GitHub
+  // Search qualifiers document. Full ISO timestamps with T/Z can cause 422.
+  const from = date;
+  const to = date;
 
   const repoScope = (base: string) => GITHUB_REPOS.map((repo) => `repo:${repo} ${base}`);
 
