@@ -10,6 +10,11 @@ import { withBasePath } from "@/lib/base-path";
 import type { DashboardView } from "@/lib/dashboard-views";
 import type { DashboardData, DashboardFilters } from "@/lib/types";
 
+// Module-level cache: snapshots are static and only change once per day.
+// Keyed by preset so switching views (issues/PRs/reviews) on the same preset
+// is instant — no re-fetch, no re-parse.
+const snapshotCache = new Map<string, DashboardData>();
+
 type SnapshotDashboardPageProps = {
   view: DashboardView;
   pathname: string;
@@ -27,12 +32,19 @@ function buildFiltersFromSearchParams(searchParams: URLSearchParams): DashboardF
 export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageProps) {
   const searchParams = useSearchParams();
   const filters = useMemo(() => buildFiltersFromSearchParams(searchParams), [searchParams]);
-  const [baseData, setBaseData] = useState<DashboardData | null>(null);
+  const [baseData, setBaseData] = useState<DashboardData | null>(() => snapshotCache.get(filters.preset) ?? null);
   const [error, setError] = useState<string | null>(null);
 
   const updateDataUrl = process.env.NEXT_PUBLIC_UPDATE_WORKFLOW_URL ?? "";
 
   useEffect(() => {
+    // Already in memory — no network needed.
+    if (snapshotCache.has(filters.preset)) {
+      setError(null);
+      setBaseData(snapshotCache.get(filters.preset)!);
+      return;
+    }
+
     let cancelled = false;
 
     async function load() {
@@ -40,12 +52,16 @@ export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageP
       setBaseData(null);
 
       try {
-        const response = await fetch(withBasePath(`/snapshots/${filters.preset}.json`), { cache: "no-store" });
+        // No cache:"no-store" — let the browser cache the response.
+        // GitHub Pages serves static files with ETags so subsequent loads
+        // use a conditional request (304 Not Modified) instead of re-downloading.
+        const response = await fetch(withBasePath(`/snapshots/${filters.preset}.json`));
         if (!response.ok) {
           throw new Error(`Snapshot fetch failed (${response.status})`);
         }
 
         const payload = (await response.json()) as DashboardData;
+        snapshotCache.set(filters.preset, payload);
         if (!cancelled) {
           setBaseData(payload);
         }
