@@ -321,7 +321,7 @@ function combineSearchCollections(results: SearchCollection[]): SearchCollection
   };
 }
 
-export async function searchAcrossQueries(queries: string[], token?: string): Promise<SearchCollection> {
+export async function searchAcrossQueries(queries: string[], token?: string, maxPages = SEARCH_PAGE_LIMIT): Promise<SearchCollection> {
   if (queries.length === 0) {
     return {
       totalCount: 0,
@@ -333,7 +333,7 @@ export async function searchAcrossQueries(queries: string[], token?: string): Pr
 
   const results = await Promise.all(
     queries.map((query) =>
-      searchQueryLimit(() => searchAcrossPages(query, SEARCH_PAGE_LIMIT, token)),
+      searchQueryLimit(() => searchAcrossPages(query, maxPages, token)),
     ),
   );
 

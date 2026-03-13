@@ -41,6 +41,9 @@ const GITHUB_REPOS = process.env.GITHUB_REPOS
   : [];
 
 const DAILY_DETAIL_LIMIT = Number(process.env.DAILY_DETAIL_LIMIT ?? 300);
+// Open issues/PRs have no date filter so they may return far more results.
+// Allow a higher page limit for them; date-scoped queries use the default SEARCH_PAGE_LIMIT.
+const OPEN_ITEMS_PAGE_LIMIT = Number(process.env.OPEN_ITEMS_PAGE_LIMIT ?? 10);
 const detailLimit = pLimit(4);
 
 function utcDateString(date: Date): string {
@@ -103,9 +106,9 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
   // Closed issues and updated PRs: date-scoped — we only care about events
   // (closes, merges, review activity) that happened in this specific day.
   const [openIssuesResult, closedIssuesResult, openPrsResult, updatedPrsResult] = await Promise.all([
-    searchAcrossQueries(repoScope(`is:issue is:open archived:false sort:updated-desc`), token),
+    searchAcrossQueries(repoScope(`is:issue is:open archived:false sort:updated-desc`), token, OPEN_ITEMS_PAGE_LIMIT),
     searchAcrossQueries(repoScope(`is:issue is:closed archived:false sort:updated-desc closed:${from}..${to}`), token),
-    searchAcrossQueries(repoScope(`is:pr is:open archived:false sort:updated-desc`), token),
+    searchAcrossQueries(repoScope(`is:pr is:open archived:false sort:updated-desc`), token, OPEN_ITEMS_PAGE_LIMIT),
     searchAcrossQueries(repoScope(`is:pr archived:false sort:updated-desc updated:${from}..${to}`), token),
   ]);
 

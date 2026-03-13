@@ -88,6 +88,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
           GITHUB_REPOS: zephyrproject-rtos/zephyr,zephyrproject-rtos/west,zephyrproject-rtos/hal_nxp,zephyrproject-rtos/hostap
           SEARCH_PAGE_LIMIT: 2
+          OPEN_ITEMS_PAGE_LIMIT: 10
           GITHUB_SEARCH_MIN_INTERVAL_MS: 2500
           DAILY_OUT_DIR: _data/public
           DAILY_OVERRIDE_DATES: ${{ steps.datelist.outputs.dates }}
