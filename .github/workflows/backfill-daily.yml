@@ -113,9 +113,12 @@ jobs:
               git push origin HEAD:data
             fi
           else
-            git checkout --orphan data-bootstrap
-            git reset
-            cp -rT _data/public public/ 2>/dev/null || true
+            ORIGIN_URL=$(git remote get-url origin)
+            cd _data
+            git init
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git remote add origin "$ORIGIN_URL"
             git add -f public/daily/ public/snapshots/ 2>/dev/null || true
             if git diff --cached --quiet; then
               echo "No files to commit on first run"
