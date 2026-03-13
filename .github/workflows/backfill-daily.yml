@@ -1,0 +1,126 @@
+name: Backfill Daily Activity Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      from_date:
+        description: "Start date (UTC, inclusive) — YYYY-MM-DD"
+        required: true
+        type: string
+      to_date:
+        description: "End date (UTC, inclusive) — YYYY-MM-DD, must be yesterday or earlier"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-data
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate date inputs
+        run: |
+          FROM="${{ github.event.inputs.from_date }}"
+          TO="${{ github.event.inputs.to_date }}"
+          YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d)
+
+          if [[ ! "$FROM" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "Error: from_date '$FROM' is not in YYYY-MM-DD format"
+            exit 1
+          fi
+          if [[ ! "$TO" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "Error: to_date '$TO' is not in YYYY-MM-DD format"
+            exit 1
+          fi
+          if [[ "$FROM" > "$TO" ]]; then
+            echo "Error: from_date '$FROM' is after to_date '$TO'"
+            exit 1
+          fi
+          if [[ "$TO" > "$YESTERDAY" ]]; then
+            echo "Error: to_date '$TO' must be yesterday ($YESTERDAY) or earlier (only completed days)"
+            exit 1
+          fi
+          echo "Backfilling $FROM .. $TO"
+
+      - name: Checkout main branch (scripts + roster)
+        uses: actions/checkout@v4
+
+      - name: Checkout data branch into _data/
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          path: _data
+          fetch-depth: 0
+        continue-on-error: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build list of dates to backfill
+        id: datelist
+        run: |
+          FROM="${{ github.event.inputs.from_date }}"
+          TO="${{ github.event.inputs.to_date }}"
+          dates=""
+          current="$FROM"
+          while [[ "$current" <= "$TO" ]]; do
+            dates="${dates:+$dates,}$current"
+            current=$(date -u -d "$current + 1 day" +%Y-%m-%d)
+          done
+          echo "dates=$dates" >> "$GITHUB_OUTPUT"
+          echo "Will backfill: $dates"
+
+      - name: Collect backfill dates
+        run: npm run collect-daily
+        env:
+          GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
+          GITHUB_REPOS: zephyrproject-rtos/zephyr,zephyrproject-rtos/west,zephyrproject-rtos/hal_nxp,zephyrproject-rtos/hostap
+          SEARCH_PAGE_LIMIT: 2
+          GITHUB_SEARCH_MIN_INTERVAL_MS: 2000
+          DAILY_OUT_DIR: _data/public
+          DAILY_OVERRIDE_DATES: ${{ steps.datelist.outputs.dates }}
+
+      - name: Aggregate snapshots from daily files
+        run: npm run aggregate-daily
+        env:
+          DAILY_IN_DIR: _data/public
+          SNAPSHOT_OUT_DIR: _data/public
+
+      - name: Push backfilled files + updated snapshots to data branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [ -d "_data/.git" ]; then
+            cd _data
+            git add -f public/daily/ public/snapshots/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No new data to commit (all dates already existed)"
+            else
+              git commit -m "chore: backfill ${{ github.event.inputs.from_date }}..${{ github.event.inputs.to_date }} $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push origin HEAD:data
+            fi
+          else
+            git checkout --orphan data-bootstrap
+            git reset
+            cp -rT _data/public public/ 2>/dev/null || true
+            git add -f public/daily/ public/snapshots/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No files to commit on first run"
+            else
+              git commit -m "chore: backfill ${{ github.event.inputs.from_date }}..${{ github.event.inputs.to_date }} $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push origin HEAD:data
+            fi
+          fi

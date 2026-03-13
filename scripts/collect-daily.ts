@@ -8,9 +8,13 @@
  * - Idempotent: skips dates that already have a file.
  * - Only collects fully-completed UTC days (never the current day D).
  *
+ * Override mode (backfill):
+ *   DAILY_OVERRIDE_DATES=2026-03-01,2026-03-02,...  collect specific dates
+ *
  * Usage:
  *   npm run collect-daily
  *   DAILY_OUT_DIR=_data/public npm run collect-daily
+ *   DAILY_OVERRIDE_DATES=2026-03-01,2026-03-05 npm run collect-daily
  *
  * Reads GITHUB_TOKEN from .env.local or the GITHUB_TOKEN env var.
  * Set SEARCH_PAGE_LIMIT (default 2) and GITHUB_SEARCH_MIN_INTERVAL_MS before
@@ -53,6 +57,17 @@ async function fileExists(filePath: string): Promise<boolean> {
 }
 
 function getTargetDates(outDir: string): Array<{ date: string; filePath: string }> {
+  // Override mode: collect exactly the specified dates (used by backfill workflow).
+  const override = process.env.DAILY_OVERRIDE_DATES;
+  if (override) {
+    const dates = override.split(",").map((d) => d.trim()).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d));
+    if (dates.length === 0) {
+      throw new Error("[collect-daily] DAILY_OVERRIDE_DATES is set but contains no valid YYYY-MM-DD dates.");
+    }
+    return dates.map((date) => ({ date, filePath: path.join(outDir, "daily", `${date}.json`) }));
+  }
+
+  // Normal mode: yesterday (D-1) and the day before (D-2) as a 1-day catch-up.
   const now = new Date();
 
   const d1 = new Date(now);
