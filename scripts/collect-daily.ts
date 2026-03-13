@@ -96,11 +96,9 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
 
   const repoScope = (base: string) => GITHUB_REPOS.map((repo) => `repo:${repo} ${base}`);
 
-  const [openIssuesResult, closedIssuesResult, , , updatedPrsResult] = await Promise.all([
+  const [openIssuesResult, closedIssuesResult, updatedPrsResult] = await Promise.all([
     searchAcrossQueries(repoScope(`is:issue is:open archived:false sort:updated-desc updated:${from}..${to}`), token),
     searchAcrossQueries(repoScope(`is:issue is:closed archived:false sort:updated-desc closed:${from}..${to}`), token),
-    searchAcrossQueries(repoScope(`is:pr is:open archived:false sort:updated-desc updated:${from}..${to}`), token),
-    searchAcrossQueries(repoScope(`is:pr is:closed archived:false sort:updated-desc closed:${from}..${to}`), token),
     searchAcrossQueries(repoScope(`is:pr archived:false sort:updated-desc updated:${from}..${to}`), token),
   ]);
 
