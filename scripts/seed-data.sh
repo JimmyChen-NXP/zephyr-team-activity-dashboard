@@ -75,7 +75,7 @@ fi
 # ---------------------------------------------------------------------------
 DATES=""
 current="$FROM"
-while [[ "$current" <= "$TO" ]]; do
+while [[ "$current" < "$TO" || "$current" == "$TO" ]]; do
   DATES="${DATES:+$DATES,}$current"
   current="$(next_day "$current")"
 done
@@ -91,11 +91,16 @@ if [[ -d "_data/.git" ]]; then
   (cd _data && git fetch origin && git reset --hard origin/data) || \
     echo "[seed-data] Could not update _data/ (data branch may not exist yet on remote — that's OK for first run)"
 else
+  # Remove any stale non-git _data/ left from a previous failed run
+  if [[ -d "_data" ]]; then
+    echo "[seed-data] Removing stale _data/ (not a git repo)..."
+    rm -rf _data
+  fi
   echo "[seed-data] Cloning data branch into _data/..."
-  git clone --branch data --single-branch "$REPO_URL" _data 2>/dev/null || {
-    echo "[seed-data] data branch not found on remote — starting fresh"
+  if ! git clone --branch data --single-branch "$REPO_URL" _data; then
+    echo "[seed-data] data branch not found on remote — will create it on push"
     mkdir -p _data/public
-  }
+  fi
 fi
 
 mkdir -p _data/public/daily _data/public/snapshots
@@ -137,22 +142,22 @@ if [[ -d "_data/.git" ]]; then
   fi
   cd ..
 else
-  # First run — bootstrap an orphan data branch
-  ORIG_BRANCH="$(git branch --show-current)"
-  git checkout --orphan data-bootstrap
-  git reset
-  cp -rT _data/public public/ 2>/dev/null || true
+  # First run — _data/ is a plain directory (no remote data branch yet).
+  # Initialize a standalone git repo inside _data/ and push as the data branch.
+  cd _data
+  git init
+  git config user.name "seed-data-local"
+  git config user.email "seed-data-local@localhost"
+  git remote add origin "$REPO_URL"
   git add -f public/daily/ public/snapshots/ 2>/dev/null || true
   if git diff --cached --quiet; then
     echo "[seed-data] Nothing to commit on first run."
   else
-    git config user.name "seed-data-local"
-    git config user.email "seed-data-local@localhost"
     git commit -m "chore: local seed $FROM..$TO $(date -u +%Y-%m-%dT%H:%M:%SZ)"
     git push origin HEAD:data
     echo "[seed-data] Bootstrapped and pushed origin/data."
   fi
-  git checkout "$ORIG_BRANCH"
+  cd ..
 fi
 
 echo "[seed-data] Done."
