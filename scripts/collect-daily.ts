@@ -97,9 +97,15 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
 
   const repoScope = (base: string) => GITHUB_REPOS.map((repo) => `repo:${repo} ${base}`);
 
-  const [openIssuesResult, closedIssuesResult, updatedPrsResult] = await Promise.all([
-    searchAcrossQueries(repoScope(`is:issue is:open archived:false sort:updated-desc updated:${from}..${to}`), token),
+  // Open issues and open/draft PRs: no date filter — we want ALL currently open
+  // items regardless of when they were last touched (a stale-but-still-assigned
+  // issue is still on someone's plate).
+  // Closed issues and updated PRs: date-scoped — we only care about events
+  // (closes, merges, review activity) that happened in this specific day.
+  const [openIssuesResult, closedIssuesResult, openPrsResult, updatedPrsResult] = await Promise.all([
+    searchAcrossQueries(repoScope(`is:issue is:open archived:false sort:updated-desc`), token),
     searchAcrossQueries(repoScope(`is:issue is:closed archived:false sort:updated-desc closed:${from}..${to}`), token),
+    searchAcrossQueries(repoScope(`is:pr is:open archived:false sort:updated-desc`), token),
     searchAcrossQueries(repoScope(`is:pr archived:false sort:updated-desc updated:${from}..${to}`), token),
   ]);
 
@@ -143,8 +149,10 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
   }
 
   // --- PRs: fetch full details + reviews ---
+  // Combine open PRs (no date filter) + updated PRs (date-filtered, for merged/reviews),
+  // deduplicating by URL so a PR that appears in both lists is only fetched once.
   const prUrlSeen = new Set<string>();
-  const detailTargets = updatedPrsResult.items
+  const detailTargets = [...openPrsResult.items, ...updatedPrsResult.items]
     .filter((item) => {
       if (!item.pull_request?.url || prUrlSeen.has(item.html_url)) return false;
       prUrlSeen.add(item.html_url);

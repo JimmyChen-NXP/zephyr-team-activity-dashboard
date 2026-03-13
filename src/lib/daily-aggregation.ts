@@ -147,8 +147,9 @@ export function aggregateDailyRecords(
   // Issues
   // -----------------------------------------------------------------------
   for (const issue of uniqueIssues) {
-    // Open issues: updated within range
-    if (issue.state === "open" && issue.updatedAt >= range.from && issue.updatedAt <= range.to) {
+    // Open issues: all currently open — no date filter. An issue that has been
+    // sitting open for months without an update is still on the assignee's plate.
+    if (issue.state === "open") {
       const assigneeLogin = issue.assignees.find((a) => rosterLogins.has(a.toLowerCase()));
       if (!assigneeLogin) continue;
       const contributor = contributorMap.get(assigneeLogin.toLowerCase());
@@ -208,24 +209,63 @@ export function aggregateDailyRecords(
   }
 
   // -----------------------------------------------------------------------
-  // PRs (basic info — updated within range, authored by roster member)
+  // PRs
+  // Open/draft PRs: no date filter — show all currently open PRs authored by
+  // roster members regardless of last-update date.
+  // Merged/closed PRs: date-scoped — only events that happened in the range.
   // -----------------------------------------------------------------------
-  const teamPrs = uniquePrs.filter(
-    (pr) => rosterLogins.has(pr.author.toLowerCase()) && pr.updatedAt >= range.from && pr.updatedAt <= range.to,
+  const teamOpenPrs = uniquePrs.filter(
+    (pr) => pr.state === "open" && rosterLogins.has(pr.author.toLowerCase()),
+  );
+  const teamClosedPrs = uniquePrs.filter(
+    (pr) => pr.state === "closed" && rosterLogins.has(pr.author.toLowerCase()) &&
+      pr.updatedAt >= range.from && pr.updatedAt <= range.to,
   );
 
-  for (const pr of teamPrs) {
+  for (const pr of teamOpenPrs) {
     const contributor = contributorMap.get(pr.author.toLowerCase());
     if (!contributor) continue;
 
     getOrCreateRepo(pr.repo).prs += 1;
     getOrCreateRepo(pr.repo).contributors.add(contributor.login);
 
-    if (pr.state === "open") {
-      contributor.openAuthoredPrs += 1;
-      if (pr.isDraft) contributor.draftPrs += 1;
-      const isStale = Date.parse(pr.updatedAt) < staleCutoff;
-      if (isStale) contributor.staleItems += 1;
+    contributor.openAuthoredPrs += 1;
+    if (pr.isDraft) contributor.draftPrs += 1;
+    const isStale = Date.parse(pr.updatedAt) < staleCutoff;
+    if (isStale) contributor.staleItems += 1;
+
+    activityItems.push({
+      id: `pull_request-${pr.id}-${contributor.login}`,
+      type: "pull_request",
+      title: pr.title,
+      url: pr.url,
+      repo: pr.repo,
+      contributor: contributor.login,
+      author: pr.author,
+      state: pr.state,
+      createdAt: pr.createdAt,
+      updatedAt: pr.updatedAt,
+      ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
+      statusLabel: pr.isDraft ? "Draft PR" : "Open PR",
+      metrics: {
+        ...emptyMetrics(),
+        openAuthoredPrs: 1,
+        draftPrs: pr.isDraft ? 1 : 0,
+        staleItems: isStale ? 1 : 0,
+      },
+    });
+  }
+
+  for (const pr of teamClosedPrs) {
+    const contributor = contributorMap.get(pr.author.toLowerCase());
+    if (!contributor) continue;
+
+    getOrCreateRepo(pr.repo).prs += 1;
+    getOrCreateRepo(pr.repo).contributors.add(contributor.login);
+
+    if (pr.mergedAt && pr.mergedAt >= range.from && pr.mergedAt <= range.to) {
+      contributor.mergedPrs += 1;
+      mergeHours.push(Math.abs(differenceInHours(parseISO(pr.mergedAt), parseISO(pr.createdAt))));
 
       activityItems.push({
         id: `pull_request-${pr.id}-${contributor.login}`,
@@ -239,62 +279,36 @@ export function aggregateDailyRecords(
         createdAt: pr.createdAt,
         updatedAt: pr.updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
-        statusLabel: pr.isDraft ? "Draft PR" : "Open PR",
-        metrics: {
-          ...emptyMetrics(),
-          openAuthoredPrs: 1,
-          draftPrs: pr.isDraft ? 1 : 0,
-          staleItems: isStale ? 1 : 0,
-        },
+        statusLabel: "Merged",
+        metrics: { ...emptyMetrics(), mergedPrs: 1 },
       });
-    }
+    } else if (!pr.mergedAt) {
+      contributor.closedUnmergedPrs += 1;
 
-    if (pr.state === "closed") {
-      if (pr.mergedAt && pr.mergedAt >= range.from && pr.mergedAt <= range.to) {
-        contributor.mergedPrs += 1;
-        mergeHours.push(Math.abs(differenceInHours(parseISO(pr.mergedAt), parseISO(pr.createdAt))));
-
-        activityItems.push({
-          id: `pull_request-${pr.id}-${contributor.login}`,
-          type: "pull_request",
-          title: pr.title,
-          url: pr.url,
-          repo: pr.repo,
-          contributor: contributor.login,
-          author: pr.author,
-          state: pr.state,
-          createdAt: pr.createdAt,
-          updatedAt: pr.updatedAt,
-          ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
-          statusLabel: "Merged",
-          metrics: { ...emptyMetrics(), mergedPrs: 1 },
-        });
-      } else if (!pr.mergedAt) {
-        contributor.closedUnmergedPrs += 1;
-
-        activityItems.push({
-          id: `pull_request-${pr.id}-${contributor.login}`,
-          type: "pull_request",
-          title: pr.title,
-          url: pr.url,
-          repo: pr.repo,
-          contributor: contributor.login,
-          author: pr.author,
-          state: pr.state,
-          createdAt: pr.createdAt,
-          updatedAt: pr.updatedAt,
-          ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
-          statusLabel: "Closed",
-          metrics: { ...emptyMetrics(), closedUnmergedPrs: 1 },
-        });
-      }
+      activityItems.push({
+        id: `pull_request-${pr.id}-${contributor.login}`,
+        type: "pull_request",
+        title: pr.title,
+        url: pr.url,
+        repo: pr.repo,
+        contributor: contributor.login,
+        author: pr.author,
+        state: pr.state,
+        createdAt: pr.createdAt,
+        updatedAt: pr.updatedAt,
+        ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
+        statusLabel: "Closed",
+        metrics: { ...emptyMetrics(), closedUnmergedPrs: 1 },
+      });
     }
   }
 
   // -----------------------------------------------------------------------
   // Pending review requests (open PRs with roster member in requestedReviewers)
+  // No date filter — a pending review request is still pending regardless of
+  // when the PR was last updated.
   // -----------------------------------------------------------------------
-  const openPrs = uniquePrs.filter((pr) => pr.state === "open" && pr.updatedAt >= range.from && pr.updatedAt <= range.to);
+  const openPrs = uniquePrs.filter((pr) => pr.state === "open");
   for (const pr of openPrs) {
     for (const reviewerLogin of pr.requestedReviewers) {
       const reviewerMetrics = contributorMap.get(reviewerLogin.toLowerCase());
