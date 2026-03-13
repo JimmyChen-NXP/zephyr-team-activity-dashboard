@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run",
-    "snapshots": "tsx scripts/generate-snapshots.ts"
+    "snapshots": "tsx scripts/generate-snapshots.ts",
+    "collect-daily": "tsx scripts/collect-daily.ts",
+    "aggregate-daily": "tsx scripts/aggregate-daily.ts",
+    "check-queries": "tsx scripts/check-queries.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

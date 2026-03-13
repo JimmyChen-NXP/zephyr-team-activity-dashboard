@@ -17,8 +17,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout main branch (scripts + roster)
         uses: actions/checkout@v4
+
+      - name: Checkout data branch into _data/
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          path: _data
+          fetch-depth: 0
+        # The data branch may not exist on the very first run; continue anyway.
+        continue-on-error: true
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -29,19 +38,47 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate snapshots
-        run: npm run snapshots
+      - name: Collect daily GitHub activity
+        run: npm run collect-daily
         env:
           GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
-          SEARCH_PAGE_LIMIT: 5
-          GITHUB_SEARCH_MIN_INTERVAL_MS: 3000
+          GITHUB_REPOS: zephyrproject-rtos/zephyr,zephyrproject-rtos/west,zephyrproject-rtos/hal_nxp,zephyrproject-rtos/hostap
+          SEARCH_PAGE_LIMIT: 2
+          GITHUB_SEARCH_MIN_INTERVAL_MS: 2000
+          DAILY_OUT_DIR: _data/public
 
-      - name: Push snapshots to data branch
+      - name: Aggregate snapshots from daily files
+        run: npm run aggregate-daily
+        env:
+          DAILY_IN_DIR: _data/public
+          SNAPSHOT_OUT_DIR: _data/public
+
+      - name: Push daily files + snapshots to data branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout --orphan data-staging
-          git reset
-          git add -f public/snapshots/
-          git commit -m "chore: snapshots $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git push origin HEAD:data --force
+
+          if [ -d "_data/.git" ]; then
+            # Normal path: data branch was already checked out into _data/
+            cd _data
+            git add -f public/daily/ public/snapshots/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No new data to commit"
+            else
+              git commit -m "chore: daily snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push origin HEAD:data
+            fi
+          else
+            # First run: data branch doesn't exist yet — bootstrap it as an orphan.
+            # Scripts wrote output to _data/public/; copy into public/ for the initial commit.
+            git checkout --orphan data-bootstrap
+            git reset
+            cp -rT _data/public public/ 2>/dev/null || true
+            git add -f public/daily/ public/snapshots/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No files to commit on first run"
+            else
+              git commit -m "chore: daily snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push origin HEAD:data
+            fi
+          fi

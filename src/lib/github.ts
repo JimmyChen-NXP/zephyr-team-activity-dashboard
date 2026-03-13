@@ -14,7 +14,7 @@ import type {
   RangeOption,
 } from "@/lib/types";
 
-type SearchItem = {
+export type SearchItem = {
   id: number;
   number: number;
   title: string;
@@ -43,7 +43,7 @@ type SearchCollection = {
   capped: boolean;
 };
 
-type PullRequestDetail = {
+export type PullRequestDetail = {
   id: number;
   number: number;
   html_url: string;
@@ -58,7 +58,7 @@ type PullRequestDetail = {
   base: { repo: { full_name: string } | null };
 };
 
-type PullRequestReview = {
+export type PullRequestReview = {
   id: number;
   state: string;
   submitted_at: string | null;
@@ -86,8 +86,8 @@ const API_ROOT = "https://api.github.com";
 const ORG = process.env.GITHUB_ORG ?? "zephyrproject-rtos";
 const SEARCH_PAGE_LIMIT = Number(process.env.SEARCH_PAGE_LIMIT ?? 10);
 const SEARCH_API_MAX_PAGES = 10;
-const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? 40);
-const REVIEW_DETAIL_LIMIT = Number(process.env.REVIEW_DETAIL_LIMIT ?? 120);
+const PR_DETAIL_LIMIT_DEFAULT = 40;
+const REVIEW_DETAIL_LIMIT_DEFAULT = 500;
 const SEARCH_QUERY_CONCURRENCY = Number(process.env.SEARCH_QUERY_CONCURRENCY ?? 4);
 const SEARCH_PARTITION_MIN_WINDOW_MS = Number(process.env.SEARCH_PARTITION_MIN_WINDOW_MS ?? 60000);
 const limit = pLimit(4);
@@ -321,7 +321,7 @@ function combineSearchCollections(results: SearchCollection[]): SearchCollection
   };
 }
 
-async function searchAcrossQueries(queries: string[], token?: string): Promise<SearchCollection> {
+export async function searchAcrossQueries(queries: string[], token?: string): Promise<SearchCollection> {
   if (queries.length === 0) {
     return {
       totalCount: 0,
@@ -374,16 +374,16 @@ async function searchAcrossDatePartitions(
   return combineSearchCollections([left, right]);
 }
 
-async function fetchPullRequestDetails(pullRequestUrl: string, token?: string): Promise<PullRequestDetail> {
+export async function fetchPullRequestDetails(pullRequestUrl: string, token?: string): Promise<PullRequestDetail> {
   const url = new URL(pullRequestUrl);
   return fetchGitHub<PullRequestDetail>(url.pathname, token);
 }
 
-async function fetchPullRequestReviews(owner: string, repo: string, number: number, token?: string): Promise<PullRequestReview[]> {
+export async function fetchPullRequestReviews(owner: string, repo: string, number: number, token?: string): Promise<PullRequestReview[]> {
   return fetchGitHub<PullRequestReview[]>(`/repos/${owner}/${repo}/pulls/${number}/reviews?per_page=100`, token);
 }
 
-function repoFullNameFromSearchItem(item: SearchItem): string {
+export function repoFullNameFromSearchItem(item: SearchItem): string {
   return item.repository_url.replace(`${API_ROOT}/repos/`, "");
 }
 
@@ -462,43 +462,74 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
 
   const staleCutoff = parseISO(range.to).getTime() - 7 * 86400000;
 
-  // Chunk the roster so each search query stays within GitHub's query-length limits.
-  const ROSTER_CHUNK_SIZE = 20;
-  const rosterChunks: RosterMember[][] = [];
-  for (let i = 0; i < roster.length; i += ROSTER_CHUNK_SIZE) {
-    rosterChunks.push(roster.slice(i, i + ROSTER_CHUNK_SIZE));
+  // Read limits at call time so scripts can override via process.env before calling this function.
+  const PR_DETAIL_LIMIT = Number(process.env.PR_DETAIL_LIMIT ?? PR_DETAIL_LIMIT_DEFAULT);
+  const REVIEW_DETAIL_LIMIT = Number(process.env.REVIEW_DETAIL_LIMIT ?? REVIEW_DETAIL_LIMIT_DEFAULT);
+
+  // Read at call time (not module load time) so scripts can set process.env.GITHUB_REPOS
+  // before calling this function without worrying about import order.
+  const GITHUB_REPOS = process.env.GITHUB_REPOS
+    ? process.env.GITHUB_REPOS.split(",").map((r) => r.trim()).filter(Boolean)
+    : [];
+
+  // Build search queries: repo-scoped (no member filter, post-filter in code) when GITHUB_REPOS
+  // is set, or org-wide with chunked member filters as fallback.
+  let openIssuesResult: SearchCollection;
+  let closedIssuesResult: SearchCollection;
+  let openPrsResult: SearchCollection;
+  let closedPrsResult: SearchCollection;
+  let updatedPrsResult: SearchCollection;
+  let reviewResult: SearchCollection;
+
+  if (GITHUB_REPOS.length > 0) {
+    // Broad repo-scoped queries (one per repo) for issues and PRs — no member names, post-filter by roster.
+    // Reduces total search requests vs org-wide chunked-member queries.
+    const repoScope = (base: string) => GITHUB_REPOS.map((repo) => `repo:${repo} ${base}`);
+
+    [openIssuesResult, closedIssuesResult, openPrsResult, closedPrsResult, updatedPrsResult] = await Promise.all([
+      searchAcrossQueries(repoScope(`is:issue is:open archived:false sort:updated-desc updated:${range.from}..${range.to}`), token),
+      searchAcrossQueries(repoScope(`is:issue is:closed archived:false sort:updated-desc closed:${range.from}..${range.to}`), token),
+      searchAcrossQueries(repoScope(`is:pr is:open archived:false sort:updated-desc updated:${range.from}..${range.to}`), token),
+      searchAcrossQueries(repoScope(`is:pr is:closed archived:false sort:updated-desc closed:${range.from}..${range.to}`), token),
+      searchAcrossQueries(repoScope(`is:pr archived:false sort:updated-desc updated:${range.from}..${range.to}`), token),
+    ]);
+    // Reuse updatedPrsResult for review discovery. The search is already bounded to GITHUB_REPOS
+    // (each repo returns at most SEARCH_PAGE_LIMIT×100 items), so reviewer:login chunked queries
+    // are not needed — REVIEW_DETAIL_LIMIT_DEFAULT covers the full bounded result set.
+    reviewResult = updatedPrsResult;
+  } else {
+    // Org-wide fallback: chunk the roster so each query stays within GitHub's query-length limits.
+    const ROSTER_CHUNK_SIZE = 20;
+    const rosterChunks: RosterMember[][] = [];
+    for (let i = 0; i < roster.length; i += ROSTER_CHUNK_SIZE) {
+      rosterChunks.push(roster.slice(i, i + ROSTER_CHUNK_SIZE));
+    }
+
+    const assigneeQueries = (base: string) =>
+      rosterChunks.map((chunk) => {
+        const or = chunk.map((m) => `assignee:${m.login}`).join(" OR ");
+        return `${base} (${or})`;
+      });
+    const authorQueries = (base: string) =>
+      rosterChunks.map((chunk) => {
+        const or = chunk.map((m) => `author:${m.login}`).join(" OR ");
+        return `${base} (${or})`;
+      });
+    const reviewerQueries = (base: string) =>
+      rosterChunks.map((chunk) => {
+        const or = chunk.map((m) => `reviewer:${m.login}`).join(" OR ");
+        return `${base} (${or})`;
+      });
+
+    [openIssuesResult, closedIssuesResult, openPrsResult, closedPrsResult, updatedPrsResult, reviewResult] = await Promise.all([
+      searchAcrossQueries(assigneeQueries(`org:${ORG} is:issue is:open archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
+      searchAcrossQueries(assigneeQueries(`org:${ORG} is:issue is:closed archived:false sort:updated-desc`).map((q) => `${q} closed:${range.from}..${range.to}`), token),
+      searchAcrossQueries(authorQueries(`org:${ORG} is:pr is:open archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
+      searchAcrossQueries(authorQueries(`org:${ORG} is:pr is:closed archived:false sort:updated-desc`).map((q) => `${q} closed:${range.from}..${range.to}`), token),
+      searchAcrossQueries(authorQueries(`org:${ORG} is:pr archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
+      searchAcrossQueries(reviewerQueries(`org:${ORG} is:pr archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
+    ]);
   }
-
-  const assigneeQueries = (base: string) =>
-    rosterChunks.map((chunk) => {
-      const or = chunk.map((m) => `assignee:${m.login}`).join(" OR ");
-      return `${base} (${or})`;
-    });
-  const authorQueries = (base: string) =>
-    rosterChunks.map((chunk) => {
-      const or = chunk.map((m) => `author:${m.login}`).join(" OR ");
-      return `${base} (${or})`;
-    });
-  const reviewerQueries = (base: string) =>
-    rosterChunks.map((chunk) => {
-      const or = chunk.map((m) => `reviewer:${m.login}`).join(" OR ");
-      return `${base} (${or})`;
-    });
-
-  const [openIssuesResult, closedIssuesResult, openPrsResult, closedPrsResult, updatedPrsResult, reviewResult] = await Promise.all([
-    // Open issues: chunked assignee queries, updated in range
-    searchAcrossQueries(assigneeQueries(`org:${ORG} is:issue is:open archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
-    // Closed issues: chunked assignee queries, closed in range
-    searchAcrossQueries(assigneeQueries(`org:${ORG} is:issue is:closed archived:false sort:updated-desc`).map((q) => `${q} closed:${range.from}..${range.to}`), token),
-    // Open PRs: chunked author queries, updated in range
-    searchAcrossQueries(authorQueries(`org:${ORG} is:pr is:open archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
-    // Merged/closed PRs: chunked author queries, closed in range
-    searchAcrossQueries(authorQueries(`org:${ORG} is:pr is:closed archived:false sort:updated-desc`).map((q) => `${q} closed:${range.from}..${range.to}`), token),
-    // Updated PRs: chunked author queries, updated in range
-    searchAcrossQueries(authorQueries(`org:${ORG} is:pr archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
-    // Reviews: chunked reviewer queries, updated in range
-    searchAcrossQueries(reviewerQueries(`org:${ORG} is:pr archived:false sort:updated-desc`).map((q) => `${q} updated:${range.from}..${range.to}`), token),
-  ]);
 
   const searchResults = [
     openIssuesResult,
@@ -590,12 +621,11 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
   }
 
   const authoredPrItems = dedupeSearchItems([...openPrsResult.items, ...closedPrsResult.items]);
-  // Include reviewer-discovered PRs and boundary activity
   const reviewTargetPrItems = dedupeSearchItems([
+    ...reviewResult.items,
     ...updatedPrsResult.items,
     ...authoredPrItems,
     ...openPrsResult.items,
-    ...reviewResult.items,
   ]);
 
   const allTeamPrItems = authoredPrItems.filter((item) =>
@@ -639,7 +669,13 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     );
   }
 
-  const detailTargets = reviewDetailTargets.filter((item) => item.pull_request?.url).slice(0, REVIEW_DETAIL_LIMIT);
+  // Only fetch details for PRs in the configured repos (reviewTargetPrItems may include authored PRs
+  // from the org-wide fallback path; the filter is a no-op for the repo-scoped path since all items
+  // already come from GITHUB_REPOS).
+  const detailTargets = reviewDetailTargets
+    .filter((item) => item.pull_request?.url)
+    .filter((item) => GITHUB_REPOS.length === 0 || GITHUB_REPOS.includes(repoFullNameFromSearchItem(item)))
+    .slice(0, REVIEW_DETAIL_LIMIT);
 
   const detailResults = await Promise.all(
     detailTargets.map((item) =>
