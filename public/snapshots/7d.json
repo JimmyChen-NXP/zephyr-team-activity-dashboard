@@ -6,7 +6,7 @@
     "to": "2026-03-14T23:59:59Z",
     "timeZone": "UTC"
   },
-  "generatedAt": "2026-03-14T05:38:01.369Z",
+  "generatedAt": "2026-03-14T06:21:08.206Z",
   "rosterSize": 171,
   "rosterMembers": [
     {
@@ -3108,6 +3108,20 @@
       "updatedAt": "2026-03-13T22:19:50Z",
       "ageDays": 2,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 5,
+        "ciStatus": "failure",
+        "cooldownHours": 8,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -3387,6 +3401,20 @@
       "updatedAt": "2026-03-13T21:35:39Z",
       "ageDays": 1,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "alexanderwachter",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 0,
+        "ciStatus": "failure",
+        "cooldownHours": 8,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -3418,6 +3446,56 @@
       "updatedAt": "2026-03-13T21:34:11Z",
       "ageDays": 35,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "yvesll",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "butok",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "mmahadevan108",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "andyross",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": true
+          },
+          {
+            "login": "ZhaoxiangJin",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "Holt-Sun",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "FelixWang47831",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "JarmouniA",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 12,
+        "ciStatus": null,
+        "cooldownHours": 8,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -3821,6 +3899,20 @@
       "updatedAt": "2026-03-13T21:27:09Z",
       "ageDays": 17,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "dsseng",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 15,
+        "ciStatus": null,
+        "cooldownHours": 8,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -4193,6 +4285,30 @@
       "updatedAt": "2026-03-13T20:43:34Z",
       "ageDays": 86,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "MarkWangChinese",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "makeshi",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "lylezhu2012",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 10,
+        "ciStatus": null,
+        "cooldownHours": 9,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -4286,6 +4402,14 @@
       "updatedAt": "2026-03-13T19:57:54Z",
       "ageDays": 1,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 1,
+        "ciStatus": null,
+        "cooldownHours": 10,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -4410,6 +4534,25 @@
       "updatedAt": "2026-03-13T19:55:58Z",
       "ageDays": 94,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "JiafeiPan",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "biwenli",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 15,
+        "ciStatus": "failure",
+        "cooldownHours": 10,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -4937,6 +5080,20 @@
       "updatedAt": "2026-03-13T19:01:42Z",
       "ageDays": 37,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 15,
+        "ciStatus": "failure",
+        "cooldownHours": 11,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -5340,6 +5497,14 @@
       "updatedAt": "2026-03-13T18:59:22Z",
       "ageDays": 5,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 11,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -5619,6 +5784,25 @@
       "updatedAt": "2026-03-13T17:59:56Z",
       "ageDays": 31,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "de-nordic",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "hakehuang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 3,
+        "ciStatus": null,
+        "cooldownHours": 12,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -5898,6 +6082,46 @@
       "updatedAt": "2026-03-13T17:19:26Z",
       "ageDays": 222,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "dleach02",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "mmahadevan108",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "rruuaanng",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "AidenHu",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "kctan0805",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 9,
+        "ciStatus": null,
+        "cooldownHours": 13,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -5991,6 +6215,20 @@
       "updatedAt": "2026-03-13T16:48:46Z",
       "ageDays": 1,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "pdgendt",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 5,
+        "ciStatus": null,
+        "cooldownHours": 13,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -6053,6 +6291,35 @@
       "updatedAt": "2026-03-13T16:34:46Z",
       "ageDays": 8,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "pdgendt",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "manuargue",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "stanislav-poboril",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "maass-hamburg",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 17,
+        "ciStatus": null,
+        "cooldownHours": 13,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -6456,6 +6723,35 @@
       "updatedAt": "2026-03-13T16:10:21Z",
       "ageDays": 257,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "ngphibang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "avolmat-st",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "teburd",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 1,
+        "ciStatus": null,
+        "cooldownHours": 14,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -6953,6 +7249,20 @@
       "updatedAt": "2026-03-13T13:30:34Z",
       "ageDays": 2,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "JarmouniA",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 8,
+        "ciStatus": null,
+        "cooldownHours": 16,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -6984,6 +7294,30 @@
       "updatedAt": "2026-03-13T13:29:29Z",
       "ageDays": 3,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "bjarki-andreasen",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "nashif",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "ZhaoxiangJin",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 16,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -7078,6 +7412,14 @@
       "updatedAt": "2026-03-13T12:51:45Z",
       "ageDays": 3,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 8,
+        "ciStatus": null,
+        "cooldownHours": 17,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -7295,6 +7637,36 @@
       "updatedAt": "2026-03-13T11:48:52Z",
       "ageDays": 2,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "andyross",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "mathieuchopstm",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "ZhaoxiangJin",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "bjarki-andreasen",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 21,
+        "ciStatus": null,
+        "cooldownHours": 18,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -7512,6 +7884,14 @@
       "updatedAt": "2026-03-13T11:28:26Z",
       "ageDays": 10,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 15,
+        "ciStatus": null,
+        "cooldownHours": 18,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -7822,6 +8202,14 @@
       "updatedAt": "2026-03-13T11:21:17Z",
       "ageDays": 15,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 5,
+        "ciStatus": null,
+        "cooldownHours": 18,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -7915,6 +8303,14 @@
       "updatedAt": "2026-03-13T11:12:34Z",
       "ageDays": 37,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 5,
+        "ciStatus": null,
+        "cooldownHours": 19,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -8008,6 +8404,41 @@
       "updatedAt": "2026-03-13T11:03:33Z",
       "ageDays": 43,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "jukkar",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "krish2718",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "nordicjm",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          },
+          {
+            "login": "fengming-ye",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "Qingling-Wu",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 10,
+        "ciStatus": null,
+        "cooldownHours": 19,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -8863,6 +9294,35 @@
       "updatedAt": "2026-03-12T17:54:42Z",
       "ageDays": 43,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "krish2718",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "jukkar",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "MaochenWang1",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "Qingling-Wu",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 36,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -9051,6 +9511,20 @@
       "updatedAt": "2026-03-12T07:13:25Z",
       "ageDays": 4,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "ZhaoxiangJin",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 1,
+        "ciStatus": null,
+        "cooldownHours": 47,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -9336,6 +9810,25 @@
       "updatedAt": "2026-03-11T21:14:06Z",
       "ageDays": 101,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "ngphibang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 8,
+        "ciStatus": null,
+        "cooldownHours": 57,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -9460,6 +9953,31 @@
       "updatedAt": "2026-03-11T20:34:40Z",
       "ageDays": 36,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "zejiang0jason",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "JarmouniA",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "KATE-WANG-NXP",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 15,
+        "ciStatus": null,
+        "cooldownHours": 57,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -10236,6 +10754,30 @@
       "updatedAt": "2026-03-11T15:01:48Z",
       "ageDays": 136,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "danieldegrasse",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "ngphibang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 13,
+        "ciStatus": null,
+        "cooldownHours": 63,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -10422,6 +10964,40 @@
       "updatedAt": "2026-03-11T14:11:01Z",
       "ageDays": 66,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "ngphibang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "KATE-WANG-NXP",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "trunghieulenxp",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "JarmouniA",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 15,
+        "ciStatus": null,
+        "cooldownHours": 64,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -11573,6 +12149,30 @@
       "updatedAt": "2026-03-11T11:28:05Z",
       "ageDays": 100,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "lylezhu2012",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "CC0918",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 13,
+        "ciStatus": null,
+        "cooldownHours": 66,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -11760,6 +12360,14 @@
       "updatedAt": "2026-03-11T10:28:13Z",
       "ageDays": 4,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 8,
+        "ciStatus": null,
+        "cooldownHours": 67,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -12103,6 +12711,14 @@
       "updatedAt": "2026-03-11T08:50:35Z",
       "ageDays": 96,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 7,
+        "ciStatus": null,
+        "cooldownHours": 69,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -12165,6 +12781,20 @@
       "updatedAt": "2026-03-11T08:47:47Z",
       "ageDays": 4,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "ZhaoxiangJin",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 2,
+        "ciStatus": null,
+        "cooldownHours": 69,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -12290,6 +12920,41 @@
       "updatedAt": "2026-03-11T08:45:44Z",
       "ageDays": 136,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "dbaluta",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "ZhaoxiangJin",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "decsny",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "michal-chvatal",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "TomasBarakNXP",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 12,
+        "ciStatus": null,
+        "cooldownHours": 69,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -12538,6 +13203,14 @@
       "updatedAt": "2026-03-11T08:36:12Z",
       "ageDays": 39,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 16,
+        "ciStatus": null,
+        "cooldownHours": 69,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -12976,6 +13649,46 @@
       "updatedAt": "2026-03-11T06:25:17Z",
       "ageDays": 59,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "ZhaoxiangJin",
+            "state": "APPROVED",
+            "wasRequested": true
+          },
+          {
+            "login": "mmahadevan108",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "zejiang0jason",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "bjarki-andreasen",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "Holt-Sun",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "ceolin",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 13,
+        "ciStatus": null,
+        "cooldownHours": 71,
+        "cooldownMet": false
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -13444,6 +14157,14 @@
       "updatedAt": "2026-03-11T05:41:46Z",
       "ageDays": 3,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 3,
+        "ciStatus": null,
+        "cooldownHours": 72,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -13693,6 +14414,14 @@
       "updatedAt": "2026-03-11T03:42:02Z",
       "ageDays": 3,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 74,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -13724,6 +14453,20 @@
       "updatedAt": "2026-03-11T03:36:10Z",
       "ageDays": 123,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 74,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -13946,6 +14689,14 @@
       "updatedAt": "2026-03-11T02:26:39Z",
       "ageDays": 4,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 15,
+        "ciStatus": null,
+        "cooldownHours": 75,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -14349,6 +15100,14 @@
       "updatedAt": "2026-03-11T02:26:26Z",
       "ageDays": 17,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 6,
+        "ciStatus": null,
+        "cooldownHours": 75,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -14629,6 +15388,14 @@
       "updatedAt": "2026-03-11T02:08:44Z",
       "ageDays": 4,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 14,
+        "ciStatus": null,
+        "cooldownHours": 76,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -15470,6 +16237,35 @@
       "updatedAt": "2026-03-10T16:36:48Z",
       "ageDays": 30,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "LaurentiuM1234",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "kartben",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "dbaluta",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "yongxu-wang15",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 85,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -15501,6 +16297,14 @@
       "updatedAt": "2026-03-10T15:39:51Z",
       "ageDays": 8,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 8,
+        "ciStatus": null,
+        "cooldownHours": 86,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -15906,6 +16710,25 @@
       "updatedAt": "2026-03-10T14:44:42Z",
       "ageDays": 10,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "lucien-nxp",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "jacob-wienecke-nxp",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 87,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -16126,6 +16949,25 @@
       "updatedAt": "2026-03-10T11:51:35Z",
       "ageDays": 16,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "chengkai15",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "makeshi",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 90,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -16157,6 +16999,14 @@
       "updatedAt": "2026-03-10T11:39:52Z",
       "ageDays": 33,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 7,
+        "ciStatus": null,
+        "cooldownHours": 90,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -16469,6 +17319,14 @@
       "updatedAt": "2026-03-10T10:38:43Z",
       "ageDays": 11,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 27,
+        "ciStatus": null,
+        "cooldownHours": 91,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -16841,6 +17699,30 @@
       "updatedAt": "2026-03-10T10:20:52Z",
       "ageDays": 16,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "yvesll",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "butok",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "zejiang0jason",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 11,
+        "ciStatus": null,
+        "cooldownHours": 92,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -17408,6 +18290,25 @@
       "updatedAt": "2026-03-10T09:09:13Z",
       "ageDays": 10,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "zejiang0jason",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "butok",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 5,
+        "ciStatus": null,
+        "cooldownHours": 93,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -17595,6 +18496,26 @@
       "updatedAt": "2026-03-10T09:07:47Z",
       "ageDays": 39,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "dbaluta",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "JiafeiPan",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 13,
+        "ciStatus": null,
+        "cooldownHours": 93,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -18067,6 +18988,20 @@
       "updatedAt": "2026-03-10T08:26:34Z",
       "ageDays": 4,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "butok",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 3,
+        "ciStatus": null,
+        "cooldownHours": 93,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -18224,6 +19159,25 @@
       "updatedAt": "2026-03-10T08:02:31Z",
       "ageDays": 8,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "jukkar",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "gangli02",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 6,
+        "ciStatus": null,
+        "cooldownHours": 94,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -18636,6 +19590,56 @@
       "updatedAt": "2026-03-10T06:33:36Z",
       "ageDays": 46,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "FelixWang47831",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "hakehuang",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "Holt-Sun",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "butok",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "mmahadevan108",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "JarmouniA",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "yvesll",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "lucien-nxp",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 13,
+        "ciStatus": null,
+        "cooldownHours": 95,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -19261,6 +20265,40 @@
       "updatedAt": "2026-03-10T02:17:29Z",
       "ageDays": 9,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "jhedberg",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "Thalley",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          },
+          {
+            "login": "sjanc",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "lylezhu2012",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 6,
+        "ciStatus": null,
+        "cooldownHours": 100,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -19483,6 +20521,35 @@
       "updatedAt": "2026-03-09T23:47:54Z",
       "ageDays": 17,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "Holt-Sun",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "FelixWang47831",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "jsbatch",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "iuliana-prodan",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 9,
+        "ciStatus": null,
+        "cooldownHours": 102,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -19829,6 +20896,20 @@
       "updatedAt": "2026-03-09T20:40:57Z",
       "ageDays": 39,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 5,
+        "ciStatus": null,
+        "cooldownHours": 105,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -20742,6 +21823,14 @@
       "updatedAt": "2026-03-09T09:08:44Z",
       "ageDays": 5,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 117,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -21058,6 +22147,36 @@
       "updatedAt": "2026-03-09T07:43:46Z",
       "ageDays": 50,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "chengkai15",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "makeshi",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "gzh-terry",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "MarkWangChinese",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 2,
+        "ciStatus": null,
+        "cooldownHours": 118,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -21152,6 +22271,20 @@
       "updatedAt": "2026-03-09T07:01:30Z",
       "ageDays": 8,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "MaochenWang1",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 119,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -21596,6 +22729,36 @@
       "updatedAt": "2026-03-09T03:42:49Z",
       "ageDays": 40,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "zejiang0jason",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "thedjnK",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": true
+          },
+          {
+            "login": "JarmouniA",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "hakehuang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 16,
+        "ciStatus": null,
+        "cooldownHours": 122,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -22000,6 +23163,20 @@
       "updatedAt": "2026-03-09T02:51:53Z",
       "ageDays": 9,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "MaochenWang1",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 1,
+        "ciStatus": null,
+        "cooldownHours": 123,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -22349,6 +23526,14 @@
       "updatedAt": "2026-03-09T00:51:42Z",
       "ageDays": 66,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 125,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -22570,6 +23755,25 @@
       "updatedAt": "2026-03-08T00:52:06Z",
       "ageDays": 67,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "nordicjm",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          },
+          {
+            "login": "tejlmand",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 6,
+        "ciStatus": null,
+        "cooldownHours": 149,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -22880,6 +24084,31 @@
       "updatedAt": "2026-03-06T19:57:08Z",
       "ageDays": 52,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "DerekSnell",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "davidmissael",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "Holt-Sun",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 6,
+        "ciStatus": null,
+        "cooldownHours": 178,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -23190,6 +24419,30 @@
       "updatedAt": "2026-03-06T08:47:29Z",
       "ageDays": 32,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "avolmat-st",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "KATE-WANG-NXP",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 5,
+        "ciStatus": null,
+        "cooldownHours": 189,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -23221,6 +24474,31 @@
       "updatedAt": "2026-03-06T06:55:25Z",
       "ageDays": 57,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "maass-hamburg",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "bjarki-andreasen",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "yongxu-wang15",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 13,
+        "ciStatus": null,
+        "cooldownHours": 191,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -23593,6 +24871,14 @@
       "updatedAt": "2026-03-05T11:22:10Z",
       "ageDays": 9,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 14,
+        "ciStatus": null,
+        "cooldownHours": 210,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -23934,6 +25220,20 @@
       "updatedAt": "2026-03-05T09:34:50Z",
       "ageDays": 228,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 212,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -23965,6 +25265,20 @@
       "updatedAt": "2026-03-05T08:04:20Z",
       "ageDays": 9,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 214,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -23996,6 +25310,14 @@
       "updatedAt": "2026-03-05T07:22:43Z",
       "ageDays": 9,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 10,
+        "ciStatus": null,
+        "cooldownHours": 214,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -24523,6 +25845,36 @@
       "updatedAt": "2026-03-04T17:13:17Z",
       "ageDays": 46,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "jfischer-no",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "tmon-nordic",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "D-Veda",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 229,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -24554,6 +25906,36 @@
       "updatedAt": "2026-03-04T16:11:55Z",
       "ageDays": 277,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "decsny",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "hakehuang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "martinjaeger",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "peterwangsz",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 9,
+        "ciStatus": null,
+        "cooldownHours": 230,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -24740,6 +26122,14 @@
       "updatedAt": "2026-03-04T15:14:58Z",
       "ageDays": 10,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 231,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -24926,6 +26316,25 @@
       "updatedAt": "2026-03-04T08:09:34Z",
       "ageDays": 17,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "zejiang0jason",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "TomasGalbickaNXP",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 3,
+        "ciStatus": null,
+        "cooldownHours": 238,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -25050,6 +26459,31 @@
       "updatedAt": "2026-03-04T03:30:57Z",
       "ageDays": 36,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "jfischer-no",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": true
+          },
+          {
+            "login": "tmon-nordic",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "D-Veda",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 1,
+        "ciStatus": null,
+        "cooldownHours": 242,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -25081,6 +26515,20 @@
       "updatedAt": "2026-03-04T00:49:33Z",
       "ageDays": 76,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "fabiobaltieri",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 245,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -25236,6 +26684,40 @@
       "updatedAt": "2026-03-03T13:07:14Z",
       "ageDays": 36,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "josuah",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "D-Veda",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "tmon-nordic",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "jfischer-no",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "MarkWangChinese",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 257,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -25267,6 +26749,25 @@
       "updatedAt": "2026-03-03T11:59:04Z",
       "ageDays": 23,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "LaurentiuM1234",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 11,
+        "ciStatus": null,
+        "cooldownHours": 258,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -25577,6 +27078,36 @@
       "updatedAt": "2026-03-03T10:39:49Z",
       "ageDays": 103,
       "statusLabel": "Open PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "maass-hamburg",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": true
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "tmon-nordic",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "D-Veda",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 11,
+        "ciStatus": null,
+        "cooldownHours": 259,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -25732,6 +27263,26 @@
       "updatedAt": "2026-03-03T10:10:50Z",
       "ageDays": 65,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [
+          {
+            "login": "MaureenHelm",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "FelixWang47831",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedCount": 18,
+        "ciStatus": null,
+        "cooldownHours": 260,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -26166,6 +27717,14 @@
       "updatedAt": "2026-03-03T07:14:20Z",
       "ageDays": 11,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 263,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -26228,6 +27787,14 @@
       "updatedAt": "2026-03-02T06:49:35Z",
       "ageDays": 12,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 0,
+        "ciStatus": null,
+        "cooldownHours": 287,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -26414,6 +27981,14 @@
       "updatedAt": "2025-08-19T07:02:45Z",
       "ageDays": 319,
       "statusLabel": "Draft PR",
+      "prStatus": {
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 4967,
+        "cooldownMet": true
+      },
       "metrics": {
         "openAssignedIssues": 0,
         "closedIssues": 0,
@@ -26466,7 +28041,7 @@
   ],
   "syncHealth": {
     "source": "cache",
-    "generatedAt": "2026-03-14T05:38:01.369Z",
+    "generatedAt": "2026-03-14T06:21:08.206Z",
     "freshnessMinutes": 0,
     "searchSamples": 23260,
     "detailSamples": 1168,
@@ -27169,6 +28744,6 @@
     "hasToken": false,
     "connectionStatus": "configured",
     "message": "Snapshot aggregated from daily files by GitHub Actions. No token is available in the browser.",
-    "checkedAt": "2026-03-14T05:38:01.369Z"
+    "checkedAt": "2026-03-14T06:21:08.206Z"
   }
 }

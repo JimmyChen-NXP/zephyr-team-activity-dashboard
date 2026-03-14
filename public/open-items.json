@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-14T05:38:00.619Z",
+  "collectedAt": "2026-03-14T06:21:07.460Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -681,7 +681,7 @@
       "repo": "zephyrproject-rtos/zephyr",
       "title": "Bug: Incorrect uptime calculation in tickless SMP environment",
       "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105339",
-      "author": "liu381257974",
+      "author": "AndyLiuQian",
       "assignees": [
         "andyross",
         "peter-mitsis"
@@ -2345,7 +2345,8 @@
         "tmleman",
         "ZhaoxiangJin",
         "yongxu-wang15"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2368,7 +2369,8 @@
         "VenkatKotakonda",
         "ChiHuaL",
         "JhanBoChao-Realtek"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2392,7 +2394,8 @@
         "con-pax",
         "rruuaanng",
         "decsny"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2416,7 +2419,8 @@
         "ssekar15",
         "jpanisbl",
         "d-philpot"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2452,7 +2456,8 @@
         "wearyzen",
         "tbr-tt",
         "duynguyenxa"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2471,7 +2476,8 @@
         "teburd",
         "tbursztyka",
         "decsny"
-      ]
+      ],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -2492,7 +2498,8 @@
         "thoh-ot",
         "erbr-ot",
         "wopu-ot"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2507,7 +2514,8 @@
       "createdAt": "2026-03-05T13:06:26Z",
       "updatedAt": "2026-03-14T02:41:09Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2534,7 +2542,8 @@
         "FelixWang47831",
         "mcatee-infineon",
         "sreeramIfx"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2557,7 +2566,8 @@
         "niym-ot",
         "jthm-ot",
         "babrsn"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2575,7 +2585,8 @@
       "requestedReviewers": [
         "teburd",
         "nashif"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2601,7 +2612,8 @@
         "katsuster",
         "fkokosinski",
         "masz-nordic"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2622,7 +2634,8 @@
         "nordicjm",
         "jeremybettis",
         "57300"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2644,7 +2657,8 @@
         "stephanosio",
         "JarmouniA",
         "tmon-nordic"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2666,7 +2680,8 @@
         "TaiJuWu",
         "dcpleung",
         "peter-mitsis"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2691,7 +2706,8 @@
         "kv2019i",
         "JarmouniA",
         "josuah"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2712,7 +2728,8 @@
         "JiafeiPan",
         "dcpleung",
         "wearyzen"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2729,7 +2746,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "ssekar15"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2749,7 +2767,8 @@
         "jeppenodgaard",
         "simonguinot",
         "JarmouniA"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2764,7 +2783,8 @@
       "createdAt": "2025-08-22T13:10:46Z",
       "updatedAt": "2026-03-14T00:49:05Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2792,7 +2812,8 @@
         "rruuaanng",
         "decsny",
         "aaronyegx"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2812,7 +2833,8 @@
         "kartben",
         "jfischer-no",
         "erwango"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2829,7 +2851,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "tejlmand"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2849,7 +2872,8 @@
         "tejlmand",
         "jeremybettis",
         "57300"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2867,7 +2891,8 @@
       "requestedReviewers": [
         "yonsch",
         "ThreeEights"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2898,7 +2923,8 @@
         "decsny",
         "sreeramIfx",
         "william-tang914"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2929,7 +2955,8 @@
         "JarmouniA",
         "josuah",
         "tmon-nordic"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -2960,7 +2987,8 @@
         "nika-nordic",
         "JarmouniA",
         "de-nordic"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -2978,7 +3006,8 @@
       "requestedReviewers": [
         "henrikbrixandersen",
         "laurenmurphyx64"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3004,7 +3033,8 @@
         "de-nordic",
         "gautierg-st",
         "juickar"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3027,7 +3057,8 @@
         "vaishnavachath",
         "JarmouniA",
         "jpanisbl"
-      ]
+      ],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -3054,7 +3085,8 @@
         "sunil-abraham",
         "ArunMCHP",
         "fabin-mchp"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3090,7 +3122,8 @@
         "juickar",
         "mathieuchopstm",
         "djiatsaf-st"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3109,7 +3142,8 @@
         "dcpleung",
         "ssekar15",
         "d-philpot"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3133,7 +3167,8 @@
         "evgeniy-paltsev",
         "dcpleung",
         "tbr-tt"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3154,7 +3189,8 @@
         "loicpoulain",
         "JarmouniA",
         "avolmat-st"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3163,7 +3199,7 @@
       "repo": "zephyrproject-rtos/zephyr",
       "title": "kernel: bugfix: fix incorrect uptime calculation in tickless SMP env",
       "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105340",
-      "author": "liu381257974",
+      "author": "AndyLiuQian",
       "state": "open",
       "isDraft": false,
       "createdAt": "2026-03-12T07:56:21Z",
@@ -3178,7 +3214,8 @@
         "TaiJuWu",
         "dcpleung",
         "peter-mitsis"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3213,7 +3250,8 @@
         "mathieuchopstm",
         "MaochenWang1",
         "djiatsaf-st"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3233,7 +3271,8 @@
         "marekmatej",
         "LucasTambor",
         "dcpleung"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3254,7 +3293,8 @@
         "danieldegrasse",
         "avolmat-st",
         "KATE-WANG-NXP"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3279,7 +3319,8 @@
         "alvsun",
         "TomChang19",
         "JhanBoChao-Realtek"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3294,7 +3335,8 @@
       "createdAt": "2026-03-13T20:30:51Z",
       "updatedAt": "2026-03-13T21:35:39Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3327,7 +3369,8 @@
         "DerekSnell",
         "NeilChen93",
         "ZhaoxiangJin"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3346,7 +3389,8 @@
         "soburi",
         "ajf58",
         "dcpleung"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3377,7 +3421,8 @@
         "Zhiqiang-Hou",
         "iuliana-prodan",
         "decsny"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3396,7 +3441,8 @@
         "kartben",
         "nashif",
         "carlescufi"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3411,7 +3457,8 @@
       "createdAt": "2026-03-13T21:00:18Z",
       "updatedAt": "2026-03-13T21:22:08Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3431,7 +3478,8 @@
         "rghaddab",
         "binhnguyen2434",
         "nhutnguyenkc"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3459,7 +3507,8 @@
         "tristan-google",
         "asemjonovs",
         "decsny"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3485,7 +3534,8 @@
         "hermabe",
         "alwa-nordic",
         "HaavardRei"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3508,7 +3558,8 @@
         "dcpleung",
         "RuibinChang",
         "GTLin08"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3532,7 +3583,8 @@
         "vaishnavachath",
         "JarmouniA",
         "jpanisbl"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3547,7 +3599,8 @@
       "createdAt": "2026-03-12T18:16:25Z",
       "updatedAt": "2026-03-13T20:49:05Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3573,7 +3626,8 @@
         "alwa-nordic",
         "HaavardRei",
         "gzh-terry"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3591,7 +3645,8 @@
       "requestedReviewers": [
         "sambhurst",
         "keith-zephyr"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3609,7 +3664,8 @@
       "requestedReviewers": [
         "nandojve",
         "nordicjm"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3628,7 +3684,8 @@
         "tejlmand",
         "nordicjm",
         "jeremybettis"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3648,7 +3705,8 @@
         "pdgendt",
         "carlescufi",
         "marc-hb"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3670,7 +3728,8 @@
         "jeppenodgaard",
         "simonguinot",
         "JarmouniA"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3687,7 +3746,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "yperess"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3711,7 +3771,8 @@
         "juickar",
         "mathieuchopstm",
         "djiatsaf-st"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3731,7 +3792,8 @@
         "Laczen",
         "rghaddab",
         "de-nordic"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3746,7 +3808,8 @@
       "createdAt": "2026-03-13T20:02:54Z",
       "updatedAt": "2026-03-13T20:07:12Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3766,7 +3829,8 @@
         "Laczen",
         "LingaoM",
         "rghaddab"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3789,7 +3853,8 @@
         "JarmouniA",
         "bjarki-andreasen",
         "d-philpot"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3820,7 +3885,8 @@
         "DerekSnell",
         "ZhaoxiangJin",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3851,7 +3917,8 @@
         "juickar",
         "mathieuchopstm",
         "djiatsaf-st"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3877,7 +3944,8 @@
         "juickar",
         "mathieuchopstm",
         "djiatsaf-st"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3897,7 +3965,8 @@
         "carlescufi",
         "jakub-uC",
         "jeremybettis"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3925,7 +3994,8 @@
         "con-pax",
         "wearyzen",
         "gramsay0"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -3948,7 +4018,8 @@
         "RuibinChang",
         "GTLin08",
         "keith-zephyr"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -3982,7 +4053,8 @@
         "FelixWang47831",
         "mcatee-infineon",
         "decsny"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4000,7 +4072,8 @@
       "requestedReviewers": [
         "mbolivar",
         "decsny"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4025,7 +4098,8 @@
         "billwatersiii",
         "mcatee-infineon",
         "sreeramIfx"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4056,7 +4130,8 @@
         "Zhiqiang-Hou",
         "iuliana-prodan",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4077,7 +4152,8 @@
         "pdgendt",
         "yishai1999",
         "keith-zephyr"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4092,7 +4168,8 @@
       "createdAt": "2026-03-09T14:28:01Z",
       "updatedAt": "2026-03-13T18:59:22Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4107,7 +4184,8 @@
       "createdAt": "2026-03-13T17:43:09Z",
       "updatedAt": "2026-03-13T18:46:06Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4134,7 +4212,8 @@
         "JarmouniA",
         "iuliana-prodan",
         "peter-mitsis"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4151,7 +4230,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "rghaddab"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4186,7 +4266,8 @@
         "masz-nordic",
         "JarmouniA",
         "bjarki-andreasen"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4212,7 +4293,8 @@
         "JarmouniA",
         "rruuaanng",
         "decsny"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4229,7 +4311,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "tmon-nordic"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4263,7 +4346,8 @@
         "alwa-nordic",
         "HaavardRei",
         "gzh-terry"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4283,7 +4367,8 @@
         "marekmatej",
         "krish2718",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4311,7 +4396,8 @@
         "ankuns",
         "HaavardRei",
         "HoZHel"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4330,7 +4416,8 @@
         "nashif",
         "ceolin",
         "dcpleung"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4359,7 +4446,8 @@
         "jthm-ot",
         "babrsn",
         "gzh-terry"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4384,7 +4472,8 @@
         "alwa-nordic",
         "HaavardRei",
         "HoZHel"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4405,7 +4494,8 @@
         "JarmouniA",
         "bjarki-andreasen",
         "jbehrensnx"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4424,7 +4514,8 @@
         "nashif",
         "Laczen",
         "rghaddab"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4449,7 +4540,8 @@
         "juickar",
         "mathieuchopstm",
         "djiatsaf-st"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4476,7 +4568,8 @@
         "fkokosinski",
         "rghaddab",
         "masz-nordic"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4504,7 +4597,8 @@
         "DerekSnell",
         "rruuaanng",
         "decsny"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4534,7 +4628,8 @@
         "tristan-google",
         "asemjonovs",
         "yasinustunerg"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4567,7 +4662,8 @@
         "mcatee-infineon",
         "wearyzen",
         "tomi-font"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4588,7 +4684,8 @@
         "billwatersiii",
         "mcatee-infineon",
         "sreeramIfx"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4609,7 +4706,8 @@
         "galak",
         "keith-zephyr",
         "decsny"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4627,7 +4725,8 @@
       "requestedReviewers": [
         "ozersa",
         "yasinustunerg"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4655,7 +4754,8 @@
         "57300",
         "valeriosetti",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4670,7 +4770,8 @@
       "createdAt": "2026-03-04T20:12:49Z",
       "updatedAt": "2026-03-14T04:53:42Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4685,7 +4786,8 @@
       "createdAt": "2026-03-03T18:17:07Z",
       "updatedAt": "2026-03-13T08:27:21Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4702,7 +4804,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "mbolivar"
-      ]
+      ],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4719,7 +4822,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "mbolivar"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4734,7 +4838,8 @@
       "createdAt": "2026-02-01T21:19:37Z",
       "updatedAt": "2026-03-05T11:05:42Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4753,7 +4858,8 @@
         "mbolivar",
         "pdgendt",
         "carlescufi"
-      ]
+      ],
+      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4768,7 +4874,8 @@
       "createdAt": "2026-03-01T21:16:08Z",
       "updatedAt": "2026-03-01T21:16:09Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4783,7 +4890,8 @@
       "createdAt": "2026-02-20T21:12:39Z",
       "updatedAt": "2026-02-24T07:30:30Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4800,7 +4908,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "kartben"
-      ]
+      ],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4817,7 +4926,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "mbolivar"
-      ]
+      ],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4832,7 +4942,8 @@
       "createdAt": "2025-10-07T08:01:30Z",
       "updatedAt": "2026-01-07T14:39:10Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4847,7 +4958,8 @@
       "createdAt": "2025-10-17T13:07:12Z",
       "updatedAt": "2025-12-15T12:46:50Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4862,7 +4974,8 @@
       "createdAt": "2024-10-16T09:30:22Z",
       "updatedAt": "2025-04-30T11:27:58Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -4877,7 +4990,8 @@
       "createdAt": "2024-06-11T08:00:03Z",
       "updatedAt": "2024-12-02T17:36:35Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4894,7 +5008,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4911,7 +5026,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4928,7 +5044,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "mmahadevan108"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4946,7 +5063,8 @@
       "requestedReviewers": [
         "mmahadevan108",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4961,7 +5079,8 @@
       "createdAt": "2026-03-06T11:13:27Z",
       "updatedAt": "2026-03-06T13:32:01Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4978,7 +5097,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "mmahadevan108"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4997,7 +5117,8 @@
         "mmahadevan108",
         "axelnxp",
         "ZhaoxiangJin"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -5012,7 +5133,8 @@
       "createdAt": "2026-03-02T06:49:35Z",
       "updatedAt": "2026-03-02T06:49:35Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -5029,7 +5151,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -5047,7 +5170,8 @@
       "requestedReviewers": [
         "Holt-Sun",
         "zejiang0jason"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -5062,7 +5186,8 @@
       "createdAt": "2026-01-30T08:28:26Z",
       "updatedAt": "2026-03-12T17:54:42Z",
       "mergedAt": null,
-      "requestedReviewers": []
+      "requestedReviewers": [],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -5081,7 +5206,8 @@
         "jukkar",
         "krish2718",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": "success"
     },
     {
       "type": "pr",
@@ -5099,7 +5225,8 @@
       "requestedReviewers": [
         "rlubos",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -5119,7 +5246,8 @@
         "rlubos",
         "krish2718",
         "MaochenWang1"
-      ]
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -5136,7 +5264,8 @@
       "mergedAt": null,
       "requestedReviewers": [
         "jukkar"
-      ]
+      ],
+      "ciStatus": null
     }
   ]
 }
