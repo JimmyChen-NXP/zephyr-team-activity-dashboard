@@ -34,6 +34,8 @@ export type DailyPrRecord = {
   createdAt: string;
   updatedAt: string;
   mergedAt: string | null;
+  /** GitHub assignees for this PR. Optional for backward compat with legacy daily files. */
+  assignees?: string[];
   requestedReviewers: string[];
   /** CI status from check-runs API. Only set for open PRs in open-items.json; undefined in legacy daily files. */
   ciStatus?: "success" | "failure" | "pending" | null;

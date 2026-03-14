@@ -96,10 +96,14 @@ export type ReviewerVerdict = {
 };
 
 export type PrStatusSummary = {
+  /** GitHub assignees for this PR (distinct from requested reviewers) */
+  assignees: string[];
   /** Reviewers who were in requestedReviewers AND have submitted a verdict */
   requestedVerdicts: ReviewerVerdict[];
   /** Reviewers who submitted a verdict but were NOT in requestedReviewers */
   otherVerdicts: ReviewerVerdict[];
+  /** Logins of requestedReviewers who have not yet submitted any verdict */
+  pendingRequestedLogins: string[];
   /** Count of requestedReviewers who have not yet submitted any verdict */
   pendingRequestedCount: number;
   ciStatus: "success" | "failure" | "pending" | null;

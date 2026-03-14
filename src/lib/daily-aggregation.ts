@@ -266,13 +266,16 @@ export function aggregateDailyRecords(
       if (verdict.wasRequested) requestedVerdicts.push(verdict);
       else otherVerdicts.push(verdict);
     }
-    const pendingRequestedCount = pr.requestedReviewers.filter(
+    const pendingRequestedLogins = pr.requestedReviewers.filter(
       (r) => !latestByReviewer.has(r.toLowerCase()),
-    ).length;
+    );
+    const pendingRequestedCount = pendingRequestedLogins.length;
     const cooldownHours = differenceInHours(new Date(), parseISO(pr.updatedAt));
     const prStatus: PrStatusSummary = {
+      assignees: pr.assignees ?? [],
       requestedVerdicts,
       otherVerdicts,
+      pendingRequestedLogins,
       pendingRequestedCount,
       ciStatus: pr.ciStatus ?? null,
       cooldownHours,

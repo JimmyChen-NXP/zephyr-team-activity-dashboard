@@ -1,6 +1,6 @@
 "use client";
 
-import { formatISO9075 } from "date-fns";
+import { formatDistanceToNowStrict } from "date-fns";
 
 import type { ActivityItem, PrStatusSummary } from "@/lib/types";
 
@@ -20,59 +20,81 @@ function getPrHighlight(item: ActivityItem): "blocked" | "draft" | "stale" | und
   return undefined;
 }
 
-function ReviewsCell({ prStatus }: { prStatus: PrStatusSummary }) {
-  const { requestedVerdicts, otherVerdicts, pendingRequestedCount, ciStatus, cooldownMet } = prStatus;
+function daysAgo(dateStr: string): string {
+  return formatDistanceToNowStrict(new Date(dateStr), { addSuffix: true });
+}
 
-  const allVerdicts = [...requestedVerdicts, ...otherVerdicts];
-  const approvedCount = allVerdicts.filter((v) => v.state === "APPROVED").length;
-  const changesCount = allVerdicts.filter((v) => v.state === "CHANGES_REQUESTED").length;
-  const commentedCount = allVerdicts.filter((v) => v.state === "COMMENTED").length;
+function repoShortName(repo: string): string {
+  return repo.split("/").at(-1) ?? repo;
+}
+
+const VERDICT_ICON: Record<string, string> = {
+  APPROVED: "✓",
+  CHANGES_REQUESTED: "✗",
+  COMMENTED: "○",
+};
+
+const VERDICT_CLASS: Record<string, string> = {
+  APPROVED: "pr-badge pr-badge-approved",
+  CHANGES_REQUESTED: "pr-badge pr-badge-changes",
+  COMMENTED: "pr-badge pr-badge-commented",
+};
+
+function AssigneesCell({ prStatus }: { prStatus: PrStatusSummary }) {
+  const assignees = prStatus.assignees ?? [];
+  if (assignees.length === 0) return <span className="pr-badge-empty">—</span>;
+  return (
+    <span className="pr-badges">
+      {assignees.map((login) => (
+        <span key={login} className="pr-badge pr-badge-commented">{login}</span>
+      ))}
+    </span>
+  );
+}
+
+function RequestedCell({ prStatus }: { prStatus: PrStatusSummary }) {
+  const { requestedVerdicts, pendingRequestedLogins = [] } = prStatus;
+  const items: React.ReactNode[] = [];
+
+  for (const login of pendingRequestedLogins) {
+    items.push(
+      <span key={`p-${login}`} className="pr-badge pr-badge-pending" title="Pending review">
+        ⏳ {login}
+      </span>,
+    );
+  }
+  for (const v of requestedVerdicts) {
+    items.push(
+      <span key={`v-${v.login}`} className={VERDICT_CLASS[v.state] ?? "pr-badge"} title={v.state.replace(/_/g, " ")}>
+        {VERDICT_ICON[v.state]} {v.login}
+      </span>,
+    );
+  }
+
+  if (items.length === 0) return <span className="pr-badge-empty">—</span>;
+  return <span className="pr-badges">{items}</span>;
+}
+
+function ReviewersCell({ prStatus }: { prStatus: PrStatusSummary }) {
+  const { otherVerdicts } = prStatus;
+  const approved = otherVerdicts.filter((v) => v.state === "APPROVED").length;
+  const changes = otherVerdicts.filter((v) => v.state === "CHANGES_REQUESTED").length;
+  const commented = otherVerdicts.filter((v) => v.state === "COMMENTED").length;
 
   const parts: React.ReactNode[] = [];
-
-  if (pendingRequestedCount > 0) {
-    parts.push(
-      <span key="pending" className="pr-badge pr-badge-pending" title={`${pendingRequestedCount} requested reviewer(s) pending`}>
-        ⏳{pendingRequestedCount}
-      </span>,
-    );
-  }
-  if (approvedCount > 0) {
-    parts.push(
-      <span key="approved" className="pr-badge pr-badge-approved" title={`${approvedCount} approval(s)`}>
-        ✓{approvedCount}
-      </span>,
-    );
-  }
-  if (changesCount > 0) {
-    parts.push(
-      <span key="changes" className="pr-badge pr-badge-changes" title={`${changesCount} changes requested`}>
-        ✗{changesCount}
-      </span>,
-    );
-  }
-  if (commentedCount > 0) {
-    parts.push(
-      <span key="commented" className="pr-badge pr-badge-commented" title={`${commentedCount} comment review(s)`}>
-        ○{commentedCount}
-      </span>,
-    );
-  }
-
-  if (ciStatus === "success") {
-    parts.push(<span key="ci" className="pr-badge pr-badge-ci-success" title="CI passing">CI✓</span>);
-  } else if (ciStatus === "failure") {
-    parts.push(<span key="ci" className="pr-badge pr-badge-ci-failure" title="CI failing">CI✗</span>);
-  } else if (ciStatus === "pending") {
-    parts.push(<span key="ci" className="pr-badge pr-badge-ci-pending" title="CI running">CI…</span>);
-  }
-
-  if (cooldownMet) {
-    parts.push(<span key="cool" className="pr-badge pr-badge-cooldown" title="No activity for 72h+">72h+</span>);
-  }
+  if (approved > 0) parts.push(<span key="a" className="pr-badge pr-badge-approved" title={`${approved} approval(s)`}>✓{approved}</span>);
+  if (changes > 0) parts.push(<span key="c" className="pr-badge pr-badge-changes" title={`${changes} changes requested`}>✗{changes}</span>);
+  if (commented > 0) parts.push(<span key="o" className="pr-badge pr-badge-commented" title={`${commented} comment review(s)`}>○{commented}</span>);
 
   if (parts.length === 0) return <span className="pr-badge-empty">—</span>;
   return <span className="pr-badges">{parts}</span>;
+}
+
+function CiCell({ ciStatus }: { ciStatus: PrStatusSummary["ciStatus"] }) {
+  if (ciStatus === "success") return <span className="pr-badge pr-badge-ci-success" title="CI passing">✓</span>;
+  if (ciStatus === "failure") return <span className="pr-badge pr-badge-ci-failure" title="CI failing">✗</span>;
+  if (ciStatus === "pending") return <span className="pr-badge pr-badge-ci-pending" title="CI running">…</span>;
+  return <span className="pr-badge-empty">—</span>;
 }
 
 export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
@@ -90,17 +112,20 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
             <tr>
               <th>PR</th>
               <th>State</th>
-              <th>Reviews</th>
-              <th>Updated</th>
-              <th>Repository</th>
+              <th>Assignees</th>
+              <th>Requested</th>
+              <th>Reviewers</th>
+              <th>CI</th>
               <th>Contributor</th>
               <th>Created</th>
+              <th>Updated</th>
+              <th>Repo</th>
             </tr>
           </thead>
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colSpan={7} className="empty-state-cell">
+                <td colSpan={10} className="empty-state-cell">
                   No authored PRs matched the current selection.
                 </td>
               </tr>
@@ -113,11 +138,14 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
                     </a>
                   </td>
                   <td>{item.statusLabel}</td>
-                  <td>{item.prStatus ? <ReviewsCell prStatus={item.prStatus} /> : <span className="pr-badge-empty">—</span>}</td>
-                  <td>{formatISO9075(new Date(item.updatedAt))}</td>
-                  <td>{item.repo}</td>
+                  <td>{item.prStatus ? <AssigneesCell prStatus={item.prStatus} /> : <span className="pr-badge-empty">—</span>}</td>
+                  <td>{item.prStatus ? <RequestedCell prStatus={item.prStatus} /> : <span className="pr-badge-empty">—</span>}</td>
+                  <td>{item.prStatus ? <ReviewersCell prStatus={item.prStatus} /> : <span className="pr-badge-empty">—</span>}</td>
+                  <td>{item.prStatus ? <CiCell ciStatus={item.prStatus.ciStatus} /> : <span className="pr-badge-empty">—</span>}</td>
                   <td>@{item.contributor}</td>
-                  <td>{formatISO9075(new Date(item.createdAt))}</td>
+                  <td>{daysAgo(item.createdAt)}</td>
+                  <td>{daysAgo(item.updatedAt)}</td>
+                  <td>{repoShortName(item.repo)}</td>
                 </tr>
               ))
             )}

@@ -133,6 +133,7 @@ async function main() {
       createdAt: detail.created_at,
       updatedAt: detail.updated_at,
       mergedAt: detail.merged_at,
+      assignees: detail.assignees.map((a) => a.login),
       requestedReviewers: detail.requested_reviewers.map((r) => r.login),
       ciStatus,
     };

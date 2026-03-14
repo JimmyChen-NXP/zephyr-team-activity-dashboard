@@ -55,6 +55,7 @@ export type PullRequestDetail = {
   merged_at: string | null;
   state: string;
   requested_reviewers: Array<{ login: string }>;
+  assignees: Array<{ login: string }>;
   user: { login: string };
   head: { sha: string; repo: { full_name: string } | null };
   base: { repo: { full_name: string } | null };
@@ -787,14 +788,17 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
           else otherVerdicts.push(verdict);
         }
 
-        const pendingRequestedCount = detail.requested_reviewers.filter(
-          (r) => !latestByReviewer.has(r.login.toLowerCase()),
-        ).length;
+        const pendingRequestedLogins = detail.requested_reviewers
+          .filter((r) => !latestByReviewer.has(r.login.toLowerCase()))
+          .map((r) => r.login);
+        const pendingRequestedCount = pendingRequestedLogins.length;
 
         const cooldownHours = differenceInHours(new Date(), parseISO(detail.updated_at));
         const prStatus: PrStatusSummary = {
+          assignees: detail.assignees.map((a) => a.login),
           requestedVerdicts,
           otherVerdicts,
+          pendingRequestedLogins,
           pendingRequestedCount,
           ciStatus: ciStatus ?? null,
           cooldownHours,
