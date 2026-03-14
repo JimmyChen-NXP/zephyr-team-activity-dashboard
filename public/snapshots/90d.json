@@ -6,7 +6,7 @@
     "to": "2026-03-14T23:59:59Z",
     "timeZone": "UTC"
   },
-  "generatedAt": "2026-03-14T09:28:51.677Z",
+  "generatedAt": "2026-03-14T13:36:20.359Z",
   "rosterSize": 171,
   "rosterMembers": [
     {
@@ -1211,10 +1211,10 @@
   "summary": {
     "openAssignedIssues": 17,
     "closedIssues": 12,
-    "openAuthoredPrs": 83,
+    "openAuthoredPrs": 87,
     "mergedPrs": 66,
     "reviewsSubmitted": 819,
-    "pendingReviewRequests": 484,
+    "pendingReviewRequests": 500,
     "uniqueReviewedPrs": 176,
     "staleItems": 20,
     "repositoriesTouched": 3,
@@ -1243,7 +1243,7 @@
       "mergedPrs": 2,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 65,
-      "pendingReviewRequests": 53,
+      "pendingReviewRequests": 55,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1253,7 +1253,7 @@
       "reviewExternalAuthored": 9,
       "uniqueReviewedPrs": 39,
       "repositoriesTouched": 2,
-      "activityScore": 201
+      "activityScore": 205
     },
     {
       "login": "Holt-Sun",
@@ -1266,7 +1266,7 @@
       "mergedPrs": 2,
       "closedUnmergedPrs": 2,
       "reviewsSubmitted": 95,
-      "pendingReviewRequests": 40,
+      "pendingReviewRequests": 41,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1276,7 +1276,7 @@
       "reviewExternalAuthored": 24,
       "uniqueReviewedPrs": 39,
       "repositoriesTouched": 1,
-      "activityScore": 191
+      "activityScore": 193
     },
     {
       "login": "ZhaoxiangJin",
@@ -1284,7 +1284,7 @@
       "role": "MEMBER",
       "openAssignedIssues": 0,
       "closedIssues": 1,
-      "openAuthoredPrs": 1,
+      "openAuthoredPrs": 2,
       "draftPrs": 0,
       "mergedPrs": 14,
       "closedUnmergedPrs": 0,
@@ -1299,7 +1299,7 @@
       "reviewExternalAuthored": 5,
       "uniqueReviewedPrs": 30,
       "repositoriesTouched": 2,
-      "activityScore": 151
+      "activityScore": 154
     },
     {
       "login": "butok",
@@ -1312,7 +1312,7 @@
       "mergedPrs": 2,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 27,
-      "pendingReviewRequests": 39,
+      "pendingReviewRequests": 41,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1322,7 +1322,7 @@
       "reviewExternalAuthored": 14,
       "uniqueReviewedPrs": 17,
       "repositoriesTouched": 1,
-      "activityScore": 111
+      "activityScore": 115
     },
     {
       "login": "MaochenWang1",
@@ -1358,7 +1358,7 @@
       "mergedPrs": 2,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 27,
-      "pendingReviewRequests": 31,
+      "pendingReviewRequests": 32,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1368,7 +1368,7 @@
       "reviewExternalAuthored": 2,
       "uniqueReviewedPrs": 22,
       "repositoriesTouched": 2,
-      "activityScore": 93
+      "activityScore": 95
     },
     {
       "login": "JiafeiPan",
@@ -1404,7 +1404,7 @@
       "mergedPrs": 0,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 8,
-      "pendingReviewRequests": 33,
+      "pendingReviewRequests": 34,
       "staleItems": 1,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1414,7 +1414,7 @@
       "reviewExternalAuthored": 2,
       "uniqueReviewedPrs": 6,
       "repositoriesTouched": 1,
-      "activityScore": 78
+      "activityScore": 80
     },
     {
       "login": "hakehuang",
@@ -1427,7 +1427,7 @@
       "mergedPrs": 2,
       "closedUnmergedPrs": 3,
       "reviewsSubmitted": 52,
-      "pendingReviewRequests": 5,
+      "pendingReviewRequests": 6,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1437,7 +1437,7 @@
       "reviewExternalAuthored": 3,
       "uniqueReviewedPrs": 17,
       "repositoriesTouched": 1,
-      "activityScore": 77
+      "activityScore": 79
     },
     {
       "login": "ngphibang",
@@ -1445,7 +1445,7 @@
       "role": "MEMBER",
       "openAssignedIssues": 10,
       "closedIssues": 1,
-      "openAuthoredPrs": 4,
+      "openAuthoredPrs": 6,
       "draftPrs": 2,
       "mergedPrs": 0,
       "closedUnmergedPrs": 0,
@@ -1460,7 +1460,7 @@
       "reviewExternalAuthored": 10,
       "uniqueReviewedPrs": 5,
       "repositoriesTouched": 1,
-      "activityScore": 73
+      "activityScore": 79
     },
     {
       "login": "manuargue",
@@ -1473,7 +1473,7 @@
       "mergedPrs": 0,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 5,
-      "pendingReviewRequests": 32,
+      "pendingReviewRequests": 33,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1483,7 +1483,7 @@
       "reviewExternalAuthored": 3,
       "uniqueReviewedPrs": 2,
       "repositoriesTouched": 1,
-      "activityScore": 69
+      "activityScore": 71
     },
     {
       "login": "FelixWang47831",
@@ -1519,7 +1519,7 @@
       "mergedPrs": 4,
       "closedUnmergedPrs": 1,
       "reviewsSubmitted": 9,
-      "pendingReviewRequests": 19,
+      "pendingReviewRequests": 20,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1529,7 +1529,7 @@
       "reviewExternalAuthored": 0,
       "uniqueReviewedPrs": 6,
       "repositoriesTouched": 2,
-      "activityScore": 64
+      "activityScore": 66
     },
     {
       "login": "lylezhu2012",
@@ -1624,6 +1624,52 @@
       "activityScore": 52
     },
     {
+      "login": "iuliana-prodan",
+      "name": "Iulia Prodan",
+      "role": "MEMBER",
+      "openAssignedIssues": 0,
+      "closedIssues": 0,
+      "openAuthoredPrs": 0,
+      "draftPrs": 0,
+      "mergedPrs": 0,
+      "closedUnmergedPrs": 0,
+      "reviewsSubmitted": 8,
+      "pendingReviewRequests": 22,
+      "staleItems": 0,
+      "reviewApproved": 0,
+      "reviewChangesRequested": 0,
+      "reviewCommented": 0,
+      "reviewSelfAuthored": 0,
+      "reviewTeamAuthored": 7,
+      "reviewExternalAuthored": 1,
+      "uniqueReviewedPrs": 8,
+      "repositoriesTouched": 1,
+      "activityScore": 52
+    },
+    {
+      "login": "lucien-nxp",
+      "name": "Lucien Zhao",
+      "role": "MEMBER",
+      "openAssignedIssues": 0,
+      "closedIssues": 0,
+      "openAuthoredPrs": 2,
+      "draftPrs": 1,
+      "mergedPrs": 4,
+      "closedUnmergedPrs": 0,
+      "reviewsSubmitted": 32,
+      "pendingReviewRequests": 2,
+      "staleItems": 0,
+      "reviewApproved": 0,
+      "reviewChangesRequested": 0,
+      "reviewCommented": 0,
+      "reviewSelfAuthored": 26,
+      "reviewTeamAuthored": 5,
+      "reviewExternalAuthored": 1,
+      "uniqueReviewedPrs": 6,
+      "repositoriesTouched": 1,
+      "activityScore": 50
+    },
+    {
       "login": "MarkWangChinese",
       "name": "Mark Wang",
       "role": "MEMBER",
@@ -1691,52 +1737,6 @@
       "uniqueReviewedPrs": 7,
       "repositoriesTouched": 1,
       "activityScore": 48
-    },
-    {
-      "login": "iuliana-prodan",
-      "name": "Iulia Prodan",
-      "role": "MEMBER",
-      "openAssignedIssues": 0,
-      "closedIssues": 0,
-      "openAuthoredPrs": 0,
-      "draftPrs": 0,
-      "mergedPrs": 0,
-      "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 8,
-      "pendingReviewRequests": 19,
-      "staleItems": 0,
-      "reviewApproved": 0,
-      "reviewChangesRequested": 0,
-      "reviewCommented": 0,
-      "reviewSelfAuthored": 0,
-      "reviewTeamAuthored": 7,
-      "reviewExternalAuthored": 1,
-      "uniqueReviewedPrs": 8,
-      "repositoriesTouched": 1,
-      "activityScore": 46
-    },
-    {
-      "login": "lucien-nxp",
-      "name": "Lucien Zhao",
-      "role": "MEMBER",
-      "openAssignedIssues": 0,
-      "closedIssues": 0,
-      "openAuthoredPrs": 1,
-      "draftPrs": 1,
-      "mergedPrs": 4,
-      "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 32,
-      "pendingReviewRequests": 1,
-      "staleItems": 0,
-      "reviewApproved": 0,
-      "reviewChangesRequested": 0,
-      "reviewCommented": 0,
-      "reviewSelfAuthored": 26,
-      "reviewTeamAuthored": 5,
-      "reviewExternalAuthored": 1,
-      "uniqueReviewedPrs": 6,
-      "repositoriesTouched": 1,
-      "activityScore": 45
     },
     {
       "login": "PetervdPerk-NXP",
@@ -1887,7 +1887,7 @@
       "mergedPrs": 0,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 1,
-      "pendingReviewRequests": 10,
+      "pendingReviewRequests": 11,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1897,7 +1897,7 @@
       "reviewExternalAuthored": 0,
       "uniqueReviewedPrs": 1,
       "repositoriesTouched": 1,
-      "activityScore": 21
+      "activityScore": 23
     },
     {
       "login": "william-tang914",
@@ -2084,6 +2084,29 @@
       "activityScore": 12
     },
     {
+      "login": "George-Stefan",
+      "name": "George Stefan",
+      "role": "MEMBER",
+      "openAssignedIssues": 0,
+      "closedIssues": 0,
+      "openAuthoredPrs": 0,
+      "draftPrs": 0,
+      "mergedPrs": 0,
+      "closedUnmergedPrs": 0,
+      "reviewsSubmitted": 0,
+      "pendingReviewRequests": 5,
+      "staleItems": 0,
+      "reviewApproved": 0,
+      "reviewChangesRequested": 0,
+      "reviewCommented": 0,
+      "reviewSelfAuthored": 0,
+      "reviewTeamAuthored": 0,
+      "reviewExternalAuthored": 0,
+      "uniqueReviewedPrs": 0,
+      "repositoriesTouched": 0,
+      "activityScore": 10
+    },
+    {
       "login": "fengming-ye",
       "name": "fengming-ye",
       "role": "MEMBER",
@@ -2128,29 +2151,6 @@
       "uniqueReviewedPrs": 3,
       "repositoriesTouched": 2,
       "activityScore": 10
-    },
-    {
-      "login": "George-Stefan",
-      "name": "George Stefan",
-      "role": "MEMBER",
-      "openAssignedIssues": 0,
-      "closedIssues": 0,
-      "openAuthoredPrs": 0,
-      "draftPrs": 0,
-      "mergedPrs": 0,
-      "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 0,
-      "pendingReviewRequests": 4,
-      "staleItems": 0,
-      "reviewApproved": 0,
-      "reviewChangesRequested": 0,
-      "reviewCommented": 0,
-      "reviewSelfAuthored": 0,
-      "reviewTeamAuthored": 0,
-      "reviewExternalAuthored": 0,
-      "uniqueReviewedPrs": 0,
-      "repositoriesTouched": 0,
-      "activityScore": 8
     },
     {
       "login": "EmilioCBen",
@@ -2755,7 +2755,7 @@
     {
       "name": "zephyrproject-rtos/zephyr",
       "issues": 29,
-      "prs": 147,
+      "prs": 151,
       "reviews": 759,
       "contributors": 58
     },
@@ -2775,6 +2775,1082 @@
     }
   ],
   "activityItems": [
+    {
+      "id": "pull_request-3335285394-lucien-nxp",
+      "type": "pull_request",
+      "title": "Add frdm-imrt1186 flexspi function support",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "lucien-nxp",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 15,
+      "statusLabel": "Open PR",
+      "prStatus": {
+        "assignees": [
+          "mmahadevan108"
+        ],
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "nashif",
+          "manuargue",
+          "hakehuang",
+          "henrikbrixandersen",
+          "butok",
+          "Holt-Sun",
+          "ithinuel",
+          "MaureenHelm",
+          "stephanosio",
+          "mmahadevan108",
+          "zejiang0jason",
+          "rghaddab",
+          "de-nordic",
+          "iuliana-prodan",
+          "DerekSnell"
+        ],
+        "pendingRequestedCount": 16,
+        "ciStatus": null,
+        "cooldownHours": 0,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-dbaluta",
+      "type": "review_request",
+      "title": "Review requested from Daniel Baluta",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "dbaluta",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-manuargue",
+      "type": "review_request",
+      "title": "Review requested from Manuel Argüelles",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "manuargue",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-hakehuang",
+      "type": "review_request",
+      "title": "Review requested from hakehuang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "hakehuang",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-butok",
+      "type": "review_request",
+      "title": "Review requested from Andrej Butok",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "butok",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-Holt-Sun",
+      "type": "review_request",
+      "title": "Review requested from Holt Sun",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Holt-Sun",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-mmahadevan108",
+      "type": "review_request",
+      "title": "Review requested from Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-zejiang0jason",
+      "type": "review_request",
+      "title": "Review requested from zejiang0jason",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "zejiang0jason",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3335285394-iuliana-prodan",
+      "type": "review_request",
+      "title": "Review requested from Iulia Prodan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "iuliana-prodan",
+      "author": "lucien-nxp",
+      "state": "open",
+      "createdAt": "2026-02-27T11:15:38Z",
+      "updatedAt": "2026-03-14T13:33:35Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3396184672-hakehuang",
+      "type": "review_request",
+      "title": "Review requested from hakehuang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105464",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "hakehuang",
+      "author": "fundakol",
+      "state": "open",
+      "createdAt": "2026-03-13T17:11:18Z",
+      "updatedAt": "2026-03-14T12:01:02Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3188118119-ngphibang",
+      "type": "pull_request",
+      "title": "video: samples: capture: add support for m2m transform",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/102516",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ngphibang",
+      "author": "ngphibang",
+      "state": "open",
+      "createdAt": "2026-01-19T14:54:44Z",
+      "updatedAt": "2026-03-14T11:21:47Z",
+      "ageDays": 54,
+      "statusLabel": "Open PR",
+      "prStatus": {
+        "assignees": [
+          "ngphibang",
+          "josuah"
+        ],
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "loicpoulain",
+          "JarmouniA"
+        ],
+        "pendingRequestedCount": 4,
+        "ciStatus": null,
+        "cooldownHours": 2,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-2959854206-ngphibang",
+      "type": "pull_request",
+      "title": "Introduce libMP (Media Pipe library)",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/98514",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ngphibang",
+      "author": "ngphibang",
+      "state": "open",
+      "createdAt": "2025-10-29T16:42:42Z",
+      "updatedAt": "2026-03-14T11:02:04Z",
+      "ageDays": 136,
+      "statusLabel": "Open PR",
+      "prStatus": {
+        "assignees": [
+          "josuah"
+        ],
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "lyakh",
+          "lgirdwood",
+          "dleach02",
+          "JarmouniA",
+          "avolmat-st",
+          "iuliana-prodan",
+          "decsny"
+        ],
+        "pendingRequestedCount": 9,
+        "ciStatus": "failure",
+        "cooldownHours": 2,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-2959854206-iuliana-prodan",
+      "type": "review_request",
+      "title": "Review requested from Iulia Prodan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/98514",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "iuliana-prodan",
+      "author": "ngphibang",
+      "state": "open",
+      "createdAt": "2025-10-29T16:42:42Z",
+      "updatedAt": "2026-03-14T11:02:04Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3398739950-ZhaoxiangJin",
+      "type": "pull_request",
+      "title": "soc: nxp: replace magic number with DT_PROP macro",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Open PR",
+      "prStatus": {
+        "assignees": [
+          "mmahadevan108",
+          "iuliana-prodan"
+        ],
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "butok",
+          "mmahadevan108",
+          "axelnxp",
+          "George-Stefan",
+          "iuliana-prodan",
+          "NeilChen93",
+          "lucien-nxp"
+        ],
+        "pendingRequestedCount": 7,
+        "ciStatus": "failure",
+        "cooldownHours": 2,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3398739950-butok",
+      "type": "review_request",
+      "title": "Review requested from Andrej Butok",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "butok",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3398739950-mmahadevan108",
+      "type": "review_request",
+      "title": "Review requested from Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3398739950-axelnxp",
+      "type": "review_request",
+      "title": "Review requested from Axel Le Bourhis",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "axelnxp",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3398739950-George-Stefan",
+      "type": "review_request",
+      "title": "Review requested from George Stefan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "George-Stefan",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3398739950-iuliana-prodan",
+      "type": "review_request",
+      "title": "Review requested from Iulia Prodan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "iuliana-prodan",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3398739950-NeilChen93",
+      "type": "review_request",
+      "title": "Review requested from NeilChen93",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "NeilChen93",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3398739950-lucien-nxp",
+      "type": "review_request",
+      "title": "Review requested from Lucien Zhao",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "lucien-nxp",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-14T10:51:26Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3387088397-ZhaoxiangJin",
+      "type": "pull_request",
+      "title": "drivers: timer: generalize the existing system timer companion API",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-12T02:33:21Z",
+      "updatedAt": "2026-03-14T09:23:21Z",
+      "ageDays": 2,
+      "statusLabel": "Open PR",
+      "prStatus": {
+        "assignees": [
+          "andyross"
+        ],
+        "requestedVerdicts": [
+          {
+            "login": "mathieuchopstm",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "andyross",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "bjarki-andreasen",
+            "state": "APPROVED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "ZhaoxiangJin",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedLogins": [
+          "mbolivar",
+          "kartben",
+          "nashif",
+          "ceolin",
+          "butok",
+          "ttmut",
+          "MaureenHelm",
+          "JordanYates",
+          "stephanosio",
+          "mmahadevan108",
+          "erwango",
+          "etienne-lms",
+          "axelnxp",
+          "FRASTM",
+          "George-Stefan",
+          "iuliana-prodan",
+          "NeilChen93",
+          "tmleman",
+          "gautierg-st",
+          "juickar",
+          "petejohanson-adi"
+        ],
+        "pendingRequestedCount": 21,
+        "ciStatus": null,
+        "cooldownHours": 4,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3387088397-butok",
+      "type": "review_request",
+      "title": "Review requested from Andrej Butok",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "butok",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-12T02:33:21Z",
+      "updatedAt": "2026-03-14T09:23:21Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3387088397-mmahadevan108",
+      "type": "review_request",
+      "title": "Review requested from Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-12T02:33:21Z",
+      "updatedAt": "2026-03-14T09:23:21Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3387088397-axelnxp",
+      "type": "review_request",
+      "title": "Review requested from Axel Le Bourhis",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "axelnxp",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-12T02:33:21Z",
+      "updatedAt": "2026-03-14T09:23:21Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3387088397-George-Stefan",
+      "type": "review_request",
+      "title": "Review requested from George Stefan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "George-Stefan",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-12T02:33:21Z",
+      "updatedAt": "2026-03-14T09:23:21Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3387088397-iuliana-prodan",
+      "type": "review_request",
+      "title": "Review requested from Iulia Prodan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "iuliana-prodan",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-12T02:33:21Z",
+      "updatedAt": "2026-03-14T09:23:21Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3387088397-NeilChen93",
+      "type": "review_request",
+      "title": "Review requested from NeilChen93",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "NeilChen93",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "createdAt": "2026-03-12T02:33:21Z",
+      "updatedAt": "2026-03-14T09:23:21Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "issue-4055267385-Holt-Sun",
+      "type": "issue",
+      "title": "Guidelines for modeling multi-API hardware in devicetree: compatible, node property, or /chosen?",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105249",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Holt-Sun",
+      "author": "Holt-Sun",
+      "state": "open",
+      "createdAt": "2026-03-11T02:15:23Z",
+      "updatedAt": "2026-03-14T09:13:37Z",
+      "ageDays": 3,
+      "statusLabel": "Assigned",
+      "metrics": {
+        "openAssignedIssues": 1,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3270279867-KATE-WANG-NXP",
+      "type": "review_request",
+      "title": "Review requested from KATE-WANG-NXP",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103887",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "KATE-WANG-NXP",
+      "author": "Maxzuru",
+      "state": "open",
+      "createdAt": "2026-02-11T06:39:06Z",
+      "updatedAt": "2026-03-14T08:22:54Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
     {
       "id": "review-request-3397233754-butok",
       "type": "review_request",
@@ -2983,68 +4059,6 @@
         "closedUnmergedPrs": 0,
         "reviewsSubmitted": 0,
         "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3270279867-KATE-WANG-NXP",
-      "type": "review_request",
-      "title": "Review requested from KATE-WANG-NXP",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103887",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "KATE-WANG-NXP",
-      "author": "Maxzuru",
-      "state": "open",
-      "createdAt": "2026-02-11T06:39:06Z",
-      "updatedAt": "2026-03-14T03:28:59Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "issue-4055267385-Holt-Sun",
-      "type": "issue",
-      "title": "Guidelines for modeling multi-API hardware in devicetree: compatible, node property, or /chosen?",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105249",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "Holt-Sun",
-      "author": "Holt-Sun",
-      "state": "open",
-      "createdAt": "2026-03-11T02:15:23Z",
-      "updatedAt": "2026-03-14T03:28:52Z",
-      "ageDays": 3,
-      "statusLabel": "Assigned",
-      "metrics": {
-        "openAssignedIssues": 1,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
         "staleItems": 0,
         "reviewApproved": 0,
         "reviewChangesRequested": 0,
@@ -3316,6 +4330,10 @@
       "ageDays": 2,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [
+          "ngphibang",
+          "josuah"
+        ],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -3324,9 +4342,16 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "loicpoulain",
+          "JarmouniA",
+          "avolmat-st"
+        ],
         "pendingRequestedCount": 5,
         "ciStatus": "failure",
-        "cooldownHours": 11,
+        "cooldownHours": 15,
         "cooldownMet": false
       },
       "metrics": {
@@ -3609,6 +4634,9 @@
       "ageDays": 1,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [
+          "alexanderwachter"
+        ],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -3617,9 +4645,10 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": "failure",
-        "cooldownHours": 11,
+        "cooldownHours": 16,
         "cooldownMet": false
       },
       "metrics": {
@@ -3654,6 +4683,11 @@
       "ageDays": 35,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [
+          "andyross",
+          "mmahadevan108",
+          "zejiang0jason"
+        ],
         "requestedVerdicts": [
           {
             "login": "yvesll",
@@ -3698,9 +4732,23 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "teburd",
+          "manuargue",
+          "bperseghetti",
+          "nordic-krch",
+          "JiafeiPan",
+          "zejiang0jason",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "iuliana-prodan",
+          "DerekSnell",
+          "NeilChen93"
+        ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 11,
+        "cooldownHours": 16,
         "cooldownMet": false
       },
       "metrics": {
@@ -4107,6 +5155,9 @@
       "ageDays": 17,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [
+          "tbursztyka"
+        ],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -4115,9 +5166,26 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "teburd",
+          "nashif",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "bperseghetti",
+          "yangbolu1991",
+          "zejiang0jason",
+          "axelnxp",
+          "JarmouniA",
+          "PetervdPerk-NXP",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "decsny"
+        ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 12,
+        "cooldownHours": 16,
         "cooldownMet": false
       },
       "metrics": {
@@ -4493,6 +5561,9 @@
       "ageDays": 86,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [
+          "lylezhu2012"
+        ],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -4511,9 +5582,21 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "PavelVPV",
+          "jhedberg",
+          "chengkai15",
+          "cvinayak",
+          "sjanc",
+          "rugeGerritsen",
+          "hermabe",
+          "alwa-nordic",
+          "HaavardRei",
+          "gzh-terry"
+        ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 12,
+        "cooldownHours": 16,
         "cooldownMet": false
       },
       "metrics": {
@@ -4610,11 +5693,15 @@
       "ageDays": 1,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 13,
+        "cooldownHours": 17,
         "cooldownMet": false
       },
       "metrics": {
@@ -4742,6 +5829,10 @@
       "ageDays": 94,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [
+          "mmahadevan108",
+          "ZhaoxiangJin"
+        ],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -4755,9 +5846,26 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "yangbolu1991",
+          "zejiang0jason",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "DerekSnell",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 15,
         "ciStatus": "failure",
-        "cooldownHours": 13,
+        "cooldownHours": 17,
         "cooldownMet": false
       },
       "metrics": {
@@ -5288,6 +6396,7 @@
       "ageDays": 37,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -5296,9 +6405,26 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "loicpoulain",
+          "yangbolu1991",
+          "zejiang0jason",
+          "axelnxp",
+          "JarmouniA",
+          "PetervdPerk-NXP",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 15,
-        "ciStatus": "failure",
-        "cooldownHours": 14,
+        "ciStatus": null,
+        "cooldownHours": 18,
         "cooldownMet": false
       },
       "metrics": {
@@ -5705,11 +6831,13 @@
       "ageDays": 5,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 14,
+        "cooldownHours": 18,
         "cooldownMet": false
       },
       "metrics": {
@@ -5992,6 +7120,7 @@
       "ageDays": 31,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -6005,9 +7134,14 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "Laczen",
+          "rghaddab"
+        ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 15,
+        "cooldownHours": 19,
         "cooldownMet": false
       },
       "metrics": {
@@ -6290,6 +7424,7 @@
       "ageDays": 222,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "dleach02",
@@ -6324,9 +7459,20 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mbolivar",
+          "kartben",
+          "nashif",
+          "jfischer-no",
+          "loicpoulain",
+          "JarmouniA",
+          "avolmat-st",
+          "decsny",
+          "tmon-nordic"
+        ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 16,
+        "cooldownHours": 20,
         "cooldownMet": false
       },
       "metrics": {
@@ -6379,37 +7525,6 @@
       }
     },
     {
-      "id": "review-request-3396184672-hakehuang",
-      "type": "review_request",
-      "title": "Review requested from hakehuang",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105464",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "hakehuang",
-      "author": "fundakol",
-      "state": "open",
-      "createdAt": "2026-03-13T17:11:18Z",
-      "updatedAt": "2026-03-13T17:16:08Z",
-      "ageDays": 1,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "pull_request-3393421117-jacob-wienecke-nxp",
       "type": "pull_request",
       "title": "drivers: display: add sleep in/out API",
@@ -6423,6 +7538,7 @@
       "ageDays": 1,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -6431,9 +7547,16 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "VynDragon",
+          "danieldegrasse",
+          "JarmouniA",
+          "avolmat-st",
+          "KATE-WANG-NXP"
+        ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 16,
+        "cooldownHours": 20,
         "cooldownMet": false
       },
       "metrics": {
@@ -6499,6 +7622,7 @@
       "ageDays": 8,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -6522,9 +7646,28 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mbolivar",
+          "dbaluta",
+          "butok",
+          "Holt-Sun",
+          "lmajewski",
+          "bperseghetti",
+          "mmahadevan108",
+          "nordic-krch",
+          "zejiang0jason",
+          "PetervdPerk-NXP",
+          "ClaCodes",
+          "iuliana-prodan",
+          "DerekSnell",
+          "NeilChen93",
+          "decsny",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 17,
         "ciStatus": null,
-        "cooldownHours": 16,
+        "cooldownHours": 21,
         "cooldownMet": false
       },
       "metrics": {
@@ -6931,6 +8074,7 @@
       "ageDays": 257,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -6954,9 +8098,12 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "loicpoulain"
+        ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 17,
+        "cooldownHours": 21,
         "cooldownMet": false
       },
       "metrics": {
@@ -7457,6 +8604,7 @@
       "ageDays": 2,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -7465,9 +8613,19 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "pdgendt",
+          "VynDragon",
+          "faxe1008",
+          "uLipe",
+          "danieldegrasse",
+          "avolmat-st"
+        ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 19,
+        "cooldownHours": 24,
         "cooldownMet": false
       },
       "metrics": {
@@ -7502,6 +8660,7 @@
       "ageDays": 3,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -7520,9 +8679,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "teburd",
+          "ceolin",
+          "JordanYates",
+          "tmleman"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 19,
+        "cooldownHours": 24,
         "cooldownMet": false
       },
       "metrics": {
@@ -7620,11 +8785,22 @@
       "ageDays": 3,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "jukkar",
+          "pdgendt",
+          "MaureenHelm",
+          "stephanosio",
+          "rlubos",
+          "JarmouniA"
+        ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 20,
+        "cooldownHours": 24,
         "cooldownMet": false
       },
       "metrics": {
@@ -7832,253 +9008,6 @@
       }
     },
     {
-      "id": "pull_request-3387088397-ZhaoxiangJin",
-      "type": "pull_request",
-      "title": "drivers: timer: generalize the existing system timer companion API",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "ZhaoxiangJin",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "createdAt": "2026-03-12T02:33:21Z",
-      "updatedAt": "2026-03-13T11:48:52Z",
-      "ageDays": 2,
-      "statusLabel": "Open PR",
-      "prStatus": {
-        "requestedVerdicts": [
-          {
-            "login": "andyross",
-            "state": "COMMENTED",
-            "wasRequested": true
-          }
-        ],
-        "otherVerdicts": [
-          {
-            "login": "mathieuchopstm",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "ZhaoxiangJin",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "bjarki-andreasen",
-            "state": "APPROVED",
-            "wasRequested": false
-          }
-        ],
-        "pendingRequestedCount": 21,
-        "ciStatus": null,
-        "cooldownHours": 21,
-        "cooldownMet": false
-      },
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 1,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3387088397-butok",
-      "type": "review_request",
-      "title": "Review requested from Andrej Butok",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "butok",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "createdAt": "2026-03-12T02:33:21Z",
-      "updatedAt": "2026-03-13T11:48:52Z",
-      "ageDays": 1,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3387088397-mmahadevan108",
-      "type": "review_request",
-      "title": "Review requested from Mahesh Mahadevan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "mmahadevan108",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "createdAt": "2026-03-12T02:33:21Z",
-      "updatedAt": "2026-03-13T11:48:52Z",
-      "ageDays": 1,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3387088397-axelnxp",
-      "type": "review_request",
-      "title": "Review requested from Axel Le Bourhis",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "axelnxp",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "createdAt": "2026-03-12T02:33:21Z",
-      "updatedAt": "2026-03-13T11:48:52Z",
-      "ageDays": 1,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3387088397-George-Stefan",
-      "type": "review_request",
-      "title": "Review requested from George Stefan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "George-Stefan",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "createdAt": "2026-03-12T02:33:21Z",
-      "updatedAt": "2026-03-13T11:48:52Z",
-      "ageDays": 1,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3387088397-iuliana-prodan",
-      "type": "review_request",
-      "title": "Review requested from Iulia Prodan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "iuliana-prodan",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "createdAt": "2026-03-12T02:33:21Z",
-      "updatedAt": "2026-03-13T11:48:52Z",
-      "ageDays": 1,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3387088397-NeilChen93",
-      "type": "review_request",
-      "title": "Review requested from NeilChen93",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "NeilChen93",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "createdAt": "2026-03-12T02:33:21Z",
-      "updatedAt": "2026-03-13T11:48:52Z",
-      "ageDays": 1,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "pull_request-3352074593-SuperHeroAbner",
       "type": "pull_request",
       "title": "Support flexspi nand on frdm rw612",
@@ -8092,11 +9021,29 @@
       "ageDays": 10,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "jfischer-no",
+          "mmahadevan108",
+          "zejiang0jason",
+          "rghaddab",
+          "danieldegrasse",
+          "axelnxp",
+          "JarmouniA",
+          "de-nordic",
+          "DerekSnell",
+          "NeilChen93",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 22,
+        "cooldownHours": 26,
         "cooldownMet": false
       },
       "metrics": {
@@ -8410,11 +9357,19 @@
       "ageDays": 15,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "d3zd3z",
+          "nashif",
+          "butok",
+          "nordicjm",
+          "de-nordic"
+        ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 22,
+        "cooldownHours": 26,
         "cooldownMet": false
       },
       "metrics": {
@@ -8511,11 +9466,19 @@
       "ageDays": 37,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "teburd",
+          "nashif",
+          "fabiobaltieri",
+          "MaureenHelm",
+          "stephanosio"
+        ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 22,
+        "cooldownHours": 26,
         "cooldownMet": false
       },
       "metrics": {
@@ -8612,6 +9575,7 @@
       "ageDays": 43,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "jukkar",
@@ -8641,9 +9605,21 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "rettichschnidi",
+          "jerome-pouiller",
+          "rlubos",
+          "yonsch",
+          "JarmouniA",
+          "de-nordic",
+          "Martinhoff-maker",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 22,
+        "cooldownHours": 26,
         "cooldownMet": false
       },
       "metrics": {
@@ -9502,6 +10478,7 @@
       "ageDays": 43,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -9525,9 +10502,10 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 39,
+        "cooldownHours": 43,
         "cooldownMet": false
       },
       "metrics": {
@@ -9719,6 +10697,7 @@
       "ageDays": 4,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -9727,9 +10706,12 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mmahadevan108"
+        ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 50,
+        "cooldownHours": 54,
         "cooldownMet": false
       },
       "metrics": {
@@ -10018,6 +11000,7 @@
       "ageDays": 101,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -10031,9 +11014,19 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "butok",
+          "mmahadevan108",
+          "loicpoulain",
+          "JarmouniA",
+          "avolmat-st",
+          "iuliana-prodan"
+        ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 60,
+        "cooldownHours": 64,
         "cooldownMet": false
       },
       "metrics": {
@@ -10161,6 +11154,7 @@
       "ageDays": 36,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "zejiang0jason",
@@ -10180,9 +11174,26 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "avisconti",
+          "kartben",
+          "manuargue",
+          "butok",
+          "VynDragon",
+          "Holt-Sun",
+          "jfischer-no",
+          "mmahadevan108",
+          "erwango",
+          "PetervdPerk-NXP",
+          "DerekSnell",
+          "ZhaoxiangJin",
+          "MaochenWang1",
+          "lucien-nxp"
+        ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 60,
+        "cooldownHours": 65,
         "cooldownMet": false
       },
       "metrics": {
@@ -10962,6 +11973,7 @@
       "ageDays": 136,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -10980,9 +11992,24 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "VynDragon",
+          "jfischer-no",
+          "mmahadevan108",
+          "loicpoulain",
+          "dleach02",
+          "JarmouniA",
+          "avolmat-st",
+          "DerekSnell",
+          "EmilioCBen",
+          "decsny"
+        ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 66,
+        "cooldownHours": 70,
         "cooldownMet": false
       },
       "metrics": {
@@ -11172,6 +12199,7 @@
       "ageDays": 66,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -11200,9 +12228,26 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "kartben",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "loicpoulain",
+          "JiafeiPan",
+          "zejiang0jason",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "avolmat-st",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 67,
+        "cooldownHours": 71,
         "cooldownMet": false
       },
       "metrics": {
@@ -12357,6 +13402,7 @@
       "ageDays": 100,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -12375,10 +13421,25 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "PavelVPV",
+          "jhedberg",
+          "chengkai15",
+          "cvinayak",
+          "sjanc",
+          "makeshi",
+          "rugeGerritsen",
+          "hermabe",
+          "MarkWangChinese",
+          "alwa-nordic",
+          "HaavardRei",
+          "gzh-terry"
+        ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 70,
-        "cooldownMet": false
+        "cooldownHours": 74,
+        "cooldownMet": true
       },
       "metrics": {
         "openAssignedIssues": 0,
@@ -12568,12 +13629,23 @@
       "ageDays": 4,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "nashif",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "mmahadevan108",
+          "anangl",
+          "zejiang0jason"
+        ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 71,
-        "cooldownMet": false
+        "cooldownHours": 75,
+        "cooldownMet": true
       },
       "metrics": {
         "openAssignedIssues": 0,
@@ -12919,11 +13991,21 @@
       "ageDays": 96,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "lyakh",
+          "lgirdwood",
+          "TomasBarakNXP",
+          "kv2019i",
+          "JarmouniA"
+        ],
         "pendingRequestedCount": 7,
         "ciStatus": null,
-        "cooldownHours": 72,
+        "cooldownHours": 76,
         "cooldownMet": true
       },
       "metrics": {
@@ -12989,6 +14071,7 @@
       "ageDays": 4,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -12997,9 +14080,13 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mmahadevan108",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 72,
+        "cooldownHours": 76,
         "cooldownMet": true
       },
       "metrics": {
@@ -13128,6 +14215,7 @@
       "ageDays": 136,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "dbaluta",
@@ -13157,9 +14245,23 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "manuargue",
+          "lyakh",
+          "butok",
+          "lgirdwood",
+          "mmahadevan108",
+          "anangl",
+          "dleach02",
+          "zejiang0jason",
+          "kv2019i",
+          "DerekSnell",
+          "EmilioCBen"
+        ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 72,
+        "cooldownHours": 76,
         "cooldownMet": true
       },
       "metrics": {
@@ -13411,11 +14513,30 @@
       "ageDays": 39,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "rettichschnidi",
+          "jerome-pouiller",
+          "butok",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "JiafeiPan",
+          "yonsch",
+          "rghaddab",
+          "nordicjm",
+          "JarmouniA",
+          "de-nordic",
+          "Martinhoff-maker",
+          "DerekSnell",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 16,
         "ciStatus": null,
-        "cooldownHours": 72,
+        "cooldownHours": 77,
         "cooldownMet": true
       },
       "metrics": {
@@ -13857,6 +14978,7 @@
       "ageDays": 59,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "ZhaoxiangJin",
@@ -13891,9 +15013,24 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "teburd",
+          "nashif",
+          "manuargue",
+          "butok",
+          "JordanYates",
+          "bperseghetti",
+          "JiafeiPan",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "DerekSnell",
+          "NeilChen93",
+          "tmleman",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 75,
+        "cooldownHours": 79,
         "cooldownMet": true
       },
       "metrics": {
@@ -14365,11 +15502,17 @@
       "ageDays": 3,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "butok",
+          "mmahadevan108",
+          "iuliana-prodan"
+        ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 75,
+        "cooldownHours": 79,
         "cooldownMet": true
       },
       "metrics": {
@@ -14622,11 +15765,13 @@
       "ageDays": 3,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 77,
+        "cooldownHours": 81,
         "cooldownMet": true
       },
       "metrics": {
@@ -14661,6 +15806,7 @@
       "ageDays": 123,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -14669,9 +15815,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "jhedberg",
+          "sjanc",
+          "alxelax"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 77,
+        "cooldownHours": 82,
         "cooldownMet": true
       },
       "metrics": {
@@ -14897,11 +16049,29 @@
       "ageDays": 4,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "npitre",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "yangbolu1991",
+          "zejiang0jason",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "wearyzen",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 79,
+        "cooldownHours": 83,
         "cooldownMet": true
       },
       "metrics": {
@@ -15308,11 +16478,20 @@
       "ageDays": 17,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "npitre",
+          "yangbolu1991",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "wearyzen"
+        ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 79,
+        "cooldownHours": 83,
         "cooldownMet": true
       },
       "metrics": {
@@ -15596,11 +16775,28 @@
       "ageDays": 4,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "PavelVPV",
+          "jhedberg",
+          "chengkai15",
+          "cvinayak",
+          "sjanc",
+          "makeshi",
+          "rugeGerritsen",
+          "hermabe",
+          "MarkWangChinese",
+          "alxelax",
+          "lylezhu2012",
+          "alwa-nordic",
+          "HaavardRei",
+          "gzh-terry"
+        ],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 79,
+        "cooldownHours": 83,
         "cooldownMet": true
       },
       "metrics": {
@@ -16445,6 +17641,7 @@
       "ageDays": 30,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -16468,9 +17665,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "MaureenHelm",
+          "stephanosio",
+          "JarmouniA"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 88,
+        "cooldownHours": 92,
         "cooldownMet": true
       },
       "metrics": {
@@ -16505,11 +17708,22 @@
       "ageDays": 8,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "mmahadevan108",
+          "anangl",
+          "zejiang0jason",
+          "TomasBarakNXP"
+        ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 89,
+        "cooldownHours": 93,
         "cooldownMet": true
       },
       "metrics": {
@@ -16918,6 +18132,7 @@
       "ageDays": 10,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -16931,9 +18146,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "hakehuang",
+          "butok",
+          "mmahadevan108",
+          "DerekSnell"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 90,
+        "cooldownHours": 94,
         "cooldownMet": true
       },
       "metrics": {
@@ -17157,6 +18378,7 @@
       "ageDays": 16,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -17170,9 +18392,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "jhedberg",
+          "sjanc",
+          "alxelax"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 93,
+        "cooldownHours": 97,
         "cooldownMet": true
       },
       "metrics": {
@@ -17207,11 +18435,21 @@
       "ageDays": 33,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "mmahadevan108",
+          "zejiang0jason",
+          "JarmouniA"
+        ],
         "pendingRequestedCount": 7,
         "ciStatus": null,
-        "cooldownHours": 93,
+        "cooldownHours": 97,
         "cooldownMet": true
       },
       "metrics": {
@@ -17527,11 +18765,41 @@
       "ageDays": 11,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "d3zd3z",
+          "manuargue",
+          "jhedberg",
+          "jukkar",
+          "butok",
+          "Holt-Sun",
+          "asmellby",
+          "bperseghetti",
+          "carlescufi",
+          "ioannis-karachalios",
+          "mmahadevan108",
+          "nordic-krch",
+          "anangl",
+          "KhiemNguyenT",
+          "arnopo",
+          "JiafeiPan",
+          "zejiang0jason",
+          "nika-nordic",
+          "doki-nordic",
+          "axelnxp",
+          "JarmouniA",
+          "PetervdPerk-NXP",
+          "krish2718",
+          "ZhaoxiangJin",
+          "MaochenWang1",
+          "Derek-RTK"
+        ],
         "pendingRequestedCount": 27,
         "ciStatus": null,
-        "cooldownHours": 94,
+        "cooldownHours": 98,
         "cooldownMet": true
       },
       "metrics": {
@@ -17907,6 +19175,7 @@
       "ageDays": 16,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -17925,9 +19194,22 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "npitre",
+          "Holt-Sun",
+          "katsuster",
+          "mmahadevan108",
+          "martinjaeger",
+          "yangbolu1991",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "wearyzen"
+        ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 95,
+        "cooldownHours": 99,
         "cooldownMet": true
       },
       "metrics": {
@@ -18498,6 +19780,7 @@
       "ageDays": 10,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -18511,9 +19794,16 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "Holt-Sun",
+          "mmahadevan108",
+          "nordic-krch"
+        ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 96,
+        "cooldownHours": 100,
         "cooldownMet": true
       },
       "metrics": {
@@ -18704,6 +19994,7 @@
       "ageDays": 39,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "dbaluta",
@@ -18718,9 +20009,24 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "npitre",
+          "henrikbrixandersen",
+          "ithinuel",
+          "jsbatch",
+          "anangl",
+          "yangbolu1991",
+          "JarmouniA",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "FelixWang47831",
+          "wearyzen"
+        ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 96,
+        "cooldownHours": 100,
         "cooldownMet": true
       },
       "metrics": {
@@ -19196,6 +20502,7 @@
       "ageDays": 4,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -19204,9 +20511,14 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mmahadevan108",
+          "DerekSnell",
+          "NeilChen93"
+        ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 97,
+        "cooldownHours": 101,
         "cooldownMet": true
       },
       "metrics": {
@@ -19367,6 +20679,7 @@
       "ageDays": 8,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -19380,9 +20693,17 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "pdgendt",
+          "ssharks",
+          "rlubos",
+          "JarmouniA"
+        ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 97,
+        "cooldownHours": 101,
         "cooldownMet": true
       },
       "metrics": {
@@ -19798,6 +21119,7 @@
       "ageDays": 46,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "FelixWang47831",
@@ -19842,9 +21164,24 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "nashif",
+          "manuargue",
+          "katsuster",
+          "nordic-krch",
+          "martinjaeger",
+          "yangbolu1991",
+          "JiafeiPan",
+          "zejiang0jason",
+          "Zhiqiang-Hou",
+          "iuliana-prodan",
+          "DerekSnell",
+          "NeilChen93"
+        ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 98,
+        "cooldownHours": 103,
         "cooldownMet": true
       },
       "metrics": {
@@ -20473,6 +21810,7 @@
       "ageDays": 9,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -20501,9 +21839,17 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "PavelVPV",
+          "cvinayak",
+          "rugeGerritsen",
+          "hermabe",
+          "alwa-nordic",
+          "HaavardRei"
+        ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 103,
+        "cooldownHours": 107,
         "cooldownMet": true
       },
       "metrics": {
@@ -20729,6 +22075,7 @@
       "ageDays": 17,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -20752,9 +22099,20 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "nashif",
+          "manuargue",
+          "henrikbrixandersen",
+          "butok",
+          "mmahadevan108",
+          "anangl",
+          "zejiang0jason",
+          "JarmouniA"
+        ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 105,
+        "cooldownHours": 109,
         "cooldownMet": true
       },
       "metrics": {
@@ -21135,6 +22493,7 @@
       "ageDays": 39,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -21143,9 +22502,16 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "d3zd3z",
+          "nashif",
+          "andyross",
+          "dcpleung",
+          "peter-mitsis"
+        ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 108,
+        "cooldownHours": 112,
         "cooldownMet": true
       },
       "metrics": {
@@ -22062,11 +23428,18 @@
       "ageDays": 5,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "butok",
+          "mmahadevan108",
+          "DerekSnell",
+          "NeilChen93"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 120,
+        "cooldownHours": 124,
         "cooldownMet": true
       },
       "metrics": {
@@ -22386,6 +23759,7 @@
       "ageDays": 50,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "chengkai15",
@@ -22410,9 +23784,13 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "jhedberg",
+          "lylezhu2012"
+        ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 121,
+        "cooldownHours": 125,
         "cooldownMet": true
       },
       "metrics": {
@@ -22510,6 +23888,7 @@
       "ageDays": 8,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -22518,9 +23897,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "butok",
+          "mmahadevan108",
+          "George-Stefan",
+          "DerekSnell"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 122,
+        "cooldownHours": 126,
         "cooldownMet": true
       },
       "metrics": {
@@ -22999,6 +24384,7 @@
       "ageDays": 40,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "zejiang0jason",
@@ -23023,9 +24409,27 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "kartben",
+          "nashif",
+          "xingrz",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "nordic-krch",
+          "JiafeiPan",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "DerekSnell",
+          "NeilChen93",
+          "ZhaoxiangJin"
+        ],
         "pendingRequestedCount": 16,
         "ciStatus": null,
-        "cooldownHours": 125,
+        "cooldownHours": 129,
         "cooldownMet": true
       },
       "metrics": {
@@ -23433,6 +24837,7 @@
       "ageDays": 9,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -23441,9 +24846,12 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mmahadevan108"
+        ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 126,
+        "cooldownHours": 130,
         "cooldownMet": true
       },
       "metrics": {
@@ -23796,11 +25204,13 @@
       "ageDays": 66,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 128,
+        "cooldownHours": 132,
         "cooldownMet": true
       },
       "metrics": {
@@ -24025,6 +25435,7 @@
       "ageDays": 67,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -24038,9 +25449,17 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mbolivar",
+          "kartben",
+          "nashif",
+          "pdgendt",
+          "carlescufi",
+          "marc-hb"
+        ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 152,
+        "cooldownHours": 156,
         "cooldownMet": true
       },
       "metrics": {
@@ -24545,6 +25964,7 @@
       "ageDays": 52,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "DerekSnell",
@@ -24564,9 +25984,17 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "mmahadevan108",
+          "zejiang0jason",
+          "dcpleung"
+        ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 181,
+        "cooldownHours": 185,
         "cooldownMet": true
       },
       "metrics": {
@@ -25925,6 +27353,7 @@
       "ageDays": 32,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -25943,9 +27372,16 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "VynDragon",
+          "danieldegrasse",
+          "JarmouniA"
+        ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 192,
+        "cooldownHours": 196,
         "cooldownMet": true
       },
       "metrics": {
@@ -26171,6 +27607,7 @@
       "ageDays": 57,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "maass-hamburg",
@@ -26190,9 +27627,24 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "manuargue",
+          "butok",
+          "pdgendt",
+          "Holt-Sun",
+          "lmajewski",
+          "mmahadevan108",
+          "yangbolu1991",
+          "JiafeiPan",
+          "zejiang0jason",
+          "ClaCodes",
+          "Zhiqiang-Hou",
+          "iuliana-prodan"
+        ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 194,
+        "cooldownHours": 198,
         "cooldownMet": true
       },
       "metrics": {
@@ -27334,11 +28786,28 @@
       "ageDays": 9,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "manuargue",
+          "jukkar",
+          "Kludentwo",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "rlubos",
+          "JiafeiPan",
+          "zejiang0jason",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "krish2718",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 214,
+        "cooldownHours": 218,
         "cooldownMet": true
       },
       "metrics": {
@@ -27873,6 +29342,7 @@
       "ageDays": 228,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -27881,9 +29351,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "jhedberg",
+          "sjanc",
+          "alxelax"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 215,
+        "cooldownHours": 220,
         "cooldownMet": true
       },
       "metrics": {
@@ -28012,6 +29488,7 @@
       "ageDays": 9,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -28020,9 +29497,15 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "nashif",
+          "jhedberg",
+          "sjanc",
+          "alxelax"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 217,
+        "cooldownHours": 221,
         "cooldownMet": true
       },
       "metrics": {
@@ -28153,11 +29636,24 @@
       "ageDays": 9,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "manuargue",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "JiafeiPan",
+          "zejiang0jason",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 218,
+        "cooldownHours": 222,
         "cooldownMet": true
       },
       "metrics": {
@@ -29740,6 +31236,7 @@
       "ageDays": 46,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "jfischer-no",
@@ -29764,9 +31261,10 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 232,
+        "cooldownHours": 236,
         "cooldownMet": true
       },
       "metrics": {
@@ -29865,6 +31363,7 @@
       "ageDays": 277,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "decsny",
@@ -29889,9 +31388,20 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "butok",
+          "mmahadevan108",
+          "dleach02",
+          "JarmouniA",
+          "DerekSnell",
+          "NeilChen93",
+          "EmilioCBen"
+        ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 233,
+        "cooldownHours": 237,
         "cooldownMet": true
       },
       "metrics": {
@@ -30113,11 +31623,13 @@
       "ageDays": 10,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 234,
+        "cooldownHours": 238,
         "cooldownMet": true
       },
       "metrics": {
@@ -31072,6 +32584,7 @@
       "ageDays": 17,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -31085,9 +32598,14 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "mmahadevan108",
+          "axelnxp",
+          "ZhaoxiangJin"
+        ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 241,
+        "cooldownHours": 245,
         "cooldownMet": true
       },
       "metrics": {
@@ -31502,6 +33020,7 @@
       "ageDays": 36,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "jfischer-no",
@@ -31521,9 +33040,12 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "josuah"
+        ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 245,
+        "cooldownHours": 250,
         "cooldownMet": true
       },
       "metrics": {
@@ -31974,6 +33496,7 @@
       "ageDays": 76,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -31982,9 +33505,10 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 248,
+        "cooldownHours": 252,
         "cooldownMet": true
       },
       "metrics": {
@@ -32615,6 +34139,7 @@
       "ageDays": 36,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -32643,9 +34168,10 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 260,
+        "cooldownHours": 264,
         "cooldownMet": true
       },
       "metrics": {
@@ -32900,6 +34426,7 @@
       "ageDays": 23,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [
           {
@@ -32913,9 +34440,22 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "teburd",
+          "nashif",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "mmahadevan108",
+          "yangbolu1991",
+          "JiafeiPan",
+          "zejiang0jason",
+          "Zhiqiang-Hou",
+          "iuliana-prodan"
+        ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 261,
+        "cooldownHours": 265,
         "cooldownMet": true
       },
       "metrics": {
@@ -33357,6 +34897,7 @@
       "ageDays": 103,
       "statusLabel": "Open PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "maass-hamburg",
@@ -33381,9 +34922,22 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "nashif",
+          "manuargue",
+          "jfischer-no",
+          "mmahadevan108",
+          "rlubos",
+          "dleach02",
+          "MarkWangChinese",
+          "JarmouniA",
+          "rruuaanng",
+          "decsny"
+        ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 262,
+        "cooldownHours": 266,
         "cooldownMet": true
       },
       "metrics": {
@@ -33668,6 +35222,7 @@
       "ageDays": 65,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [
           {
             "login": "MaureenHelm",
@@ -33682,9 +35237,29 @@
             "wasRequested": false
           }
         ],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "avisconti",
+          "kartben",
+          "teburd",
+          "nashif",
+          "manuargue",
+          "butok",
+          "Holt-Sun",
+          "yperess",
+          "bperseghetti",
+          "mmahadevan108",
+          "nordic-krch",
+          "JiafeiPan",
+          "zejiang0jason",
+          "axelnxp",
+          "PetervdPerk-NXP",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 18,
         "ciStatus": null,
-        "cooldownHours": 263,
+        "cooldownHours": 267,
         "cooldownMet": true
       },
       "metrics": {
@@ -34857,11 +36432,13 @@
       "ageDays": 11,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 266,
+        "cooldownHours": 270,
         "cooldownMet": true
       },
       "metrics": {
@@ -36901,11 +38478,13 @@
       "ageDays": 12,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 290,
+        "cooldownHours": 294,
         "cooldownMet": true
       },
       "metrics": {
@@ -51427,11 +53006,18 @@
       "ageDays": 319,
       "statusLabel": "Draft PR",
       "prStatus": {
+        "assignees": [],
         "requestedVerdicts": [],
         "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "jukkar",
+          "rlubos",
+          "krish2718",
+          "MaochenWang1"
+        ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 4970,
+        "cooldownHours": 4974,
         "cooldownMet": true
       },
       "metrics": {
@@ -51486,10 +53072,10 @@
   ],
   "syncHealth": {
     "source": "cache",
-    "generatedAt": "2026-03-14T09:28:51.677Z",
+    "generatedAt": "2026-03-14T13:36:20.359Z",
     "freshnessMinutes": 0,
     "searchSamples": 23260,
-    "detailSamples": 1169,
+    "detailSamples": 1187,
     "liveEnabled": false
   },
   "filterOptions": {
@@ -52189,6 +53775,6 @@
     "hasToken": false,
     "connectionStatus": "configured",
     "message": "Snapshot aggregated from daily files by GitHub Actions. No token is available in the browser.",
-    "checkedAt": "2026-03-14T09:28:51.677Z"
+    "checkedAt": "2026-03-14T13:36:20.359Z"
   }
 }
