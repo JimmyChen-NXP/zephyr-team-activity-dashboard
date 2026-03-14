@@ -6,7 +6,6 @@ import { formatDistanceToNow, formatISO9075 } from "date-fns";
 import { ActivityPageNav } from "@/components/activity-page-nav";
 import { AuthoredPrsTable } from "@/components/authored-prs-table";
 import { ConnectionTestButton } from "@/components/connection-test-button";
-import { DashboardCharts } from "@/components/charts";
 import { ExportCsvButton } from "@/components/export-csv-button";
 import { IssuesTable } from "@/components/issues-table";
 import { ReviewedPrsTable } from "@/components/reviewed-prs-table";
@@ -93,34 +92,13 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
   const detailCountLabel = getDetailCountLabel(viewData, view);
   const pageTitle = getActivityPageTitle(view);
   const pageDescription = getActivityPageDescription(view);
-  const summaryHighlights = summaryCards.slice(0, 3).map((card) => ({ label: card.label, value: card.value }));
 
   return (
     <div className="dashboard-shell">
-      <section className="hero panel">
-        <div>
-          <p className="eyebrow">Internal analytics cockpit</p>
-          <h1>Zephyr team activity dashboard</h1>
-          <p className="hero-copy">
-            Track workload, review pressure, and repo concentration across the configured NXP upstream roster. Snapshot-first,
-            with manual live refresh when you explicitly want a new GitHub sync.
-          </p>
-        </div>
-        <div className="hero-meta">
-          <div>
-            <span className="meta-label">Roster size</span>
-            <strong>{data.rosterSize}</strong>
-          </div>
-          <div>
-            <span className="meta-label">Time window</span>
-            <strong>{data.range.label}</strong>
-          </div>
-          <div>
-            <span className="meta-label">Timezone</span>
-            <strong>{data.range.timeZone}</strong>
-          </div>
-        </div>
-      </section>
+      <div className="title-bar">
+        <span className="title-bar-name">Zephyr team activity</span>
+        <ActivityPageNav currentView={view} filters={filters} />
+      </div>
 
       <section className="panel filter-panel">
         <div className="panel-header compact">
@@ -276,8 +254,6 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
         </div>
       </section>
 
-      <ActivityPageNav currentView={view} filters={filters} />
-
       <section className="panel detail-focus-panel">
         <div className="panel-header compact">
           <div>
@@ -301,32 +277,7 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
         ))}
       </section>
 
-      <DashboardCharts
-        view={view}
-        contributors={viewData.contributors}
-        items={viewData.activityItems}
-        reviewOutcomes={viewData.reviewOutcomes}
-        reviewSources={viewData.reviewSources}
-        summaryHighlights={summaryHighlights}
-      />
-
-      <section className="panel detail-focus-panel">
-        <div className="panel-header compact">
-          <div>
-            <p className="eyebrow">Contributor focus</p>
-            <h2>{selectedContributor}</h2>
-          </div>
-          <div className="detail-focus-meta">
-            <span>{detailCountLabel}</span>
-            <span>{scoreLabel} ranking</span>
-          </div>
-        </div>
-        <p className="token-copy">
-          Click a contributor row or use the filter dropdown to narrow this page. All summary cards, charts, and contributor ranking are scoped to the active activity type.
-        </p>
-      </section>
-
-      <div className="content-grid">
+      <div className="tables-grid">
         <section className="panel table-panel">
           <div className="panel-header compact">
             <div>
@@ -363,15 +314,15 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
                   viewData.contributors.map((contributor) => (
                     <tr key={contributor.login}>
                       <td>
-                        <div className="person-cell">
+                        <span className="person-cell">
                           <a
                             className="table-link"
                             href={buildDashboardHref(pathname, { ...filters, contributors: [contributor.login], refresh: false })}
                           >
                             <strong>{contributor.name}</strong>
                           </a>
-                          <span>@{contributor.login}</span>
-                        </div>
+                          <span className="login-tag">@{contributor.login}</span>
+                        </span>
                       </td>
                       {contributorColumns.map((column) => (
                         <td key={column.key}>{column.value(contributor)}</td>
@@ -383,11 +334,10 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
             </table>
           </div>
         </section>
+        {view === "issues" ? <IssuesTable items={viewData.activityItems} /> : null}
+        {view === "pull-requests" ? <AuthoredPrsTable items={viewData.activityItems} /> : null}
+        {view === "reviews" ? <ReviewedPrsTable items={viewData.activityItems} /> : null}
       </div>
-
-      {view === "issues" ? <IssuesTable items={viewData.activityItems} /> : null}
-      {view === "pull-requests" ? <AuthoredPrsTable items={viewData.activityItems} /> : null}
-      {view === "reviews" ? <ReviewedPrsTable items={viewData.activityItems} /> : null}
     </div>
   );
 }
