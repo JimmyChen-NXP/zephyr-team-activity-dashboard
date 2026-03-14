@@ -6,7 +6,7 @@
     "to": "2026-03-14T23:59:59Z",
     "timeZone": "UTC"
   },
-  "generatedAt": "2026-03-14T07:20:50.971Z",
+  "generatedAt": "2026-03-14T09:28:51.591Z",
   "rosterSize": 171,
   "rosterMembers": [
     {
@@ -3119,7 +3119,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": "failure",
-        "cooldownHours": 9,
+        "cooldownHours": 11,
         "cooldownMet": false
       },
       "metrics": {
@@ -3412,7 +3412,7 @@
         ],
         "pendingRequestedCount": 0,
         "ciStatus": "failure",
-        "cooldownHours": 9,
+        "cooldownHours": 11,
         "cooldownMet": false
       },
       "metrics": {
@@ -3493,7 +3493,7 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 9,
+        "cooldownHours": 11,
         "cooldownMet": false
       },
       "metrics": {
@@ -3910,7 +3910,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 9,
+        "cooldownHours": 12,
         "cooldownMet": false
       },
       "metrics": {
@@ -4306,7 +4306,7 @@
         ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 10,
+        "cooldownHours": 12,
         "cooldownMet": false
       },
       "metrics": {
@@ -4407,7 +4407,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 11,
+        "cooldownHours": 13,
         "cooldownMet": false
       },
       "metrics": {
@@ -4550,7 +4550,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": "failure",
-        "cooldownHours": 11,
+        "cooldownHours": 13,
         "cooldownMet": false
       },
       "metrics": {
@@ -5091,7 +5091,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": "failure",
-        "cooldownHours": 12,
+        "cooldownHours": 14,
         "cooldownMet": false
       },
       "metrics": {
@@ -5502,7 +5502,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 12,
+        "cooldownHours": 14,
         "cooldownMet": false
       },
       "metrics": {
@@ -5800,7 +5800,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 13,
+        "cooldownHours": 15,
         "cooldownMet": false
       },
       "metrics": {
@@ -6119,7 +6119,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 14,
+        "cooldownHours": 16,
         "cooldownMet": false
       },
       "metrics": {
@@ -6226,7 +6226,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 14,
+        "cooldownHours": 16,
         "cooldownMet": false
       },
       "metrics": {
@@ -6317,7 +6317,7 @@
         ],
         "pendingRequestedCount": 17,
         "ciStatus": null,
-        "cooldownHours": 14,
+        "cooldownHours": 16,
         "cooldownMet": false
       },
       "metrics": {
@@ -6749,7 +6749,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 15,
+        "cooldownHours": 17,
         "cooldownMet": false
       },
       "metrics": {
@@ -7260,7 +7260,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 17,
+        "cooldownHours": 19,
         "cooldownMet": false
       },
       "metrics": {
@@ -7315,7 +7315,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 17,
+        "cooldownHours": 19,
         "cooldownMet": false
       },
       "metrics": {
@@ -7417,7 +7417,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 18,
+        "cooldownHours": 20,
         "cooldownMet": false
       },
       "metrics": {
@@ -7664,7 +7664,7 @@
         ],
         "pendingRequestedCount": 21,
         "ciStatus": null,
-        "cooldownHours": 19,
+        "cooldownHours": 21,
         "cooldownMet": false
       },
       "metrics": {
@@ -7889,7 +7889,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 19,
+        "cooldownHours": 22,
         "cooldownMet": false
       },
       "metrics": {
@@ -8207,7 +8207,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 19,
+        "cooldownHours": 22,
         "cooldownMet": false
       },
       "metrics": {
@@ -8308,7 +8308,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 20,
+        "cooldownHours": 22,
         "cooldownMet": false
       },
       "metrics": {
@@ -8436,7 +8436,7 @@
         ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 20,
+        "cooldownHours": 22,
         "cooldownMet": false
       },
       "metrics": {
@@ -9320,7 +9320,7 @@
         ],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 37,
+        "cooldownHours": 39,
         "cooldownMet": false
       },
       "metrics": {
@@ -9522,7 +9522,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 48,
+        "cooldownHours": 50,
         "cooldownMet": false
       },
       "metrics": {
@@ -9826,7 +9826,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 58,
+        "cooldownHours": 60,
         "cooldownMet": false
       },
       "metrics": {
@@ -9975,7 +9975,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 58,
+        "cooldownHours": 60,
         "cooldownMet": false
       },
       "metrics": {
@@ -10775,7 +10775,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 64,
+        "cooldownHours": 66,
         "cooldownMet": false
       },
       "metrics": {
@@ -10995,7 +10995,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 65,
+        "cooldownHours": 67,
         "cooldownMet": false
       },
       "metrics": {
@@ -12170,7 +12170,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 67,
+        "cooldownHours": 70,
         "cooldownMet": false
       },
       "metrics": {
@@ -12365,7 +12365,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 68,
+        "cooldownHours": 71,
         "cooldownMet": false
       },
       "metrics": {
@@ -12716,8 +12716,8 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 7,
         "ciStatus": null,
-        "cooldownHours": 70,
-        "cooldownMet": false
+        "cooldownHours": 72,
+        "cooldownMet": true
       },
       "metrics": {
         "openAssignedIssues": 0,
@@ -12792,8 +12792,8 @@
         ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 70,
-        "cooldownMet": false
+        "cooldownHours": 72,
+        "cooldownMet": true
       },
       "metrics": {
         "openAssignedIssues": 0,
@@ -12952,8 +12952,8 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 70,
-        "cooldownMet": false
+        "cooldownHours": 72,
+        "cooldownMet": true
       },
       "metrics": {
         "openAssignedIssues": 0,
@@ -13208,8 +13208,8 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 16,
         "ciStatus": null,
-        "cooldownHours": 70,
-        "cooldownMet": false
+        "cooldownHours": 72,
+        "cooldownMet": true
       },
       "metrics": {
         "openAssignedIssues": 0,
@@ -13686,7 +13686,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 72,
+        "cooldownHours": 75,
         "cooldownMet": true
       },
       "metrics": {
@@ -14162,7 +14162,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 73,
+        "cooldownHours": 75,
         "cooldownMet": true
       },
       "metrics": {
@@ -14419,7 +14419,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 75,
+        "cooldownHours": 77,
         "cooldownMet": true
       },
       "metrics": {
@@ -14464,7 +14464,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 75,
+        "cooldownHours": 77,
         "cooldownMet": true
       },
       "metrics": {
@@ -14694,7 +14694,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 76,
+        "cooldownHours": 79,
         "cooldownMet": true
       },
       "metrics": {
@@ -15105,7 +15105,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 76,
+        "cooldownHours": 79,
         "cooldownMet": true
       },
       "metrics": {
@@ -15393,7 +15393,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 77,
+        "cooldownHours": 79,
         "cooldownMet": true
       },
       "metrics": {
@@ -16263,7 +16263,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 86,
+        "cooldownHours": 88,
         "cooldownMet": true
       },
       "metrics": {
@@ -16302,7 +16302,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 87,
+        "cooldownHours": 89,
         "cooldownMet": true
       },
       "metrics": {
@@ -16726,7 +16726,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 88,
+        "cooldownHours": 90,
         "cooldownMet": true
       },
       "metrics": {
@@ -16965,7 +16965,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 91,
+        "cooldownHours": 93,
         "cooldownMet": true
       },
       "metrics": {
@@ -17004,7 +17004,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 7,
         "ciStatus": null,
-        "cooldownHours": 91,
+        "cooldownHours": 93,
         "cooldownMet": true
       },
       "metrics": {
@@ -17324,7 +17324,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 27,
         "ciStatus": null,
-        "cooldownHours": 92,
+        "cooldownHours": 94,
         "cooldownMet": true
       },
       "metrics": {
@@ -17720,7 +17720,7 @@
         ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 92,
+        "cooldownHours": 95,
         "cooldownMet": true
       },
       "metrics": {
@@ -18306,7 +18306,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 94,
+        "cooldownHours": 96,
         "cooldownMet": true
       },
       "metrics": {
@@ -18513,7 +18513,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 94,
+        "cooldownHours": 96,
         "cooldownMet": true
       },
       "metrics": {
@@ -18999,7 +18999,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 94,
+        "cooldownHours": 97,
         "cooldownMet": true
       },
       "metrics": {
@@ -19175,7 +19175,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 95,
+        "cooldownHours": 97,
         "cooldownMet": true
       },
       "metrics": {
@@ -19637,7 +19637,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 96,
+        "cooldownHours": 98,
         "cooldownMet": true
       },
       "metrics": {
@@ -20296,7 +20296,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 101,
+        "cooldownHours": 103,
         "cooldownMet": true
       },
       "metrics": {
@@ -20547,7 +20547,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 103,
+        "cooldownHours": 105,
         "cooldownMet": true
       },
       "metrics": {
@@ -20907,7 +20907,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 106,
+        "cooldownHours": 108,
         "cooldownMet": true
       },
       "metrics": {
@@ -21828,7 +21828,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 118,
+        "cooldownHours": 120,
         "cooldownMet": true
       },
       "metrics": {
@@ -22174,7 +22174,7 @@
         ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 119,
+        "cooldownHours": 121,
         "cooldownMet": true
       },
       "metrics": {
@@ -22282,7 +22282,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 120,
+        "cooldownHours": 122,
         "cooldownMet": true
       },
       "metrics": {
@@ -22756,7 +22756,7 @@
         ],
         "pendingRequestedCount": 16,
         "ciStatus": null,
-        "cooldownHours": 123,
+        "cooldownHours": 125,
         "cooldownMet": true
       },
       "metrics": {
@@ -23174,7 +23174,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 124,
+        "cooldownHours": 126,
         "cooldownMet": true
       },
       "metrics": {
@@ -23531,7 +23531,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 126,
+        "cooldownHours": 128,
         "cooldownMet": true
       },
       "metrics": {
@@ -23771,7 +23771,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 150,
+        "cooldownHours": 152,
         "cooldownMet": true
       },
       "metrics": {
@@ -24106,7 +24106,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 179,
+        "cooldownHours": 181,
         "cooldownMet": true
       },
       "metrics": {
@@ -24440,7 +24440,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 190,
+        "cooldownHours": 192,
         "cooldownMet": true
       },
       "metrics": {
@@ -24496,7 +24496,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 192,
+        "cooldownHours": 194,
         "cooldownMet": true
       },
       "metrics": {
@@ -24876,7 +24876,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 211,
+        "cooldownHours": 214,
         "cooldownMet": true
       },
       "metrics": {
@@ -25231,7 +25231,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 213,
+        "cooldownHours": 215,
         "cooldownMet": true
       },
       "metrics": {
@@ -25276,7 +25276,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 215,
+        "cooldownHours": 217,
         "cooldownMet": true
       },
       "metrics": {
@@ -25315,7 +25315,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 215,
+        "cooldownHours": 218,
         "cooldownMet": true
       },
       "metrics": {
@@ -25872,7 +25872,7 @@
         ],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 230,
+        "cooldownHours": 232,
         "cooldownMet": true
       },
       "metrics": {
@@ -25933,7 +25933,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 231,
+        "cooldownHours": 233,
         "cooldownMet": true
       },
       "metrics": {
@@ -26127,7 +26127,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 232,
+        "cooldownHours": 234,
         "cooldownMet": true
       },
       "metrics": {
@@ -26332,7 +26332,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 239,
+        "cooldownHours": 241,
         "cooldownMet": true
       },
       "metrics": {
@@ -26481,7 +26481,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 243,
+        "cooldownHours": 245,
         "cooldownMet": true
       },
       "metrics": {
@@ -26526,7 +26526,7 @@
         ],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 246,
+        "cooldownHours": 248,
         "cooldownMet": true
       },
       "metrics": {
@@ -26715,7 +26715,7 @@
         ],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 258,
+        "cooldownHours": 260,
         "cooldownMet": true
       },
       "metrics": {
@@ -26765,7 +26765,7 @@
         ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 259,
+        "cooldownHours": 261,
         "cooldownMet": true
       },
       "metrics": {
@@ -27105,7 +27105,7 @@
         ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 260,
+        "cooldownHours": 262,
         "cooldownMet": true
       },
       "metrics": {
@@ -27280,7 +27280,7 @@
         ],
         "pendingRequestedCount": 18,
         "ciStatus": null,
-        "cooldownHours": 261,
+        "cooldownHours": 263,
         "cooldownMet": true
       },
       "metrics": {
@@ -27722,7 +27722,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 264,
+        "cooldownHours": 266,
         "cooldownMet": true
       },
       "metrics": {
@@ -27792,7 +27792,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 288,
+        "cooldownHours": 290,
         "cooldownMet": true
       },
       "metrics": {
@@ -27986,7 +27986,7 @@
         "otherVerdicts": [],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 4968,
+        "cooldownHours": 4970,
         "cooldownMet": true
       },
       "metrics": {
@@ -28041,7 +28041,7 @@
   ],
   "syncHealth": {
     "source": "cache",
-    "generatedAt": "2026-03-14T07:20:50.971Z",
+    "generatedAt": "2026-03-14T09:28:51.591Z",
     "freshnessMinutes": 0,
     "searchSamples": 23260,
     "detailSamples": 1169,
@@ -28744,6 +28744,6 @@
     "hasToken": false,
     "connectionStatus": "configured",
     "message": "Snapshot aggregated from daily files by GitHub Actions. No token is available in the browser.",
-    "checkedAt": "2026-03-14T07:20:50.971Z"
+    "checkedAt": "2026-03-14T09:28:51.591Z"
   }
 }
