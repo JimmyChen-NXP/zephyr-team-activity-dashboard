@@ -14,8 +14,6 @@ import {
   getContributorColumns,
   getDetailCountLabel,
   getSummaryCards,
-  getViewScoreFormula,
-  getViewScoreLabel,
 } from "@/lib/dashboard-aggregates";
 import { withBasePath } from "@/lib/base-path";
 import { buildDashboardHref, buildExportHref } from "@/lib/dashboard-links";
@@ -87,9 +85,7 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
           .map((option) => option.name)
           .join(", ");
   const summaryCards = getSummaryCards(viewData, view);
-  const contributorColumns = getContributorColumns(view);
-  const scoreLabel = getViewScoreLabel(view);
-  const scoreFormula = getViewScoreFormula(view);
+  const contributorColumns = getContributorColumns(view).filter((col) => col.key !== "score");
   const detailCountLabel = getDetailCountLabel(viewData, view);
   const pageTitle = getActivityPageTitle(view);
   const pageDescription = getActivityPageDescription(view);
@@ -191,87 +187,6 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
             )}
           </div>
         </form>
-
-        <div className="status-strip">
-          <article className="status-card">
-            <div className="status-card-header">
-              <div>
-                <p className="eyebrow">GitHub connection</p>
-                <h3>{getAuthStatusLabel(viewData.auth)}</h3>
-              </div>
-              <span className={clsx("status-pill", `status-pill-${viewData.auth.connectionStatus}`)}>{getAuthStatusLabel(viewData.auth)}</span>
-            </div>
-            <p className="token-copy">{viewData.auth.message}</p>
-            {isHostedSnapshot ? (
-              <p className="token-copy connection-test-copy">Snapshot mode. Use Update data to run the GitHub Action and refresh this page after it finishes.</p>
-            ) : (
-              <ConnectionTestButton />
-            )}
-          </article>
-
-          <article className="status-card">
-            <div className="status-card-header">
-              <div>
-                <p className="eyebrow">Active source</p>
-                <h3>{getSyncSourceLabel(viewData.syncHealth.source)}</h3>
-              </div>
-            </div>
-            <p className="token-copy">
-              {viewData.syncHealth.source === "live"
-                ? "This page was built from a live GitHub sync."
-                : viewData.syncHealth.source === "cache"
-                  ? "This page is currently using the latest cached snapshot."
-                  : "This page is currently using demo data."}
-            </p>
-          </article>
-
-          <article className="status-card">
-            <div className="status-card-header">
-              <div>
-                <p className="eyebrow">Last update</p>
-                <h3>{formatDistanceToNow(new Date(viewData.generatedAt), { addSuffix: true })}</h3>
-              </div>
-            </div>
-            <p className="token-copy">
-              Generated {formatISO9075(new Date(viewData.generatedAt))}
-              {viewData.auth.checkedAt ? ` · Connection checked ${formatDistanceToNow(new Date(viewData.auth.checkedAt), { addSuffix: true })}` : ""}
-            </p>
-          </article>
-
-          <article className="status-card">
-            <div className="status-card-header">
-              <div>
-                <p className="eyebrow">Warnings</p>
-                <h3>{viewData.warnings.length === 0 ? "No warnings" : `${viewData.warnings.length} warning${viewData.warnings.length === 1 ? "" : "s"}`}</h3>
-              </div>
-            </div>
-            <div className="warning-list">
-              {viewData.warnings.length === 0 ? (
-                <div className="warning-item info">No warnings. Coverage looks healthy.</div>
-              ) : (
-                viewData.warnings.map((warning) => (
-                  <div key={warning.message} className={clsx("warning-item", warning.level)}>
-                    {warning.message}
-                  </div>
-                ))
-              )}
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="panel detail-focus-panel">
-        <div className="panel-header compact">
-          <div>
-            <p className="eyebrow">Activity context</p>
-            <h2>{pageTitle}</h2>
-          </div>
-          <div className="detail-focus-meta">
-            <span>{detailCountLabel}</span>
-            <span>{viewData.contributors.length} active contributors</span>
-          </div>
-        </div>
-        <p className="token-copy">{pageDescription}</p>
       </section>
 
       <section className="summary-grid">
@@ -297,15 +212,7 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
                 <tr>
                   <th>Contributor</th>
                   {contributorColumns.map((column) => (
-                    <th key={column.key}>
-                      {column.label === scoreLabel ? (
-                        <span className="help-label" title={scoreFormula}>
-                          {column.label} ⓘ
-                        </span>
-                      ) : (
-                        column.label
-                      )}
-                    </th>
+                    <th key={column.key}>{column.label}</th>
                   ))}
                 </tr>
               </thead>
@@ -320,15 +227,12 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
                   viewData.contributors.map((contributor) => (
                     <tr key={contributor.login}>
                       <td>
-                        <span className="person-cell">
-                          <a
-                            className="table-link"
-                            href={buildDashboardHref(pathname, { ...filters, contributors: [contributor.login], refresh: false })}
-                          >
-                            <strong>{contributor.name}</strong>
-                          </a>
-                          <span className="login-tag">@{contributor.login}</span>
-                        </span>
+                        <a
+                          className="table-link"
+                          href={buildDashboardHref(pathname, { ...filters, contributors: [contributor.login], refresh: false })}
+                        >
+                          <strong>{contributor.name}</strong>
+                        </a>
                       </td>
                       {contributorColumns.map((column) => (
                         <td key={column.key}>{column.value(contributor)}</td>
@@ -344,6 +248,87 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
         {view === "pull-requests" ? <AuthoredPrsTable items={viewData.activityItems} /> : null}
         {view === "reviews" ? <ReviewedPrsTable items={viewData.activityItems} /> : null}
       </div>
+
+      <div className="status-strip">
+        <article className="status-card">
+          <div className="status-card-header">
+            <div>
+              <p className="eyebrow">GitHub connection</p>
+              <h3>{getAuthStatusLabel(viewData.auth)}</h3>
+            </div>
+            <span className={clsx("status-pill", `status-pill-${viewData.auth.connectionStatus}`)}>{getAuthStatusLabel(viewData.auth)}</span>
+          </div>
+          <p className="token-copy">{viewData.auth.message}</p>
+          {isHostedSnapshot ? (
+            <p className="token-copy connection-test-copy">Snapshot mode. Use Update data to run the GitHub Action and refresh this page after it finishes.</p>
+          ) : (
+            <ConnectionTestButton />
+          )}
+        </article>
+
+        <article className="status-card">
+          <div className="status-card-header">
+            <div>
+              <p className="eyebrow">Active source</p>
+              <h3>{getSyncSourceLabel(viewData.syncHealth.source)}</h3>
+            </div>
+          </div>
+          <p className="token-copy">
+            {viewData.syncHealth.source === "live"
+              ? "This page was built from a live GitHub sync."
+              : viewData.syncHealth.source === "cache"
+                ? "This page is currently using the latest cached snapshot."
+                : "This page is currently using demo data."}
+          </p>
+        </article>
+
+        <article className="status-card">
+          <div className="status-card-header">
+            <div>
+              <p className="eyebrow">Last update</p>
+              <h3>{formatDistanceToNow(new Date(viewData.generatedAt), { addSuffix: true })}</h3>
+            </div>
+          </div>
+          <p className="token-copy">
+            Generated {formatISO9075(new Date(viewData.generatedAt))}
+            {viewData.auth.checkedAt ? ` · Connection checked ${formatDistanceToNow(new Date(viewData.auth.checkedAt), { addSuffix: true })}` : ""}
+          </p>
+        </article>
+
+        <article className="status-card">
+          <div className="status-card-header">
+            <div>
+              <p className="eyebrow">Warnings</p>
+              <h3>{viewData.warnings.length === 0 ? "No warnings" : `${viewData.warnings.length} warning${viewData.warnings.length === 1 ? "" : "s"}`}</h3>
+            </div>
+          </div>
+          <div className="warning-list">
+            {viewData.warnings.length === 0 ? (
+              <div className="warning-item info">No warnings. Coverage looks healthy.</div>
+            ) : (
+              viewData.warnings.map((warning) => (
+                <div key={warning.message} className={clsx("warning-item", warning.level)}>
+                  {warning.message}
+                </div>
+              ))
+            )}
+          </div>
+        </article>
+      </div>
+
+      <section className="panel detail-focus-panel">
+        <div className="panel-header compact">
+          <div>
+            <p className="eyebrow">Activity context</p>
+            <h2>{pageTitle}</h2>
+          </div>
+          <div className="detail-focus-meta">
+            <span>{detailCountLabel}</span>
+            <span>{viewData.contributors.length} active contributors</span>
+          </div>
+        </div>
+        <p className="token-copy">{pageDescription}</p>
+      </section>
     </div>
   );
 }
