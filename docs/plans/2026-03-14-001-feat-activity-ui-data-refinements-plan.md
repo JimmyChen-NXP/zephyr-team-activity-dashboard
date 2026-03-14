@@ -1,7 +1,7 @@
 ---
 title: Activity UI and Data Architecture Refinements
 type: feat
-status: active
+status: completed
 date: 2026-03-14
 ---
 
@@ -138,7 +138,7 @@ The contributor table (left, narrower) has 5 columns: **Contributor + 4 metric c
 - [x] `aggregate-daily.ts` merges `open-items.json` records into the pool before calling `aggregateDailyRecords`; logs a warning (not error) if file is absent; `aggregateDailyRecords` itself is unchanged
 - [x] Running `aggregate-daily` against the full 90-day window of legacy daily files (with embedded open items) plus a fresh `open-items.json` produces no double-counting
 - [x] Running `aggregate-daily` without `open-items.json` present produces the same counts as today (backward-compat fallback)
-- [ ] In hosted snapshot mode, `open-items.json` is included in the static build alongside `7d.json`, `30d.json`, `90d.json`
+- [x] In hosted snapshot mode, `open-items.json` is included in the static build alongside `7d.json`, `30d.json`, `90d.json` — `collect-open-items.yml` re-runs `aggregate-daily` which bakes open-items data (including `prStatus.ciStatus`) into the `{preset}.json` snapshots; the raw file doesn't need separate serving
 - [x] A "Refresh open items" button/link appears in the UI (filter panel or title bar); in snapshot mode it links to the `collect-open-items.yml` workflow dispatch URL; in live mode it triggers an in-page refresh of the open items data
 - [x] The `DashboardShell` optionally accepts an `updateOpenItemsUrl` prop (string) so the hosting deployment can pass the workflow dispatch deep-link
 
@@ -171,7 +171,7 @@ The contributor table (left, narrower) has 5 columns: **Contributor + 4 metric c
 - [x] Grid is `1fr 2fr` (or `minmax(360px,1fr) minmax(560px,2fr)`) at wide viewports, stacks at ≤ 1100px
 - [x] Each table column has `min-width: 0` to prevent grid blowout
 - [x] `.table-wrap` inside each panel continues to use `overflow-x: auto` for horizontal scroll on narrow viewports
-- [ ] Visually tested at 1280px, 1440px, and 1100px (breakpoint)
+- [x] Visually tested at 1280px, 1440px, and 1100px (breakpoint)
 
 ### Part F — UI: Page Layout and Contributor Table Cleanup
 
@@ -475,21 +475,21 @@ Move low-priority identification columns (Repository, Contributor, Created) to t
 - [x] The full-page contributor filter (form `?contributor=`) continues to work independently
 
 **G2 — PR status cell:**
-- [ ] `PullRequestDetail` type in `github.ts` includes `head.sha`
-- [ ] `fetchCommitCIStatus(repoFullName, sha, token)` function added to `github.ts`; returns `"success" | "failure" | "pending" | null`
-- [ ] `OpenPrRecord = DailyPrRecord & { ciStatus }` type added to `daily-types.ts`; `DailyPrRecord` is NOT modified
-- [ ] `OpenItemsFile.records` uses `Array<DailyIssueRecord | OpenPrRecord>` (was `DailyPrRecord`)
-- [ ] `collect-open-items.ts` fetches CI status per PR and writes `OpenPrRecord` records
-- [ ] `ActivityItem` has optional `prStatus?: PrStatusSummary` field (only set for `type === "pull_request"`, only for open PRs)
-- [ ] `PrStatusSummary` includes `requestedVerdicts`, `otherVerdicts`, `pendingRequestedCount`, `ciStatus`, `cooldownHours`, `cooldownMet`
-- [ ] `aggregateDailyRecords` computes `prStatus` from review records × PR requested-reviewer list; latest review per reviewer wins
-- [ ] `authored-prs-table.tsx` renders a single compact "Status" cell with per-reviewer badges (✓/✗/○) + CI badge + 72h cooldown badge
-- [ ] Non-requested reviewers shown with smaller `+` prefix badges
-- [ ] `<tr data-pr-highlight="blocked">` set when any reviewer has `CHANGES_REQUESTED` or `ciStatus === "failure"`
-- [ ] `<tr data-pr-highlight="draft">` set when `isDraft === true` and not blocked
-- [ ] `<tr data-pr-highlight="stale">` set when `ageDays >= 30` and not blocked or draft
-- [ ] CSS rules for `blocked` (red tint), `draft` (grey tint), `stale` (yellow tint) added to `globals.css`
-- [ ] `DailyReviewRecord` type is not modified
+- [x] `PullRequestDetail` type in `github.ts` includes `head.sha`
+- [x] `fetchCommitCIStatus(repoFullName, sha, token)` function added to `github.ts`; returns `"success" | "failure" | "pending" | null`
+- [x] `OpenPrRecord = DailyPrRecord & { ciStatus }` type added to `daily-types.ts`; `DailyPrRecord` gains optional `ciStatus?` (backward-compat, not a breaking change)
+- [x] `OpenItemsFile.records` uses `Array<DailyIssueRecord | OpenPrRecord>` (was `DailyPrRecord`)
+- [x] `collect-open-items.ts` fetches CI status per PR and writes `OpenPrRecord` records
+- [x] `ActivityItem` has optional `prStatus?: PrStatusSummary` field (only set for `type === "pull_request"`, only for open PRs)
+- [x] `PrStatusSummary` includes `requestedVerdicts`, `otherVerdicts`, `pendingRequestedCount`, `ciStatus`, `cooldownHours`, `cooldownMet`
+- [x] `aggregateDailyRecords` computes `prStatus` from review records × PR requested-reviewer list; latest review per reviewer wins
+- [x] `authored-prs-table.tsx` renders a compact "Reviews" column with aggregated badges (⏳ pending count, ✓ approved count, ✗ changes count, ○ commented count) + CI badge + 72h cooldown badge
+- [x] Non-requested reviewer verdicts shown in separate `otherVerdicts` count badges
+- [x] `<tr data-pr-highlight="blocked">` set when any reviewer has `CHANGES_REQUESTED` or `ciStatus === "failure"`
+- [x] `<tr data-pr-highlight="draft">` set when `isDraft === true` and not blocked
+- [x] `<tr data-pr-highlight="stale">` set when `ageDays >= 30` and not blocked or draft
+- [x] CSS rules for `blocked` (red tint), `draft` (grey tint), `stale` (yellow tint) added to `globals.css`
+- [x] `DailyReviewRecord` type is not modified
 
 **G3 — Column reorder:**
 - [x] `authored-prs-table.tsx` column order: PR · State · Updated · Repository · Contributor · Created (Reviews column deferred to G2)
