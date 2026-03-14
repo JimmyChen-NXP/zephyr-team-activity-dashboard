@@ -22,11 +22,11 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
           <thead>
             <tr>
               <th>PR</th>
+              <th>State</th>
+              <th>Updated</th>
               <th>Repository</th>
               <th>Contributor</th>
               <th>Created</th>
-              <th>State</th>
-              <th>Updated</th>
             </tr>
           </thead>
           <tbody>
@@ -44,11 +44,11 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
                       {item.title}
                     </a>
                   </td>
+                  <td>{item.statusLabel}</td>
+                  <td>{formatISO9075(new Date(item.updatedAt))}</td>
                   <td>{item.repo}</td>
                   <td>@{item.contributor}</td>
                   <td>{formatISO9075(new Date(item.createdAt))}</td>
-                  <td>{item.statusLabel}</td>
-                  <td>{formatISO9075(new Date(item.updatedAt))}</td>
                 </tr>
               ))
             )}

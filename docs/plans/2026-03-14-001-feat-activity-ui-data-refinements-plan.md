@@ -173,6 +173,330 @@ The contributor table (left, narrower) has 5 columns: **Contributor + 4 metric c
 - [x] `.table-wrap` inside each panel continues to use `overflow-x: auto` for horizontal scroll on narrow viewports
 - [ ] Visually tested at 1280px, 1440px, and 1100px (breakpoint)
 
+### Part F — UI: Page Layout and Contributor Table Cleanup
+
+Four focused refinements requested after initial implementation:
+
+1. **Status strip to end of page** — the four status cards (GitHub connection, Active source, Last update, Warnings) are operational detail, not decision-making data. Move `div.status-strip` out of `section.filter-panel` and place it at the bottom of the page after `.tables-grid`.
+
+2. **Activity context to end of page** — the `section.panel.detail-focus-panel` ("Activity context") describes the current view. It is more useful as a footer reference than as a separator between the filter panel and the summary cards. Move it to the end of the page, after the status strip.
+
+3. **Remove `@login` from contributor name cell** — the login tag is redundant next to the display name. The contributor filter link on the name is sufficient for identification.
+
+4. **Remove score column from contributor table, keep score-based sorting** — contributors are already sorted by `activityScore` descending (`dashboard-aggregates.ts:145`). Remove the column from display; the `scoreLabel`/`scoreFormula` tooltip logic and the `getViewScoreLabel`/`getViewScoreFormula` imports can be removed.
+
+#### Acceptance Criteria
+
+- [x] `div.status-strip` is rendered after `div.tables-grid`, not inside `section.filter-panel`
+- [x] `section.panel.detail-focus-panel` ("Activity context") is rendered at the end of the page, after the status strip
+- [x] `section.filter-panel` contains only the panel header and `form.filter-form`
+- [x] Contributor table `person-cell` renders only `<strong>{contributor.name}</strong>` — no `@login` span
+- [x] Score column (`key: "score"`) is not rendered in contributor table header or rows
+- [x] `getViewScoreLabel` and `getViewScoreFormula` imports removed from `dashboard-shell.tsx`
+- [x] Contributors remain sorted by `activityScore` descending (no change to data layer)
+
+---
+
+### Part G — Contributor Row → Local Detail Filter, PR Review Status, Column Reorder
+
+Three coordinated improvements to make the side-by-side tables more interactive and informative.
+
+#### G1 — Contributor row click filters only the detail table (no URL change)
+
+Currently clicking a contributor name navigates to `?contributor=<login>`, which applies a full-page filter (both tables + URL change). The request is to instead let clicking a contributor row act as a **local, in-memory filter on the detail table only** — the contributor table stays fully visible for comparison, and no URL navigation occurs.
+
+**Approach:**
+
+`dashboard-shell.tsx` is already `"use client"`. Add a `useState<string | null>` for `localContributor`:
+
+```tsx
+const [localContributor, setLocalContributor] = useState<string | null>(null);
+
+// Filter detail items locally
+const detailItems = localContributor
+  ? viewData.activityItems.filter((item) => item.contributor === localContributor)
+  : viewData.activityItems;
+```
+
+Change the contributor table rows from `<a href={...}>` links to `<button>` elements that call `setLocalContributor(login)` on click (toggle: clicking the already-selected contributor clears the filter). Highlight the selected row visually (`aria-selected` + CSS). Add a small "clear" affordance above the detail table when a local filter is active (e.g., a `×` button showing "Filtering for: Name").
+
+The existing URL-based contributor filter (from the filter form) continues to work as before — it is a separate, coarser control.
+
+```tsx
+// Contributor table row button (replaces <a>)
+<button
+  className={clsx("table-link", localContributor === contributor.login && "is-selected")}
+  onClick={() => setLocalContributor(localContributor === contributor.login ? null : contributor.login)}
+  type="button"
+>
+  <strong>{contributor.name}</strong>
+</button>
+```
+
+#### G2 — PR status cell: reviewer verdicts, CI, cooldown, and row highlighting
+
+The authored-PRs detail table needs to answer at a glance: **is this PR blocked, and by what?**
+
+Five signals are needed per open PR:
+
+| Signal | Question answered |
+|---|---|
+| Requested-reviewer verdicts | Did the people asked to review approve or request changes? |
+| Other reviewer verdicts | Did anyone outside the requested set weigh in? |
+| CI status | Did automated checks pass? |
+| 72-hour cooldown (Zephyr rule) | Has the PR been in review long enough to merge? |
+| Age | Has this been open for over a month with no merge? |
+
+**Terminology clarification — "assignee" vs "requested reviewer":**
+
+In GitHub's PR model, `assignees` (PR field) are typically the author/DRI, while `requested_reviewers` are people explicitly asked to review. The Zephyr project uses `requested_reviewers` for the "who must approve" role. This plan uses **requested reviewers** as the primary concept. The distinction between "requested reviewer verdict" and "other reviewer verdict" is: was the reviewer's login in `DailyPrRecord.requestedReviewers` at the time of collection?
+
+---
+
+**Data currently available:**
+- `DailyReviewRecord.state` (`APPROVED | CHANGES_REQUESTED | COMMENTED`) ✓ in daily files
+- `DailyReviewRecord.reviewer` (login) ✓
+- `DailyPrRecord.requestedReviewers` ✓
+- `DailyPrRecord.isDraft` ✓
+- `DailyPrRecord.createdAt` ✓ (for age + cooldown proxy)
+
+**Data NOT yet available (requires collection additions):**
+- `ciStatus` — not in `DailyPrRecord` or `PullRequestDetail`; requires `head.sha` + a new API call
+
+---
+
+**Data layer additions:**
+
+**Step 1 — Add `ciStatus` to `PullRequestDetail` type** (`src/lib/github.ts`):
+
+```ts
+export type PullRequestDetail = {
+  // ...existing fields...
+  head: {
+    sha: string;           // add this
+    repo: { full_name: string } | null;
+  };
+};
+```
+
+The REST API already returns `head.sha` in every PR detail response — it just isn't typed yet.
+
+**Step 2 — Add `fetchCommitCIStatus` function** (`src/lib/github.ts`):
+
+```ts
+// Calls GET /repos/{owner}/{repo}/commits/{sha}/check-runs
+// Returns aggregated: "success" | "failure" | "pending" | null (null = no checks configured)
+export async function fetchCommitCIStatus(
+  repoFullName: string,
+  sha: string,
+  token?: string,
+): Promise<"success" | "failure" | "pending" | null>
+```
+
+Logic: if any check run has `conclusion: "failure" | "timed_out" | "cancelled"` → `"failure"`. If all are `"success"` → `"success"`. Otherwise `"pending"`.
+
+**Step 3 — Extend `DailyPrRecord` for open-items-only fields** (`src/lib/daily-types.ts`):
+
+`DailyPrRecord` is used in both daily files and `open-items.json`. Rather than modifying it (breaking change for daily files), introduce an extended type only for open-items output:
+
+```ts
+// daily-types.ts — additive only, DailyPrRecord unchanged
+export type OpenPrRecord = DailyPrRecord & {
+  ciStatus: "success" | "failure" | "pending" | null;
+};
+
+// Update OpenItemsFile to use OpenPrRecord for PR entries
+export type OpenItemsFile = {
+  collectedAt: string;
+  repos: string[];
+  records: Array<DailyIssueRecord | OpenPrRecord>;
+};
+```
+
+**Step 4 — Collect CI status in `collect-open-items.ts`**:
+
+After `fetchPullRequestDetails`, fetch CI status concurrently:
+
+```ts
+const [detail, ciStatus] = await Promise.all([
+  fetchPullRequestDetails(item.pull_request!.url, token),
+  fetchCommitCIStatus(repoFullName, detail.head.sha, token), // after detail resolves
+]);
+
+const prRecord: OpenPrRecord = {
+  // ...existing DailyPrRecord fields...
+  ciStatus,
+};
+```
+
+Rate-limit note: `check-runs` uses the core rate limit (not search). At 300 PRs per run and 5,000 requests/hour, this adds ~300 requests. Stay within budget.
+
+**Step 5 — Enrich `ActivityItem` with reviewer verdicts** (`src/lib/types.ts` + `src/lib/daily-aggregation.ts`):
+
+```ts
+// src/lib/types.ts
+export type ReviewerVerdict = {
+  login: string;
+  state: "APPROVED" | "CHANGES_REQUESTED" | "COMMENTED";
+  wasRequested: boolean; // true if login was in DailyPrRecord.requestedReviewers
+};
+
+export type PrStatusSummary = {
+  requestedVerdicts: ReviewerVerdict[];  // people in requestedReviewers who submitted a review
+  otherVerdicts: ReviewerVerdict[];      // reviewers not in requestedReviewers
+  pendingRequestedCount: number;         // requestedReviewers with no review yet
+  ciStatus: "success" | "failure" | "pending" | null;
+  cooldownHours: number;                 // hours since createdAt (proxy for review start)
+  cooldownMet: boolean;                  // cooldownHours >= 72
+};
+
+export type ActivityItem = {
+  // ...existing fields...
+  prStatus?: PrStatusSummary; // only set for type === "pull_request"
+};
+```
+
+**Scope: open PRs only.** `prStatus` is computed and attached only for PR ActivityItems where `pr.state === "open"`. Merged and closed PRs leave `prStatus` undefined — the Status cell renders `—` and no row highlight is applied. This matches where the rich data comes from: `OpenPrRecord` (with `ciStatus`) is only written by `collect-open-items.ts`, which exclusively fetches open PRs. Reviewer verdict computation is also guarded to `state === "open"` to avoid stale/misleading data on already-resolved PRs.
+
+In `aggregateDailyRecords`, before building PR ActivityItems, build a per-PR-URL map from review records:
+
+```ts
+// Map from prUrl → latest verdict per reviewer login
+const reviewsByPrUrl = new Map<string, Map<string, "APPROVED" | "CHANGES_REQUESTED" | "COMMENTED">>();
+for (const review of reviewRecords) {
+  if (!reviewsByPrUrl.has(review.prUrl)) reviewsByPrUrl.set(review.prUrl, new Map());
+  // Use latest review per reviewer (later submittedAt wins)
+  reviewsByPrUrl.get(review.prUrl)!.set(review.reviewer, review.state);
+}
+
+// When building open PR ActivityItem:
+const reviewerMap = reviewsByPrUrl.get(pr.url) ?? new Map();
+const requestedSet = new Set(pr.requestedReviewers.map(r => r.toLowerCase()));
+const requestedVerdicts: ReviewerVerdict[] = [];
+const otherVerdicts: ReviewerVerdict[] = [];
+for (const [login, state] of reviewerMap) {
+  const verdict = { login, state, wasRequested: requestedSet.has(login.toLowerCase()) };
+  (verdict.wasRequested ? requestedVerdicts : otherVerdicts).push(verdict);
+}
+const pendingRequestedCount = pr.requestedReviewers
+  .filter(r => !reviewerMap.has(r.toLowerCase())).length;
+const cooldownHours = differenceInHours(new Date(), parseISO(pr.createdAt));
+
+activityItem.prStatus = {
+  requestedVerdicts,
+  otherVerdicts,
+  pendingRequestedCount,
+  ciStatus: (pr as OpenPrRecord).ciStatus ?? null,
+  cooldownHours,
+  cooldownMet: cooldownHours >= 72,
+};
+```
+
+---
+
+**UI — compact "Status" cell** (`authored-prs-table.tsx`):
+
+Replace the simple "State" and "Reviews" columns with a single compact **"Status"** cell that shows all signals as inline badges. Keep the table scannable — one dense cell beats four sparse columns.
+
+```
+[PR Title]                              [Status cell]           [Updated]   ...
+Open PR linked to title                 ✓ Alice  ✗ Bob  ○ Carol  CI ✓  72h ✓
+```
+
+Badge rendering rules (all inline, small font, colored):
+
+| Badge | Condition | Color |
+|---|---|---|
+| `✓ {login}` | Requested reviewer: APPROVED | green |
+| `✗ {login}` | Requested reviewer: CHANGES_REQUESTED | red |
+| `○ {login}` | Requested reviewer: pending (no review yet) | muted |
+| `+ ✓` / `+ ✗` | Non-requested reviewer: approved/changes | green/red (smaller) |
+| `CI ✓` | ciStatus = success | green |
+| `CI ✗` | ciStatus = failure | red |
+| `CI …` | ciStatus = pending | muted |
+| `72h ✓` | cooldownMet = true | muted green |
+| `⏱ Xh` | cooldownMet = false, X hours remaining | amber |
+
+Use `title` attributes on each badge for tooltip detail (e.g., `title="Bob requested changes"`).
+
+**Row highlighting** — `<tr data-pr-highlight="...">` + CSS:
+
+| Condition | Class | Color | Priority |
+|---|---|---|---|
+| `changesRequested > 0` in any verdict, OR `ciStatus === "failure"` | `pr-row-blocked` | Red tint `#fff0f0` | 1 (highest) |
+| `isDraft === true` | `pr-row-draft` | Grey tint `#f5f5f5` | 2 |
+| `ageDays >= 30` | `pr-row-stale` | Yellow tint `#fffbe6` | 3 |
+| none | — | white | — |
+
+Priority means: a PR that is both draft AND blocked shows red (red wins).
+
+```css
+tr[data-pr-highlight="blocked"] { background: #fff0f0; }
+tr[data-pr-highlight="draft"]   { background: #f5f5f5; color: var(--muted); }
+tr[data-pr-highlight="stale"]   { background: #fffbe6; }
+```
+
+---
+
+> **Note on data freshness for reviews:** Review records in the daily files are scoped to the collection window (default 30–90 days). For PRs older than the window, review history may be incomplete. The status cell shows what is in the dataset — for open PRs (the primary use case), reviews are within window. For merged/closed PRs in the table, `prStatus` will be absent or incomplete.
+
+> **Note on CI status freshness:** CI status is collected at the time `collect-open-items` runs (daily, ~05:23 UTC). It reflects the CI result as of collection time, not real-time. The table header or tooltip should note "CI status as of last collection".
+
+#### G3 — Column reorder for detail tables
+
+Move low-priority identification columns (Repository, Contributor, Created) to the right of each detail table so the most decision-relevant columns appear first.
+
+**`authored-prs-table.tsx` — Pull Requests view:**
+
+| Before | After |
+|---|---|
+| PR · Repository · Contributor · Created · State · Updated | PR · State · Reviews (new) · Updated · Repository · Contributor · Created |
+
+**`issues-table.tsx` — Issues view:**
+
+| Before | After |
+|---|---|
+| Issue · Repository · Contributor · State · Updated | Issue · State · Updated · Repository · Contributor |
+
+**`reviewed-prs-table.tsx` — Reviews view:**
+
+| Before | After |
+|---|---|
+| Reviewed PR · Repository · Reviewer · Author · Author type · Created · Status · Outcome · Updated | Reviewed PR · Status · Outcome · Author type · Updated · Repository · Reviewer · Author · Created |
+
+#### Acceptance Criteria
+
+**G1 — Local contributor filter:**
+- [x] Clicking a contributor row in the contributor table sets a local filter; the detail table shows only that contributor's items
+- [x] Clicking the same row again clears the filter (toggle)
+- [x] A "Focusing: Name  ×" label appears above the detail table when a local filter is active; clicking × clears it
+- [x] The selected contributor row has a visible active state (CSS class `is-selected`)
+- [x] The URL does not change when the local filter is applied (no navigation)
+- [x] The full-page contributor filter (form `?contributor=`) continues to work independently
+
+**G2 — PR status cell:**
+- [ ] `PullRequestDetail` type in `github.ts` includes `head.sha`
+- [ ] `fetchCommitCIStatus(repoFullName, sha, token)` function added to `github.ts`; returns `"success" | "failure" | "pending" | null`
+- [ ] `OpenPrRecord = DailyPrRecord & { ciStatus }` type added to `daily-types.ts`; `DailyPrRecord` is NOT modified
+- [ ] `OpenItemsFile.records` uses `Array<DailyIssueRecord | OpenPrRecord>` (was `DailyPrRecord`)
+- [ ] `collect-open-items.ts` fetches CI status per PR and writes `OpenPrRecord` records
+- [ ] `ActivityItem` has optional `prStatus?: PrStatusSummary` field (only set for `type === "pull_request"`, only for open PRs)
+- [ ] `PrStatusSummary` includes `requestedVerdicts`, `otherVerdicts`, `pendingRequestedCount`, `ciStatus`, `cooldownHours`, `cooldownMet`
+- [ ] `aggregateDailyRecords` computes `prStatus` from review records × PR requested-reviewer list; latest review per reviewer wins
+- [ ] `authored-prs-table.tsx` renders a single compact "Status" cell with per-reviewer badges (✓/✗/○) + CI badge + 72h cooldown badge
+- [ ] Non-requested reviewers shown with smaller `+` prefix badges
+- [ ] `<tr data-pr-highlight="blocked">` set when any reviewer has `CHANGES_REQUESTED` or `ciStatus === "failure"`
+- [ ] `<tr data-pr-highlight="draft">` set when `isDraft === true` and not blocked
+- [ ] `<tr data-pr-highlight="stale">` set when `ageDays >= 30` and not blocked or draft
+- [ ] CSS rules for `blocked` (red tint), `draft` (grey tint), `stale` (yellow tint) added to `globals.css`
+- [ ] `DailyReviewRecord` type is not modified
+
+**G3 — Column reorder:**
+- [x] `authored-prs-table.tsx` column order: PR · State · Updated · Repository · Contributor · Created (Reviews column deferred to G2)
+- [x] `issues-table.tsx` column order: Issue · State · Updated · Repository · Contributor
+- [x] `reviewed-prs-table.tsx` column order: Reviewed PR · Status · Outcome · Author type · Updated · Repository · Reviewer · Author · Created
+- [x] `colSpan` values unchanged (column counts unchanged; Reviews column added in G2)
+
 ---
 
 ## Technical Considerations
@@ -198,6 +522,16 @@ The contributor table (left, narrower) has 5 columns: **Contributor + 4 metric c
 | `src/components/activity-page-nav.tsx` | Possibly update layout classes to support inline-with-title mode |
 | `src/app/globals.css` | Remove hero/chart CSS; add `.title-bar`, `.tables-grid` CSS |
 | `src/components/snapshot-dashboard-page.tsx` | Optionally load `open-items.json` in addition to the main snapshot |
+| `src/lib/github.ts` | Add `head.sha` to `PullRequestDetail` type; add `fetchCommitCIStatus` function (Part G2) |
+| `src/lib/daily-types.ts` | Add `OpenPrRecord` type extending `DailyPrRecord` with `ciStatus`; update `OpenItemsFile.records` union (Part G2) |
+| `src/lib/types.ts` | Add `ReviewerVerdict`, `PrStatusSummary` types; add `prStatus?: PrStatusSummary` to `ActivityItem` (Part G2) |
+| `src/lib/daily-aggregation.ts` | Build per-PR reviewer verdict map; attach `prStatus` to open PR `ActivityItem`s (Part G2) |
+| `scripts/collect-open-items.ts` | Fetch CI status per PR via `fetchCommitCIStatus`; write `OpenPrRecord` records (Part G2) |
+| `src/components/authored-prs-table.tsx` | Add Reviews column; reorder columns (Part G2 + G3) |
+| `src/components/issues-table.tsx` | Reorder columns (Part G3) |
+| `src/components/reviewed-prs-table.tsx` | Reorder columns (Part G3) |
+| `src/components/dashboard-shell.tsx` | Add `localContributor` state; change contributor rows to toggle-buttons; filter detail items locally (Part G1) |
+| `src/app/globals.css` | Add `.is-selected` style for contributor row; add `.local-filter-bar` style (Part G1) |
 
 ---
 
@@ -231,3 +565,11 @@ Before deploying the data architecture changes, run locally to confirm no regres
 - `src/lib/daily-types.ts` — unchanged types; `OpenItemsFile` added here
 - `.github/workflows/collect-data.yml` — reference pattern for new workflow
 - `src/lib/dashboard-aggregates.ts:225` — `getContributorColumns` (column counts per view)
+- `src/lib/daily-aggregation.ts:119` — `activityItems` array construction — insertion point for `reviewSummary`
+- `src/lib/daily-aggregation.ts:383` — PR `ActivityItem` push — where `prStatus` is attached
+- `src/lib/types.ts:92` — `ActivityItem` type definition
+- `src/lib/daily-types.ts:37` — `DailyPrRecord.requestedReviewers` (requested reviewer set)
+- `src/lib/daily-types.ts:49` — `DailyReviewRecord.state` (`APPROVED | CHANGES_REQUESTED | COMMENTED`)
+- `src/lib/github.ts:46` — `PullRequestDetail` type (add `head.sha`)
+- `src/lib/github.ts:377` — `fetchPullRequestDetails` (pattern for new `fetchCommitCIStatus`)
+- GitHub REST API: `GET /repos/{owner}/{repo}/commits/{sha}/check-runs` — CI status endpoint

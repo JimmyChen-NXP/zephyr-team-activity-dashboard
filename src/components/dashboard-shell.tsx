@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import { formatDistanceToNow, formatISO9075 } from "date-fns";
+import { useState } from "react";
 
 import { ActivityPageNav } from "@/components/activity-page-nav";
 import { AuthoredPrsTable } from "@/components/authored-prs-table";
@@ -89,6 +90,14 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
   const detailCountLabel = getDetailCountLabel(viewData, view);
   const pageTitle = getActivityPageTitle(view);
   const pageDescription = getActivityPageDescription(view);
+
+  const [localContributor, setLocalContributor] = useState<string | null>(null);
+  const detailItems = localContributor
+    ? viewData.activityItems.filter((item) => item.contributor === localContributor)
+    : viewData.activityItems;
+  const localContributorName = localContributor
+    ? (contributorOptions.find((c) => c.login === localContributor)?.name ?? localContributor)
+    : null;
 
   return (
     <div className="dashboard-shell">
@@ -225,11 +234,17 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
                   </tr>
                 ) : (
                   viewData.contributors.map((contributor) => (
-                    <tr key={contributor.login}>
+                    <tr
+                      key={contributor.login}
+                      className={clsx("contributor-row", localContributor === contributor.login && "is-selected")}
+                      onClick={() => setLocalContributor(localContributor === contributor.login ? null : contributor.login)}
+                      title={localContributor === contributor.login ? "Click to clear focus" : `Click to focus ${contributor.name} in detail table`}
+                    >
                       <td>
                         <a
                           className="table-link"
                           href={buildDashboardHref(pathname, { ...filters, contributors: [contributor.login], refresh: false })}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <strong>{contributor.name}</strong>
                         </a>
@@ -244,9 +259,19 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
             </table>
           </div>
         </section>
-        {view === "issues" ? <IssuesTable items={viewData.activityItems} /> : null}
-        {view === "pull-requests" ? <AuthoredPrsTable items={viewData.activityItems} /> : null}
-        {view === "reviews" ? <ReviewedPrsTable items={viewData.activityItems} /> : null}
+        <div className="detail-table-column">
+          {localContributorName ? (
+            <div className="local-filter-bar">
+              <span>Focusing: <strong>{localContributorName}</strong></span>
+              <button type="button" className="local-filter-clear" onClick={() => setLocalContributor(null)}>
+                ×
+              </button>
+            </div>
+          ) : null}
+          {view === "issues" ? <IssuesTable items={detailItems} /> : null}
+          {view === "pull-requests" ? <AuthoredPrsTable items={detailItems} /> : null}
+          {view === "reviews" ? <ReviewedPrsTable items={detailItems} /> : null}
+        </div>
       </div>
 
       <div className="status-strip">

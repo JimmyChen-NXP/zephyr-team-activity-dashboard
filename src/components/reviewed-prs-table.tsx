@@ -42,14 +42,14 @@ export function ReviewedPrsTable({ items }: ReviewedPrsTableProps) {
           <thead>
             <tr>
               <th>Reviewed PR</th>
+              <th>Status</th>
+              <th>Outcome</th>
+              <th>Author type</th>
+              <th>Updated</th>
               <th>Repository</th>
               <th>Reviewer</th>
               <th>Author</th>
-              <th>Author type</th>
               <th>Created</th>
-              <th>Status</th>
-              <th>Outcome</th>
-              <th>Updated</th>
             </tr>
           </thead>
           <tbody>
@@ -67,14 +67,14 @@ export function ReviewedPrsTable({ items }: ReviewedPrsTableProps) {
                       {item.title}
                     </a>
                   </td>
+                  <td>{item.statusLabel}</td>
+                  <td>{formatTypeLabel(item.state)}</td>
+                  <td>{formatReviewKind(item.reviewedPrKind)}</td>
+                  <td>{formatISO9075(new Date(item.updatedAt))}</td>
                   <td>{item.repo}</td>
                   <td>@{item.contributor}</td>
                   <td>@{item.author}</td>
-                  <td>{formatReviewKind(item.reviewedPrKind)}</td>
                   <td>{formatISO9075(new Date(item.createdAt))}</td>
-                  <td>{item.statusLabel}</td>
-                  <td>{formatTypeLabel(item.state)}</td>
-                  <td>{formatISO9075(new Date(item.updatedAt))}</td>
                 </tr>
               ))
             )}

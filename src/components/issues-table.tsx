@@ -22,10 +22,10 @@ export function IssuesTable({ items }: IssuesTableProps) {
           <thead>
             <tr>
               <th>Issue</th>
-              <th>Repository</th>
-              <th>Contributor</th>
               <th>State</th>
               <th>Updated</th>
+              <th>Repository</th>
+              <th>Contributor</th>
             </tr>
           </thead>
           <tbody>
@@ -43,10 +43,10 @@ export function IssuesTable({ items }: IssuesTableProps) {
                       {item.title}
                     </a>
                   </td>
-                  <td>{item.repo}</td>
-                  <td>@{item.contributor}</td>
                   <td>{item.statusLabel}</td>
                   <td>{formatISO9075(new Date(item.updatedAt))}</td>
+                  <td>{item.repo}</td>
+                  <td>@{item.contributor}</td>
                 </tr>
               ))
             )}
