@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-14T06:21:07.460Z",
+  "collectedAt": "2026-03-14T07:20:50.022Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -7,6 +7,22 @@
     "zephyrproject-rtos/hostap"
   ],
   "records": [
+    {
+      "type": "issue",
+      "id": 886306673,
+      "number": 35088,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "lib: json: JSON lib isn't able to encode double precision numbers according to RFC7159",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/35088",
+      "author": "ycsin",
+      "assignees": [
+        "d3zd3z"
+      ],
+      "state": "open",
+      "createdAt": "2021-05-11T07:18:12Z",
+      "updatedAt": "2026-03-14T06:53:24Z",
+      "closedAt": null
+    },
     {
       "type": "issue",
       "id": 4055267385,
@@ -220,22 +236,6 @@
       "state": "open",
       "createdAt": "2026-03-09T18:55:29Z",
       "updatedAt": "2026-03-14T00:05:39Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 886306673,
-      "number": 35088,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "lib: json: JSON lib isn't able to encode double precision numbers according to RFC7159",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/35088",
-      "author": "ycsin",
-      "assignees": [
-        "d3zd3z"
-      ],
-      "state": "open",
-      "createdAt": "2021-05-11T07:18:12Z",
-      "updatedAt": "2026-03-14T00:02:05Z",
       "closedAt": null
     },
     {
@@ -2310,6 +2310,26 @@
       "createdAt": "2019-10-21T17:21:05Z",
       "updatedAt": "2019-12-17T22:14:24Z",
       "closedAt": null
+    },
+    {
+      "type": "pr",
+      "id": 2810447574,
+      "number": 95704,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "UART Shell: Add Info command and add error check",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/95704",
+      "author": "dnltz",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-09-09T05:23:28Z",
+      "updatedAt": "2026-03-14T06:43:59Z",
+      "mergedAt": null,
+      "requestedReviewers": [
+        "kartben",
+        "yishai1999",
+        "dcpleung"
+      ],
+      "ciStatus": null
     },
     {
       "type": "pr",
@@ -4725,35 +4745,6 @@
       "requestedReviewers": [
         "ozersa",
         "yasinustunerg"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3279154474,
-      "number": 104035,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "RFC: boards: arm: add Corstone-1000-A320 FVP board support",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104035",
-      "author": "npitre",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-13T03:32:32Z",
-      "updatedAt": "2026-03-13T17:33:21Z",
-      "mergedAt": null,
-      "requestedReviewers": [
-        "d3zd3z",
-        "nashif",
-        "ithinuel",
-        "JordanYates",
-        "Vge0rge",
-        "tejlmand",
-        "JiafeiPan",
-        "nordicjm",
-        "jeremybettis",
-        "57300",
-        "valeriosetti",
-        "MaochenWang1"
       ],
       "ciStatus": "failure"
     },
