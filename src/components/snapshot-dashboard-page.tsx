@@ -36,6 +36,7 @@ export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageP
   const [error, setError] = useState<string | null>(null);
 
   const updateDataUrl = process.env.NEXT_PUBLIC_UPDATE_WORKFLOW_URL ?? "";
+  const updateOpenItemsUrl = process.env.NEXT_PUBLIC_UPDATE_OPEN_ITEMS_WORKFLOW_URL ?? "";
 
   useEffect(() => {
     // Already in memory — no network needed.
@@ -91,12 +92,12 @@ export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageP
   if (error) {
     return (
       <div className="dashboard-shell">
-        <section className="hero panel">
-          <div>
-            <p className="eyebrow">Static snapshot</p>
-            <h1>Zephyr team activity dashboard</h1>
-            <p className="hero-copy">Could not load snapshot data: {error}</p>
-          </div>
+        <div className="title-bar">
+          <span className="title-bar-name">Zephyr team activity</span>
+        </div>
+        <section className="panel">
+          <p className="eyebrow">Static snapshot</p>
+          <p className="token-copy">Could not load snapshot data: {error}</p>
         </section>
       </div>
     );
@@ -105,12 +106,12 @@ export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageP
   if (!filtered) {
     return (
       <div className="dashboard-shell">
-        <section className="hero panel">
-          <div>
-            <p className="eyebrow">Static snapshot</p>
-            <h1>Zephyr team activity dashboard</h1>
-            <p className="hero-copy">Loading snapshot…</p>
-          </div>
+        <div className="title-bar">
+          <span className="title-bar-name">Zephyr team activity</span>
+        </div>
+        <section className="panel">
+          <p className="eyebrow">Static snapshot</p>
+          <p className="token-copy">Loading snapshot…</p>
         </section>
       </div>
     );
@@ -124,6 +125,7 @@ export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageP
       pathname={pathname}
       isHostedSnapshot
       updateDataUrl={updateDataUrl}
+      updateOpenItemsUrl={updateOpenItemsUrl}
     />
   );
 }

@@ -10,6 +10,7 @@
     "test": "vitest run",
     "snapshots": "tsx scripts/generate-snapshots.ts",
     "collect-daily": "tsx scripts/collect-daily.ts",
+    "collect-open-items": "tsx scripts/collect-open-items.ts",
     "aggregate-daily": "tsx scripts/aggregate-daily.ts",
     "check-queries": "tsx scripts/check-queries.ts",
     "seed-data": "bash scripts/seed-data.sh"

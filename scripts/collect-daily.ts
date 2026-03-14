@@ -41,9 +41,6 @@ const GITHUB_REPOS = process.env.GITHUB_REPOS
   : [];
 
 const DAILY_DETAIL_LIMIT = Number(process.env.DAILY_DETAIL_LIMIT ?? 300);
-// Open issues/PRs have no date filter so they may return far more results.
-// Allow a higher page limit for them; date-scoped queries use the default SEARCH_PAGE_LIMIT.
-const OPEN_ITEMS_PAGE_LIMIT = Number(process.env.OPEN_ITEMS_PAGE_LIMIT ?? 10);
 const detailLimit = pLimit(4);
 
 function utcDateString(date: Date): string {
@@ -100,39 +97,16 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
 
   const repoScope = (base: string) => GITHUB_REPOS.map((repo) => `repo:${repo} ${base}`);
 
-  // Open issues and open/draft PRs: no date filter — we want ALL currently open
-  // items regardless of when they were last touched (a stale-but-still-assigned
-  // issue is still on someone's plate).
-  // Closed issues and updated PRs: date-scoped — we only care about events
-  // (closes, merges, review activity) that happened in this specific day.
-  const [openIssuesResult, closedIssuesResult, openPrsResult, updatedPrsResult] = await Promise.all([
-    searchAcrossQueries(repoScope(`is:issue is:open archived:false sort:updated-desc`), token, OPEN_ITEMS_PAGE_LIMIT),
+  // Closed issues and updated PRs only — date-scoped to this specific day.
+  // Open issues and open PRs are now collected separately by collect-open-items.ts.
+  const [closedIssuesResult, updatedPrsResult] = await Promise.all([
     searchAcrossQueries(repoScope(`is:issue is:closed archived:false sort:updated-desc closed:${from}..${to}`), token),
-    searchAcrossQueries(repoScope(`is:pr is:open archived:false sort:updated-desc`), token, OPEN_ITEMS_PAGE_LIMIT),
     searchAcrossQueries(repoScope(`is:pr archived:false sort:updated-desc updated:${from}..${to}`), token),
   ]);
 
   const records: DailyFile["records"] = [];
 
   // --- Issues ---
-  for (const item of openIssuesResult.items) {
-    const record: DailyIssueRecord = {
-      type: "issue",
-      id: item.id,
-      number: item.number,
-      repo: repoFullNameFromSearchItem(item),
-      title: item.title,
-      url: item.html_url,
-      author: item.user.login,
-      assignees: (item.assignees ?? []).map((a) => a.login),
-      state: "open",
-      createdAt: item.created_at,
-      updatedAt: item.updated_at,
-      closedAt: item.closed_at,
-    };
-    records.push(record);
-  }
-
   for (const item of closedIssuesResult.items) {
     const record: DailyIssueRecord = {
       type: "issue",
@@ -151,11 +125,9 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
     records.push(record);
   }
 
-  // --- PRs: fetch full details + reviews ---
-  // Combine open PRs (no date filter) + updated PRs (date-filtered, for merged/reviews),
-  // deduplicating by URL so a PR that appears in both lists is only fetched once.
+  // --- PRs: fetch full details + reviews for PRs active on this date ---
   const prUrlSeen = new Set<string>();
-  const detailTargets = [...openPrsResult.items, ...updatedPrsResult.items]
+  const detailTargets = updatedPrsResult.items
     .filter((item) => {
       if (!item.pull_request?.url || prUrlSeen.has(item.html_url)) return false;
       prUrlSeen.add(item.html_url);
@@ -164,8 +136,8 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
     .slice(0, DAILY_DETAIL_LIMIT);
 
   console.log(
-    `[collect-daily] ${date}: ${openIssuesResult.items.length} open issues, ` +
-    `${closedIssuesResult.items.length} closed issues, ${detailTargets.length} PRs to fetch`,
+    `[collect-daily] ${date}: ${closedIssuesResult.items.length} closed issues, ` +
+    `${detailTargets.length} PRs to fetch`,
   );
 
   const detailResults = await Promise.all(

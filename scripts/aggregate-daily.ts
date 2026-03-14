@@ -15,7 +15,7 @@ import path from "node:path";
 import { resolveRange } from "@/lib/range";
 import { loadRoster } from "@/lib/roster";
 import type { DashboardData, DashboardPreset } from "@/lib/types";
-import type { DailyFile } from "@/lib/daily-types";
+import type { DailyFile, OpenItemsFile } from "@/lib/daily-types";
 import { aggregateDailyRecords } from "@/lib/daily-aggregation";
 
 const PRESETS: DashboardPreset[] = ["7d", "30d", "90d"];
@@ -41,6 +41,15 @@ async function loadDailyFile(filePath: string): Promise<DailyFile | null> {
   try {
     const content = await readFile(filePath, "utf8");
     return JSON.parse(content) as DailyFile;
+  } catch {
+    return null;
+  }
+}
+
+async function loadOpenItemsFile(filePath: string): Promise<OpenItemsFile | null> {
+  try {
+    const content = await readFile(filePath, "utf8");
+    return JSON.parse(content) as OpenItemsFile;
   } catch {
     return null;
   }
@@ -76,7 +85,8 @@ async function writeSnapshotFile(filePath: string, data: unknown): Promise<void>
 }
 
 async function main() {
-  const dailyInDir = path.join(process.env.DAILY_IN_DIR ?? path.join(process.cwd(), "public"), "daily");
+  const dailyInBase = process.env.DAILY_IN_DIR ?? path.join(process.cwd(), "public");
+  const dailyInDir = path.join(dailyInBase, "daily");
   const snapshotOutDir = path.join(process.env.SNAPSHOT_OUT_DIR ?? path.join(process.cwd(), "public"), "snapshots");
 
   const roster = await loadRoster();
@@ -91,7 +101,18 @@ async function main() {
     console.log(`[aggregate-daily] Loaded ${allDailyFiles.length} daily file(s) (${allDailyFiles[0].date} .. ${allDailyFiles[allDailyFiles.length - 1].date})`);
   }
 
-  const allRecords = allDailyFiles.flatMap((f) => f.records);
+  // Merge open-items.json (current open state) into the record pool before aggregating.
+  // deduplicateByUrl in aggregateDailyRecords keeps the record with the latest updatedAt,
+  // so a fresher open-items.json always wins over stale open records in legacy daily files.
+  const openItemsPath = path.join(dailyInBase, "open-items.json");
+  const openItemsFile = await loadOpenItemsFile(openItemsPath);
+  if (!openItemsFile) {
+    console.warn("[aggregate-daily] open-items.json not found — open item counts sourced from legacy daily files (backward-compat mode).");
+  } else {
+    console.log(`[aggregate-daily] Loaded open-items.json (${openItemsFile.records.length} records, collected ${openItemsFile.collectedAt})`);
+  }
+
+  const allRecords = [...(openItemsFile?.records ?? []), ...allDailyFiles.flatMap((f) => f.records)];
   const generatedAt = new Date().toISOString();
 
   const meta: {

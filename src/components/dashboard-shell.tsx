@@ -29,6 +29,7 @@ type DashboardShellProps = {
   pathname: string;
   isHostedSnapshot?: boolean;
   updateDataUrl?: string;
+  updateOpenItemsUrl?: string;
 };
 
 const PRESET_OPTIONS: Array<{ value: DashboardFilters["preset"]; label: string }> = [
@@ -73,7 +74,7 @@ function getSyncSourceLabel(source: DashboardData["syncHealth"]["source"]) {
   }
 }
 
-export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot = false, updateDataUrl }: DashboardShellProps) {
+export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot = false, updateDataUrl, updateOpenItemsUrl }: DashboardShellProps) {
   const actionPath = withBasePath(pathname);
   const viewData = buildViewDashboardData(data, view);
   const contributorOptions = viewData.filterOptions.contributors;
@@ -176,6 +177,11 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
                 Refresh now
               </button>
             )}
+            {isHostedSnapshot && updateOpenItemsUrl ? (
+              <a className="ghost-button" href={updateOpenItemsUrl} target="_blank" rel="noreferrer">
+                Refresh open items
+              </a>
+            ) : null}
             {isHostedSnapshot ? (
               <ExportCsvButton filename={`zephyr-team-activity-${view}-${filters.preset}.csv`} items={viewData.activityItems} />
             ) : (

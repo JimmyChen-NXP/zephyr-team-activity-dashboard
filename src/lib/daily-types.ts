@@ -63,3 +63,16 @@ export type DailyFile = {
   repos: string[];
   records: DailyRecord[];
 };
+
+/**
+ * Single overwritable snapshot of all currently open issues and open/draft PRs.
+ * Written by collect-open-items.ts; merged into the record pool in aggregate-daily.ts.
+ */
+export type OpenItemsFile = {
+  /** ISO timestamp of when this file was collected */
+  collectedAt: string;
+  /** Repos covered by this file */
+  repos: string[];
+  /** All currently open issues and open/draft PRs */
+  records: Array<DailyIssueRecord | DailyPrRecord>;
+};

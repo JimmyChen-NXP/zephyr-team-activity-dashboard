@@ -1,15 +1,15 @@
-name: Collect GitHub Data
+name: Collect Open Items
 
 on:
   schedule:
-    - cron: "13 5 * * *"
+    - cron: "23 5 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: collect-data
+  group: collect-open-items
   cancel-in-progress: false
 
 jobs:
@@ -26,7 +26,6 @@ jobs:
           ref: data
           path: _data
           fetch-depth: 0
-        # The data branch may not exist on the very first run; continue anyway.
         continue-on-error: true
 
       - name: Setup Node
@@ -38,14 +37,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Collect daily GitHub activity
-        run: npm run collect-daily
+      - name: Collect open issues and PRs
+        run: npm run collect-open-items
         env:
           GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
           GITHUB_REPOS: zephyrproject-rtos/zephyr,zephyrproject-rtos/west,zephyrproject-rtos/hal_nxp,zephyrproject-rtos/hostap
-          SEARCH_PAGE_LIMIT: 2
+          OPEN_ITEMS_PAGE_LIMIT: 10
           GITHUB_SEARCH_MIN_INTERVAL_MS: 2500
-          DAILY_OUT_DIR: _data/public
+          OPEN_ITEMS_OUT_DIR: _data/public
 
       - name: Aggregate snapshots from daily files
         run: npm run aggregate-daily
@@ -53,35 +52,32 @@ jobs:
           DAILY_IN_DIR: _data/public
           SNAPSHOT_OUT_DIR: _data/public
 
-      - name: Push daily files + snapshots to data branch
+      - name: Push open-items.json + snapshots to data branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           if [ -d "_data/.git" ]; then
-            # Normal path: data branch was already checked out into _data/
             cd _data
-            git add -f public/daily/ public/snapshots/ 2>/dev/null || true
+            git add -f public/open-items.json public/snapshots/ 2>/dev/null || true
             if git diff --cached --quiet; then
               echo "No new data to commit"
             else
-              git commit -m "chore: daily snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git commit -m "chore: open items snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
               git push origin HEAD:data
             fi
           else
-            # First run: data branch doesn't exist yet.
-            # Initialize a standalone git repo in _data/ and push it as the data branch.
             ORIGIN_URL=$(git remote get-url origin)
             cd _data
             git init
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git remote add origin "$ORIGIN_URL"
-            git add -f public/daily/ public/snapshots/ 2>/dev/null || true
+            git add -f public/open-items.json public/snapshots/ 2>/dev/null || true
             if git diff --cached --quiet; then
               echo "No files to commit on first run"
             else
-              git commit -m "chore: daily snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git commit -m "chore: open items snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
               git push origin HEAD:data
             fi
           fi
