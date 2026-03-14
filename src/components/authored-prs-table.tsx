@@ -53,10 +53,12 @@ function AssigneesCell({ prStatus }: { prStatus: PrStatusSummary }) {
 }
 
 function RequestedCell({ prStatus }: { prStatus: PrStatusSummary }) {
-  const { requestedVerdicts, pendingRequestedLogins = [] } = prStatus;
+  const { requestedVerdicts, pendingRequestedLogins = [], assignees } = prStatus;
+  const assigneeSet = new Set((assignees ?? []).map((l) => l.toLowerCase()));
   const items: React.ReactNode[] = [];
 
   for (const login of pendingRequestedLogins) {
+    if (assigneeSet.has(login.toLowerCase())) continue;
     items.push(
       <span key={`p-${login}`} className="pr-badge pr-badge-pending" title="Pending review">
         ⏳ {login}
@@ -64,6 +66,7 @@ function RequestedCell({ prStatus }: { prStatus: PrStatusSummary }) {
     );
   }
   for (const v of requestedVerdicts) {
+    if (assigneeSet.has(v.login.toLowerCase())) continue;
     items.push(
       <span key={`v-${v.login}`} className={VERDICT_CLASS[v.state] ?? "pr-badge"} title={v.state.replace(/_/g, " ")}>
         {VERDICT_ICON[v.state]} {v.login}
@@ -76,10 +79,16 @@ function RequestedCell({ prStatus }: { prStatus: PrStatusSummary }) {
 }
 
 function ReviewersCell({ prStatus }: { prStatus: PrStatusSummary }) {
-  const { otherVerdicts } = prStatus;
-  const approved = otherVerdicts.filter((v) => v.state === "APPROVED").length;
-  const changes = otherVerdicts.filter((v) => v.state === "CHANGES_REQUESTED").length;
-  const commented = otherVerdicts.filter((v) => v.state === "COMMENTED").length;
+  const { otherVerdicts, assignees, requestedVerdicts, pendingRequestedLogins = [] } = prStatus;
+  const excludeSet = new Set([
+    ...(assignees ?? []).map((l) => l.toLowerCase()),
+    ...requestedVerdicts.map((v) => v.login.toLowerCase()),
+    ...pendingRequestedLogins.map((l) => l.toLowerCase()),
+  ]);
+  const filtered = otherVerdicts.filter((v) => !excludeSet.has(v.login.toLowerCase()));
+  const approved = filtered.filter((v) => v.state === "APPROVED").length;
+  const changes = filtered.filter((v) => v.state === "CHANGES_REQUESTED").length;
+  const commented = filtered.filter((v) => v.state === "COMMENTED").length;
 
   const parts: React.ReactNode[] = [];
   if (approved > 0) parts.push(<span key="a" className="pr-badge pr-badge-approved" title={`${approved} approval(s)`}>✓{approved}</span>);
