@@ -7,3 +7,6 @@ coverage/
 .env
 public/snapshots/
 scripts/git-askpass.cmd
+tsconfig.tsbuildinfo
+_data/
+.claude/
