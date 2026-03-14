@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-14T04:06:23.820Z",
+  "collectedAt": "2026-03-14T05:38:00.619Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -2322,7 +2322,7 @@
       "state": "open",
       "isDraft": false,
       "createdAt": "2026-03-13T21:58:47Z",
-      "updatedAt": "2026-03-14T04:02:02Z",
+      "updatedAt": "2026-03-14T04:32:17Z",
       "mergedAt": null,
       "requestedReviewers": [
         "teburd",
@@ -2349,6 +2349,29 @@
     },
     {
       "type": "pr",
+      "id": 3264126020,
+      "number": 103773,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: peci_espi: Add PECI over eSPI controller driver",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103773",
+      "author": "perezpri",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-09T19:37:37Z",
+      "updatedAt": "2026-03-14T04:20:29Z",
+      "mergedAt": null,
+      "requestedReviewers": [
+        "nashif",
+        "Dino-Li",
+        "scottwcpg",
+        "JarmouniA",
+        "VenkatKotakonda",
+        "ChiHuaL",
+        "JhanBoChao-Realtek"
+      ]
+    },
+    {
+      "type": "pr",
       "id": 2957832862,
       "number": 98463,
       "repo": "zephyrproject-rtos/zephyr",
@@ -2358,7 +2381,7 @@
       "state": "open",
       "isDraft": false,
       "createdAt": "2025-10-29T07:00:45Z",
-      "updatedAt": "2026-03-14T04:00:14Z",
+      "updatedAt": "2026-03-14T04:18:45Z",
       "mergedAt": null,
       "requestedReviewers": [
         "mbolivar",
@@ -2429,29 +2452,6 @@
         "wearyzen",
         "tbr-tt",
         "duynguyenxa"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3264126020,
-      "number": 103773,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: peci_espi: Add PECI over eSPI controller driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103773",
-      "author": "perezpri",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-09T19:37:37Z",
-      "updatedAt": "2026-03-14T03:22:25Z",
-      "mergedAt": null,
-      "requestedReviewers": [
-        "nashif",
-        "Dino-Li",
-        "scottwcpg",
-        "JarmouniA",
-        "VenkatKotakonda",
-        "ChiHuaL",
-        "JhanBoChao-Realtek"
       ]
     },
     {
@@ -3217,52 +3217,6 @@
     },
     {
       "type": "pr",
-      "id": 3378865647,
-      "number": 105222,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "driver: pwm: pwm_max32: Added support for PWM Events",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105222",
-      "author": "rwiebe-adi",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-10T14:01:51Z",
-      "updatedAt": "2026-03-13T21:52:45Z",
-      "mergedAt": null,
-      "requestedReviewers": [
-        "kartben",
-        "nashif",
-        "henrikbrixandersen",
-        "anangl",
-        "ozersa",
-        "JarmouniA",
-        "FelixWang47831",
-        "yasinustunerg",
-        "petejohanson-adi"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3373194373,
-      "number": 105142,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "MAINTAINERS.yml: Add @will-tm as collaborator for BFLB platform",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105142",
-      "author": "will-tm",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-09T12:25:26Z",
-      "updatedAt": "2026-03-13T21:51:09Z",
-      "mergedAt": null,
-      "requestedReviewers": [
-        "nashif",
-        "ceolin",
-        "stephanosio",
-        "mmahadevan108",
-        "bjarki-andreasen"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3395052441,
       "number": 105446,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3392,26 +3346,6 @@
         "soburi",
         "ajf58",
         "dcpleung"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3382568066,
-      "number": 105260,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "pm: device: replace magic number with named constant",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105260",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-11T07:23:34Z",
-      "updatedAt": "2026-03-13T21:28:57Z",
-      "mergedAt": null,
-      "requestedReviewers": [
-        "teburd",
-        "ceolin",
-        "JordanYates",
-        "tmleman"
       ]
     },
     {
@@ -4162,26 +4096,6 @@
     },
     {
       "type": "pr",
-      "id": 3347973350,
-      "number": 104814,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "MAINTAINERS: add ZhiyuanTang17 as Realtek Bee maintainer",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104814",
-      "author": "ZhiyuanTang17",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-03T09:33:25Z",
-      "updatedAt": "2026-03-13T18:49:54Z",
-      "mergedAt": null,
-      "requestedReviewers": [
-        "nashif",
-        "stephanosio",
-        "zjian-zhang",
-        "Derek-RTK"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3396325585,
       "number": 105468,
       "repo": "zephyrproject-rtos/zephyr",
@@ -4657,6 +4571,94 @@
     },
     {
       "type": "pr",
+      "id": 3390489154,
+      "number": 105380,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: i2c: fix i2c_infineon_pdl error recovery",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105380",
+      "author": "Peterson-Brett",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-12T16:01:41Z",
+      "updatedAt": "2026-03-13T17:41:45Z",
+      "mergedAt": null,
+      "requestedReviewers": [
+        "talih0",
+        "maass-hamburg",
+        "billwatersiii",
+        "mcatee-infineon",
+        "sreeramIfx"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 2433131903,
+      "number": 88016,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "edtlib: Add static type hint stub files for mypy",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/88016",
+      "author": "rruuaanng",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-04-02T04:54:35Z",
+      "updatedAt": "2026-03-13T17:37:22Z",
+      "mergedAt": null,
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "galak",
+        "keith-zephyr",
+        "decsny"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3396243178,
+      "number": 105465,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "manifest: Update hal_adi revision to the latest",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105465",
+      "author": "MaureenHelm",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-13T17:24:38Z",
+      "updatedAt": "2026-03-13T17:37:01Z",
+      "mergedAt": null,
+      "requestedReviewers": [
+        "ozersa",
+        "yasinustunerg"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3279154474,
+      "number": 104035,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "RFC: boards: arm: add Corstone-1000-A320 FVP board support",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104035",
+      "author": "npitre",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-13T03:32:32Z",
+      "updatedAt": "2026-03-13T17:33:21Z",
+      "mergedAt": null,
+      "requestedReviewers": [
+        "d3zd3z",
+        "nashif",
+        "ithinuel",
+        "JordanYates",
+        "Vge0rge",
+        "tejlmand",
+        "JiafeiPan",
+        "nordicjm",
+        "jeremybettis",
+        "57300",
+        "valeriosetti",
+        "MaochenWang1"
+      ]
+    },
+    {
+      "type": "pr",
       "id": 3355050586,
       "number": 930,
       "repo": "zephyrproject-rtos/west",
@@ -4666,7 +4668,7 @@
       "state": "open",
       "isDraft": false,
       "createdAt": "2026-03-04T20:12:49Z",
-      "updatedAt": "2026-03-13T21:35:23Z",
+      "updatedAt": "2026-03-14T04:53:42Z",
       "mergedAt": null,
       "requestedReviewers": []
     },
