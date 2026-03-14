@@ -54,7 +54,7 @@ export type PullRequestDetail = {
   state: string;
   requested_reviewers: Array<{ login: string }>;
   user: { login: string };
-  head: { repo: { full_name: string } | null };
+  head: { sha: string; repo: { full_name: string } | null };
   base: { repo: { full_name: string } | null };
 };
 
@@ -381,6 +381,31 @@ export async function fetchPullRequestDetails(pullRequestUrl: string, token?: st
 
 export async function fetchPullRequestReviews(owner: string, repo: string, number: number, token?: string): Promise<PullRequestReview[]> {
   return fetchGitHub<PullRequestReview[]>(`/repos/${owner}/${repo}/pulls/${number}/reviews?per_page=100`, token);
+}
+
+type CheckRun = { status: string; conclusion: string | null };
+type CheckRunsResponse = { check_runs: CheckRun[] };
+
+export async function fetchCommitCIStatus(
+  repoFullName: string,
+  sha: string,
+  token?: string,
+): Promise<"success" | "failure" | "pending" | null> {
+  try {
+    const data = await fetchGitHub<CheckRunsResponse>(
+      `/repos/${repoFullName}/commits/${sha}/check-runs?per_page=100`,
+      token,
+    );
+    const runs = data.check_runs;
+    if (runs.length === 0) return null;
+    const failureConclusions = new Set(["failure", "cancelled", "timed_out", "action_required"]);
+    if (runs.some((r) => r.conclusion !== null && failureConclusions.has(r.conclusion))) return "failure";
+    if (runs.some((r) => r.status !== "completed")) return "pending";
+    if (runs.every((r) => r.conclusion === "success")) return "success";
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 export function repoFullNameFromSearchItem(item: SearchItem): string {

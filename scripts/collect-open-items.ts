@@ -22,11 +22,12 @@ import pLimit from "p-limit";
 
 import { getGitHubEnvToken } from "@/lib/github-auth";
 import {
+  fetchCommitCIStatus,
   fetchPullRequestDetails,
   repoFullNameFromSearchItem,
   searchAcrossQueries,
 } from "@/lib/github";
-import type { DailyIssueRecord, DailyPrRecord, OpenItemsFile } from "@/lib/daily-types";
+import type { DailyIssueRecord, OpenItemsFile, OpenPrRecord } from "@/lib/daily-types";
 
 const GITHUB_REPOS = process.env.GITHUB_REPOS
   ? process.env.GITHUB_REPOS.split(",").map((r) => r.trim()).filter(Boolean)
@@ -59,7 +60,7 @@ async function main() {
     searchAcrossQueries(repoScope(`is:pr is:open archived:false sort:updated-desc`), token, OPEN_ITEMS_PAGE_LIMIT),
   ]);
 
-  const records: Array<DailyIssueRecord | DailyPrRecord> = [];
+  const records: Array<DailyIssueRecord | OpenPrRecord> = [];
 
   // --- Open Issues ---
   for (const item of openIssuesResult.items) {
@@ -102,7 +103,8 @@ async function main() {
           const detail = await fetchPullRequestDetails(item.pull_request!.url, token);
           const repoFullName = detail.base.repo?.full_name ?? detail.head.repo?.full_name;
           if (!repoFullName) return null;
-          return { item, detail, repoFullName };
+          const ciStatus = await fetchCommitCIStatus(repoFullName, detail.head.sha, token);
+          return { item, detail, repoFullName, ciStatus };
         } catch (error) {
           console.warn(
             `[collect-open-items] Failed to fetch PR detail ${item.html_url}: ` +
@@ -116,9 +118,9 @@ async function main() {
 
   for (const result of detailResults) {
     if (!result) continue;
-    const { detail, repoFullName } = result;
+    const { detail, repoFullName, ciStatus } = result;
 
-    const prRecord: DailyPrRecord = {
+    const prRecord: OpenPrRecord = {
       type: "pr",
       id: detail.id,
       number: detail.number,
@@ -132,6 +134,7 @@ async function main() {
       updatedAt: detail.updated_at,
       mergedAt: detail.merged_at,
       requestedReviewers: detail.requested_reviewers.map((r) => r.login),
+      ciStatus,
     };
     records.push(prRecord);
   }

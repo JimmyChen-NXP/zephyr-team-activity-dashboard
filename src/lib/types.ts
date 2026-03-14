@@ -89,6 +89,24 @@ export type ActivityItemType = "issue" | "pull_request" | "review" | "review_req
 
 export type ReviewedPrKind = "authored-by-self" | "authored-by-them" | "authored-external";
 
+export type ReviewerVerdict = {
+  login: string;
+  state: "APPROVED" | "CHANGES_REQUESTED" | "COMMENTED";
+  wasRequested: boolean;
+};
+
+export type PrStatusSummary = {
+  /** Reviewers who were in requestedReviewers AND have submitted a verdict */
+  requestedVerdicts: ReviewerVerdict[];
+  /** Reviewers who submitted a verdict but were NOT in requestedReviewers */
+  otherVerdicts: ReviewerVerdict[];
+  /** Count of requestedReviewers who have not yet submitted any verdict */
+  pendingRequestedCount: number;
+  ciStatus: "success" | "failure" | "pending" | null;
+  cooldownHours: number;
+  cooldownMet: boolean;
+};
+
 export type ActivityItem = {
   id: string;
   type: ActivityItemType;
@@ -103,6 +121,8 @@ export type ActivityItem = {
   ageDays: number;
   statusLabel: string;
   reviewedPrKind?: ReviewedPrKind;
+  /** Only set for type === "pull_request" and state === "open" */
+  prStatus?: PrStatusSummary;
   metrics: ActivityMetricDelta;
 };
 

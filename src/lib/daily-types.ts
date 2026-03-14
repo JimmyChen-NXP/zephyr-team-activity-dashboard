@@ -35,6 +35,13 @@ export type DailyPrRecord = {
   updatedAt: string;
   mergedAt: string | null;
   requestedReviewers: string[];
+  /** CI status from check-runs API. Only set for open PRs in open-items.json; undefined in legacy daily files. */
+  ciStatus?: "success" | "failure" | "pending" | null;
+};
+
+/** Open-items-only extension of DailyPrRecord with ciStatus always present. */
+export type OpenPrRecord = DailyPrRecord & {
+  ciStatus: "success" | "failure" | "pending" | null;
 };
 
 export type DailyReviewRecord = {
@@ -74,5 +81,5 @@ export type OpenItemsFile = {
   /** Repos covered by this file */
   repos: string[];
   /** All currently open issues and open/draft PRs */
-  records: Array<DailyIssueRecord | DailyPrRecord>;
+  records: Array<DailyIssueRecord | OpenPrRecord>;
 };

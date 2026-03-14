@@ -14,8 +14,10 @@ import type {
   ContributorMetrics,
   DashboardData,
   DashboardWarning,
+  PrStatusSummary,
   RangeOption,
   RepoActivity,
+  ReviewerVerdict,
   ReviewOutcomeBreakdown,
   ReviewSourceBreakdown,
   RosterMember,
@@ -214,6 +216,15 @@ export function aggregateDailyRecords(
   // roster members regardless of last-update date.
   // Merged/closed PRs: date-scoped — only events that happened in the range.
   // -----------------------------------------------------------------------
+
+  // Build a map of prUrl → all review records (all time, not range-filtered) for prStatus computation.
+  const prReviewsMap = new Map<string, DailyReviewRecord[]>();
+  for (const review of uniqueReviews) {
+    const list = prReviewsMap.get(review.prUrl) ?? [];
+    list.push(review);
+    prReviewsMap.set(review.prUrl, list);
+  }
+
   const teamOpenPrs = uniquePrs.filter(
     (pr) => pr.state === "open" && rosterLogins.has(pr.author.toLowerCase()),
   );
@@ -234,6 +245,40 @@ export function aggregateDailyRecords(
     const isStale = Date.parse(pr.updatedAt) < staleCutoff;
     if (isStale) contributor.staleItems += 1;
 
+    // Build prStatus from review records + requested reviewers + ciStatus
+    const prReviews = prReviewsMap.get(pr.url) ?? [];
+    const latestByReviewer = new Map<string, DailyReviewRecord>();
+    for (const review of prReviews) {
+      const existing = latestByReviewer.get(review.reviewer.toLowerCase());
+      if (!existing || review.submittedAt > existing.submittedAt) {
+        latestByReviewer.set(review.reviewer.toLowerCase(), review);
+      }
+    }
+    const requestedSet = new Set(pr.requestedReviewers.map((r) => r.toLowerCase()));
+    const requestedVerdicts: ReviewerVerdict[] = [];
+    const otherVerdicts: ReviewerVerdict[] = [];
+    for (const [reviewerKey, review] of latestByReviewer) {
+      const verdict: ReviewerVerdict = {
+        login: review.reviewer,
+        state: review.state,
+        wasRequested: requestedSet.has(reviewerKey),
+      };
+      if (verdict.wasRequested) requestedVerdicts.push(verdict);
+      else otherVerdicts.push(verdict);
+    }
+    const pendingRequestedCount = pr.requestedReviewers.filter(
+      (r) => !latestByReviewer.has(r.toLowerCase()),
+    ).length;
+    const cooldownHours = differenceInHours(new Date(), parseISO(pr.updatedAt));
+    const prStatus: PrStatusSummary = {
+      requestedVerdicts,
+      otherVerdicts,
+      pendingRequestedCount,
+      ciStatus: pr.ciStatus ?? null,
+      cooldownHours,
+      cooldownMet: cooldownHours >= 72,
+    };
+
     activityItems.push({
       id: `pull_request-${pr.id}-${contributor.login}`,
       type: "pull_request",
@@ -247,6 +292,7 @@ export function aggregateDailyRecords(
       updatedAt: pr.updatedAt,
       ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
       statusLabel: pr.isDraft ? "Draft PR" : "Open PR",
+      prStatus,
       metrics: {
         ...emptyMetrics(),
         openAuthoredPrs: 1,
