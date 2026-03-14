@@ -2,7 +2,7 @@ name: Publish GitHub Pages (static snapshots)
 
 on:
   workflow_run:
-    workflows: ["Collect GitHub Data"]
+    workflows: ["Collect GitHub Data", "Collect Open Items"]
     types: [completed]
   workflow_dispatch:
 
@@ -58,6 +58,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           GITHUB_PAGES_BASE_PATH: /${{ github.event.repository.name }}
           NEXT_PUBLIC_UPDATE_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/workflows/collect-data.yml
+          NEXT_PUBLIC_UPDATE_OPEN_ITEMS_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/workflows/collect-open-items.yml
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
