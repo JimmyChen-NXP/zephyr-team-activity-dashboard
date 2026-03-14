@@ -55,12 +55,11 @@ jobs:
 
       - name: Push daily files + snapshots to data branch
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
           if [ -d "_data/.git" ]; then
             # Normal path: data branch was already checked out into _data/
             cd _data
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
             git add -f public/daily/ public/snapshots/ 2>/dev/null || true
             if git diff --cached --quiet; then
               echo "No new data to commit"
