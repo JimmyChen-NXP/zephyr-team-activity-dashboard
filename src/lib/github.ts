@@ -7,7 +7,9 @@ import type {
   ContributorMetrics,
   DashboardData,
   DashboardWarning,
+  PrStatusSummary,
   RepoActivity,
+  ReviewerVerdict,
   ReviewSourceBreakdown,
   ReviewOutcomeBreakdown,
   RosterMember,
@@ -712,7 +714,8 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
         }
         const [owner, repo] = repoFullName.split("/");
         const reviews = await fetchPullRequestReviews(owner, repo, detail.number, token);
-        return { item, detail, reviews, repoFullName };
+        const ciStatus = item.state === "open" ? await fetchCommitCIStatus(repoFullName, detail.head.sha, token) : null;
+        return { item, detail, reviews, repoFullName, ciStatus };
       }),
     ),
   );
@@ -723,7 +726,7 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
     }
 
     detailSamples += 1;
-    const { item, detail, reviews, repoFullName } = result;
+    const { item, detail, reviews, repoFullName, ciStatus } = result;
     const authorContributor = contributorMap.get(item.user.login.toLowerCase());
 
     if (authorContributor && detail.draft) {
@@ -749,6 +752,55 @@ export async function collectLiveDashboard(roster: RosterMember[], range: RangeO
           prItem.metrics.closedUnmergedPrs += 1;
           prItem.statusLabel = "Closed";
         }
+      }
+    }
+
+    // Compute prStatus for open PRs (reviewer verdicts + CI + cooldown)
+    if (item.state === "open") {
+      const prItem = activityItems.find(
+        (activityItem) => activityItem.type === "pull_request" && activityItem.url === item.html_url,
+      );
+      if (prItem) {
+        const latestByReviewer = new Map<string, PullRequestReview>();
+        for (const review of reviews) {
+          if (!review.user?.login || !review.submitted_at) continue;
+          const key = review.user.login.toLowerCase();
+          const existing = latestByReviewer.get(key);
+          if (!existing || review.submitted_at > existing.submitted_at!) {
+            latestByReviewer.set(key, review);
+          }
+        }
+
+        const requestedSet = new Set(detail.requested_reviewers.map((r) => r.login.toLowerCase()));
+        const requestedVerdicts: ReviewerVerdict[] = [];
+        const otherVerdicts: ReviewerVerdict[] = [];
+
+        for (const [reviewerKey, review] of latestByReviewer) {
+          const state = review.state.toUpperCase() as ReviewerVerdict["state"];
+          if (state !== "APPROVED" && state !== "CHANGES_REQUESTED" && state !== "COMMENTED") continue;
+          const verdict: ReviewerVerdict = {
+            login: review.user!.login,
+            state,
+            wasRequested: requestedSet.has(reviewerKey),
+          };
+          if (verdict.wasRequested) requestedVerdicts.push(verdict);
+          else otherVerdicts.push(verdict);
+        }
+
+        const pendingRequestedCount = detail.requested_reviewers.filter(
+          (r) => !latestByReviewer.has(r.login.toLowerCase()),
+        ).length;
+
+        const cooldownHours = differenceInHours(new Date(), parseISO(detail.updated_at));
+        const prStatus: PrStatusSummary = {
+          requestedVerdicts,
+          otherVerdicts,
+          pendingRequestedCount,
+          ciStatus: ciStatus ?? null,
+          cooldownHours,
+          cooldownMet: cooldownHours >= 72,
+        };
+        prItem.prStatus = prStatus;
       }
     }
 
