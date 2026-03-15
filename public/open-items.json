@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-15T01:44:21.889Z",
+  "collectedAt": "2026-03-15T05:45:04.339Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -7,6 +7,22 @@
     "zephyrproject-rtos/hostap"
   ],
   "records": [
+    {
+      "type": "issue",
+      "id": 3523575134,
+      "number": 97747,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "hci_usb (or hci_uart) can't scan and won't advertise",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/97747",
+      "author": "Jolon-Milktech",
+      "assignees": [
+        "cvinayak"
+      ],
+      "state": "open",
+      "createdAt": "2025-10-16T21:29:07Z",
+      "updatedAt": "2026-03-15T04:10:27Z",
+      "closedAt": null
+    },
     {
       "type": "issue",
       "id": 3806845093,
@@ -1006,22 +1022,6 @@
       "state": "open",
       "createdAt": "2026-03-12T17:29:02Z",
       "updatedAt": "2026-03-12T22:51:14Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 3523575134,
-      "number": 97747,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "hci_usb (or hci_uart) can't scan and won't advertise",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/97747",
-      "author": "Jolon-Milktech",
-      "assignees": [
-        "cvinayak"
-      ],
-      "state": "open",
-      "createdAt": "2025-10-16T21:29:07Z",
-      "updatedAt": "2026-03-12T21:36:27Z",
       "closedAt": null
     },
     {
@@ -2319,6 +2319,177 @@
     },
     {
       "type": "pr",
+      "id": 3295516058,
+      "number": 104178,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: sensor: add bma400 accelerometer driver",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104178",
+      "author": "lucagessi",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-17T18:25:28Z",
+      "updatedAt": "2026-03-15T05:03:02Z",
+      "mergedAt": null,
+      "assignees": [
+        "MaureenHelm"
+      ],
+      "requestedReviewers": [
+        "avisconti",
+        "kartben",
+        "teburd",
+        "nashif",
+        "jeppenodgaard",
+        "MaureenHelm",
+        "yperess",
+        "JarmouniA",
+        "ubieda",
+        "tristan-google",
+        "asemjonovs"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 3281526443,
+      "number": 104070,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "samples: drivers: mspi: mspi_flash: enable CI testing on available STM32 platforms and apply several fixes and improvements to the MSPI Flash driver",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104070",
+      "author": "djiatsaf-st",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-13T16:09:52Z",
+      "updatedAt": "2026-03-15T04:18:49Z",
+      "mergedAt": null,
+      "assignees": [
+        "swift-tk"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "GeorgeCGV",
+        "anangl",
+        "etienne-lms",
+        "rghaddab",
+        "FRASTM",
+        "de-nordic",
+        "gautierg-st",
+        "juickar"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 3270279867,
+      "number": 103887,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: display: add new driver for qemu ramfb",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103887",
+      "author": "Maxzuru",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-11T06:39:06Z",
+      "updatedAt": "2026-03-15T03:38:57Z",
+      "mergedAt": null,
+      "assignees": [
+        "JarmouniA"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "npitre",
+        "ruuddw",
+        "VynDragon",
+        "kgugala",
+        "faxe1008",
+        "evgeniy-paltsev",
+        "tgorochowik",
+        "katsuster",
+        "tejlmand",
+        "fkokosinski",
+        "danieldegrasse",
+        "dcpleung",
+        "JarmouniA",
+        "avolmat-st",
+        "KATE-WANG-NXP",
+        "wearyzen",
+        "tbr-tt",
+        "duynguyenxa"
+      ],
+      "ciStatus": "pending"
+    },
+    {
+      "type": "pr",
+      "id": 3398456251,
+      "number": 105492,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: spi: dw: Fix configuration cache comparison",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105492",
+      "author": "sudiiyengar-en",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-14T07:37:38Z",
+      "updatedAt": "2026-03-15T03:28:41Z",
+      "mergedAt": null,
+      "assignees": [
+        "tbursztyka"
+      ],
+      "requestedReviewers": [
+        "teburd",
+        "tbursztyka",
+        "decsny"
+      ],
+      "ciStatus": "failure"
+    },
+    {
+      "type": "pr",
+      "id": 3395139006,
+      "number": 105448,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "doc: improve west completion setup for bash",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105448",
+      "author": "Aric5301",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-13T13:26:27Z",
+      "updatedAt": "2026-03-15T02:35:39Z",
+      "mergedAt": null,
+      "assignees": [
+        "pdgendt"
+      ],
+      "requestedReviewers": [
+        "mbolivar",
+        "kartben",
+        "nashif"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 3352689768,
+      "number": 104879,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "dts: nxp: mcx: delete \"nxp,cmc-reset-cause\" compatible",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104879",
+      "author": "butok",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-04T10:11:23Z",
+      "updatedAt": "2026-03-15T02:14:12Z",
+      "mergedAt": null,
+      "assignees": [
+        "mmahadevan108"
+      ],
+      "requestedReviewers": [
+        "dbaluta",
+        "manuargue",
+        "mmahadevan108",
+        "DerekSnell"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
       "id": 3188118119,
       "number": 102516,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3342,37 +3513,6 @@
     },
     {
       "type": "pr",
-      "id": 3295516058,
-      "number": 104178,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: sensor: add bma400 accelerometer driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104178",
-      "author": "lucagessi",
-      "state": "open",
-      "isDraft": true,
-      "createdAt": "2026-02-17T18:25:28Z",
-      "updatedAt": "2026-03-14T18:29:40Z",
-      "mergedAt": null,
-      "assignees": [
-        "MaureenHelm"
-      ],
-      "requestedReviewers": [
-        "avisconti",
-        "kartben",
-        "teburd",
-        "nashif",
-        "jeppenodgaard",
-        "MaureenHelm",
-        "yperess",
-        "JarmouniA",
-        "ubieda",
-        "tristan-google",
-        "asemjonovs"
-      ],
-      "ciStatus": "success"
-    },
-    {
-      "type": "pr",
       "id": 3381472393,
       "number": 105245,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3596,31 +3736,6 @@
     },
     {
       "type": "pr",
-      "id": 3352689768,
-      "number": 104879,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "dts: nxp: mcx: delete \"nxp,cmc-reset-cause\" compatible",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104879",
-      "author": "butok",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-04T10:11:23Z",
-      "updatedAt": "2026-03-14T14:59:01Z",
-      "mergedAt": null,
-      "assignees": [
-        "mmahadevan108"
-      ],
-      "requestedReviewers": [
-        "dbaluta",
-        "manuargue",
-        "Holt-Sun",
-        "mmahadevan108",
-        "DerekSnell"
-      ],
-      "ciStatus": null
-    },
-    {
-      "type": "pr",
       "id": 2297964902,
       "number": 84544,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3640,29 +3755,6 @@
         "tmon-nordic"
       ],
       "ciStatus": null
-    },
-    {
-      "type": "pr",
-      "id": 3398456251,
-      "number": 105492,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: spi: context: Fix configuration cache comparison",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105492",
-      "author": "sudiiyengar-en",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-14T07:37:38Z",
-      "updatedAt": "2026-03-14T14:45:43Z",
-      "mergedAt": null,
-      "assignees": [
-        "tbursztyka"
-      ],
-      "requestedReviewers": [
-        "teburd",
-        "tbursztyka",
-        "decsny"
-      ],
-      "ciStatus": "failure"
     },
     {
       "type": "pr",
@@ -4529,45 +4621,6 @@
     },
     {
       "type": "pr",
-      "id": 3270279867,
-      "number": 103887,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: display: add new driver for qemu ramfb",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103887",
-      "author": "Maxzuru",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-11T06:39:06Z",
-      "updatedAt": "2026-03-14T08:22:54Z",
-      "mergedAt": null,
-      "assignees": [
-        "JarmouniA"
-      ],
-      "requestedReviewers": [
-        "kartben",
-        "nashif",
-        "npitre",
-        "ruuddw",
-        "VynDragon",
-        "kgugala",
-        "faxe1008",
-        "evgeniy-paltsev",
-        "tgorochowik",
-        "katsuster",
-        "tejlmand",
-        "fkokosinski",
-        "danieldegrasse",
-        "dcpleung",
-        "avolmat-st",
-        "KATE-WANG-NXP",
-        "wearyzen",
-        "tbr-tt",
-        "duynguyenxa"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
       "id": 3398523049,
       "number": 105493,
       "repo": "zephyrproject-rtos/zephyr",
@@ -4972,47 +5025,6 @@
     },
     {
       "type": "pr",
-      "id": 3025206038,
-      "number": 99641,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "samples: led_strip: Add Nucleo C071RB overlay",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/99641",
-      "author": "JohnAZoidberg",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2025-11-19T10:11:19Z",
-      "updatedAt": "2026-03-14T00:59:16Z",
-      "mergedAt": null,
-      "assignees": [
-        "simonguinot"
-      ],
-      "requestedReviewers": [
-        "nashif",
-        "jeppenodgaard",
-        "simonguinot",
-        "JarmouniA"
-      ],
-      "ciStatus": null
-    },
-    {
-      "type": "pr",
-      "id": 2766289810,
-      "number": 94866,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: spi: litex: use new clk divisor",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94866",
-      "author": "maass-hamburg",
-      "state": "open",
-      "isDraft": true,
-      "createdAt": "2025-08-22T13:10:46Z",
-      "updatedAt": "2026-03-14T00:49:05Z",
-      "mergedAt": null,
-      "assignees": [],
-      "requestedReviewers": [],
-      "ciStatus": null
-    },
-    {
-      "type": "pr",
       "id": 3355050586,
       "number": 930,
       "repo": "zephyrproject-rtos/west",
@@ -5022,11 +5034,11 @@
       "state": "open",
       "isDraft": false,
       "createdAt": "2026-03-04T20:12:49Z",
-      "updatedAt": "2026-03-14T21:03:25Z",
+      "updatedAt": "2026-03-15T04:19:13Z",
       "mergedAt": null,
       "assignees": [],
       "requestedReviewers": [],
-      "ciStatus": "failure"
+      "ciStatus": null
     },
     {
       "type": "pr",
