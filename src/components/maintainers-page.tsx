@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, Cell, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { ActivityPageNav } from "@/components/activity-page-nav";
 import { withBasePath } from "@/lib/base-path";
 import type { MaintainersData, PersonEntry, SubsystemEntry } from "@/lib/maintainers-types";
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
+function isNxpSubsystem(name: string): boolean {
+  const lower = name.toLowerCase();
+  return lower.startsWith("nxp") || lower.includes("hal_nxp");
+}
 
 // ── Person cell ───────────────────────────────────────────────────────────────
 
@@ -44,16 +51,35 @@ function TypeBadge({ type }: { type: SubsystemEntry["type"] }) {
 
 type ContributorChartEntry = { name: string; maintainer: number; collaborator: number };
 
-function ContributorChart({ data }: { data: ContributorChartEntry[] }) {
+type ContributorChartProps = {
+  data: ContributorChartEntry[];
+  personFilter: string;
+  onPersonClick: (name: string) => void;
+};
+
+function ContributorChart({ data, personFilter, onPersonClick }: ContributorChartProps) {
   if (data.length === 0) return null;
-  // Height scales with number of contributors so bars stay readable
   const chartHeight = Math.max(240, data.length * 34);
+
+  function isActive(name: string) {
+    return !personFilter || name.toLowerCase().includes(personFilter.toLowerCase());
+  }
+
+  function handleClick(payload: unknown) {
+    const d = payload as { activePayload?: Array<{ payload: ContributorChartEntry }> } | null;
+    const name = d?.activePayload?.[0]?.payload?.name;
+    if (name) onPersonClick(name);
+  }
+
   return (
-    <section className="panel chart-panel">
+    <section className="panel chart-panel maintainers-chart-panel">
       <div className="panel-header">
         <div>
           <p className="eyebrow">Contributor engagement · {data.length} people</p>
           <h3>Subsystem ownership per roster member</h3>
+          <p className="maintainers-chart-note">
+            NXP components excluded · Click a name to filter the table
+          </p>
         </div>
       </div>
       <div style={{ height: chartHeight }}>
@@ -63,6 +89,8 @@ function ContributorChart({ data }: { data: ContributorChartEntry[] }) {
             data={data}
             margin={{ left: 8, right: 24, top: 8, bottom: 8 }}
             barSize={12}
+            onClick={handleClick}
+            style={{ cursor: "pointer" }}
           >
             <XAxis
               type="number"
@@ -84,8 +112,16 @@ function ContributorChart({ data }: { data: ContributorChartEntry[] }) {
               contentStyle={{ background: "#111827", border: "1px solid rgba(148, 163, 184, 0.15)", borderRadius: 16 }}
             />
             <Legend wrapperStyle={{ fontSize: 12, color: "#b8c2d9" }} />
-            <Bar dataKey="maintainer" name="Maintainer" stackId="a" fill="#7c3aed" radius={[0, 0, 0, 0]} />
-            <Bar dataKey="collaborator" name="Collaborator" stackId="a" fill="#38bdf8" radius={[0, 6, 6, 0]} />
+            <Bar dataKey="maintainer" name="Maintainer" stackId="a" fill="#7c3aed" radius={[0, 0, 0, 0]}>
+              {data.map((entry) => (
+                <Cell key={entry.name} fill="#7c3aed" opacity={isActive(entry.name) ? 1 : 0.2} />
+              ))}
+            </Bar>
+            <Bar dataKey="collaborator" name="Collaborator" stackId="a" fill="#38bdf8" radius={[0, 6, 6, 0]}>
+              {data.map((entry) => (
+                <Cell key={entry.name} fill="#38bdf8" opacity={isActive(entry.name) ? 1 : 0.2} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -99,8 +135,10 @@ export function MaintainersPage() {
   const [data, setData] = useState<MaintainersData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [nameFilter, setNameFilter] = useState("");
+  const [personFilter, setPersonFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | "component" | "file-group">("all");
   const [hideUnassigned, setHideUnassigned] = useState(false);
+  const [dateFrom, setDateFrom] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -123,6 +161,11 @@ export function MaintainersPage() {
     return () => { cancelled = true; };
   }, []);
 
+  function handlePersonClick(name: string) {
+    // Toggle: clicking the same name again clears the filter
+    setPersonFilter((prev) => (prev === name ? "" : name));
+  }
+
   const visibleSubsystems = useMemo(() => {
     if (!data) return [];
     let list = data.subsystems;
@@ -130,16 +173,25 @@ export function MaintainersPage() {
       const lower = nameFilter.toLowerCase();
       list = list.filter((s) => s.name.toLowerCase().includes(lower));
     }
+    if (personFilter.trim()) {
+      const lower = personFilter.toLowerCase();
+      list = list.filter((s) =>
+        s.maintainers.some((p) => p.name.toLowerCase().includes(lower)) ||
+        s.collaborators.some((p) => p.name.toLowerCase().includes(lower))
+      );
+    }
     if (typeFilter !== "all") list = list.filter((s) => s.type === typeFilter);
     if (hideUnassigned) list = list.filter((s) => s.maintainers.length > 0 || s.collaborators.length > 0);
+    if (dateFrom) list = list.filter((s) => (s.detectedAt ?? "") >= dateFrom);
     return list;
-  }, [data, nameFilter, typeFilter, hideUnassigned]);
+  }, [data, nameFilter, personFilter, typeFilter, hideUnassigned, dateFrom]);
 
-  // Per-contributor subsystem counts (across ALL subsystems, not just filtered)
+  // Per-contributor counts — NXP/hal_nxp subsystems excluded from chart statistics
   const chartData = useMemo((): ContributorChartEntry[] => {
     if (!data) return [];
     const map = new Map<string, ContributorChartEntry>();
     for (const s of data.subsystems) {
+      if (isNxpSubsystem(s.name)) continue;
       for (const p of s.maintainers) {
         const e = map.get(p.login) ?? { name: p.name, maintainer: 0, collaborator: 0 };
         e.maintainer++;
@@ -214,12 +266,31 @@ export function MaintainersPage() {
             />
           </label>
           <label>
+            <span>Person name</span>
+            <input
+              type="text"
+              className="filter-text-input"
+              placeholder="Search or click chart…"
+              value={personFilter}
+              onChange={(e) => setPersonFilter(e.target.value)}
+            />
+          </label>
+          <label>
             <span>Type</span>
             <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as typeof typeFilter)}>
               <option value="all">All types</option>
               <option value="component">Component</option>
               <option value="file-group">File group</option>
             </select>
+          </label>
+          <label>
+            <span>Detected from</span>
+            <input
+              type="date"
+              className="filter-text-input"
+              value={dateFrom}
+              onChange={(e) => setDateFrom(e.target.value)}
+            />
           </label>
           <div className="filter-actions">
             <label className="filter-checkbox-label">
@@ -234,48 +305,56 @@ export function MaintainersPage() {
         </div>
       </section>
 
-      <ContributorChart data={chartData} />
+      <div className="maintainers-main-layout">
+        <ContributorChart
+          data={chartData}
+          personFilter={personFilter}
+          onPersonClick={handlePersonClick}
+        />
 
-      <section className="panel table-panel">
-        <div className="panel-header compact">
-          <div>
-            <p className="eyebrow">
-              {visibleSubsystems.length} of {data.subsystems.length} components
-            </p>
-            <h2>Component ownership</h2>
+        <section className="panel table-panel maintainers-table-panel">
+          <div className="panel-header compact">
+            <div>
+              <p className="eyebrow">
+                {visibleSubsystems.length} of {data.subsystems.length} components
+              </p>
+              <h2>Component ownership</h2>
+            </div>
           </div>
-        </div>
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Component</th>
-                <th>Maintainers</th>
-                <th>Collaborators</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {visibleSubsystems.length === 0 ? (
+          <div className="table-wrap">
+            <table>
+              <thead>
                 <tr>
-                  <td colSpan={4} className="empty-state-cell">
-                    No components match the current filters.
-                  </td>
+                  <th>Component</th>
+                  <th>Maintainers</th>
+                  <th>Collaborators</th>
+                  <th>Type</th>
+                  <th>Detected</th>
                 </tr>
-              ) : (
-                visibleSubsystems.map((s) => (
-                  <tr key={s.name}>
-                    <td><strong>{s.name}</strong></td>
-                    <td><PersonList people={s.maintainers} /></td>
-                    <td><PersonList people={s.collaborators} /></td>
-                    <td><TypeBadge type={s.type} /></td>
+              </thead>
+              <tbody>
+                {visibleSubsystems.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="empty-state-cell">
+                      No components match the current filters.
+                    </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
+                ) : (
+                  visibleSubsystems.map((s) => (
+                    <tr key={s.name}>
+                      <td><strong>{s.name}</strong></td>
+                      <td><PersonList people={s.maintainers} /></td>
+                      <td><PersonList people={s.collaborators} /></td>
+                      <td><TypeBadge type={s.type} /></td>
+                      <td className="maintainers-detected-date">{s.detectedAt ?? "—"}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

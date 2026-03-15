@@ -11,6 +11,7 @@ export type SubsystemEntry = {
   type: SubsystemType;
   maintainers: PersonEntry[];
   collaborators: PersonEntry[];
+  detectedAt: string;
 };
 
 export type MaintainersData = {
