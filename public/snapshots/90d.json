@@ -6,7 +6,7 @@
     "to": "2026-03-15T23:59:59Z",
     "timeZone": "UTC"
   },
-  "generatedAt": "2026-03-15T00:05:11.491Z",
+  "generatedAt": "2026-03-15T00:17:02.614Z",
   "rosterSize": 171,
   "rosterMembers": [
     {
@@ -1210,26 +1210,26 @@
   "warnings": [],
   "summary": {
     "openAssignedIssues": 17,
-    "closedIssues": 12,
-    "openAuthoredPrs": 88,
-    "mergedPrs": 66,
-    "reviewsSubmitted": 819,
-    "pendingReviewRequests": 512,
-    "uniqueReviewedPrs": 176,
+    "closedIssues": 13,
+    "openAuthoredPrs": 87,
+    "mergedPrs": 67,
+    "reviewsSubmitted": 839,
+    "pendingReviewRequests": 509,
+    "uniqueReviewedPrs": 180,
     "staleItems": 21,
     "repositoriesTouched": 3,
-    "medianFirstReviewHours": 86.5,
-    "medianMergeHours": 148.5
+    "medianFirstReviewHours": 88,
+    "medianMergeHours": 147
   },
   "reviewOutcomes": {
-    "approved": 197,
-    "changesRequested": 21,
-    "commented": 601
+    "approved": 200,
+    "changesRequested": 23,
+    "commented": 616
   },
   "reviewSources": {
-    "selfAuthored": 330,
-    "teamAuthored": 325,
-    "externalAuthored": 164
+    "selfAuthored": 337,
+    "teamAuthored": 337,
+    "externalAuthored": 165
   },
   "contributors": [
     {
@@ -1237,23 +1237,23 @@
       "name": "Mahesh Mahadevan",
       "role": "MEMBER",
       "openAssignedIssues": 4,
-      "closedIssues": 7,
+      "closedIssues": 8,
       "openAuthoredPrs": 0,
       "draftPrs": 0,
       "mergedPrs": 2,
       "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 65,
-      "pendingReviewRequests": 57,
+      "reviewsSubmitted": 66,
+      "pendingReviewRequests": 56,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
       "reviewSelfAuthored": 0,
       "reviewTeamAuthored": 56,
-      "reviewExternalAuthored": 9,
-      "uniqueReviewedPrs": 39,
+      "reviewExternalAuthored": 10,
+      "uniqueReviewedPrs": 40,
       "repositoriesTouched": 2,
-      "activityScore": 209
+      "activityScore": 210
     },
     {
       "login": "Holt-Sun",
@@ -1265,18 +1265,18 @@
       "draftPrs": 0,
       "mergedPrs": 2,
       "closedUnmergedPrs": 2,
-      "reviewsSubmitted": 95,
+      "reviewsSubmitted": 96,
       "pendingReviewRequests": 43,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
       "reviewSelfAuthored": 37,
-      "reviewTeamAuthored": 34,
+      "reviewTeamAuthored": 35,
       "reviewExternalAuthored": 24,
-      "uniqueReviewedPrs": 39,
+      "uniqueReviewedPrs": 40,
       "repositoriesTouched": 1,
-      "activityScore": 197
+      "activityScore": 198
     },
     {
       "login": "ZhaoxiangJin",
@@ -1287,19 +1287,19 @@
       "openAuthoredPrs": 2,
       "draftPrs": 0,
       "mergedPrs": 14,
-      "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 64,
+      "closedUnmergedPrs": 2,
+      "reviewsSubmitted": 66,
       "pendingReviewRequests": 28,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
-      "reviewSelfAuthored": 18,
+      "reviewSelfAuthored": 20,
       "reviewTeamAuthored": 41,
       "reviewExternalAuthored": 5,
       "uniqueReviewedPrs": 30,
       "repositoriesTouched": 2,
-      "activityScore": 156
+      "activityScore": 158
     },
     {
       "login": "butok",
@@ -1311,18 +1311,18 @@
       "draftPrs": 0,
       "mergedPrs": 2,
       "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 27,
+      "reviewsSubmitted": 28,
       "pendingReviewRequests": 42,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
       "reviewSelfAuthored": 1,
-      "reviewTeamAuthored": 12,
+      "reviewTeamAuthored": 13,
       "reviewExternalAuthored": 14,
-      "uniqueReviewedPrs": 17,
+      "uniqueReviewedPrs": 18,
       "repositoriesTouched": 1,
-      "activityScore": 120
+      "activityScore": 121
     },
     {
       "login": "zejiang0jason",
@@ -1334,18 +1334,18 @@
       "draftPrs": 0,
       "mergedPrs": 2,
       "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 27,
+      "reviewsSubmitted": 28,
       "pendingReviewRequests": 33,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
       "reviewSelfAuthored": 0,
-      "reviewTeamAuthored": 25,
+      "reviewTeamAuthored": 26,
       "reviewExternalAuthored": 2,
-      "uniqueReviewedPrs": 22,
+      "uniqueReviewedPrs": 23,
       "repositoriesTouched": 2,
-      "activityScore": 97
+      "activityScore": 98
     },
     {
       "login": "MaochenWang1",
@@ -1381,7 +1381,7 @@
       "mergedPrs": 2,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 13,
-      "pendingReviewRequests": 25,
+      "pendingReviewRequests": 24,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1391,7 +1391,7 @@
       "reviewExternalAuthored": 4,
       "uniqueReviewedPrs": 10,
       "repositoriesTouched": 2,
-      "activityScore": 88
+      "activityScore": 86
     },
     {
       "login": "dbaluta",
@@ -1426,18 +1426,18 @@
       "draftPrs": 2,
       "mergedPrs": 0,
       "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 21,
+      "reviewsSubmitted": 24,
       "pendingReviewRequests": 5,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
-      "reviewSelfAuthored": 0,
+      "reviewSelfAuthored": 3,
       "reviewTeamAuthored": 11,
       "reviewExternalAuthored": 10,
-      "uniqueReviewedPrs": 5,
+      "uniqueReviewedPrs": 6,
       "repositoriesTouched": 1,
-      "activityScore": 81
+      "activityScore": 84
     },
     {
       "login": "hakehuang",
@@ -1449,18 +1449,18 @@
       "draftPrs": 0,
       "mergedPrs": 2,
       "closedUnmergedPrs": 3,
-      "reviewsSubmitted": 52,
+      "reviewsSubmitted": 55,
       "pendingReviewRequests": 6,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
       "reviewSelfAuthored": 25,
-      "reviewTeamAuthored": 24,
+      "reviewTeamAuthored": 27,
       "reviewExternalAuthored": 3,
-      "uniqueReviewedPrs": 17,
+      "uniqueReviewedPrs": 18,
       "repositoriesTouched": 1,
-      "activityScore": 79
+      "activityScore": 82
     },
     {
       "login": "manuargue",
@@ -1486,29 +1486,6 @@
       "activityScore": 75
     },
     {
-      "login": "FelixWang47831",
-      "name": "Felix Wang",
-      "role": "MEMBER",
-      "openAssignedIssues": 0,
-      "closedIssues": 0,
-      "openAuthoredPrs": 2,
-      "draftPrs": 1,
-      "mergedPrs": 1,
-      "closedUnmergedPrs": 1,
-      "reviewsSubmitted": 31,
-      "pendingReviewRequests": 14,
-      "staleItems": 1,
-      "reviewApproved": 0,
-      "reviewChangesRequested": 0,
-      "reviewCommented": 0,
-      "reviewSelfAuthored": 18,
-      "reviewTeamAuthored": 10,
-      "reviewExternalAuthored": 3,
-      "uniqueReviewedPrs": 12,
-      "repositoriesTouched": 1,
-      "activityScore": 68
-    },
-    {
       "login": "axelnxp",
       "name": "Axel Le Bourhis",
       "role": "MEMBER",
@@ -1529,6 +1506,29 @@
       "reviewExternalAuthored": 0,
       "uniqueReviewedPrs": 6,
       "repositoriesTouched": 2,
+      "activityScore": 66
+    },
+    {
+      "login": "FelixWang47831",
+      "name": "Felix Wang",
+      "role": "MEMBER",
+      "openAssignedIssues": 0,
+      "closedIssues": 0,
+      "openAuthoredPrs": 2,
+      "draftPrs": 1,
+      "mergedPrs": 1,
+      "closedUnmergedPrs": 1,
+      "reviewsSubmitted": 31,
+      "pendingReviewRequests": 13,
+      "staleItems": 1,
+      "reviewApproved": 0,
+      "reviewChangesRequested": 0,
+      "reviewCommented": 0,
+      "reviewSelfAuthored": 18,
+      "reviewTeamAuthored": 10,
+      "reviewExternalAuthored": 3,
+      "uniqueReviewedPrs": 12,
+      "repositoriesTouched": 1,
       "activityScore": 66
     },
     {
@@ -1560,9 +1560,9 @@
       "role": "MEMBER",
       "openAssignedIssues": 0,
       "closedIssues": 1,
-      "openAuthoredPrs": 3,
+      "openAuthoredPrs": 2,
       "draftPrs": 0,
-      "mergedPrs": 3,
+      "mergedPrs": 4,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 35,
       "pendingReviewRequests": 2,
@@ -1575,7 +1575,7 @@
       "reviewExternalAuthored": 1,
       "uniqueReviewedPrs": 7,
       "repositoriesTouched": 1,
-      "activityScore": 57
+      "activityScore": 56
     },
     {
       "login": "AidenHu",
@@ -1656,18 +1656,18 @@
       "draftPrs": 1,
       "mergedPrs": 4,
       "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 32,
+      "reviewsSubmitted": 34,
       "pendingReviewRequests": 2,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
-      "reviewSelfAuthored": 26,
+      "reviewSelfAuthored": 28,
       "reviewTeamAuthored": 5,
       "reviewExternalAuthored": 1,
-      "uniqueReviewedPrs": 6,
+      "uniqueReviewedPrs": 7,
       "repositoriesTouched": 1,
-      "activityScore": 50
+      "activityScore": 52
     },
     {
       "login": "yvesll",
@@ -1725,18 +1725,18 @@
       "draftPrs": 1,
       "mergedPrs": 1,
       "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 18,
+      "reviewsSubmitted": 19,
       "pendingReviewRequests": 6,
       "staleItems": 1,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
       "reviewCommented": 0,
       "reviewSelfAuthored": 13,
-      "reviewTeamAuthored": 2,
+      "reviewTeamAuthored": 3,
       "reviewExternalAuthored": 3,
-      "uniqueReviewedPrs": 7,
+      "uniqueReviewedPrs": 8,
       "repositoriesTouched": 1,
-      "activityScore": 48
+      "activityScore": 49
     },
     {
       "login": "PetervdPerk-NXP",
@@ -1900,6 +1900,29 @@
       "activityScore": 23
     },
     {
+      "login": "Albort12138",
+      "name": "Albort12138",
+      "role": "MEMBER",
+      "openAssignedIssues": 0,
+      "closedIssues": 0,
+      "openAuthoredPrs": 1,
+      "draftPrs": 1,
+      "mergedPrs": 2,
+      "closedUnmergedPrs": 0,
+      "reviewsSubmitted": 11,
+      "pendingReviewRequests": 0,
+      "staleItems": 1,
+      "reviewApproved": 0,
+      "reviewChangesRequested": 0,
+      "reviewCommented": 0,
+      "reviewSelfAuthored": 4,
+      "reviewTeamAuthored": 7,
+      "reviewExternalAuthored": 0,
+      "uniqueReviewedPrs": 3,
+      "repositoriesTouched": 1,
+      "activityScore": 19
+    },
+    {
       "login": "william-tang914",
       "name": "william-tang914",
       "role": "MEMBER",
@@ -1990,29 +2013,6 @@
       "uniqueReviewedPrs": 1,
       "repositoriesTouched": 1,
       "activityScore": 15
-    },
-    {
-      "login": "Albort12138",
-      "name": "Albort12138",
-      "role": "MEMBER",
-      "openAssignedIssues": 0,
-      "closedIssues": 0,
-      "openAuthoredPrs": 1,
-      "draftPrs": 1,
-      "mergedPrs": 2,
-      "closedUnmergedPrs": 0,
-      "reviewsSubmitted": 6,
-      "pendingReviewRequests": 0,
-      "staleItems": 1,
-      "reviewApproved": 0,
-      "reviewChangesRequested": 0,
-      "reviewCommented": 0,
-      "reviewSelfAuthored": 4,
-      "reviewTeamAuthored": 2,
-      "reviewExternalAuthored": 0,
-      "uniqueReviewedPrs": 2,
-      "repositoriesTouched": 1,
-      "activityScore": 14
     },
     {
       "login": "stanislav-poboril",
@@ -2754,9 +2754,9 @@
   "repoActivity": [
     {
       "name": "zephyrproject-rtos/zephyr",
-      "issues": 29,
-      "prs": 152,
-      "reviews": 759,
+      "issues": 30,
+      "prs": 154,
+      "reviews": 779,
       "contributors": 58
     },
     {
@@ -3123,7 +3123,23 @@
           "mmahadevan108"
         ],
         "requestedVerdicts": [],
-        "otherVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "zejiang0jason",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "alexanderwachter",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "JarmouniA",
+            "state": "APPROVED",
+            "wasRequested": false
+          }
+        ],
         "pendingRequestedLogins": [
           "dbaluta",
           "manuargue",
@@ -3326,16 +3342,40 @@
         "assignees": [
           "mmahadevan108"
         ],
-        "requestedVerdicts": [],
-        "otherVerdicts": [],
+        "requestedVerdicts": [
+          {
+            "login": "hakehuang",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "butok",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "Holt-Sun",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "Albort12138",
+            "state": "APPROVED",
+            "wasRequested": false
+          },
+          {
+            "login": "lucien-nxp",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
         "pendingRequestedLogins": [
           "dbaluta",
           "nashif",
           "manuargue",
-          "hakehuang",
           "henrikbrixandersen",
-          "butok",
-          "Holt-Sun",
           "ithinuel",
           "MaureenHelm",
           "stephanosio",
@@ -3346,7 +3386,7 @@
           "iuliana-prodan",
           "DerekSnell"
         ],
-        "pendingRequestedCount": 16,
+        "pendingRequestedCount": 13,
         "ciStatus": null,
         "cooldownHours": 10,
         "cooldownMet": false
@@ -3618,6 +3658,38 @@
       }
     },
     {
+      "id": "review-3948856377",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Albort12138",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Albort12138",
+      "author": "lucien-nxp",
+      "state": "approved",
+      "createdAt": "2026-03-14T13:33:34Z",
+      "updatedAt": "2026-03-14T13:33:34Z",
+      "ageDays": 1,
+      "statusLabel": "APPROVED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 1,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-request-3396184672-hakehuang",
       "type": "review_request",
       "title": "Review requested from hakehuang",
@@ -3666,7 +3738,58 @@
           "josuah"
         ],
         "requestedVerdicts": [],
-        "otherVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "butok",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "ngphibang",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "trunghieulenxp",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "dbaluta",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "copilot-pull-request-reviewer[bot]",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "michal-chvatal",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "bjarki-andreasen",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "KATE-WANG-NXP",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "teburd",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
         "pendingRequestedLogins": [
           "kartben",
           "nashif",
@@ -4002,6 +4125,69 @@
       }
     },
     {
+      "id": "review-3948644595",
+      "type": "review",
+      "title": "Introduce libMP (Media Pipe library) review by Phi Bang Nguyen",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/98514",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ngphibang",
+      "author": "ngphibang",
+      "state": "commented",
+      "createdAt": "2026-03-14T10:50:08Z",
+      "updatedAt": "2026-03-14T10:50:08Z",
+      "ageDays": 1,
+      "statusLabel": "COMMENTED · Authored by self",
+      "reviewedPrKind": "authored-by-self",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 1,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3364185658-ZhaoxiangJin",
+      "type": "pull_request",
+      "title": "drivers: timer: systick: Add conditional compilation guards around hook function declarations",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105053",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "ZhaoxiangJin",
+      "state": "closed",
+      "createdAt": "2026-03-06T14:41:20Z",
+      "updatedAt": "2026-03-14T09:59:09Z",
+      "ageDays": 9,
+      "statusLabel": "Closed",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 1,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "pull_request-3387088397-ZhaoxiangJin",
       "type": "pull_request",
       "title": "drivers: timer: generalize the existing system timer companion API",
@@ -4031,7 +4217,7 @@
           },
           {
             "login": "bjarki-andreasen",
-            "state": "APPROVED",
+            "state": "COMMENTED",
             "wasRequested": true
           }
         ],
@@ -4327,6 +4513,132 @@
         "closedUnmergedPrs": 0,
         "reviewsSubmitted": 0,
         "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3948376732",
+      "type": "review",
+      "title": "drivers: timer: generalize the existing system timer companion API review by Zhaoxiang Jin",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "ZhaoxiangJin",
+      "state": "commented",
+      "createdAt": "2026-03-14T07:50:56Z",
+      "updatedAt": "2026-03-14T07:50:56Z",
+      "ageDays": 1,
+      "statusLabel": "COMMENTED · Authored by self",
+      "reviewedPrKind": "authored-by-self",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 1,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3948375382",
+      "type": "review",
+      "title": "drivers: timer: generalize the existing system timer companion API review by Zhaoxiang Jin",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105331",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "ZhaoxiangJin",
+      "state": "commented",
+      "createdAt": "2026-03-14T07:49:07Z",
+      "updatedAt": "2026-03-14T07:49:07Z",
+      "ageDays": 1,
+      "statusLabel": "COMMENTED · Authored by self",
+      "reviewedPrKind": "authored-by-self",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 1,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3398328339-ZhaoxiangJin",
+      "type": "pull_request",
+      "title": "Unified Boot CPU Frequency Modeling and Publication",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105491",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "ZhaoxiangJin",
+      "state": "closed",
+      "createdAt": "2026-03-14T06:31:39Z",
+      "updatedAt": "2026-03-14T07:01:24Z",
+      "ageDays": 1,
+      "statusLabel": "Closed",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 1,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3382568066-yongxu-wang15",
+      "type": "pull_request",
+      "title": "pm: device: replace magic number with named constant",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105260",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "yongxu-wang15",
+      "author": "yongxu-wang15",
+      "state": "closed",
+      "createdAt": "2026-03-11T07:23:34Z",
+      "updatedAt": "2026-03-14T04:59:46Z",
+      "ageDays": 4,
+      "statusLabel": "Merged",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 1,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
         "staleItems": 0,
         "reviewApproved": 0,
         "reviewChangesRequested": 0,
@@ -4647,6 +4959,37 @@
       }
     },
     {
+      "id": "issue-3565577473-mmahadevan108",
+      "type": "issue",
+      "title": "soc: mcxw7x: PM not working properly. Issues with timing and flashing",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/98484",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "SynchronicIT",
+      "state": "closed",
+      "createdAt": "2025-10-29T11:42:06Z",
+      "updatedAt": "2026-03-14T00:48:51Z",
+      "ageDays": 137,
+      "statusLabel": "Closed",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 1,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-request-3396361091-william-tang914",
       "type": "review_request",
       "title": "Review requested from william-tang914",
@@ -4706,6 +5049,38 @@
         "reviewSelfAuthored": 0,
         "reviewTeamAuthored": 0,
         "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3947573437",
+      "type": "review",
+      "title": "modules: tflite-micro: update to latest main review by Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105485",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "XenuIsWatching",
+      "state": "approved",
+      "createdAt": "2026-03-14T00:07:41Z",
+      "updatedAt": "2026-03-14T00:07:41Z",
+      "ageDays": 1,
+      "statusLabel": "APPROVED · Authored externally",
+      "reviewedPrKind": "authored-external",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 1,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 1
       }
     },
     {
@@ -8572,7 +8947,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 31,
+        "cooldownHours": 32,
         "cooldownMet": false
       },
       "metrics": {
@@ -8749,37 +9124,6 @@
       }
     },
     {
-      "id": "review-request-3373194373-mmahadevan108",
-      "type": "review_request",
-      "title": "Review requested from Mahesh Mahadevan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105142",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "mmahadevan108",
-      "author": "will-tm",
-      "state": "open",
-      "createdAt": "2026-03-09T12:25:26Z",
-      "updatedAt": "2026-03-13T15:36:39Z",
-      "ageDays": 2,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "pull_request-3387065623-yongxu-wang15",
       "type": "pull_request",
       "title": "MAINTAINERS: Apply to become PM subsystem collaborator",
@@ -8901,37 +9245,6 @@
         "reviewCommented": 0,
         "reviewSelfAuthored": 0,
         "reviewTeamAuthored": 1,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3378865647-FelixWang47831",
-      "type": "review_request",
-      "title": "Review requested from Felix Wang",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105222",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "FelixWang47831",
-      "author": "rwiebe-adi",
-      "state": "open",
-      "createdAt": "2026-03-10T14:01:51Z",
-      "updatedAt": "2026-03-13T14:21:50Z",
-      "ageDays": 2,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
         "reviewExternalAuthored": 0
       }
     },
@@ -9093,68 +9406,6 @@
           "avolmat-st"
         ],
         "pendingRequestedCount": 8,
-        "ciStatus": null,
-        "cooldownHours": 34,
-        "cooldownMet": false
-      },
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 1,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "pull_request-3382568066-yongxu-wang15",
-      "type": "pull_request",
-      "title": "pm: device: replace magic number with named constant",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105260",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "yongxu-wang15",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-11T07:23:34Z",
-      "updatedAt": "2026-03-13T13:29:29Z",
-      "ageDays": 4,
-      "statusLabel": "Open PR",
-      "prStatus": {
-        "assignees": [],
-        "requestedVerdicts": [],
-        "otherVerdicts": [
-          {
-            "login": "bjarki-andreasen",
-            "state": "APPROVED",
-            "wasRequested": false
-          },
-          {
-            "login": "nashif",
-            "state": "APPROVED",
-            "wasRequested": false
-          },
-          {
-            "login": "ZhaoxiangJin",
-            "state": "COMMENTED",
-            "wasRequested": false
-          }
-        ],
-        "pendingRequestedLogins": [
-          "teburd",
-          "ceolin",
-          "JordanYates",
-          "tmleman"
-        ],
-        "pendingRequestedCount": 4,
         "ciStatus": null,
         "cooldownHours": 34,
         "cooldownMet": false
@@ -9947,7 +10198,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 36,
+        "cooldownHours": 37,
         "cooldownMet": false
       },
       "metrics": {
@@ -10136,6 +10387,38 @@
         "reviewChangesRequested": 0,
         "reviewCommented": 0,
         "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3942519598",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Lucien Zhao",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "lucien-nxp",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-13T08:49:12Z",
+      "updatedAt": "2026-03-13T08:49:12Z",
+      "ageDays": 2,
+      "statusLabel": "COMMENTED · Authored by self",
+      "reviewedPrKind": "authored-by-self",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 1,
         "reviewTeamAuthored": 0,
         "reviewExternalAuthored": 0
       }
@@ -10424,6 +10707,38 @@
         "reviewCommented": 1,
         "reviewSelfAuthored": 1,
         "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3941331217",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Albort12138",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Albort12138",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-13T03:08:20Z",
+      "updatedAt": "2026-03-13T03:08:20Z",
+      "ageDays": 2,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
         "reviewExternalAuthored": 0
       }
     },
@@ -11180,7 +11495,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 64,
+        "cooldownHours": 65,
         "cooldownMet": false
       },
       "metrics": {
@@ -11456,6 +11771,38 @@
       }
     },
     {
+      "id": "review-3933489725",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Lucien Zhao",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "lucien-nxp",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-12T02:21:04Z",
+      "updatedAt": "2026-03-12T02:21:04Z",
+      "ageDays": 3,
+      "statusLabel": "COMMENTED · Authored by self",
+      "reviewedPrKind": "authored-by-self",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 1,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "pull_request-3068970788-ngphibang",
       "type": "pull_request",
       "title": "samples: drivers: video: Add pipeline sample",
@@ -11495,7 +11842,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 74,
+        "cooldownHours": 75,
         "cooldownMet": true
       },
       "metrics": {
@@ -12716,7 +13063,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 81,
+        "cooldownHours": 82,
         "cooldownMet": true
       },
       "metrics": {
@@ -13107,37 +13454,6 @@
         "reviewCommented": 1,
         "reviewSelfAuthored": 0,
         "reviewTeamAuthored": 1,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3381029725-JiafeiPan",
-      "type": "review_request",
-      "title": "Review requested from Jiafei Pan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105240",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "JiafeiPan",
-      "author": "parya03",
-      "state": "open",
-      "createdAt": "2026-03-10T22:29:44Z",
-      "updatedAt": "2026-03-11T14:10:54Z",
-      "ageDays": 4,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
         "reviewExternalAuthored": 0
       }
     },
@@ -14352,6 +14668,38 @@
       }
     },
     {
+      "id": "review-3928417074",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by hakehuang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "hakehuang",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-11T10:10:45Z",
+      "updatedAt": "2026-03-11T10:10:45Z",
+      "ageDays": 4,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-3928267910",
       "type": "review",
       "title": "crypto: mbedtls_crypto_alt: replace legacy Mbed TLS crypto with PSA API and prepare for TF-PSA-Crypto 1.0 review by Hui Bai",
@@ -15335,6 +15683,70 @@
         "reviewCommented": 0,
         "reviewSelfAuthored": 0,
         "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3927533297",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Albort12138",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Albort12138",
+      "author": "lucien-nxp",
+      "state": "changes_requested",
+      "createdAt": "2026-03-11T07:40:36Z",
+      "updatedAt": "2026-03-11T07:40:36Z",
+      "ageDays": 4,
+      "statusLabel": "CHANGES_REQUESTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 1,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3927524874",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Albort12138",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Albort12138",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-11T07:38:51Z",
+      "updatedAt": "2026-03-11T07:38:51Z",
+      "ageDays": 4,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
         "reviewExternalAuthored": 0
       }
     },
@@ -17265,7 +17677,7 @@
         ],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 93,
+        "cooldownHours": 94,
         "cooldownMet": true
       },
       "metrics": {
@@ -19917,6 +20329,38 @@
       }
     },
     {
+      "id": "review-3921296351",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by hakehuang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "hakehuang",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-10T10:17:49Z",
+      "updatedAt": "2026-03-10T10:17:49Z",
+      "ageDays": 5,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-request-3372657977-Holt-Sun",
       "type": "review_request",
       "title": "Review requested from Holt Sun",
@@ -20272,7 +20716,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 110,
+        "cooldownHours": 111,
         "cooldownMet": true
       },
       "metrics": {
@@ -20495,7 +20939,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 110,
+        "cooldownHours": 111,
         "cooldownMet": true
       },
       "metrics": {
@@ -21103,6 +21547,38 @@
       }
     },
     {
+      "id": "review-3920615628",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Albort12138",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Albort12138",
+      "author": "lucien-nxp",
+      "state": "changes_requested",
+      "createdAt": "2026-03-10T08:24:49Z",
+      "updatedAt": "2026-03-10T08:24:49Z",
+      "ageDays": 5,
+      "statusLabel": "CHANGES_REQUESTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 1,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-3920539913",
       "type": "review",
       "title": "enable watchdog on A53 for imx8mp/m/n evk board review by zejiang0jason",
@@ -21222,6 +21698,38 @@
         "reviewCommented": 1,
         "reviewSelfAuthored": 1,
         "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3920501938",
+      "type": "review",
+      "title": "dts: nxp: mcx: delete \"nxp,cmc-reset-cause\" compatible review by zejiang0jason",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104879",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "zejiang0jason",
+      "author": "butok",
+      "state": "approved",
+      "createdAt": "2026-03-10T08:01:00Z",
+      "updatedAt": "2026-03-10T08:01:00Z",
+      "ageDays": 5,
+      "statusLabel": "APPROVED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 1,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
         "reviewExternalAuthored": 0
       }
     },
@@ -21505,6 +22013,70 @@
         "reviewApproved": 1,
         "reviewChangesRequested": 0,
         "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3920322354",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Holt Sun",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Holt-Sun",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-10T07:23:02Z",
+      "updatedAt": "2026-03-10T07:23:02Z",
+      "ageDays": 5,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3920308187",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by Andrej Butok",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "butok",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-10T07:20:32Z",
+      "updatedAt": "2026-03-10T07:20:32Z",
+      "ageDays": 5,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
         "reviewSelfAuthored": 0,
         "reviewTeamAuthored": 1,
         "reviewExternalAuthored": 0
@@ -23288,6 +23860,38 @@
       }
     },
     {
+      "id": "review-3916204176",
+      "type": "review",
+      "title": "Add frdm-imrt1186 flexspi function support review by hakehuang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104664",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "hakehuang",
+      "author": "lucien-nxp",
+      "state": "commented",
+      "createdAt": "2026-03-09T15:22:16Z",
+      "updatedAt": "2026-03-09T15:22:16Z",
+      "ageDays": 6,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-3916108620",
       "type": "review",
       "title": "samples: drivers: add SCMI shell-based sample review by Laurentiu Mihalcea",
@@ -23908,7 +24512,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 134,
+        "cooldownHours": 135,
         "cooldownMet": true
       },
       "metrics": {
@@ -31702,7 +32306,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 246,
+        "cooldownHours": 247,
         "cooldownMet": true
       },
       "metrics": {
@@ -31839,7 +32443,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 247,
+        "cooldownHours": 248,
         "cooldownMet": true
       },
       "metrics": {
@@ -32067,7 +32671,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 248,
+        "cooldownHours": 249,
         "cooldownMet": true
       },
       "metrics": {
@@ -33012,7 +33616,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 255,
+        "cooldownHours": 256,
         "cooldownMet": true
       },
       "metrics": {
@@ -34578,7 +35182,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 274,
+        "cooldownHours": 275,
         "cooldownMet": true
       },
       "metrics": {
@@ -35666,7 +36270,7 @@
         ],
         "pendingRequestedCount": 18,
         "ciStatus": null,
-        "cooldownHours": 277,
+        "cooldownHours": 278,
         "cooldownMet": true
       },
       "metrics": {
@@ -36845,7 +37449,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 280,
+        "cooldownHours": 281,
         "cooldownMet": true
       },
       "metrics": {
@@ -52952,6 +53556,38 @@
       }
     },
     {
+      "id": "review-3638557390",
+      "type": "review",
+      "title": "Introduce libMP (Media Pipe library) review by Phi Bang Nguyen",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/98514",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ngphibang",
+      "author": "ngphibang",
+      "state": "commented",
+      "createdAt": "2026-01-08T09:28:23Z",
+      "updatedAt": "2026-01-08T09:28:23Z",
+      "ageDays": 66,
+      "statusLabel": "COMMENTED · Authored by self",
+      "reviewedPrKind": "authored-by-self",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 1,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-3638196708",
       "type": "review",
       "title": "Bluetooth: Classic: SPP: Add shell SPP command set review by makeshi",
@@ -53016,6 +53652,38 @@
       }
     },
     {
+      "id": "review-3627622680",
+      "type": "review",
+      "title": "Introduce libMP (Media Pipe library) review by Phi Bang Nguyen",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/98514",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ngphibang",
+      "author": "ngphibang",
+      "state": "commented",
+      "createdAt": "2026-01-05T16:46:15Z",
+      "updatedAt": "2026-01-05T16:46:15Z",
+      "ageDays": 69,
+      "statusLabel": "COMMENTED · Authored by self",
+      "reviewedPrKind": "authored-by-self",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 1,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "review-3620097945",
       "type": "review",
       "title": "NXP support lptmr tickless function review by Albort12138",
@@ -53059,6 +53727,38 @@
       "createdAt": "2025-12-31T02:00:22Z",
       "updatedAt": "2025-12-31T02:00:22Z",
       "ageDays": 74,
+      "statusLabel": "COMMENTED · Authored by teammate",
+      "reviewedPrKind": "authored-by-them",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 1,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 1,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 1,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-3597664189",
+      "type": "review",
+      "title": "Introduce libMP (Media Pipe library) review by KATE-WANG-NXP",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/98514",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "KATE-WANG-NXP",
+      "author": "ngphibang",
+      "state": "commented",
+      "createdAt": "2025-12-26T07:02:57Z",
+      "updatedAt": "2025-12-26T07:02:57Z",
+      "ageDays": 79,
       "statusLabel": "COMMENTED · Authored by teammate",
       "reviewedPrKind": "authored-by-them",
       "metrics": {
@@ -53479,10 +54179,10 @@
   ],
   "syncHealth": {
     "source": "cache",
-    "generatedAt": "2026-03-15T00:05:11.491Z",
+    "generatedAt": "2026-03-15T00:17:02.614Z",
     "freshnessMinutes": 0,
-    "searchSamples": 23260,
-    "detailSamples": 1205,
+    "searchSamples": 24416,
+    "detailSamples": 1215,
     "liveEnabled": false
   },
   "filterOptions": {
@@ -54182,6 +54882,6 @@
     "hasToken": false,
     "connectionStatus": "configured",
     "message": "Snapshot aggregated from daily files by GitHub Actions. No token is available in the browser.",
-    "checkedAt": "2026-03-15T00:05:11.491Z"
+    "checkedAt": "2026-03-15T00:17:02.614Z"
   }
 }
