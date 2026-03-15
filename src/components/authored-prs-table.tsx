@@ -71,67 +71,46 @@ function ReviewersCell({ prStatus }: { prStatus: PrStatusSummary }) {
   const { assignees = [], requestedVerdicts, otherVerdicts, pendingRequestedLogins = [] } = prStatus;
   const assigneeSet = new Set(assignees.map((l) => l.toLowerCase()));
 
-  const pendingLogins = pendingRequestedLogins.filter((l) => !assigneeSet.has(l.toLowerCase()));
+  const pendingCount = pendingRequestedLogins.filter((l) => !assigneeSet.has(l.toLowerCase())).length;
   const allVerdicts = [...requestedVerdicts, ...otherVerdicts].filter(
     (v) => !assigneeSet.has(v.login.toLowerCase()),
   );
-  // deduplicate by login (requestedVerdicts and otherVerdicts should not overlap, but guard anyway)
+  // deduplicate by login
   const verdictMap = new Map(allVerdicts.map((v) => [v.login.toLowerCase(), v]));
 
-  const hasMeaningfulVerdict = [...verdictMap.values()].some(
+  // Named badges only for APPROVED / CHANGES_REQUESTED; pending and commented are always counts
+  const namedVerdicts = [...verdictMap.values()].filter(
     (v) => v.state === "APPROVED" || v.state === "CHANGES_REQUESTED",
   );
+  const commentedCount = [...verdictMap.values()].filter((v) => v.state === "COMMENTED").length;
 
-  if (!hasMeaningfulVerdict && pendingLogins.length === 0 && verdictMap.size === 0) {
+  if (namedVerdicts.length === 0 && pendingCount === 0 && commentedCount === 0) {
     return <span className="pr-badge-empty">—</span>;
   }
 
-  if (hasMeaningfulVerdict) {
-    const nodes: React.ReactNode[] = [];
-    for (const login of pendingLogins) {
-      nodes.push(
-        <span key={`p-${login}`} className="pr-badge pr-badge-pending" title="Pending">
-          ⏳ {login}
-        </span>,
-      );
-    }
-    for (const [, v] of verdictMap) {
-      if (v.state === "COMMENTED") continue;
-      nodes.push(
-        <span key={`v-${v.login}`} className={VERDICT_CLASS[v.state] ?? "pr-badge"} title={v.state.replace(/_/g, " ")}>
-          {VERDICT_ICON[v.state]} {v.login}
-        </span>,
-      );
-    }
-    const commented = [...verdictMap.values()].filter((v) => v.state === "COMMENTED").length;
-    if (commented > 0) {
-      nodes.push(
-        <span key="cmt" className="pr-badge pr-badge-commented" title={`${commented} comment review(s)`}>
-          ○{commented}
-        </span>,
-      );
-    }
-    return <span className="pr-badges">{nodes}</span>;
-  }
-
-  // static icon mode: no meaningful verdict — show counts only
-  const parts: React.ReactNode[] = [];
-  if (pendingLogins.length > 0) {
-    parts.push(
-      <span key="p" className="pr-badge pr-badge-pending" title={`${pendingLogins.length} pending`}>
-        ⏳{pendingLogins.length}
+  const nodes: React.ReactNode[] = [];
+  for (const v of namedVerdicts) {
+    nodes.push(
+      <span key={`v-${v.login}`} className={VERDICT_CLASS[v.state] ?? "pr-badge"} title={v.state.replace(/_/g, " ")}>
+        {VERDICT_ICON[v.state]} {v.login}
       </span>,
     );
   }
-  const commented = [...verdictMap.values()].filter((v) => v.state === "COMMENTED").length;
-  if (commented > 0) {
-    parts.push(
-      <span key="o" className="pr-badge pr-badge-commented" title={`${commented} comment review(s)`}>
-        ○{commented}
+  if (pendingCount > 0) {
+    nodes.push(
+      <span key="p" className="pr-badge pr-badge-pending" title={`${pendingCount} pending`}>
+        ⏳{pendingCount}
       </span>,
     );
   }
-  return parts.length > 0 ? <span className="pr-badges">{parts}</span> : <span className="pr-badge-empty">—</span>;
+  if (commentedCount > 0) {
+    nodes.push(
+      <span key="o" className="pr-badge pr-badge-commented" title={`${commentedCount} comment review(s)`}>
+        ○{commentedCount}
+      </span>,
+    );
+  }
+  return <span className="pr-badges">{nodes}</span>;
 }
 
 function CiCell({ ciStatus }: { ciStatus: PrStatusSummary["ciStatus"] }) {
@@ -141,13 +120,16 @@ function CiCell({ ciStatus }: { ciStatus: PrStatusSummary["ciStatus"] }) {
   return <span className="pr-badge-empty">—</span>;
 }
 
+const PR_STATE_CHIPS = ["Open PR", "Draft PR", "Merged", "Closed"] as const;
+
 export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
   const [activeStates, setActiveStates] = useState<Set<string>>(new Set());
 
-  const availableStates = [...new Set(items.map((i) => i.statusLabel))].sort();
+  const countByState = Object.fromEntries(PR_STATE_CHIPS.map((label) => [label, items.filter((i) => i.statusLabel === label).length]));
   const filtered = activeStates.size === 0 ? items : items.filter((item) => activeStates.has(item.statusLabel));
 
   function toggleState(label: string) {
+    if (countByState[label] === 0) return;
     setActiveStates((prev) => {
       const next = new Set(prev);
       next.has(label) ? next.delete(label) : next.add(label);
@@ -163,18 +145,23 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
           <h2>Pull request activity</h2>
         </div>
       </div>
-      {availableStates.length > 1 && (
+      {items.length > 0 && (
         <div className="table-filter-bar">
-          {availableStates.map((label) => (
-            <button
-              key={label}
-              type="button"
-              className={clsx("table-filter-chip", activeStates.has(label) && "is-active")}
-              onClick={() => toggleState(label)}
-            >
-              {label}
-            </button>
-          ))}
+          {PR_STATE_CHIPS.map((label) => {
+            const count = countByState[label];
+            return (
+              <button
+                key={label}
+                type="button"
+                className={clsx("table-filter-chip", activeStates.has(label) && "is-active", count === 0 && "is-empty")}
+                onClick={() => toggleState(label)}
+                disabled={count === 0}
+              >
+                {label}
+                {count > 0 && <span className="table-filter-chip-count">{count}</span>}
+              </button>
+            );
+          })}
         </div>
       )}
       <div className="table-wrap">

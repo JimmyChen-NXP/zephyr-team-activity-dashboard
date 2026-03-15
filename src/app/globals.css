@@ -672,6 +672,23 @@ tr[data-pr-highlight="stale"]:hover td { background: rgba(245, 158, 11, 0.1); }
   color: var(--violet);
 }
 
+.table-filter-chip:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.table-filter-chip:disabled:hover {
+  background: rgba(148, 163, 184, 0.08);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: var(--muted);
+}
+
+.table-filter-chip-count {
+  margin-left: 5px;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
 @media (max-width: 1100px) {
   body {
     padding: 18px;
