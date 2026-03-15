@@ -35,9 +35,6 @@ export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageP
   const [baseData, setBaseData] = useState<DashboardData | null>(() => snapshotCache.get(filters.preset) ?? null);
   const [error, setError] = useState<string | null>(null);
 
-  const updateDataUrl = process.env.NEXT_PUBLIC_UPDATE_WORKFLOW_URL ?? "";
-  const updateOpenItemsUrl = process.env.NEXT_PUBLIC_UPDATE_OPEN_ITEMS_WORKFLOW_URL ?? "";
-
   useEffect(() => {
     // Already in memory — no network needed.
     if (snapshotCache.has(filters.preset)) {
@@ -124,8 +121,6 @@ export function SnapshotDashboardPage({ view, pathname }: SnapshotDashboardPageP
       view={view}
       pathname={pathname}
       isHostedSnapshot
-      updateDataUrl={updateDataUrl}
-      updateOpenItemsUrl={updateOpenItemsUrl}
     />
   );
 }
