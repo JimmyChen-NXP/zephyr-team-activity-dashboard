@@ -2,16 +2,24 @@
 
 import clsx from "clsx";
 
+import { withBasePath } from "@/lib/base-path";
 import { buildDashboardHref } from "@/lib/dashboard-links";
 import { DASHBOARD_VIEWS, getActivityPageTitle, type DashboardView } from "@/lib/dashboard-views";
 import type { DashboardFilters } from "@/lib/types";
 
-type ActivityPageNavProps = {
-  currentView: DashboardView;
-  filters: DashboardFilters;
+const DEFAULT_FILTERS: DashboardFilters = {
+  preset: "30d",
+  contributors: [],
+  repo: "all",
+  refresh: false,
 };
 
-export function ActivityPageNav({ currentView, filters }: ActivityPageNavProps) {
+type ActivityPageNavProps = {
+  currentView: DashboardView | "maintainers";
+  filters?: DashboardFilters;
+};
+
+export function ActivityPageNav({ currentView, filters = DEFAULT_FILTERS }: ActivityPageNavProps) {
   return (
     <nav className="activity-page-nav-links" aria-label="Activity pages">
       {DASHBOARD_VIEWS.map((view) => {
@@ -27,6 +35,13 @@ export function ActivityPageNav({ currentView, filters }: ActivityPageNavProps) 
           </a>
         );
       })}
+      <a
+        href={withBasePath("/maintainers")}
+        className={clsx("activity-page-link", currentView === "maintainers" && "active")}
+        aria-current={currentView === "maintainers" ? "page" : undefined}
+      >
+        Maintainers
+      </a>
     </nav>
   );
 }

@@ -13,12 +13,14 @@
     "collect-open-items": "tsx scripts/collect-open-items.ts",
     "aggregate-daily": "tsx scripts/aggregate-daily.ts",
     "check-queries": "tsx scripts/check-queries.ts",
-    "seed-data": "bash scripts/seed-data.sh"
+    "seed-data": "bash scripts/seed-data.sh",
+    "collect-maintainers": "node scripts/collect-maintainers.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "csv-parse": "^5.5.6",
     "date-fns": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "next": "^15.3.0",
     "p-limit": "^6.2.0",
     "react": "^19.0.0",
@@ -26,6 +28,7 @@
     "recharts": "^2.15.1"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",

@@ -211,6 +211,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate maintainers map
+        run: npm run collect-maintainers
+
       - name: Remove runtime API routes (static export)
         run: rm -rf src/app/api
 
