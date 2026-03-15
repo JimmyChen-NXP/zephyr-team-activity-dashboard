@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-15T05:45:04.339Z",
+  "collectedAt": "2026-03-15T06:19:49.123Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -2416,7 +2416,7 @@
         "tbr-tt",
         "duynguyenxa"
       ],
-      "ciStatus": "pending"
+      "ciStatus": "failure"
     },
     {
       "type": "pr",

@@ -6,7 +6,7 @@
     "to": "2026-03-15T23:59:59Z",
     "timeZone": "UTC"
   },
-  "generatedAt": "2026-03-15T05:45:05.180Z",
+  "generatedAt": "2026-03-15T06:19:50.863Z",
   "rosterSize": 171,
   "rosterMembers": [
     {
@@ -2826,7 +2826,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 3,
+        "cooldownHours": 4,
         "cooldownMet": false
       },
       "metrics": {
@@ -3871,7 +3871,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": "failure",
-        "cooldownHours": 18,
+        "cooldownHours": 19,
         "cooldownMet": false
       },
       "metrics": {
@@ -3954,7 +3954,7 @@
         ],
         "pendingRequestedCount": 7,
         "ciStatus": "failure",
-        "cooldownHours": 18,
+        "cooldownHours": 19,
         "cooldownMet": false
       },
       "metrics": {
@@ -5214,7 +5214,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 31,
+        "cooldownHours": 32,
         "cooldownMet": false
       },
       "metrics": {
@@ -6554,7 +6554,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 33,
+        "cooldownHours": 34,
         "cooldownMet": false
       },
       "metrics": {
@@ -6715,7 +6715,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 33,
+        "cooldownHours": 34,
         "cooldownMet": false
       },
       "metrics": {
@@ -7274,7 +7274,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 34,
+        "cooldownHours": 35,
         "cooldownMet": false
       },
       "metrics": {
@@ -7687,7 +7687,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 34,
+        "cooldownHours": 35,
         "cooldownMet": false
       },
       "metrics": {
@@ -7991,7 +7991,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 35,
+        "cooldownHours": 36,
         "cooldownMet": false
       },
       "metrics": {
@@ -8322,7 +8322,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 36,
+        "cooldownHours": 37,
         "cooldownMet": false
       },
       "metrics": {
@@ -8406,7 +8406,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 36,
+        "cooldownHours": 37,
         "cooldownMet": false
       },
       "metrics": {
@@ -8953,7 +8953,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 37,
+        "cooldownHours": 38,
         "cooldownMet": false
       },
       "metrics": {
@@ -9526,7 +9526,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 40,
+        "cooldownHours": 41,
         "cooldownMet": false
       },
       "metrics": {
@@ -10204,7 +10204,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 42,
+        "cooldownHours": 43,
         "cooldownMet": false
       },
       "metrics": {
@@ -10345,7 +10345,7 @@
         ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 42,
+        "cooldownHours": 43,
         "cooldownMet": false
       },
       "metrics": {
@@ -11295,7 +11295,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 59,
+        "cooldownHours": 60,
         "cooldownMet": false
       },
       "metrics": {
@@ -11501,7 +11501,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 70,
+        "cooldownHours": 71,
         "cooldownMet": false
       },
       "metrics": {
@@ -11848,7 +11848,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 80,
+        "cooldownHours": 81,
         "cooldownMet": true
       },
       "metrics": {
@@ -12831,7 +12831,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 86,
+        "cooldownHours": 87,
         "cooldownMet": true
       },
       "metrics": {
@@ -13069,7 +13069,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 87,
+        "cooldownHours": 88,
         "cooldownMet": true
       },
       "metrics": {
@@ -14828,7 +14828,7 @@
         ],
         "pendingRequestedCount": 7,
         "ciStatus": null,
-        "cooldownHours": 92,
+        "cooldownHours": 93,
         "cooldownMet": true
       },
       "metrics": {
@@ -14909,7 +14909,7 @@
         ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 92,
+        "cooldownHours": 93,
         "cooldownMet": true
       },
       "metrics": {
@@ -15084,7 +15084,7 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 92,
+        "cooldownHours": 93,
         "cooldownMet": true
       },
       "metrics": {
@@ -17683,7 +17683,7 @@
         ],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 99,
+        "cooldownHours": 100,
         "cooldownMet": true
       },
       "metrics": {
@@ -19287,7 +19287,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 113,
+        "cooldownHours": 114,
         "cooldownMet": true
       },
       "metrics": {
@@ -20722,7 +20722,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 116,
+        "cooldownHours": 117,
         "cooldownMet": true
       },
       "metrics": {
@@ -20945,7 +20945,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 116,
+        "cooldownHours": 117,
         "cooldownMet": true
       },
       "metrics": {
@@ -21654,7 +21654,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 117,
+        "cooldownHours": 118,
         "cooldownMet": true
       },
       "metrics": {
@@ -22896,7 +22896,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 123,
+        "cooldownHours": 124,
         "cooldownMet": true
       },
       "metrics": {
@@ -23159,7 +23159,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 125,
+        "cooldownHours": 126,
         "cooldownMet": true
       },
       "metrics": {
@@ -24518,7 +24518,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 140,
+        "cooldownHours": 141,
         "cooldownMet": true
       },
       "metrics": {
@@ -24984,7 +24984,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 142,
+        "cooldownHours": 143,
         "cooldownMet": true
       },
       "metrics": {
@@ -25930,7 +25930,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 146,
+        "cooldownHours": 147,
         "cooldownMet": true
       },
       "metrics": {
@@ -26289,7 +26289,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 148,
+        "cooldownHours": 149,
         "cooldownMet": true
       },
       "metrics": {
@@ -26538,7 +26538,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 172,
+        "cooldownHours": 173,
         "cooldownMet": true
       },
       "metrics": {
@@ -27042,7 +27042,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 201,
+        "cooldownHours": 202,
         "cooldownMet": true
       },
       "metrics": {
@@ -28429,7 +28429,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 212,
+        "cooldownHours": 213,
         "cooldownMet": true
       },
       "metrics": {
@@ -28692,7 +28692,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 214,
+        "cooldownHours": 215,
         "cooldownMet": true
       },
       "metrics": {
@@ -30553,7 +30553,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 237,
+        "cooldownHours": 238,
         "cooldownMet": true
       },
       "metrics": {
@@ -32281,7 +32281,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 252,
+        "cooldownHours": 253,
         "cooldownMet": true
       },
       "metrics": {
@@ -32418,7 +32418,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 253,
+        "cooldownHours": 254,
         "cooldownMet": true
       },
       "metrics": {
@@ -32646,7 +32646,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 254,
+        "cooldownHours": 255,
         "cooldownMet": true
       },
       "metrics": {
@@ -33591,7 +33591,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 261,
+        "cooldownHours": 262,
         "cooldownMet": true
       },
       "metrics": {
@@ -34494,7 +34494,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 268,
+        "cooldownHours": 269,
         "cooldownMet": true
       },
       "metrics": {
@@ -35157,7 +35157,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 280,
+        "cooldownHours": 281,
         "cooldownMet": true
       },
       "metrics": {
@@ -35410,7 +35410,7 @@
         ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 281,
+        "cooldownHours": 282,
         "cooldownMet": true
       },
       "metrics": {
@@ -36214,7 +36214,7 @@
         ],
         "pendingRequestedCount": 18,
         "ciStatus": null,
-        "cooldownHours": 283,
+        "cooldownHours": 284,
         "cooldownMet": true
       },
       "metrics": {
@@ -37393,7 +37393,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 286,
+        "cooldownHours": 287,
         "cooldownMet": true
       },
       "metrics": {
@@ -39439,7 +39439,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 310,
+        "cooldownHours": 311,
         "cooldownMet": true
       },
       "metrics": {
@@ -44180,7 +44180,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 4990,
+        "cooldownHours": 4991,
         "cooldownMet": true
       },
       "metrics": {
@@ -44235,7 +44235,7 @@
   ],
   "syncHealth": {
     "source": "cache",
-    "generatedAt": "2026-03-15T05:45:05.180Z",
+    "generatedAt": "2026-03-15T06:19:50.863Z",
     "freshnessMinutes": 0,
     "searchSamples": 24416,
     "detailSamples": 1224,
@@ -44938,6 +44938,6 @@
     "hasToken": false,
     "connectionStatus": "configured",
     "message": "Snapshot aggregated from daily files by GitHub Actions. No token is available in the browser.",
-    "checkedAt": "2026-03-15T05:45:05.180Z"
+    "checkedAt": "2026-03-15T06:19:50.863Z"
   }
 }
