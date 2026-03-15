@@ -1,12 +1,16 @@
 /**
  * collect-maintainers.mjs
  *
- * Fetches MAINTAINERS.yml from the Zephyr repository, inverts it into a
- * per-person map, cross-references with the team roster CSV, and writes
- * public/maintainers-map.json.
+ * Fetches MAINTAINERS.yml from the Zephyr repository and produces a
+ * per-subsystem map. Each subsystem entry lists its roster maintainers,
+ * roster collaborators, and a type ("component" | "file-group").
  *
- * Only roster members (logins present in upstream_member.csv) are included.
- * Logins are matched case-insensitively.
+ * Type is determined by whether the MAINTAINERS.yml entry has a `labels:`
+ * field (component) or not (file-group).
+ *
+ * Only subsystems where at least one roster member (from upstream_member.csv)
+ * appears as maintainer or collaborator are included. Logins are matched
+ * case-insensitively.
  *
  * Usage:
  *   node scripts/collect-maintainers.mjs
@@ -59,66 +63,50 @@ async function fetchMaintainersYaml() {
   return response.text();
 }
 
-// ── Invert subsystem map into per-person buckets ──────────────────────────────
+// ── Build per-subsystem data ───────────────────────────────────────────────────
 
 /**
  * @param {unknown} yaml - parsed YAML (object keyed by subsystem name)
  * @param {Map<string, string>} rosterMap - lowercase login → display name
  */
 function buildMaintainersData(yaml, rosterMap) {
-  /** @type {Map<string, Set<string>>} */
-  const maintainerSubsystems = new Map();
-  /** @type {Map<string, Set<string>>} */
-  const collaboratorSubsystems = new Map();
-
   if (typeof yaml !== "object" || yaml === null) {
     throw new Error("Unexpected MAINTAINERS.yml structure (not an object)");
   }
 
+  /** @type {Array<{name: string, type: string, maintainers: Array<{login:string,name:string}>, collaborators: Array<{login:string,name:string}>}>} */
+  const subsystems = [];
+
   for (const [subsystemName, entry] of Object.entries(yaml)) {
     if (typeof entry !== "object" || entry === null) continue;
 
-    const maintainers = Array.isArray(entry.maintainers)
-      ? entry.maintainers
-      : [];
-    const collaborators = Array.isArray(entry.collaborators)
-      ? entry.collaborators
-      : [];
+    const rawMaintainers = Array.isArray(entry.maintainers) ? entry.maintainers : [];
+    const rawCollaborators = Array.isArray(entry.collaborators) ? entry.collaborators : [];
 
-    for (const login of maintainers) {
-      if (typeof login !== "string") continue;
-      const key = login.toLowerCase();
-      if (!rosterMap.has(key)) continue; // skip non-roster members
-      if (!maintainerSubsystems.has(key)) maintainerSubsystems.set(key, new Set());
-      maintainerSubsystems.get(key).add(subsystemName);
+    // Resolve roster members only, sorted by display name
+    function rosterPeople(logins) {
+      return logins
+        .filter((l) => typeof l === "string" && rosterMap.has(l.toLowerCase()))
+        .map((l) => ({ login: l.toLowerCase(), name: rosterMap.get(l.toLowerCase()) ?? l }))
+        .sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    for (const login of collaborators) {
-      if (typeof login !== "string") continue;
-      const key = login.toLowerCase();
-      if (!rosterMap.has(key)) continue; // skip non-roster members
-      if (!collaboratorSubsystems.has(key)) collaboratorSubsystems.set(key, new Set());
-      collaboratorSubsystems.get(key).add(subsystemName);
-    }
+    const maintainers = rosterPeople(rawMaintainers);
+    const collaborators = rosterPeople(rawCollaborators);
+
+    // "component" if the entry has GitHub labels; otherwise "file-group"
+    const hasLabels = Array.isArray(entry.labels) && entry.labels.length > 0;
+    const type = hasLabels ? "component" : "file-group";
+
+    subsystems.push({ name: subsystemName, type, maintainers, collaborators });
   }
 
-  // Convert to sorted arrays
-  function toEntries(map) {
-    return Array.from(map.entries())
-      .map(([loginLower, subsystemSet]) => ({
-        login: loginLower,
-        name: rosterMap.get(loginLower) ?? loginLower,
-        subsystems: Array.from(subsystemSet).sort((a, b) =>
-          a.localeCompare(b)
-        ),
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name));
-  }
+  // Sort subsystems alphabetically by name
+  subsystems.sort((a, b) => a.name.localeCompare(b.name));
 
   return {
     generatedAt: new Date().toISOString(),
-    maintainers: toEntries(maintainerSubsystems),
-    collaborators: toEntries(collaboratorSubsystems),
+    subsystems,
   };
 }
 
@@ -139,9 +127,7 @@ async function main() {
   console.log("Building maintainers map");
   const data = buildMaintainersData(yaml, rosterMap);
 
-  console.log(
-    `  ${data.maintainers.length} maintainers, ${data.collaborators.length} collaborators (roster members only)`
-  );
+  console.log(`  ${data.subsystems.length} subsystems with at least one roster member`);
 
   mkdirSync("public", { recursive: true });
   writeFileSync(OUT_FILE, JSON.stringify(data, null, 2), "utf8");
