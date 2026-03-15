@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { ActivityPageNav } from "@/components/activity-page-nav";
 import { withBasePath } from "@/lib/base-path";
@@ -39,92 +40,56 @@ function TypeBadge({ type }: { type: SubsystemEntry["type"] }) {
   );
 }
 
-// ── Component search filter ───────────────────────────────────────────────────
-// Text-search approach: avoids rendering hundreds of checkboxes at once.
-// Typing narrows suggestions to ≤20 matches; clicking adds to selected set.
+// ── Contributor bar chart ─────────────────────────────────────────────────────
 
-type ComponentFilterProps = {
-  allNames: string[];
-  selected: Set<string>;
-  onChange: (next: Set<string>) => void;
-};
+type ContributorChartEntry = { name: string; maintainer: number; collaborator: number };
 
-function ComponentFilter({ allNames, selected, onChange }: ComponentFilterProps) {
-  const [query, setQuery] = useState("");
-  const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const suggestions = useMemo(() => {
-    if (!query.trim()) return [];
-    const lower = query.toLowerCase();
-    return allNames.filter((n) => n.toLowerCase().includes(lower)).slice(0, 20);
-  }, [allNames, query]);
-
-  function add(name: string) {
-    const next = new Set(selected);
-    next.add(name);
-    onChange(next);
-    setQuery("");
-    setOpen(false);
-  }
-
-  function remove(name: string) {
-    const next = new Set(selected);
-    next.delete(name);
-    onChange(next);
-  }
-
-  // Close suggestion list when clicking outside
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
-
+function ContributorChart({ data }: { data: ContributorChartEntry[] }) {
+  if (data.length === 0) return null;
+  // Height scales with number of contributors so bars stay readable
+  const chartHeight = Math.max(240, data.length * 34);
   return (
-    <div className="maintainers-search-filter" ref={containerRef}>
-      <span className="maintainers-search-label">Component search</span>
-      <div className="maintainers-search-input-wrap">
-        <input
-          className="maintainers-search-input"
-          type="text"
-          placeholder="Type to filter components…"
-          value={query}
-          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
-          onFocus={() => setOpen(true)}
-        />
-        {open && suggestions.length > 0 && (
-          <ul className="maintainers-search-suggestions">
-            {suggestions.map((name) => (
-              <li
-                key={name}
-                className="maintainers-search-suggestion"
-                onMouseDown={(e) => { e.preventDefault(); add(name); }}
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      {selected.size > 0 && (
-        <div className="maintainers-selected-tags">
-          {Array.from(selected).map((name) => (
-            <span key={name} className="maintainers-selected-tag">
-              {name}
-              <button type="button" className="maintainers-tag-remove" onClick={() => remove(name)}>×</button>
-            </span>
-          ))}
-          <button type="button" className="filter-dropdown-clear" onClick={() => onChange(new Set())}>
-            Clear all
-          </button>
+    <section className="panel chart-panel">
+      <div className="panel-header">
+        <div>
+          <p className="eyebrow">Contributor engagement · {data.length} people</p>
+          <h3>Subsystem ownership per roster member</h3>
         </div>
-      )}
-    </div>
+      </div>
+      <div style={{ height: chartHeight }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            layout="vertical"
+            data={data}
+            margin={{ left: 8, right: 24, top: 8, bottom: 8 }}
+            barSize={12}
+          >
+            <XAxis
+              type="number"
+              tickLine={false}
+              axisLine={false}
+              tick={{ fill: "#7f8aa3", fontSize: 12 }}
+              allowDecimals={false}
+            />
+            <YAxis
+              type="category"
+              dataKey="name"
+              width={140}
+              tickLine={false}
+              axisLine={false}
+              tick={{ fill: "#b8c2d9", fontSize: 12 }}
+            />
+            <Tooltip
+              cursor={{ fill: "rgba(124, 58, 237, 0.08)" }}
+              contentStyle={{ background: "#111827", border: "1px solid rgba(148, 163, 184, 0.15)", borderRadius: 16 }}
+            />
+            <Legend wrapperStyle={{ fontSize: 12, color: "#b8c2d9" }} />
+            <Bar dataKey="maintainer" name="Maintainer" stackId="a" fill="#7c3aed" radius={[0, 0, 0, 0]} />
+            <Bar dataKey="collaborator" name="Collaborator" stackId="a" fill="#38bdf8" radius={[0, 6, 6, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </section>
   );
 }
 
@@ -133,7 +98,8 @@ function ComponentFilter({ allNames, selected, onChange }: ComponentFilterProps)
 export function MaintainersPage() {
   const [data, setData] = useState<MaintainersData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [selectedComponents, setSelectedComponents] = useState<Set<string>>(new Set());
+  const [nameFilter, setNameFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState<"all" | "component" | "file-group">("all");
   const [hideUnassigned, setHideUnassigned] = useState(false);
 
   useEffect(() => {
@@ -157,18 +123,37 @@ export function MaintainersPage() {
     return () => { cancelled = true; };
   }, []);
 
-  const allNames = useMemo(
-    () => data?.subsystems.map((s) => s.name) ?? [],
-    [data]
-  );
-
   const visibleSubsystems = useMemo(() => {
     if (!data) return [];
     let list = data.subsystems;
-    if (selectedComponents.size > 0) list = list.filter((s) => selectedComponents.has(s.name));
+    if (nameFilter.trim()) {
+      const lower = nameFilter.toLowerCase();
+      list = list.filter((s) => s.name.toLowerCase().includes(lower));
+    }
+    if (typeFilter !== "all") list = list.filter((s) => s.type === typeFilter);
     if (hideUnassigned) list = list.filter((s) => s.maintainers.length > 0 || s.collaborators.length > 0);
     return list;
-  }, [data, selectedComponents, hideUnassigned]);
+  }, [data, nameFilter, typeFilter, hideUnassigned]);
+
+  // Per-contributor subsystem counts (across ALL subsystems, not just filtered)
+  const chartData = useMemo((): ContributorChartEntry[] => {
+    if (!data) return [];
+    const map = new Map<string, ContributorChartEntry>();
+    for (const s of data.subsystems) {
+      for (const p of s.maintainers) {
+        const e = map.get(p.login) ?? { name: p.name, maintainer: 0, collaborator: 0 };
+        e.maintainer++;
+        map.set(p.login, e);
+      }
+      for (const p of s.collaborators) {
+        const e = map.get(p.login) ?? { name: p.name, maintainer: 0, collaborator: 0 };
+        e.collaborator++;
+        map.set(p.login, e);
+      }
+    }
+    return Array.from(map.values())
+      .sort((a, b) => (b.maintainer + b.collaborator) - (a.maintainer + a.collaborator));
+  }, [data]);
 
   const titleBar = (
     <div className="title-bar">
@@ -217,22 +202,39 @@ export function MaintainersPage() {
             <h2>Filter components</h2>
           </div>
         </div>
-        <div className="maintainers-filter-bar">
-          <ComponentFilter
-            allNames={allNames}
-            selected={selectedComponents}
-            onChange={setSelectedComponents}
-          />
-          <label className="filter-checkbox-label">
+        <div className="filter-form">
+          <label>
+            <span>Component name</span>
             <input
-              type="checkbox"
-              checked={hideUnassigned}
-              onChange={(e) => setHideUnassigned(e.target.checked)}
+              type="text"
+              className="filter-text-input"
+              placeholder="Search…"
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
             />
-            <span>Hide unassigned components</span>
           </label>
+          <label>
+            <span>Type</span>
+            <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as typeof typeFilter)}>
+              <option value="all">All types</option>
+              <option value="component">Component</option>
+              <option value="file-group">File group</option>
+            </select>
+          </label>
+          <div className="filter-actions">
+            <label className="filter-checkbox-label">
+              <input
+                type="checkbox"
+                checked={hideUnassigned}
+                onChange={(e) => setHideUnassigned(e.target.checked)}
+              />
+              <span>Hide unassigned</span>
+            </label>
+          </div>
         </div>
       </section>
+
+      <ContributorChart data={chartData} />
 
       <section className="panel table-panel">
         <div className="panel-header compact">
@@ -257,7 +259,7 @@ export function MaintainersPage() {
               {visibleSubsystems.length === 0 ? (
                 <tr>
                   <td colSpan={4} className="empty-state-cell">
-                    No components match the current filter.
+                    No components match the current filters.
                   </td>
                 </tr>
               ) : (
