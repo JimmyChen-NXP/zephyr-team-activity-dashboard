@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { ActivityPageNav } from "@/components/activity-page-nav";
 import { withBasePath } from "@/lib/base-path";
@@ -39,7 +39,9 @@ function TypeBadge({ type }: { type: SubsystemEntry["type"] }) {
   );
 }
 
-// ── Multi-select dropdown ─────────────────────────────────────────────────────
+// ── Component search filter ───────────────────────────────────────────────────
+// Text-search approach: avoids rendering hundreds of checkboxes at once.
+// Typing narrows suggestions to ≤20 matches; clicking adds to selected set.
 
 type ComponentFilterProps = {
   allNames: string[];
@@ -48,46 +50,80 @@ type ComponentFilterProps = {
 };
 
 function ComponentFilter({ allNames, selected, onChange }: ComponentFilterProps) {
-  const label = selected.size === 0 ? "All components" : `${selected.size} selected`;
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  function toggle(name: string) {
+  const suggestions = useMemo(() => {
+    if (!query.trim()) return [];
+    const lower = query.toLowerCase();
+    return allNames.filter((n) => n.toLowerCase().includes(lower)).slice(0, 20);
+  }, [allNames, query]);
+
+  function add(name: string) {
     const next = new Set(selected);
-    if (next.has(name)) {
-      next.delete(name);
-    } else {
-      next.add(name);
-    }
+    next.add(name);
+    onChange(next);
+    setQuery("");
+    setOpen(false);
+  }
+
+  function remove(name: string) {
+    const next = new Set(selected);
+    next.delete(name);
     onChange(next);
   }
 
+  // Close suggestion list when clicking outside
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
   return (
-    <div className="filter-field">
-      <span id="component-filter-label">Component</span>
-      <details className="filter-dropdown" aria-labelledby="component-filter-label">
-        <summary>{label}</summary>
-        <div className="filter-dropdown-panel">
-          <button
-            type="button"
-            className="filter-dropdown-clear"
-            onClick={() => onChange(new Set())}
-          >
-            All components
-          </button>
-          <div className="filter-dropdown-options">
-            {allNames.map((name) => (
-              <div key={name} className="filter-dropdown-option">
-                <input
-                  id={`comp-${name}`}
-                  type="checkbox"
-                  checked={selected.has(name)}
-                  onChange={() => toggle(name)}
-                />
-                <label htmlFor={`comp-${name}`}>{name}</label>
-              </div>
+    <div className="maintainers-search-filter" ref={containerRef}>
+      <span className="maintainers-search-label">Component search</span>
+      <div className="maintainers-search-input-wrap">
+        <input
+          className="maintainers-search-input"
+          type="text"
+          placeholder="Type to filter components…"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
+        />
+        {open && suggestions.length > 0 && (
+          <ul className="maintainers-search-suggestions">
+            {suggestions.map((name) => (
+              <li
+                key={name}
+                className="maintainers-search-suggestion"
+                onMouseDown={(e) => { e.preventDefault(); add(name); }}
+              >
+                {name}
+              </li>
             ))}
-          </div>
+          </ul>
+        )}
+      </div>
+      {selected.size > 0 && (
+        <div className="maintainers-selected-tags">
+          {Array.from(selected).map((name) => (
+            <span key={name} className="maintainers-selected-tag">
+              {name}
+              <button type="button" className="maintainers-tag-remove" onClick={() => remove(name)}>×</button>
+            </span>
+          ))}
+          <button type="button" className="filter-dropdown-clear" onClick={() => onChange(new Set())}>
+            Clear all
+          </button>
         </div>
-      </details>
+      )}
     </div>
   );
 }
@@ -181,7 +217,7 @@ export function MaintainersPage() {
             <h2>Filter components</h2>
           </div>
         </div>
-        <div className="filter-form">
+        <div className="maintainers-filter-bar">
           <ComponentFilter
             allNames={allNames}
             selected={selectedComponents}
