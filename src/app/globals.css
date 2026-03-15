@@ -258,6 +258,45 @@ select[multiple] {
   padding-bottom: 12px;
 }
 
+.filter-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.maintainers-type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.maintainers-type-badge--component {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--blue);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.maintainers-type-badge--file-group {
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--muted);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.maintainers-person-list {
+  font-size: 13px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
 .primary-button,
 .secondary-button,
 .ghost-button {
