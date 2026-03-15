@@ -73,7 +73,8 @@ jobs:
             fi
           else
             # First run: data branch doesn't exist yet.
-            ORIGIN_URL=$(git -C .. remote get-url origin)
+            ORIGIN_URL=$(git remote get-url origin)
+            cd _data
             git init
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -86,7 +87,6 @@ jobs:
               git push origin HEAD:data
             fi
           fi
-        working-directory: _data
 
   # ─── Job 2: Collect open items + aggregate ALL data into snapshots ──────────
   # Runs after collect-daily (needs: collect-daily).
@@ -151,7 +151,7 @@ jobs:
               git push origin HEAD:data
             fi
           else
-            ORIGIN_URL=$(git -C .. remote get-url origin)
+            ORIGIN_URL=$(git remote get-url origin)
             cd _data
             git init
             git config user.name "github-actions[bot]"
