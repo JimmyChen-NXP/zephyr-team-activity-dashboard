@@ -1,0 +1,237 @@
+name: Collect Data and Deploy
+
+on:
+  schedule:
+    - cron: "13 5 * * *"
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# collect-daily and collect-open-items jobs need contents:write to push to data branch.
+# deploy job needs pages:write and id-token:write for GitHub Pages.
+# Set permissive defaults at workflow level; jobs that don't need elevated perms
+# can override to restrict (deploy job overrides contents: read).
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: collect-and-deploy
+  cancel-in-progress: false
+
+jobs:
+  # ─── Job 1: Collect daily activity files ───────────────────────────────────
+  # Skipped on push events (code push doesn't need fresh data collection).
+  collect-daily:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'push'
+
+    steps:
+      - name: Checkout main branch (scripts + roster)
+        uses: actions/checkout@v4
+
+      - name: Checkout data branch into _data/
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          path: _data
+          fetch-depth: 0
+        continue-on-error: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Collect daily GitHub activity
+        run: npm run collect-daily
+        env:
+          GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
+          GITHUB_REPOS: zephyrproject-rtos/zephyr,zephyrproject-rtos/west,zephyrproject-rtos/hal_nxp,zephyrproject-rtos/hostap
+          SEARCH_PAGE_LIMIT: 2
+          GITHUB_SEARCH_MIN_INTERVAL_MS: 2500
+          DAILY_OUT_DIR: _data/public
+
+      - name: Push daily files to data branch
+        run: |
+          if [ -d "_data/.git" ]; then
+            cd _data
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -f public/daily/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No new daily files to commit"
+            else
+              git commit -m "chore: daily files $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git pull --rebase origin data
+              git push origin HEAD:data
+            fi
+          else
+            # First run: data branch doesn't exist yet.
+            ORIGIN_URL=$(git -C .. remote get-url origin)
+            git init
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git remote add origin "$ORIGIN_URL"
+            git add -f public/daily/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No files to commit on first run"
+            else
+              git commit -m "chore: daily files $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push origin HEAD:data
+            fi
+          fi
+        working-directory: _data
+
+  # ─── Job 2: Collect open items + aggregate ALL data into snapshots ──────────
+  # Runs after collect-daily (needs: collect-daily).
+  # On push events, collect-daily is skipped → collect-open-items is also skipped.
+  # aggregate-daily runs HERE (once, with all data sources present) — never in collect-daily.
+  collect-open-items:
+    runs-on: ubuntu-latest
+    needs: collect-daily
+    if: github.event_name != 'push'
+
+    steps:
+      - name: Checkout main branch (scripts + roster)
+        uses: actions/checkout@v4
+
+      - name: Checkout data branch into _data/
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          path: _data
+          fetch-depth: 0
+        continue-on-error: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Collect open issues and PRs
+        run: npm run collect-open-items
+        env:
+          GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
+          GITHUB_REPOS: zephyrproject-rtos/zephyr,zephyrproject-rtos/west,zephyrproject-rtos/hal_nxp,zephyrproject-rtos/hostap
+          OPEN_ITEMS_PAGE_LIMIT: 10
+          GITHUB_SEARCH_MIN_INTERVAL_MS: 2500
+          OPEN_ITEMS_OUT_DIR: _data/public
+
+      - name: Aggregate snapshots from all data sources
+        # Run aggregate-daily ONCE here, after both daily files and open-items.json
+        # are present. This is the only place aggregate-daily runs — never in
+        # collect-daily — so snapshots always include prStatus from open-items.
+        run: npm run aggregate-daily
+        env:
+          DAILY_IN_DIR: _data/public
+          SNAPSHOT_OUT_DIR: _data/public
+
+      - name: Push open-items.json + snapshots to data branch
+        run: |
+          if [ -d "_data/.git" ]; then
+            cd _data
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -f public/open-items.json public/snapshots/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No changes to commit"
+            else
+              git commit -m "chore: open items + snapshots $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git pull --rebase origin data
+              git push origin HEAD:data
+            fi
+          else
+            ORIGIN_URL=$(git -C .. remote get-url origin)
+            cd _data
+            git init
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git remote add origin "$ORIGIN_URL"
+            git add -f public/open-items.json public/snapshots/ 2>/dev/null || true
+            if git diff --cached --quiet; then
+              echo "No files to commit on first run"
+            else
+              git commit -m "chore: open items + snapshots $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push origin HEAD:data
+            fi
+          fi
+
+  # ─── Job 3: Build and deploy GitHub Pages ──────────────────────────────────
+  # Runs after collect-open-items on schedule/manual triggers.
+  # On push events, both collection jobs are skipped, so this job runs directly
+  # (needs.collect-open-items.result == 'skipped' is allowed by the if condition).
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [collect-open-items]
+    if: >
+      always() && (
+        needs.collect-open-items.result == 'success' ||
+        needs.collect-open-items.result == 'skipped'
+      )
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages-publish
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout snapshots from data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          path: _data
+          sparse-checkout: |
+            public/snapshots
+          sparse-checkout-cone-mode: false
+
+      - name: Copy snapshots into public/
+        run: mkdir -p public && cp -r _data/public/snapshots public/snapshots
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Remove runtime API routes (static export)
+        run: rm -rf src/app/api
+
+      - name: Build static export
+        run: npm run build
+        env:
+          DEPLOY_TARGET: github-pages
+          NEXT_PUBLIC_DEPLOY_TARGET: github-pages
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          GITHUB_PAGES_BASE_PATH: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_UPDATE_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/workflows/collect-and-deploy.yml
+          NEXT_PUBLIC_UPDATE_OPEN_ITEMS_WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/workflows/collect-and-deploy.yml
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
