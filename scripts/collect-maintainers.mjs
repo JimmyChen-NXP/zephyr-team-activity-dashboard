@@ -19,7 +19,7 @@
  *   public/maintainers-map.json
  */
 
-import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { readFileSync, mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { parse as parseCsv } from "csv-parse/sync";
 import { load as parseYaml } from "js-yaml";
@@ -28,6 +28,7 @@ const MAINTAINERS_URL =
   "https://raw.githubusercontent.com/zephyrproject-rtos/zephyr/main/MAINTAINERS.yml";
 const ROSTER_FILE = "upstream_member.csv";
 const OUT_FILE = join("public", "maintainers-map.json");
+const LEGACY_DETECTED_AT = "2026-03-01";
 
 // ── Load roster ──────────────────────────────────────────────────────────────
 
@@ -63,13 +64,37 @@ async function fetchMaintainersYaml() {
   return response.text();
 }
 
+// ── Load existing detectedAt map ──────────────────────────────────────────────
+
+/**
+ * Returns a Map of subsystem name → detectedAt string from the existing output
+ * file if it exists, so we can preserve first-seen dates across runs.
+ * @returns {Map<string, string>}
+ */
+function loadExistingDetectedAt() {
+  if (!existsSync(OUT_FILE)) return new Map();
+  try {
+    const existing = JSON.parse(readFileSync(OUT_FILE, "utf8"));
+    const map = new Map();
+    for (const s of (existing.subsystems ?? [])) {
+      if (s.name && s.detectedAt) {
+        map.set(s.name, s.detectedAt);
+      }
+    }
+    return map;
+  } catch {
+    return new Map();
+  }
+}
+
 // ── Build per-subsystem data ───────────────────────────────────────────────────
 
 /**
  * @param {unknown} yaml - parsed YAML (object keyed by subsystem name)
  * @param {Map<string, string>} rosterMap - lowercase login → display name
+ * @param {Map<string, string>} existingDetectedAt - name → previous detectedAt
  */
-function buildMaintainersData(yaml, rosterMap) {
+function buildMaintainersData(yaml, rosterMap, existingDetectedAt) {
   if (typeof yaml !== "object" || yaml === null) {
     throw new Error("Unexpected MAINTAINERS.yml structure (not an object)");
   }
@@ -98,7 +123,13 @@ function buildMaintainersData(yaml, rosterMap) {
     const hasLabels = Array.isArray(entry.labels) && entry.labels.length > 0;
     const type = hasLabels ? "component" : "file-group";
 
-    subsystems.push({ name: subsystemName, type, maintainers, collaborators });
+    // Preserve detectedAt from previous run; default legacy records to LEGACY_DETECTED_AT;
+    // new subsystems get today's date.
+    const detectedAt =
+      existingDetectedAt.get(subsystemName) ??
+      (existingDetectedAt.size > 0 ? new Date().toISOString().slice(0, 10) : LEGACY_DETECTED_AT);
+
+    subsystems.push({ name: subsystemName, type, maintainers, collaborators, detectedAt });
   }
 
   // Sort subsystems alphabetically by name
@@ -124,8 +155,12 @@ async function main() {
   console.log("Parsing MAINTAINERS.yml");
   const yaml = parseYaml(yamlText);
 
+  console.log("Loading existing detectedAt values from", OUT_FILE);
+  const existingDetectedAt = loadExistingDetectedAt();
+  console.log(`  ${existingDetectedAt.size} existing subsystem dates loaded`);
+
   console.log("Building maintainers map");
-  const data = buildMaintainersData(yaml, rosterMap);
+  const data = buildMaintainersData(yaml, rosterMap, existingDetectedAt);
 
   console.log(`  ${data.subsystems.length} subsystems with at least one roster member`);
 
