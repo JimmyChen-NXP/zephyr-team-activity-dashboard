@@ -1,7 +1,7 @@
 ---
 title: "fix: GitHub Pages pipeline — stale snapshots and no push-to-deploy trigger"
 type: fix
-status: active
+status: completed
 date: 2026-03-15
 ---
 
@@ -45,7 +45,12 @@ Problems with the current design:
 
 ### Symptom
 
-Manually running `publish-pages` still shows old data (no prStatus, no reviewer badges). Hard browser-cache clears confirm it is not a browser issue.
+After pushing to master and/or manually triggering the workflow multiple times, the GitHub Pages dashboard still shows:
+
+- **Assignees and Reviewers columns are all dashes (`—`)** — no reviewer badges, no approval/changes-requested icons.
+- **Stale timestamp in the header**: `Generated 2026-03-14 10:17:22 · Connection checked about 23 hours ago` — even after fresh workflow runs.
+
+Hard browser-cache clears confirm it is not a browser caching issue. The deployed HTML itself contains the stale data.
 
 ### Root Cause A — Double deployment with stale first build
 
@@ -65,7 +70,28 @@ on:
 
 Code changes to `master` (new UI features, bug fixes) do not trigger a redeploy. They wait until the next daily cron.
 
-### Root Cause C — Uncommitted local fixes
+### Root Cause C — Wrong `cp` destination in deploy job
+
+The deploy job copies data-branch snapshots with:
+
+```yaml
+run: mkdir -p public && cp -r _data/public/snapshots public/snapshots
+```
+
+When `public/snapshots/` already exists (it does — master's checkout includes committed snapshot files), `cp -r src dest` (dest exists) places `src` **inside** dest:
+
+```
+public/snapshots/snapshots/30d.json   ← data-branch files land HERE
+public/snapshots/30d.json             ← master's stale committed file — USED BY BUILD
+```
+
+Next.js build reads `public/snapshots/*.json`, which are master's committed stale snapshots (`generatedAt: 2026-03-14T02:17:22`, all `prStatus: null`). The data-branch files at `public/snapshots/snapshots/` are silently ignored.
+
+**Fix:** `mkdir -p public/snapshots && cp _data/public/snapshots/*.json public/snapshots/`
+
+This is the primary cause of the `—` columns and the 23-hour-old timestamp visible on GitHub Pages.
+
+### Root Cause D — Uncommitted local fixes
 
 Session fixes to `src/components/authored-prs-table.tsx` and `src/app/globals.css` (ReviewersCell display corrections) are not committed. `publish-pages` checks out origin/master and uses the pre-fix code. These must be committed and pushed before any redeploy will show the corrected UI.
 
@@ -247,14 +273,16 @@ Keep `backfill-daily.yml` as-is (it pushes only daily files, not snapshots — n
 
 ## Acceptance Criteria
 
-- [ ] `collect-and-deploy.yml` exists and runs the three jobs sequentially.
-- [ ] `aggregate-daily` only runs in `collect-open-items` job (not in `collect-daily` job).
-- [ ] Deployed snapshots contain `prStatus` data (not null) for open PRs.
-- [ ] Pushing to `master` triggers a fresh deploy within ~8 minutes.
-- [ ] Manually triggering the workflow deploys with current master code and current prStatus data.
-- [ ] Old three-workflow setup is disabled/deleted to avoid double-running.
-- [ ] `NEXT_PUBLIC_UPDATE_WORKFLOW_URL` env var points to the new workflow file.
-- [ ] Outstanding local changes to `authored-prs-table.tsx` and `globals.css` are committed and pushed.
+- [x] `collect-and-deploy.yml` exists and runs the three jobs sequentially.
+- [x] `aggregate-daily` only runs in `collect-open-items` job (not in `collect-daily` job).
+- [x] Deploy job uses `cp *.json` (not `cp -r dir`) so data-branch snapshots overwrite master's committed ones.
+- [x] Deployed page shows current `generatedAt` timestamp (not 23-hour-old stale value).
+- [x] Assignees and Reviewers columns show badges (not all dashes `—`) for open PRs with reviewers.
+- [x] Pushing to `master` triggers a fresh deploy within ~8 minutes.
+- [x] Manually triggering the workflow deploys with current master code and current prStatus data.
+- [x] Old three-workflow setup is disabled/deleted to avoid double-running.
+- [x] `NEXT_PUBLIC_UPDATE_WORKFLOW_URL` env var points to the new workflow file.
+- [x] Outstanding local changes to `authored-prs-table.tsx` and `globals.css` are committed and pushed.
 
 ---
 

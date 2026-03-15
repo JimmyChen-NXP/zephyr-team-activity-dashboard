@@ -200,7 +200,7 @@ jobs:
           sparse-checkout-cone-mode: false
 
       - name: Copy snapshots into public/
-        run: mkdir -p public && cp -r _data/public/snapshots public/snapshots
+        run: mkdir -p public/snapshots && cp _data/public/snapshots/*.json public/snapshots/
 
       - name: Setup Node
         uses: actions/setup-node@v4
