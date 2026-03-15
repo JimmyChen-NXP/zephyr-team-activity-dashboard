@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-15T00:05:10.630Z",
+  "collectedAt": "2026-03-15T01:44:21.889Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -7,6 +7,186 @@
     "zephyrproject-rtos/hostap"
   ],
   "records": [
+    {
+      "type": "issue",
+      "id": 3806845093,
+      "number": 102142,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "telnet: NXP: enabling CONFIG_SHELL_BACKEND_TELNET will stuck the process of network configuration",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/102142",
+      "author": "fanyi-4w",
+      "assignees": [
+        "jakub-uC"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-13T02:55:55Z",
+      "updatedAt": "2026-03-15T01:07:51Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 2166025765,
+      "number": 69730,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "tests: kernel: mimxrt595_evk/mimxrt595s/cm33  and mimxrt685_evk : tests/kernel/common/kernel.common.lto build failure",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/69730",
+      "author": "hakehuang",
+      "assignees": [
+        "ZhaoxiangJin"
+      ],
+      "state": "open",
+      "createdAt": "2024-03-04T06:18:41Z",
+      "updatedAt": "2026-03-15T01:00:06Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 2691084321,
+      "number": 81883,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "kernel: cache: kernel.cache.api* reports timeout",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/81883",
+      "author": "katgiadla",
+      "assignees": [
+        "nordic-krch"
+      ],
+      "state": "open",
+      "createdAt": "2024-11-25T15:04:53Z",
+      "updatedAt": "2026-03-15T00:59:56Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3040929923,
+      "number": 89505,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Relocation out of range errors with lld when building for riscv64 medany",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/89505",
+      "author": "jonathonpenix",
+      "assignees": [
+        "kgugala",
+        "tgorochowik",
+        "fkokosinski"
+      ],
+      "state": "open",
+      "createdAt": "2025-05-05T22:03:00Z",
+      "updatedAt": "2026-03-15T00:59:51Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3789527871,
+      "number": 101897,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "[Backport v4.2-branch] Failed to backport #94798",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/101897",
+      "author": "github-actions[bot]",
+      "assignees": [
+        "tswaehn"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-07T16:53:01Z",
+      "updatedAt": "2026-03-15T00:58:56Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3789640317,
+      "number": 101901,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "PICOLIBC does not implement `write` for `stdout`",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/101901",
+      "author": "srberard",
+      "assignees": [
+        "keith-packard",
+        "cfriedt"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-07T17:24:06Z",
+      "updatedAt": "2026-03-15T00:58:55Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3795869426,
+      "number": 101993,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "samples\\net\\sockets\\http_server compilation failed",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/101993",
+      "author": "Colt-Ma",
+      "assignees": [
+        "cfriedt"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-09T07:55:38Z",
+      "updatedAt": "2026-03-15T00:58:53Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3797372190,
+      "number": 102027,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Bluetooth: GMCS: Failing PTS tests",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/102027",
+      "author": "Thalley",
+      "assignees": [
+        "Thalley"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-09T15:30:35Z",
+      "updatedAt": "2026-03-15T00:58:51Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3797386560,
+      "number": 102031,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Bluetooth: PBP: Failing PTS tests",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/102031",
+      "author": "Thalley",
+      "assignees": [
+        "Thalley"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-09T15:34:58Z",
+      "updatedAt": "2026-03-15T00:58:49Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3802566119,
+      "number": 102081,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "doc: Documentation issue in 'develop/getting_started/index'",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/102081",
+      "author": "nickdaria",
+      "assignees": [
+        "kartben",
+        "carlescufi"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-12T02:44:04Z",
+      "updatedAt": "2026-03-15T00:58:46Z",
+      "closedAt": null
+    },
+    {
+      "type": "issue",
+      "id": 3805029693,
+      "number": 102124,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Bluetooth: CSIS: Failing PTS tests",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/102124",
+      "author": "Thalley",
+      "assignees": [
+        "Thalley"
+      ],
+      "state": "open",
+      "createdAt": "2026-01-12T16:18:33Z",
+      "updatedAt": "2026-03-15T00:58:44Z",
+      "closedAt": null
+    },
     {
       "type": "issue",
       "id": 3412608257,
@@ -1460,186 +1640,6 @@
     },
     {
       "type": "issue",
-      "id": 4058139193,
-      "number": 105288,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "libZMP element: uvcsink, uvcsrc",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105288",
-      "author": "josuah",
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "state": "open",
-      "createdAt": "2026-03-11T13:08:19Z",
-      "updatedAt": "2026-03-11T13:09:44Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 4058073221,
-      "number": 105284,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "libZMP element: zvid_transform (jpegenc/h264enc/...)",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105284",
-      "author": "josuah",
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "state": "open",
-      "createdAt": "2026-03-11T12:55:03Z",
-      "updatedAt": "2026-03-11T12:56:26Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 4058009641,
-      "number": 105282,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "libZMP element: appsrc/appsink",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105282",
-      "author": "josuah",
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "state": "open",
-      "createdAt": "2026-03-11T12:41:42Z",
-      "updatedAt": "2026-03-11T12:43:06Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 3225554368,
-      "number": 93055,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "samples: subsys: usb: dfu-next: unable to get DFU working",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/93055",
-      "author": "henrikbrixandersen",
-      "assignees": [
-        "jfischer-no"
-      ],
-      "state": "open",
-      "createdAt": "2025-07-12T16:27:21Z",
-      "updatedAt": "2026-03-11T12:42:42Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 4057979397,
-      "number": 105280,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "libZMP element: tee",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105280",
-      "author": "josuah",
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "state": "open",
-      "createdAt": "2026-03-11T12:35:30Z",
-      "updatedAt": "2026-03-11T12:36:48Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 4057964528,
-      "number": 105278,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "libZMP element: queue",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105278",
-      "author": "josuah",
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "state": "open",
-      "createdAt": "2026-03-11T12:32:19Z",
-      "updatedAt": "2026-03-11T12:33:43Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 4012619475,
-      "number": 104786,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: net: ppp: async UART transmissions (DMA) are mangled by queued transmissions",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/104786",
-      "author": "snydecor000",
-      "assignees": [
-        "jukkar",
-        "rlubos"
-      ],
-      "state": "open",
-      "createdAt": "2026-03-02T18:13:15Z",
-      "updatedAt": "2026-03-11T12:27:24Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 2303156982,
-      "number": 72959,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: video: API enhancement",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/72959",
-      "author": "josuah",
-      "assignees": [
-        "josuah"
-      ],
-      "state": "open",
-      "createdAt": "2024-05-17T16:32:46Z",
-      "updatedAt": "2026-03-11T12:17:31Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 4056810393,
-      "number": 105266,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "boards: raspberrypi: rpi_4b: doc: Fix incorrect firmware requirements",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105266",
-      "author": "sidstuff",
-      "assignees": [],
-      "state": "open",
-      "createdAt": "2026-03-11T08:51:20Z",
-      "updatedAt": "2026-03-11T09:52:10Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 4056810210,
-      "number": 105265,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "menuconfig fails on Windows when using multiple shields",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/105265",
-      "author": "Piziwate",
-      "assignees": [
-        "tejlmand"
-      ],
-      "state": "open",
-      "createdAt": "2026-03-11T08:51:17Z",
-      "updatedAt": "2026-03-11T09:50:14Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
-      "id": 3901000200,
-      "number": 103567,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Bluetooth: Audio: Get all relevant info from the bt_bap_unicast_group",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/issues/103567",
-      "author": "koffes",
-      "assignees": [
-        "Thalley"
-      ],
-      "state": "open",
-      "createdAt": "2026-02-05T11:07:24Z",
-      "updatedAt": "2026-03-11T08:54:25Z",
-      "closedAt": null
-    },
-    {
-      "type": "issue",
       "id": 3793767955,
       "number": 903,
       "repo": "zephyrproject-rtos/west",
@@ -2319,6 +2319,377 @@
     },
     {
       "type": "pr",
+      "id": 3188118119,
+      "number": 102516,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "video: samples: capture: add support for m2m transform",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/102516",
+      "author": "ngphibang",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-01-19T14:54:44Z",
+      "updatedAt": "2026-03-15T01:33:24Z",
+      "mergedAt": null,
+      "assignees": [
+        "ngphibang",
+        "josuah"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "loicpoulain",
+        "JarmouniA",
+        "avolmat-st"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 2149453330,
+      "number": 80525,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Flash API: flash_mmap syscall allowing to obtain mapping of flash device in CPU address space",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/80525",
+      "author": "de-nordic",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2024-10-28T15:18:39Z",
+      "updatedAt": "2026-03-15T01:00:00Z",
+      "mergedAt": null,
+      "assignees": [
+        "anangl",
+        "masz-nordic"
+      ],
+      "requestedReviewers": [
+        "kl-cruz",
+        "anangl",
+        "nvlsianpu",
+        "rghaddab",
+        "nika-nordic",
+        "masz-nordic",
+        "Damian-Nordic",
+        "magp-nordic",
+        "jaz1-nordic"
+      ],
+      "ciStatus": "failure"
+    },
+    {
+      "type": "pr",
+      "id": 2542637317,
+      "number": 90469,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "cmake: allow shield overlays in APPLICATION_CONFIG_DIR",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/90469",
+      "author": "kartben",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-05-25T20:47:56Z",
+      "updatedAt": "2026-03-15T00:59:47Z",
+      "mergedAt": null,
+      "assignees": [
+        "tejlmand"
+      ],
+      "requestedReviewers": [
+        "mbolivar",
+        "avisconti",
+        "nashif",
+        "JordanYates",
+        "tejlmand",
+        "jfischer-no",
+        "erwango",
+        "jeremybettis",
+        "57300",
+        "rruuaanng",
+        "decsny"
+      ],
+      "ciStatus": "failure"
+    },
+    {
+      "type": "pr",
+      "id": 2613305301,
+      "number": 92057,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "include: zephyr: devicetree: add DT_INST_IRQN_BY_NAME()",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/92057",
+      "author": "danieldegrasse",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-06-24T02:53:14Z",
+      "updatedAt": "2026-03-15T00:59:45Z",
+      "mergedAt": null,
+      "assignees": [
+        "mbolivar",
+        "decsny"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "galak",
+        "rruuaanng",
+        "decsny"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 2708753254,
+      "number": 93901,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "cmake: dts: Generate `edt.json` metadata during build",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/93901",
+      "author": "rruuaanng",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-07-31T01:58:52Z",
+      "updatedAt": "2026-03-15T00:59:42Z",
+      "mergedAt": null,
+      "assignees": [
+        "tejlmand"
+      ],
+      "requestedReviewers": [
+        "mbolivar",
+        "nashif",
+        "tejlmand",
+        "galak",
+        "nordicjm",
+        "jeremybettis",
+        "57300"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 2843405594,
+      "number": 96278,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "zvfs: improve libc FILE to integer fd abstraction (v3)",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/96278",
+      "author": "fkokosinski",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-09-19T10:43:07Z",
+      "updatedAt": "2026-03-15T00:59:36Z",
+      "mergedAt": null,
+      "assignees": [
+        "stephanosio"
+      ],
+      "requestedReviewers": [
+        "nashif",
+        "andyross",
+        "npitre",
+        "ceolin",
+        "ycsin",
+        "stephanosio",
+        "TaiJuWu",
+        "dcpleung",
+        "de-nordic",
+        "peter-mitsis"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 2984570419,
+      "number": 99003,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "scripts: ci: check_compliance: Warn on missing Apache-2.0 license",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/99003",
+      "author": "pdgendt",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-11-06T12:54:32Z",
+      "updatedAt": "2026-03-15T00:59:23Z",
+      "mergedAt": null,
+      "assignees": [
+        "nashif",
+        "stephanosio"
+      ],
+      "requestedReviewers": [
+        "stephanosio",
+        "keith-zephyr"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 3018270778,
+      "number": 99522,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "usb: device_next: Add MIDI 1.0 support to the USB next MIDI 2.0 driver",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/99522",
+      "author": "nrbrook",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-11-17T17:05:03Z",
+      "updatedAt": "2026-03-15T00:59:20Z",
+      "mergedAt": null,
+      "assignees": [
+        "jfischer-no"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "lyakh",
+        "jfischer-no",
+        "lgirdwood",
+        "TomasBarakNXP",
+        "kv2019i",
+        "JarmouniA",
+        "josuah"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 3135050486,
+      "number": 101599,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "tests: drivers: gpio: Add nrf54h20dk cpuflpr support",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/101599",
+      "author": "nordic-pikr",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-12-29T19:10:41Z",
+      "updatedAt": "2026-03-15T00:59:04Z",
+      "mergedAt": null,
+      "assignees": [
+        "anangl",
+        "masz-nordic",
+        "bjarki-andreasen"
+      ],
+      "requestedReviewers": [
+        "mgielda",
+        "nashif",
+        "npitre",
+        "henrikbrixandersen",
+        "ycsin",
+        "tbursztyka",
+        "VynDragon",
+        "edersondisouza",
+        "kl-cruz",
+        "kgugala",
+        "tgorochowik",
+        "katsuster",
+        "anangl",
+        "fkokosinski",
+        "nika-nordic",
+        "masz-nordic",
+        "bjarki-andreasen",
+        "lstnl",
+        "magp-nordic",
+        "jaz1-nordic"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 3169234825,
+      "number": 102177,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: gnss: Add L5 Constellation Support to GNSS API",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/102177",
+      "author": "ChrisCope",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-01-13T10:51:56Z",
+      "updatedAt": "2026-03-15T00:58:41Z",
+      "mergedAt": null,
+      "assignees": [
+        "bjarki-andreasen"
+      ],
+      "requestedReviewers": [
+        "mbolivar",
+        "JarmouniA",
+        "ubieda",
+        "rruuaanng",
+        "decsny",
+        "tomi-font"
+      ],
+      "ciStatus": "failure"
+    },
+    {
+      "type": "pr",
+      "id": 3400183215,
+      "number": 105515,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "lora: optional configurable SYNC word",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105515",
+      "author": "JordanYates",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-15T00:26:37Z",
+      "updatedAt": "2026-03-15T00:56:53Z",
+      "mergedAt": null,
+      "assignees": [
+        "JordanYates"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "carlocaione",
+        "MaureenHelm",
+        "mniestroj",
+        "stephanosio",
+        "martinjaeger"
+      ],
+      "ciStatus": "failure"
+    },
+    {
+      "type": "pr",
+      "id": 3367828444,
+      "number": 105080,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "video: add formats: 8-bit split in 4-bit 4-bit",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105080",
+      "author": "josuah",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-07T16:34:32Z",
+      "updatedAt": "2026-03-15T00:27:47Z",
+      "mergedAt": null,
+      "assignees": [
+        "ngphibang",
+        "josuah"
+      ],
+      "requestedReviewers": [
+        "ngphibang",
+        "loicpoulain",
+        "avolmat-st"
+      ],
+      "ciStatus": null
+    },
+    {
+      "type": "pr",
+      "id": 3399829256,
+      "number": 105511,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "video: add colorspace / planar and semi-planar related helpers",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105511",
+      "author": "avolmat-st",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-14T21:07:16Z",
+      "updatedAt": "2026-03-15T00:24:11Z",
+      "mergedAt": null,
+      "assignees": [
+        "ngphibang",
+        "josuah"
+      ],
+      "requestedReviewers": [
+        "GeorgeCGV",
+        "ngphibang",
+        "loicpoulain",
+        "erwango",
+        "etienne-lms",
+        "FRASTM",
+        "gautierg-st",
+        "juickar",
+        "mathieuchopstm",
+        "djiatsaf-st"
+      ],
+      "ciStatus": "failure"
+    },
+    {
+      "type": "pr",
       "id": 3256142979,
       "number": 103686,
       "repo": "zephyrproject-rtos/zephyr",
@@ -2365,33 +2736,6 @@
         "stephanosio"
       ],
       "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3188118119,
-      "number": 102516,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "video: samples: capture: add support for m2m transform",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/102516",
-      "author": "ngphibang",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-01-19T14:54:44Z",
-      "updatedAt": "2026-03-14T23:57:46Z",
-      "mergedAt": null,
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "requestedReviewers": [
-        "kartben",
-        "nashif",
-        "loicpoulain",
-        "JarmouniA",
-        "josuah",
-        "avolmat-st"
-      ],
-      "ciStatus": "pending"
     },
     {
       "type": "pr",
@@ -2658,38 +3002,6 @@
       "mergedAt": null,
       "assignees": [],
       "requestedReviewers": [],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3399829256,
-      "number": 105511,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "video: add colorspace / planar and semi-planar related helpers",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105511",
-      "author": "avolmat-st",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-14T21:07:16Z",
-      "updatedAt": "2026-03-14T21:11:45Z",
-      "mergedAt": null,
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "requestedReviewers": [
-        "GeorgeCGV",
-        "ngphibang",
-        "loicpoulain",
-        "erwango",
-        "etienne-lms",
-        "FRASTM",
-        "josuah",
-        "gautierg-st",
-        "juickar",
-        "mathieuchopstm",
-        "djiatsaf-st"
-      ],
       "ciStatus": "failure"
     },
     {
@@ -4635,35 +4947,6 @@
     },
     {
       "type": "pr",
-      "id": 3018270778,
-      "number": 99522,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "usb: device_next: Add MIDI 1.0 support to the USB next MIDI 2.0 driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/99522",
-      "author": "nrbrook",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2025-11-17T17:05:03Z",
-      "updatedAt": "2026-03-14T01:05:28Z",
-      "mergedAt": null,
-      "assignees": [
-        "jfischer-no"
-      ],
-      "requestedReviewers": [
-        "kartben",
-        "nashif",
-        "lyakh",
-        "jfischer-no",
-        "lgirdwood",
-        "TomasBarakNXP",
-        "kv2019i",
-        "JarmouniA",
-        "josuah"
-      ],
-      "ciStatus": null
-    },
-    {
-      "type": "pr",
       "id": 3392829313,
       "number": 105412,
       "repo": "zephyrproject-rtos/zephyr",
@@ -4726,289 +5009,6 @@
       "mergedAt": null,
       "assignees": [],
       "requestedReviewers": [],
-      "ciStatus": null
-    },
-    {
-      "type": "pr",
-      "id": 2836122570,
-      "number": 96138,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "RFC: MSPI CE control rework and CE timing support",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/96138",
-      "author": "swift-tk",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2025-09-17T10:43:49Z",
-      "updatedAt": "2026-03-14T00:49:00Z",
-      "mergedAt": null,
-      "assignees": [
-        "de-nordic"
-      ],
-      "requestedReviewers": [
-        "mbolivar",
-        "kartben",
-        "nashif",
-        "AlessandroLuo",
-        "RichardSWheatley",
-        "rghaddab",
-        "danieldegrasse",
-        "JarmouniA",
-        "de-nordic",
-        "rruuaanng",
-        "decsny",
-        "aaronyegx"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 2920858381,
-      "number": 97723,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "boards: xtensa: Rename WeAct boards for consistency",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/97723",
-      "author": "heronet",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2025-10-16T14:10:26Z",
-      "updatedAt": "2026-03-14T00:48:57Z",
-      "mergedAt": null,
-      "assignees": [
-        "sylvioalves"
-      ],
-      "requestedReviewers": [
-        "avisconti",
-        "kartben",
-        "jfischer-no",
-        "erwango"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 2963403075,
-      "number": 98580,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "scripts: list_boards: Add support for using parent files",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/98580",
-      "author": "nordicjm",
-      "state": "open",
-      "isDraft": true,
-      "createdAt": "2025-10-30T14:19:26Z",
-      "updatedAt": "2026-03-14T00:48:48Z",
-      "mergedAt": null,
-      "assignees": [],
-      "requestedReviewers": [
-        "tejlmand"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3146228101,
-      "number": 101762,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "sysbuild: Add ExternalZephyrNonConfigProject_Add CMake function",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/101762",
-      "author": "nordicjm",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-01-05T13:04:27Z",
-      "updatedAt": "2026-03-14T00:48:28Z",
-      "mergedAt": null,
-      "assignees": [
-        "tejlmand"
-      ],
-      "requestedReviewers": [
-        "nashif",
-        "tejlmand",
-        "jeremybettis",
-        "57300"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3161768883,
-      "number": 102059,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Add Pimoroni Pico Plus 2W and enable WiFi",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/102059",
-      "author": "casaroli",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-01-10T09:09:24Z",
-      "updatedAt": "2026-03-14T00:48:24Z",
-      "mergedAt": null,
-      "assignees": [
-        "soburi"
-      ],
-      "requestedReviewers": [
-        "yonsch",
-        "ThreeEights"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3396361091,
-      "number": 105471,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: can: infineon: Adding CAN driver and support for PSOC Control C3",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105471",
-      "author": "jsbatch",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-13T17:50:42Z",
-      "updatedAt": "2026-03-14T00:37:20Z",
-      "mergedAt": null,
-      "assignees": [
-        "henrikbrixandersen"
-      ],
-      "requestedReviewers": [
-        "nashif",
-        "henrikbrixandersen",
-        "tbursztyka",
-        "alexanderwachter",
-        "nordic-krch",
-        "talih0",
-        "martinjaeger",
-        "str4t0m",
-        "dcpleung",
-        "JarmouniA",
-        "billwatersiii",
-        "mcatee-infineon",
-        "decsny",
-        "sreeramIfx",
-        "william-tang914"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3300922168,
-      "number": 104244,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: usb: add Bouffalo Lab BL70x USB device controller driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104244",
-      "author": "will-tm",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-19T00:36:15Z",
-      "updatedAt": "2026-03-14T00:31:01Z",
-      "mergedAt": null,
-      "assignees": [
-        "jfischer-no"
-      ],
-      "requestedReviewers": [
-        "mgielda",
-        "npitre",
-        "ycsin",
-        "VynDragon",
-        "edersondisouza",
-        "kgugala",
-        "tgorochowik",
-        "katsuster",
-        "jfischer-no",
-        "nordic-krch",
-        "fkokosinski",
-        "masz-nordic",
-        "JarmouniA",
-        "josuah",
-        "tmon-nordic"
-      ],
-      "ciStatus": null
-    },
-    {
-      "type": "pr",
-      "id": 3315648537,
-      "number": 104398,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "dts: bindings: Add zephyr,mapped-partition binding, and demonstrate usage of it",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104398",
-      "author": "nordicjm",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-23T11:54:17Z",
-      "updatedAt": "2026-03-14T00:09:23Z",
-      "mergedAt": null,
-      "assignees": [
-        "mbolivar"
-      ],
-      "requestedReviewers": [
-        "mbolivar",
-        "Laczen",
-        "butok",
-        "kl-cruz",
-        "ithinuel",
-        "MaureenHelm",
-        "kylebonnici",
-        "nordic-krch",
-        "anangl",
-        "erwango",
-        "etienne-lms",
-        "rghaddab",
-        "nika-nordic",
-        "JarmouniA",
-        "de-nordic"
-      ],
-      "ciStatus": "failure"
-    },
-    {
-      "type": "pr",
-      "id": 3281526443,
-      "number": 104070,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "samples: drivers: mspi: mspi_flash: enable CI testing on available STM32 platforms and apply several fixes and improvements to the MSPI Flash driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104070",
-      "author": "djiatsaf-st",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-13T16:09:52Z",
-      "updatedAt": "2026-03-13T23:48:06Z",
-      "mergedAt": null,
-      "assignees": [
-        "swift-tk"
-      ],
-      "requestedReviewers": [
-        "kartben",
-        "nashif",
-        "GeorgeCGV",
-        "anangl",
-        "etienne-lms",
-        "rghaddab",
-        "FRASTM",
-        "de-nordic",
-        "gautierg-st",
-        "juickar"
-      ],
-      "ciStatus": null
-    },
-    {
-      "type": "pr",
-      "id": 3381531525,
-      "number": 105246,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: led: lp596x controller",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105246",
-      "author": "mrrosen-cpi",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-11T01:49:32Z",
-      "updatedAt": "2026-03-13T23:39:09Z",
-      "mergedAt": null,
-      "assignees": [
-        "simonguinot"
-      ],
-      "requestedReviewers": [
-        "nashif",
-        "jeppenodgaard",
-        "simonguinot",
-        "bogdanovs",
-        "vaishnavachath",
-        "JarmouniA",
-        "jpanisbl"
-      ],
       "ciStatus": null
     },
     {
