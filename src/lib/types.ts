@@ -76,6 +76,9 @@ export type ContributorMetrics = {
   reviewCommented: number;
   repositoriesTouched: number;
   activityScore: number;
+  archPrs: number;
+  rfcPrs: number;
+  stablePrs: number;
 };
 
 export type RepoActivity = {

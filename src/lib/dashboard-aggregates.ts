@@ -38,6 +38,9 @@ function buildEmptyContributor(member: DashboardData["rosterMembers"][number]): 
     reviewCommented: 0,
     repositoriesTouched: 0,
     activityScore: 0,
+    archPrs: 0,
+    rfcPrs: 0,
+    stablePrs: 0,
   };
 }
 
@@ -106,6 +109,13 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
       contributor.reviewTeamAuthored += item.metrics.reviewTeamAuthored;
       contributor.reviewExternalAuthored += item.metrics.reviewExternalAuthored;
       contributor.reviewCommented += item.metrics.reviewCommented;
+
+      if (item.type === "pull_request") {
+        const labels = item.labels ?? [];
+        if (labels.some((l) => l.toLowerCase() === "area: architectures")) contributor.archPrs += 1;
+        if (labels.some((l) => l.includes("RFC"))) contributor.rfcPrs += 1;
+        if (labels.some((l) => l.toLowerCase().includes("stable"))) contributor.stablePrs += 1;
+      }
 
       const repos = contributorRepos.get(contributor.login) ?? new Set<string>();
       repos.add(item.repo);
@@ -237,7 +247,9 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
       return [
         { key: "open-prs", label: "Open PRs", value: (contributor) => contributor.openAuthoredPrs },
         { key: "merged", label: "Merged", value: (contributor) => contributor.mergedPrs },
-        { key: "repos", label: "Repos", value: (contributor) => contributor.repositoriesTouched },
+        { key: "stable", label: "Stable", value: (contributor) => contributor.stablePrs },
+        { key: "arch", label: "Arch", value: (contributor) => contributor.archPrs },
+        { key: "rfc", label: "RFC", value: (contributor) => contributor.rfcPrs },
         { key: "score", label: getViewScoreLabel(view), value: (contributor) => contributor.activityScore },
       ];
     case "reviews":

@@ -33,6 +33,9 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
         reviewCommented: 0,
         repositoriesTouched: 0,
         activityScore: 0,
+        archPrs: 0,
+        rfcPrs: 0,
+        stablePrs: 0,
       },
     ]),
   );
