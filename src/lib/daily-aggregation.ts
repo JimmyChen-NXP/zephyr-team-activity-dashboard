@@ -115,7 +115,6 @@ export function aggregateDailyRecords(
         activityScore: 0,
         archPrs: 0,
         rfcPrs: 0,
-        stablePrs: 0,
       } satisfies ContributorMetrics,
     ]),
   );

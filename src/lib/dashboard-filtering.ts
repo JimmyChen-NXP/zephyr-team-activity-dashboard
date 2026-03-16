@@ -35,7 +35,6 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
         activityScore: 0,
         archPrs: 0,
         rfcPrs: 0,
-        stablePrs: 0,
       },
     ]),
   );

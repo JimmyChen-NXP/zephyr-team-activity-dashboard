@@ -85,7 +85,6 @@ export function buildDemoDashboard(roster: RosterMember[], range: RangeOption): 
       repositoriesTouched,
       archPrs: 0,
       rfcPrs: 0,
-      stablePrs: 0,
       activityScore: calculateActivityScore({
         openAssignedIssues,
         closedIssues,

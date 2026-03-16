@@ -474,7 +474,6 @@ function createContributorMap(roster: RosterMember[]): Map<string, ContributorAc
         activityScore: 0,
         archPrs: 0,
         rfcPrs: 0,
-        stablePrs: 0,
       },
     ]),
   );

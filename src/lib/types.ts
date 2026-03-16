@@ -78,7 +78,6 @@ export type ContributorMetrics = {
   activityScore: number;
   archPrs: number;
   rfcPrs: number;
-  stablePrs: number;
 };
 
 export type RepoActivity = {
