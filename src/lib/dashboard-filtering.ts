@@ -30,6 +30,7 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
         reviewSelfAuthored: 0,
         reviewTeamAuthored: 0,
         reviewExternalAuthored: 0,
+        reviewCommented: 0,
         repositoriesTouched: 0,
         activityScore: 0,
       },
@@ -53,6 +54,7 @@ export function filterDashboardData(data: DashboardData, filters: DashboardFilte
       contributor.reviewSelfAuthored += item.metrics.reviewSelfAuthored;
       contributor.reviewTeamAuthored += item.metrics.reviewTeamAuthored;
       contributor.reviewExternalAuthored += item.metrics.reviewExternalAuthored;
+      contributor.reviewCommented += item.metrics.reviewCommented;
 
       const touchedRepos = contributorRepos.get(contributor.login) ?? new Set<string>();
       touchedRepos.add(item.repo);
