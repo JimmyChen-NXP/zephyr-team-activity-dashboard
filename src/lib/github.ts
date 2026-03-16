@@ -437,6 +437,7 @@ function createContributorMap(roster: RosterMember[]): Map<string, ContributorAc
         reviewSelfAuthored: 0,
         reviewTeamAuthored: 0,
         reviewExternalAuthored: 0,
+        reviewCommented: 0,
         repositoriesTouched: 0,
         activityScore: 0,
       },
