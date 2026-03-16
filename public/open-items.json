@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-16T02:19:43.769Z",
+  "collectedAt": "2026-03-16T02:27:14.930Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -2961,6 +2961,142 @@
     },
     {
       "type": "pr",
+      "id": 3381565219,
+      "number": 105248,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "soc: ite: remove unnecessary __soc_handle_irq trampoline",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105248",
+      "author": "tari",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-11T02:02:50Z",
+      "updatedAt": "2026-03-16T02:25:39Z",
+      "mergedAt": null,
+      "assignees": [
+        "Chenhongren",
+        "Dino-Li",
+        "RuibinChang",
+        "GTLin08"
+      ],
+      "requestedReviewers": [
+        "nashif",
+        "ycsin",
+        "Chenhongren",
+        "dcpleung",
+        "RuibinChang",
+        "GTLin08"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "area: Interrupt Controller",
+        "platform: ITE",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3372988776,
+      "number": 105138,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "tests: posix: system_database: split POSIX_SYSTEM_DATABASE into standalone test",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105138",
+      "author": "seyoungjeong",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-09T11:34:20Z",
+      "updatedAt": "2026-03-16T02:24:07Z",
+      "mergedAt": null,
+      "assignees": [
+        "cfriedt"
+      ],
+      "requestedReviewers": [
+        "nashif",
+        "ycsin"
+      ],
+      "ciStatus": "pending",
+      "labels": [
+        "area: Tests",
+        "area: POSIX"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 2718292133,
+      "number": 94085,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "usb: host: class: support for usb host video class",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
+      "author": "AidenHu",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-08-04T14:52:17Z",
+      "updatedAt": "2026-03-16T02:22:10Z",
+      "mergedAt": null,
+      "assignees": [
+        "jfischer-no"
+      ],
+      "requestedReviewers": [
+        "mbolivar",
+        "kartben",
+        "nashif",
+        "jfischer-no",
+        "mmahadevan108",
+        "loicpoulain",
+        "dleach02",
+        "JarmouniA",
+        "avolmat-st",
+        "rruuaanng",
+        "decsny",
+        "tmon-nordic"
+      ],
+      "ciStatus": "pending",
+      "labels": [
+        "area: USB",
+        "area: Samples",
+        "area: Devicetree",
+        "area: Tests",
+        "area: Video",
+        "area: Devicetree Binding",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3356866095,
+      "number": 104936,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "soc: renesas: ra: enable DCACHE support",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104936",
+      "author": "thenguyenyf",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-05T06:00:17Z",
+      "updatedAt": "2026-03-16T02:21:40Z",
+      "mergedAt": null,
+      "assignees": [
+        "soburi",
+        "KhiemNguyenT"
+      ],
+      "requestedReviewers": [
+        "soburi",
+        "ydamigos",
+        "blauret",
+        "andrzej-kaczmarek",
+        "ioannis-karachalios",
+        "thaoluonguw",
+        "binhnguyen2434",
+        "duynguyenxa",
+        "nhutnguyenkc"
+      ],
+      "ciStatus": null,
+      "labels": [
+        "platform: Renesas",
+        "platform: Renesas RA",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
       "id": 3398739950,
       "number": 105495,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3348,32 +3484,6 @@
     },
     {
       "type": "pr",
-      "id": 3372988776,
-      "number": 105138,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "tests: posix: system_database: split POSIX_SYSTEM_DATABASE into standalone test",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105138",
-      "author": "seyoungjeong",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-09T11:34:20Z",
-      "updatedAt": "2026-03-16T01:53:59Z",
-      "mergedAt": null,
-      "assignees": [
-        "cfriedt"
-      ],
-      "requestedReviewers": [
-        "nashif",
-        "ycsin"
-      ],
-      "ciStatus": "pending",
-      "labels": [
-        "area: Tests",
-        "area: POSIX"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3316775084,
       "number": 104416,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3553,47 +3663,6 @@
         "area: Devicetree Binding",
         "area: Input",
         "platform: Seeed Studio",
-        "area: Boards/SoCs"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 2718292133,
-      "number": 94085,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "usb: host: class: support for usb host video class",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
-      "author": "AidenHu",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2025-08-04T14:52:17Z",
-      "updatedAt": "2026-03-16T01:28:57Z",
-      "mergedAt": null,
-      "assignees": [
-        "jfischer-no"
-      ],
-      "requestedReviewers": [
-        "mbolivar",
-        "kartben",
-        "nashif",
-        "jfischer-no",
-        "mmahadevan108",
-        "loicpoulain",
-        "dleach02",
-        "JarmouniA",
-        "avolmat-st",
-        "rruuaanng",
-        "decsny",
-        "tmon-nordic"
-      ],
-      "ciStatus": null,
-      "labels": [
-        "area: USB",
-        "area: Samples",
-        "area: Devicetree",
-        "area: Tests",
-        "area: Video",
-        "area: Devicetree Binding",
         "area: Boards/SoCs"
       ]
     },
@@ -6309,69 +6378,6 @@
       "requestedReviewers": [],
       "ciStatus": "failure",
       "labels": []
-    },
-    {
-      "type": "pr",
-      "id": 3355707550,
-      "number": 104929,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: sensor: add Sensirion STCC4 CO2 sensor driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104929",
-      "author": "will-tm",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-04T23:15:44Z",
-      "updatedAt": "2026-03-15T13:33:18Z",
-      "mergedAt": null,
-      "assignees": [
-        "MaureenHelm"
-      ],
-      "requestedReviewers": [
-        "avisconti",
-        "teburd",
-        "nashif",
-        "jeppenodgaard",
-        "MaureenHelm",
-        "yperess",
-        "JarmouniA",
-        "ubieda",
-        "tristan-google",
-        "asemjonovs"
-      ],
-      "ciStatus": null,
-      "labels": [
-        "area: Sensors",
-        "area: Tests",
-        "area: Devicetree Binding"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3393950134,
-      "number": 105433,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "scripts: west_commands: sdk: Support Zephyr SDK 1.0.0",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105433",
-      "author": "stephanosio",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-13T08:41:23Z",
-      "updatedAt": "2026-03-15T12:45:00Z",
-      "mergedAt": null,
-      "assignees": [
-        "soburi",
-        "pdgendt"
-      ],
-      "requestedReviewers": [
-        "mbolivar",
-        "pdgendt",
-        "carlescufi",
-        "marc-hb"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "area: West"
-      ]
     },
     {
       "type": "pr",

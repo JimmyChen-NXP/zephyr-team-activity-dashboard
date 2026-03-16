@@ -6,7 +6,7 @@
     "to": "2026-03-16T23:59:59Z",
     "timeZone": "UTC"
   },
-  "generatedAt": "2026-03-16T02:19:44.613Z",
+  "generatedAt": "2026-03-16T02:27:15.808Z",
   "rosterSize": 171,
   "rosterMembers": [
     {
@@ -2799,6 +2799,131 @@
   ],
   "activityItems": [
     {
+      "id": "pull_request-2718292133-AidenHu",
+      "type": "pull_request",
+      "title": "usb: host: class: support for usb host video class",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "AidenHu",
+      "author": "AidenHu",
+      "state": "open",
+      "createdAt": "2025-08-04T14:52:17Z",
+      "updatedAt": "2026-03-16T02:22:10Z",
+      "ageDays": 224,
+      "statusLabel": "Open PR",
+      "labels": [
+        "area: USB",
+        "area: Samples",
+        "area: Devicetree",
+        "area: Tests",
+        "area: Video",
+        "area: Devicetree Binding",
+        "area: Boards/SoCs"
+      ],
+      "prStatus": {
+        "assignees": [
+          "jfischer-no"
+        ],
+        "requestedVerdicts": [
+          {
+            "login": "dleach02",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "mmahadevan108",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "rruuaanng",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "AidenHu",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "kctan0805",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedLogins": [
+          "mbolivar",
+          "kartben",
+          "nashif",
+          "jfischer-no",
+          "loicpoulain",
+          "JarmouniA",
+          "avolmat-st",
+          "decsny",
+          "tmon-nordic"
+        ],
+        "pendingRequestedCount": 9,
+        "ciStatus": "pending",
+        "cooldownHours": 0,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-2718292133-mmahadevan108",
+      "type": "review_request",
+      "title": "Review requested from Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "AidenHu",
+      "state": "open",
+      "createdAt": "2025-08-04T14:52:17Z",
+      "updatedAt": "2026-03-16T02:22:10Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "pull_request-3398739950-ZhaoxiangJin",
       "type": "pull_request",
       "title": "soc: nxp: replace magic number with DT_PROP macro",
@@ -4597,131 +4722,6 @@
       }
     },
     {
-      "id": "pull_request-2718292133-AidenHu",
-      "type": "pull_request",
-      "title": "usb: host: class: support for usb host video class",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "AidenHu",
-      "author": "AidenHu",
-      "state": "open",
-      "createdAt": "2025-08-04T14:52:17Z",
-      "updatedAt": "2026-03-16T01:28:57Z",
-      "ageDays": 224,
-      "statusLabel": "Open PR",
-      "labels": [
-        "area: USB",
-        "area: Samples",
-        "area: Devicetree",
-        "area: Tests",
-        "area: Video",
-        "area: Devicetree Binding",
-        "area: Boards/SoCs"
-      ],
-      "prStatus": {
-        "assignees": [
-          "jfischer-no"
-        ],
-        "requestedVerdicts": [
-          {
-            "login": "dleach02",
-            "state": "COMMENTED",
-            "wasRequested": true
-          },
-          {
-            "login": "mmahadevan108",
-            "state": "COMMENTED",
-            "wasRequested": true
-          },
-          {
-            "login": "rruuaanng",
-            "state": "COMMENTED",
-            "wasRequested": true
-          }
-        ],
-        "otherVerdicts": [
-          {
-            "login": "AidenHu",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "josuah",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "kctan0805",
-            "state": "COMMENTED",
-            "wasRequested": false
-          }
-        ],
-        "pendingRequestedLogins": [
-          "mbolivar",
-          "kartben",
-          "nashif",
-          "jfischer-no",
-          "loicpoulain",
-          "JarmouniA",
-          "avolmat-st",
-          "decsny",
-          "tmon-nordic"
-        ],
-        "pendingRequestedCount": 9,
-        "ciStatus": null,
-        "cooldownHours": 0,
-        "cooldownMet": false
-      },
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 1,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-2718292133-mmahadevan108",
-      "type": "review_request",
-      "title": "Review requested from Mahesh Mahadevan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "mmahadevan108",
-      "author": "AidenHu",
-      "state": "open",
-      "createdAt": "2025-08-04T14:52:17Z",
-      "updatedAt": "2026-03-16T01:28:57Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "pull_request-3105140461-NGExplorer",
       "type": "pull_request",
       "title": "Add vglite examples as independent library or framework",
@@ -6368,7 +6368,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": "failure",
-        "cooldownHours": 11,
+        "cooldownHours": 12,
         "cooldownMet": false
       },
       "metrics": {
@@ -7569,7 +7569,7 @@
         ],
         "pendingRequestedCount": 21,
         "ciStatus": null,
-        "cooldownHours": 40,
+        "cooldownHours": 41,
         "cooldownMet": false
       },
       "metrics": {
@@ -8435,7 +8435,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 51,
+        "cooldownHours": 52,
         "cooldownMet": false
       },
       "metrics": {
@@ -9230,7 +9230,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 52,
+        "cooldownHours": 53,
         "cooldownMet": false
       },
       "metrics": {
@@ -13085,7 +13085,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 62,
+        "cooldownHours": 63,
         "cooldownMet": false
       },
       "metrics": {
@@ -19122,7 +19122,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 115,
+        "cooldownHours": 116,
         "cooldownMet": true
       },
       "metrics": {
@@ -20163,7 +20163,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 119,
+        "cooldownHours": 120,
         "cooldownMet": true
       },
       "metrics": {
@@ -20583,7 +20583,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 119,
+        "cooldownHours": 120,
         "cooldownMet": true
       },
       "metrics": {
@@ -23301,7 +23301,7 @@
         ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 135,
+        "cooldownHours": 136,
         "cooldownMet": true
       },
       "metrics": {
@@ -32917,7 +32917,7 @@
         ],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 254,
+        "cooldownHours": 255,
         "cooldownMet": true
       },
       "metrics": {
@@ -33763,7 +33763,7 @@
         ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 258,
+        "cooldownHours": 259,
         "cooldownMet": true
       },
       "metrics": {
@@ -57156,10 +57156,10 @@
   ],
   "syncHealth": {
     "source": "cache",
-    "generatedAt": "2026-03-16T02:19:44.613Z",
+    "generatedAt": "2026-03-16T02:27:15.808Z",
     "freshnessMinutes": 0,
     "searchSamples": 25275,
-    "detailSamples": 1280,
+    "detailSamples": 1281,
     "liveEnabled": false
   },
   "filterOptions": {
@@ -57859,6 +57859,6 @@
     "hasToken": false,
     "connectionStatus": "configured",
     "message": "Snapshot aggregated from daily files by GitHub Actions. No token is available in the browser.",
-    "checkedAt": "2026-03-16T02:19:44.613Z"
+    "checkedAt": "2026-03-16T02:27:15.808Z"
   }
 }
