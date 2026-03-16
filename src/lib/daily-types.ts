@@ -19,6 +19,7 @@ export type DailyIssueRecord = {
   createdAt: string; // ISO
   updatedAt: string; // ISO
   closedAt: string | null;
+  labels?: string[]; // GitHub label names, e.g. ["bug", "area: Bluetooth"]
 };
 
 export type DailyPrRecord = {
@@ -34,6 +35,7 @@ export type DailyPrRecord = {
   createdAt: string;
   updatedAt: string;
   mergedAt: string | null;
+  labels?: string[]; // GitHub label names
   /** GitHub assignees for this PR. Optional for backward compat with legacy daily files. */
   assignees?: string[];
   requestedReviewers: string[];

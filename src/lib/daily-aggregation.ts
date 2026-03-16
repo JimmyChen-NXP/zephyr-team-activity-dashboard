@@ -177,6 +177,7 @@ export function aggregateDailyRecords(
         updatedAt: issue.updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(issue.createdAt)),
         statusLabel: isStale ? "Stale issue" : "Assigned",
+        labels: issue.labels,
         metrics: { ...emptyMetrics(), openAssignedIssues: 1, staleItems: isStale ? 1 : 0 },
       });
     }
@@ -205,6 +206,7 @@ export function aggregateDailyRecords(
         updatedAt: issue.updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(issue.createdAt)),
         statusLabel: "Closed",
+        labels: issue.labels,
         metrics: { ...emptyMetrics(), closedIssues: 1 },
       });
     }
@@ -295,6 +297,7 @@ export function aggregateDailyRecords(
       updatedAt: pr.updatedAt,
       ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
       statusLabel: pr.isDraft ? "Draft PR" : "Open PR",
+      labels: pr.labels,
       prStatus,
       metrics: {
         ...emptyMetrics(),
@@ -329,6 +332,7 @@ export function aggregateDailyRecords(
         updatedAt: pr.updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
         statusLabel: "Merged",
+        labels: pr.labels,
         metrics: { ...emptyMetrics(), mergedPrs: 1 },
       });
     } else if (!pr.mergedAt) {
@@ -347,6 +351,7 @@ export function aggregateDailyRecords(
         updatedAt: pr.updatedAt,
         ageDays: differenceInCalendarDays(new Date(), parseISO(pr.createdAt)),
         statusLabel: "Closed",
+        labels: pr.labels,
         metrics: { ...emptyMetrics(), closedUnmergedPrs: 1 },
       });
     }

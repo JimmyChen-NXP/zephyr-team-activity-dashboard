@@ -126,6 +126,7 @@ export type ActivityItem = {
   ageDays: number;
   statusLabel: string;
   reviewedPrKind?: ReviewedPrKind;
+  labels?: string[]; // GitHub label names; undefined for records collected before labels were captured
   /** Only set for type === "pull_request" and state === "open" */
   prStatus?: PrStatusSummary;
   metrics: ActivityMetricDelta;
