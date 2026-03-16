@@ -137,7 +137,7 @@ export function MaintainersPage() {
   const [nameFilter, setNameFilter] = useState("");
   const [personFilter, setPersonFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState<"all" | "component" | "file-group">("all");
-  const [hideUnassigned, setHideUnassigned] = useState(false);
+  const [hideUnassigned, setHideUnassigned] = useState(true);
   const [dateFrom, setDateFrom] = useState("");
 
   useEffect(() => {
@@ -299,7 +299,7 @@ export function MaintainersPage() {
                 checked={hideUnassigned}
                 onChange={(e) => setHideUnassigned(e.target.checked)}
               />
-              <span>Hide unassigned</span>
+              <span>Hide no maintainer/collaborator</span>
             </label>
           </div>
         </div>

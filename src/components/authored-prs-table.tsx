@@ -1,14 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import { formatDistanceToNowStrict } from "date-fns";
 
 import type { ActivityItem, PrStatusSummary } from "@/lib/types";
 
-type AuthoredPrsTableProps = {
-  items: ActivityItem[];
+// ── Column-header filter cell ─────────────────────────────────────────────────
+
+type ColumnFilterThProps = {
+  label: string;
+  options: string[];
+  formatOption?: (v: string) => string;
+  selected: Set<string>;
+  onChange: (next: Set<string>) => void;
 };
+
+function ColumnFilterTh({ label, options, formatOption, selected, onChange }: ColumnFilterThProps) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLTableCellElement>(null);
+  const fmt = formatOption ?? ((v: string) => v);
+
+  useEffect(() => {
+    if (!open) return;
+    function onMouseDown(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onMouseDown);
+    return () => document.removeEventListener("mousedown", onMouseDown);
+  }, [open]);
+
+  function toggle(val: string) {
+    const next = new Set(selected);
+    next.has(val) ? next.delete(val) : next.add(val);
+    onChange(next);
+  }
+
+  return (
+    <th ref={ref} className="col-filter-th">
+      <button
+        type="button"
+        className={clsx("col-filter-btn", selected.size > 0 && "is-active")}
+        onClick={() => setOpen((p) => !p)}
+      >
+        <span>{label}</span>
+        {selected.size > 0 && <span className="col-filter-count">{selected.size}</span>}
+        <span className="col-filter-caret">{open ? "▲" : "▼"}</span>
+      </button>
+      {open && (
+        <div className="col-filter-dropdown">
+          {options.map((opt) => (
+            <label key={opt} className="col-filter-option">
+              <input type="checkbox" checked={selected.has(opt)} onChange={() => toggle(opt)} />
+              <span>{fmt(opt)}</span>
+            </label>
+          ))}
+          {selected.size > 0 && (
+            <button type="button" className="col-filter-clear" onClick={() => onChange(new Set())}>
+              Clear filter
+            </button>
+          )}
+        </div>
+      )}
+    </th>
+  );
+}
+
+// ── PR status helpers ─────────────────────────────────────────────────────────
 
 function getPrHighlight(item: ActivityItem): "blocked" | "draft" | "stale" | undefined {
   if (item.prStatus) {
@@ -75,10 +133,8 @@ function ReviewersCell({ prStatus }: { prStatus: PrStatusSummary }) {
   const allVerdicts = [...requestedVerdicts, ...otherVerdicts].filter(
     (v) => !assigneeSet.has(v.login.toLowerCase()),
   );
-  // deduplicate by login
   const verdictMap = new Map(allVerdicts.map((v) => [v.login.toLowerCase(), v]));
 
-  // Named badges only for APPROVED / CHANGES_REQUESTED; pending and commented are always counts
   const namedVerdicts = [...verdictMap.values()].filter(
     (v) => v.state === "APPROVED" || v.state === "CHANGES_REQUESTED",
   );
@@ -120,56 +176,41 @@ function CiCell({ ciStatus }: { ciStatus: PrStatusSummary["ciStatus"] }) {
   return <span className="pr-badge-empty">—</span>;
 }
 
-const PR_STATE_CHIPS = ["Open PR", "Draft PR", "Merged", "Closed"] as const;
+const PR_STATE_OPTIONS = ["Open PR", "Draft PR", "Merged", "Closed"] as const;
+
+// ── Authored PRs table ────────────────────────────────────────────────────────
+
+type AuthoredPrsTableProps = {
+  items: ActivityItem[];
+};
 
 export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
-  const [activeStates, setActiveStates] = useState<Set<string>>(new Set());
+  const [stateFilter, setStateFilter] = useState<Set<string>>(new Set(["Open PR", "Draft PR"]));
 
-  const countByState = Object.fromEntries(PR_STATE_CHIPS.map((label) => [label, items.filter((i) => i.statusLabel === label).length]));
-  const filtered = activeStates.size === 0 ? items : items.filter((item) => activeStates.has(item.statusLabel));
-
-  function toggleState(label: string) {
-    if (countByState[label] === 0) return;
-    setActiveStates((prev) => {
-      const next = new Set(prev);
-      next.has(label) ? next.delete(label) : next.add(label);
-      return next;
-    });
-  }
+  const filtered = useMemo(() => {
+    if (stateFilter.size === 0) return items;
+    return items.filter((item) => stateFilter.has(item.statusLabel));
+  }, [items, stateFilter]);
 
   return (
     <section className="panel table-panel detail-panel">
       <div className="panel-header compact">
         <div>
-          <p className="eyebrow">Authored PRs</p>
+          <p className="eyebrow">Authored PRs · {filtered.length} of {items.length}</p>
           <h2>Pull request activity</h2>
         </div>
       </div>
-      {items.length > 0 && (
-        <div className="table-filter-bar">
-          {PR_STATE_CHIPS.map((label) => {
-            const count = countByState[label];
-            return (
-              <button
-                key={label}
-                type="button"
-                className={clsx("table-filter-chip", activeStates.has(label) && "is-active", count === 0 && "is-empty")}
-                onClick={() => toggleState(label)}
-                disabled={count === 0}
-              >
-                {label}
-                {count > 0 && <span className="table-filter-chip-count">{count}</span>}
-              </button>
-            );
-          })}
-        </div>
-      )}
       <div className="table-wrap">
         <table>
           <thead>
             <tr>
               <th>PR</th>
-              <th>State</th>
+              <ColumnFilterTh
+                label="State"
+                options={[...PR_STATE_OPTIONS]}
+                selected={stateFilter}
+                onChange={setStateFilter}
+              />
               <th>Assignees</th>
               <th>Reviewers</th>
               <th>CI</th>

@@ -55,7 +55,9 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
           .map((option) => option.name)
           .join(", ");
   const summaryCards = getSummaryCards(viewData, view);
-  const contributorColumns = getContributorColumns(view).filter((col) => col.key !== "score");
+  const contributorColumns = getContributorColumns(view).filter(
+    (col) => col.key !== "score" && !(view === "reviews" && col.key === "reviews"),
+  );
 
   const [localContributor, setLocalContributor] = useState<string | null>(null);
   const detailItems = localContributor
@@ -169,6 +171,9 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
             <div>
               <p className="eyebrow">Contributor load</p>
               <h2>Who is carrying the queue</h2>
+              {view === "reviews" && (
+                <p className="contributor-table-note">Teammate / External columns: PRs / Review activities</p>
+              )}
             </div>
           </div>
           <div className="table-wrap">
