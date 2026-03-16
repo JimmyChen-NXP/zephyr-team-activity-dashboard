@@ -73,6 +73,7 @@ export type ContributorMetrics = {
   reviewSelfAuthored: number;
   reviewTeamAuthored: number;
   reviewExternalAuthored: number;
+  reviewCommented: number;
   repositoriesTouched: number;
   activityScore: number;
 };

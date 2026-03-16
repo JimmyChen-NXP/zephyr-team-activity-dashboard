@@ -35,6 +35,7 @@ function buildEmptyContributor(member: DashboardData["rosterMembers"][number]): 
     reviewSelfAuthored: 0,
     reviewTeamAuthored: 0,
     reviewExternalAuthored: 0,
+    reviewCommented: 0,
     repositoriesTouched: 0,
     activityScore: 0,
   };
@@ -104,6 +105,7 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
       contributor.reviewSelfAuthored += item.metrics.reviewSelfAuthored;
       contributor.reviewTeamAuthored += item.metrics.reviewTeamAuthored;
       contributor.reviewExternalAuthored += item.metrics.reviewExternalAuthored;
+      contributor.reviewCommented += item.metrics.reviewCommented;
 
       const repos = contributorRepos.get(contributor.login) ?? new Set<string>();
       repos.add(item.repo);
@@ -250,6 +252,14 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
           key: "external",
           label: "External",
           value: (contributor) => `${contributor.uniqueReviewedPrsExternalAuthored ?? 0} / ${contributor.reviewExternalAuthored}`,
+        },
+        {
+          key: "comment-rate",
+          label: "Comment rate",
+          value: (contributor) =>
+            contributor.reviewsSubmitted === 0
+              ? "—"
+              : `${Math.round((contributor.reviewCommented / contributor.reviewsSubmitted) * 100)}%`,
         },
         { key: "score", label: getViewScoreLabel(view), value: (contributor) => contributor.activityScore },
       ];
