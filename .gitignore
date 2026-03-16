@@ -6,6 +6,8 @@ coverage/
 .env.local
 .env
 public/snapshots/
+public/daily/
+public/*.json
 scripts/git-askpass.cmd
 tsconfig.tsbuildinfo
 _data/
