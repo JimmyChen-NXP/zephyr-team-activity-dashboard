@@ -253,14 +253,6 @@ export function getContributorColumns(view: DashboardView): ContributorColumn[] 
           label: "External",
           value: (contributor) => `${contributor.uniqueReviewedPrsExternalAuthored ?? 0} / ${contributor.reviewExternalAuthored}`,
         },
-        {
-          key: "comment-rate",
-          label: "Comment rate",
-          value: (contributor) =>
-            contributor.reviewsSubmitted === 0
-              ? "—"
-              : `${Math.round((contributor.reviewCommented / contributor.reviewsSubmitted) * 100)}%`,
-        },
         { key: "score", label: getViewScoreLabel(view), value: (contributor) => contributor.activityScore },
       ];
   }
