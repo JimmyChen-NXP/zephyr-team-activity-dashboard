@@ -29,6 +29,7 @@ export type SearchItem = {
   draft?: boolean;
   user: { login: string };
   assignees?: Array<{ login: string }>;
+  labels?: Array<{ name: string }>;
   pull_request?: { url: string };
 };
 
