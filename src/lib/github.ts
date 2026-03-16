@@ -49,6 +49,7 @@ type SearchCollection = {
 export type PullRequestDetail = {
   id: number;
   number: number;
+  title: string;
   html_url: string;
   draft: boolean;
   created_at: string;
@@ -57,6 +58,7 @@ export type PullRequestDetail = {
   state: string;
   requested_reviewers: Array<{ login: string }>;
   assignees: Array<{ login: string }>;
+  labels?: Array<{ name: string }>;
   user: { login: string };
   head: { sha: string; repo: { full_name: string } | null };
   base: { repo: { full_name: string } | null };
@@ -281,13 +283,7 @@ async function searchAcrossPages(query: string, maxPages = SEARCH_PAGE_LIMIT, to
   let incompleteResults = firstPage.incomplete_results;
 
   if (totalCount > pagesToFetch * 100) {
-    logGitHubRequest(`search capped total=${totalCount} pages=${pagesToFetch}`);
-    return {
-      totalCount,
-      incompleteResults,
-      items: allItems,
-      capped: true,
-    };
+    logGitHubRequest(`search capped total=${totalCount} pages=${pagesToFetch} — fetching all ${pagesToFetch} pages`);
   }
 
   for (let page = 2; page <= pagesToFetch; page += 1) {
@@ -342,6 +338,42 @@ export async function searchAcrossQueries(queries: string[], token?: string, max
   );
 
   return combineSearchCollections(results);
+}
+
+// --- REST list endpoints (no 1000-result cap, uses core rate limit 5000/hr) ---
+
+async function listPagedRest<T>(path: string, token?: string): Promise<T[]> {
+  const allItems: T[] = [];
+  for (let page = 1; ; page++) {
+    const sep = path.includes("?") ? "&" : "?";
+    const items = await fetchGitHub<T[]>(`${path}${sep}per_page=100&page=${page}`, token);
+    allItems.push(...items);
+    if (items.length < 100) break;
+  }
+  return allItems;
+}
+
+/**
+ * Lists all open issues for a repo via REST (no 1000-result cap).
+ * Filters out pull requests (GitHub returns PRs from /issues too).
+ */
+export async function listOpenIssuesForRepo(repoFullName: string, token?: string): Promise<SearchItem[]> {
+  const items = await listPagedRest<SearchItem>(
+    `/repos/${repoFullName}/issues?state=open&sort=updated&direction=desc`,
+    token,
+  );
+  return items.filter((item) => !item.pull_request);
+}
+
+/**
+ * Lists all open pull requests for a repo via REST (no 1000-result cap).
+ * Returns full PR detail objects — no separate per-PR fetch needed.
+ */
+export async function listOpenPullRequestsForRepo(repoFullName: string, token?: string): Promise<PullRequestDetail[]> {
+  return listPagedRest<PullRequestDetail>(
+    `/repos/${repoFullName}/pulls?state=open&sort=updated&direction=desc`,
+    token,
+  );
 }
 
 function buildSearchDateRangeQuery(baseQuery: string, qualifier: string, from: string, to: string) {

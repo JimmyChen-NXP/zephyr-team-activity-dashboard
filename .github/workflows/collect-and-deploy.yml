@@ -123,9 +123,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DASHBOARD_GITHUB_TOKEN }}
           GITHUB_REPOS: zephyrproject-rtos/zephyr,zephyrproject-rtos/west,zephyrproject-rtos/hal_nxp,zephyrproject-rtos/hostap
-          OPEN_ITEMS_PAGE_LIMIT: 10
-          GITHUB_SEARCH_MIN_INTERVAL_MS: 2500
           OPEN_ITEMS_OUT_DIR: _data/public
+          DAILY_DETAIL_LIMIT: 1500
+          OPEN_ITEMS_PR_STALE_DAYS: 90
 
       - name: Aggregate snapshots from all data sources
         # Run aggregate-daily ONCE here, after both daily files and open-items.json
