@@ -111,7 +111,7 @@ export function buildViewDashboardData(data: DashboardData, view: DashboardView)
 
       if (item.type === "pull_request") {
         const labels = item.labels ?? [];
-        if (labels.some((l) => l.toLowerCase() === "area: architectures")) contributor.archPrs += 1;
+        if (labels.some((l) => l.toLowerCase().includes("architect"))) contributor.archPrs += 1;
         if (labels.some((l) => l.includes("RFC"))) contributor.rfcPrs += 1;
       }
 

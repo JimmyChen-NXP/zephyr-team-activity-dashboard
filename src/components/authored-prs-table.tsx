@@ -195,11 +195,23 @@ function LabelsCell({ labels }: { labels?: string[] }) {
 
 export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
   const [stateFilter, setStateFilter] = useState<Set<string>>(new Set(["Open PR"]));
+  const [labelFilter, setLabelFilter] = useState<Set<string>>(new Set());
+
+  const allLabels = useMemo(() => {
+    const s = new Set<string>();
+    for (const item of items) {
+      for (const l of item.labels ?? []) s.add(l);
+    }
+    return [...s].sort();
+  }, [items]);
 
   const filtered = useMemo(() => {
-    if (stateFilter.size === 0) return items;
-    return items.filter((item) => stateFilter.has(item.statusLabel));
-  }, [items, stateFilter]);
+    return items.filter((item) => {
+      if (stateFilter.size > 0 && !stateFilter.has(item.statusLabel)) return false;
+      if (labelFilter.size > 0 && !( item.labels ?? []).some((l) => labelFilter.has(l))) return false;
+      return true;
+    });
+  }, [items, stateFilter, labelFilter]);
 
   return (
     <section className="panel table-panel detail-panel">
@@ -222,7 +234,12 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
               />
               <th>Assignees</th>
               <th>Reviewers</th>
-              <th>Labels</th>
+              <ColumnFilterTh
+                label="Labels"
+                options={allLabels}
+                selected={labelFilter}
+                onChange={setLabelFilter}
+              />
               <th>CI</th>
               <th>Contributor</th>
               <th>Created</th>
