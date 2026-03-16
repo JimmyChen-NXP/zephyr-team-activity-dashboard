@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-16T02:27:14.930Z",
+  "collectedAt": "2026-03-16T02:41:20.893Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -2961,6 +2961,365 @@
     },
     {
       "type": "pr",
+      "id": 3352216738,
+      "number": 104872,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Add minimal support for Renesas RZ/T2H Evaluation Board Kit",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104872",
+      "author": "tiennguyenzg",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-04T07:54:18Z",
+      "updatedAt": "2026-03-16T02:38:49Z",
+      "mergedAt": null,
+      "assignees": [
+        "ioannis-karachalios",
+        "KhiemNguyenT"
+      ],
+      "requestedReviewers": [
+        "d3zd3z",
+        "teburd",
+        "nashif",
+        "soburi",
+        "henrikbrixandersen",
+        "ydamigos",
+        "ycsin",
+        "blauret",
+        "tgorochowik",
+        "andrzej-kaczmarek",
+        "ioannis-karachalios",
+        "erwango",
+        "KhiemNguyenT",
+        "dcpleung",
+        "JarmouniA",
+        "binhnguyen2434"
+      ],
+      "ciStatus": null,
+      "labels": [
+        "area: GPIO",
+        "area: UART",
+        "area: Tests",
+        "area: Devicetree Binding",
+        "area: Interrupt Controller",
+        "platform: Renesas",
+        "area: Pinctrl",
+        "platforms: Renesas RZ",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3393314296,
+      "number": 105419,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Add support for GPIO on AMD Versal",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105419",
+      "author": "takumiando",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-13T05:29:41Z",
+      "updatedAt": "2026-03-16T02:37:02Z",
+      "mergedAt": null,
+      "assignees": [
+        "michalsimek"
+      ],
+      "requestedReviewers": [
+        "michalsimek"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "area: GPIO",
+        "area: Tests",
+        "platform: Xilinx"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3278638917,
+      "number": 104031,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "modules: mbedtls: bump to 4.x",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104031",
+      "author": "valeriosetti",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-12T23:30:41Z",
+      "updatedAt": "2026-03-16T02:37:00Z",
+      "mergedAt": null,
+      "assignees": [
+        "d3zd3z",
+        "ceolin",
+        "valeriosetti",
+        "tomi-font"
+      ],
+      "requestedReviewers": [
+        "d3zd3z",
+        "nashif",
+        "ceolin",
+        "jhedberg",
+        "ithinuel",
+        "tejlmand",
+        "sylvioalves",
+        "frkv",
+        "hermabe",
+        "alxelax",
+        "akredalen",
+        "krish2718",
+        "wearyzen",
+        "tomi-font",
+        "MaochenWang1"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "block: HW Test",
+        "manifest",
+        "manifest-mbedtls",
+        "manifest-hostap",
+        "DNM (manifest)",
+        "manifest-mbedtls-3.6.5",
+        "manifest-tf-psa-crypto",
+        "manifest-tf-psa-crypto-framework",
+        "manifest-mbedtls-framework",
+        "manifest-mldsa-native"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3100717332,
+      "number": 101018,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Add SPSDK runner support for imx91_evk and frdm_imx91 boards",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/101018",
+      "author": "JiafeiPan",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-12-15T02:11:54Z",
+      "updatedAt": "2026-03-16T02:35:18Z",
+      "mergedAt": null,
+      "assignees": [
+        "JiafeiPan"
+      ],
+      "requestedReviewers": [
+        "dbaluta",
+        "manuargue",
+        "Holt-Sun",
+        "bperseghetti",
+        "mmahadevan108",
+        "zejiang0jason",
+        "axelnxp",
+        "PetervdPerk-NXP",
+        "Zhiqiang-Hou",
+        "iuliana-prodan",
+        "ZhaoxiangJin",
+        "MaochenWang1"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "platform: NXP",
+        "manifest",
+        "manifest-hal_nxp",
+        "platform: NXP MPU",
+        "DNM (manifest)",
+        "Binary Blobs Added",
+        "Binary Blobs Modified",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3401604373,
+      "number": 105530,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "Update preprocessor directive for DHCPV4 start in samples/net/wifi/apsta_mode/src/main.c",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105530",
+      "author": "pascaldornfeld",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-15T19:26:41Z",
+      "updatedAt": "2026-03-16T02:31:28Z",
+      "mergedAt": null,
+      "assignees": [
+        "jukkar"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "jukkar",
+        "rlubos",
+        "JarmouniA"
+      ],
+      "ciStatus": "success",
+      "labels": [
+        "area: Networking",
+        "area: Samples",
+        "area: Wi-Fi",
+        "size: XS"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3398739950,
+      "number": 105495,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "soc: nxp: replace magic number with DT_PROP macro",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
+      "author": "ZhaoxiangJin",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-14T09:52:45Z",
+      "updatedAt": "2026-03-16T02:30:54Z",
+      "mergedAt": null,
+      "assignees": [
+        "mmahadevan108",
+        "iuliana-prodan"
+      ],
+      "requestedReviewers": [
+        "butok",
+        "mmahadevan108",
+        "axelnxp",
+        "George-Stefan",
+        "iuliana-prodan",
+        "NeilChen93"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "platform: NXP",
+        "platform: NXP MCU",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3393484079,
+      "number": 105422,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "boards: renesas: ra: Add support for Renesas ek_ra8t2 board",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105422",
+      "author": "khaicao-rvc",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-13T06:29:23Z",
+      "updatedAt": "2026-03-16T02:30:15Z",
+      "mergedAt": null,
+      "assignees": [
+        "teburd",
+        "soburi",
+        "KhiemNguyenT"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "teburd",
+        "nashif",
+        "soburi",
+        "henrikbrixandersen",
+        "tbursztyka",
+        "Holt-Sun",
+        "jsbatch",
+        "nordic-krch",
+        "anangl",
+        "KhiemNguyenT",
+        "arnopo",
+        "dcpleung",
+        "doki-nordic",
+        "iuliana-prodan",
+        "FelixWang47831",
+        "bjarki-andreasen",
+        "decsny",
+        "wearyzen",
+        "thaoluonguw",
+        "thenguyenyf",
+        "duynguyenxa",
+        "khoa-nguyen-18"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "area: Samples",
+        "area: Tests",
+        "platform: Renesas",
+        "platform: Renesas RA",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3270230044,
+      "number": 103884,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "boards: renesas: Add support for Renesas ek_ra8d2 CM33",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103884",
+      "author": "khaicao-rvc",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-11T06:22:06Z",
+      "updatedAt": "2026-03-16T02:28:30Z",
+      "mergedAt": null,
+      "assignees": [
+        "teburd",
+        "soburi",
+        "KhiemNguyenT"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "teburd",
+        "nashif",
+        "soburi",
+        "henrikbrixandersen",
+        "tbursztyka",
+        "ithinuel",
+        "ioannis-karachalios",
+        "nordic-krch",
+        "KhiemNguyenT",
+        "dcpleung",
+        "doki-nordic",
+        "maass-hamburg",
+        "iuliana-prodan",
+        "FelixWang47831",
+        "bjarki-andreasen",
+        "decsny",
+        "wearyzen",
+        "thaoluonguw",
+        "duynguyenxa",
+        "khoa-nguyen-18",
+        "nhutnguyenkc"
+      ],
+      "ciStatus": null,
+      "labels": [
+        "platform: Renesas",
+        "platform: Renesas RA"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3390271828,
+      "number": 105376,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: rtc: add Realtek Ameba series support",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105376",
+      "author": "minyuan-xue",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-12T15:22:34Z",
+      "updatedAt": "2026-03-16T02:26:31Z",
+      "mergedAt": null,
+      "assignees": [
+        "bjarki-andreasen"
+      ],
+      "requestedReviewers": [
+        "JarmouniA",
+        "bjarki-andreasen",
+        "zjian-zhang",
+        "Derek-RTK",
+        "mchp-asif"
+      ],
+      "ciStatus": null,
+      "labels": [
+        "area: RTC",
+        "area: Devicetree Binding",
+        "platform: Ameba"
+      ]
+    },
+    {
+      "type": "pr",
       "id": 3381565219,
       "number": 105248,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3013,7 +3372,7 @@
         "nashif",
         "ycsin"
       ],
-      "ciStatus": "pending",
+      "ciStatus": null,
       "labels": [
         "area: Tests",
         "area: POSIX"
@@ -3092,39 +3451,6 @@
       "labels": [
         "platform: Renesas",
         "platform: Renesas RA",
-        "area: Boards/SoCs"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3398739950,
-      "number": 105495,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "soc: nxp: replace magic number with DT_PROP macro",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105495",
-      "author": "ZhaoxiangJin",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-14T09:52:45Z",
-      "updatedAt": "2026-03-16T02:18:43Z",
-      "mergedAt": null,
-      "assignees": [
-        "mmahadevan108",
-        "iuliana-prodan"
-      ],
-      "requestedReviewers": [
-        "butok",
-        "mmahadevan108",
-        "axelnxp",
-        "George-Stefan",
-        "iuliana-prodan",
-        "NeilChen93",
-        "lucien-nxp"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "platform: NXP",
-        "platform: NXP MCU",
         "area: Boards/SoCs"
       ]
     },
@@ -3319,7 +3645,7 @@
         "kevinwang821020",
         "jimmyzhe"
       ],
-      "ciStatus": "pending",
+      "ciStatus": null,
       "labels": [
         "area: RISCV",
         "area: Architectures",
@@ -3437,48 +3763,6 @@
       "labels": [
         "platform: NXP",
         "platform: NXP MCU",
-        "area: Boards/SoCs"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3100717332,
-      "number": 101018,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Add SPSDK runner support for imx91_evk and frdm_imx91 boards",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/101018",
-      "author": "JiafeiPan",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2025-12-15T02:11:54Z",
-      "updatedAt": "2026-03-16T01:54:34Z",
-      "mergedAt": null,
-      "assignees": [
-        "JiafeiPan"
-      ],
-      "requestedReviewers": [
-        "dbaluta",
-        "manuargue",
-        "Holt-Sun",
-        "bperseghetti",
-        "mmahadevan108",
-        "zejiang0jason",
-        "axelnxp",
-        "PetervdPerk-NXP",
-        "Zhiqiang-Hou",
-        "iuliana-prodan",
-        "ZhaoxiangJin",
-        "MaochenWang1"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "platform: NXP",
-        "manifest",
-        "manifest-hal_nxp",
-        "platform: NXP MPU",
-        "DNM (manifest)",
-        "Binary Blobs Added",
-        "Binary Blobs Modified",
         "area: Boards/SoCs"
       ]
     },
@@ -5003,38 +5287,6 @@
     },
     {
       "type": "pr",
-      "id": 3401604373,
-      "number": 105530,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Update preprocessor directive for DHCPV4 start in samples/net/wifi/apsta_mode/src/main.c",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105530",
-      "author": "pascaldornfeld",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-15T19:26:41Z",
-      "updatedAt": "2026-03-15T21:39:09Z",
-      "mergedAt": null,
-      "assignees": [
-        "jukkar"
-      ],
-      "requestedReviewers": [
-        "kartben",
-        "nashif",
-        "jukkar",
-        "rlubos",
-        "JarmouniA",
-        "MaochenWang1"
-      ],
-      "ciStatus": "success",
-      "labels": [
-        "area: Networking",
-        "area: Samples",
-        "area: Wi-Fi",
-        "size: XS"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3401707592,
       "number": 105531,
       "repo": "zephyrproject-rtos/zephyr",
@@ -5683,32 +5935,6 @@
     },
     {
       "type": "pr",
-      "id": 3393314296,
-      "number": 105419,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Add support for GPIO on AMD Versal",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105419",
-      "author": "takumiando",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-13T05:29:41Z",
-      "updatedAt": "2026-03-15T19:01:34Z",
-      "mergedAt": null,
-      "assignees": [
-        "michalsimek"
-      ],
-      "requestedReviewers": [
-        "michalsimek"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "area: GPIO",
-        "area: Tests",
-        "platform: Xilinx"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3396361091,
       "number": 105471,
       "repo": "zephyrproject-rtos/zephyr",
@@ -6224,163 +6450,6 @@
     },
     {
       "type": "pr",
-      "id": 3194507416,
-      "number": 102624,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "video: Some trivial misc fixes and adds",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/102624",
-      "author": "ngphibang",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-01-21T09:44:25Z",
-      "updatedAt": "2026-03-15T14:25:48Z",
-      "mergedAt": null,
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "requestedReviewers": [
-        "loicpoulain",
-        "avolmat-st"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "area: Video"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3311562341,
-      "number": 104345,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: sensor: add QST QMI8658A 6-axis IMU driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104345",
-      "author": "will-tm",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-21T22:24:42Z",
-      "updatedAt": "2026-03-15T14:24:13Z",
-      "mergedAt": null,
-      "assignees": [
-        "MaureenHelm"
-      ],
-      "requestedReviewers": [
-        "mbolivar",
-        "avisconti",
-        "kartben",
-        "teburd",
-        "nashif",
-        "jeppenodgaard",
-        "MaureenHelm",
-        "yperess",
-        "JarmouniA",
-        "ubieda",
-        "tristan-google",
-        "asemjonovs",
-        "rruuaanng",
-        "decsny"
-      ],
-      "ciStatus": null,
-      "labels": [
-        "area: Sensors",
-        "area: Devicetree",
-        "area: Tests",
-        "area: Devicetree Binding"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3378510694,
-      "number": 105219,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Drivers: MSPI/Memc : Add mspi psram support [APS256, APS6408L]",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105219",
-      "author": "ExaltZephyr",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-10T12:49:04Z",
-      "updatedAt": "2026-03-15T14:21:41Z",
-      "mergedAt": null,
-      "assignees": [
-        "swift-tk"
-      ],
-      "requestedReviewers": [
-        "mbolivar",
-        "kartben",
-        "nashif",
-        "GeorgeCGV",
-        "erwango",
-        "etienne-lms",
-        "FRASTM",
-        "gautierg-st",
-        "rruuaanng",
-        "decsny",
-        "juickar",
-        "mathieuchopstm",
-        "swift-tk",
-        "djiatsaf-st"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "area: Samples",
-        "area: Devicetree",
-        "platform: STM32",
-        "area: Tests",
-        "area: Devicetree Binding",
-        "area: MEMC",
-        "area: MSPI"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3367828444,
-      "number": 105080,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "video: add formats: 8-bit split in 4-bit 4-bit",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105080",
-      "author": "josuah",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-07T16:34:32Z",
-      "updatedAt": "2026-03-15T13:50:02Z",
-      "mergedAt": null,
-      "assignees": [
-        "ngphibang",
-        "josuah"
-      ],
-      "requestedReviewers": [
-        "kartben",
-        "MaureenHelm",
-        "ngphibang",
-        "stephanosio",
-        "loicpoulain"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "Release Notes",
-        "area: Video"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3341961294,
-      "number": 104736,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Define DTS binding for Arduino UNO Q LED Matrix",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104736",
-      "author": "shankar-sd",
-      "state": "open",
-      "isDraft": true,
-      "createdAt": "2026-03-01T23:41:08Z",
-      "updatedAt": "2026-03-15T13:48:59Z",
-      "mergedAt": null,
-      "assignees": [],
-      "requestedReviewers": [],
-      "ciStatus": "failure",
-      "labels": []
-    },
-    {
-      "type": "pr",
       "id": 3355050586,
       "number": 930,
       "repo": "zephyrproject-rtos/west",
@@ -6653,6 +6722,26 @@
     },
     {
       "type": "pr",
+      "id": 3357706609,
+      "number": 681,
+      "repo": "zephyrproject-rtos/hal_nxp",
+      "title": "mcux: wifi_nxp: add support for network channel list and band selection",
+      "url": "https://github.com/zephyrproject-rtos/hal_nxp/pull/681",
+      "author": "gangli02",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-05T09:22:54Z",
+      "updatedAt": "2026-03-16T02:41:08Z",
+      "mergedAt": null,
+      "assignees": [],
+      "requestedReviewers": [
+        "mmahadevan108"
+      ],
+      "ciStatus": null,
+      "labels": []
+    },
+    {
+      "type": "pr",
       "id": 3391408818,
       "number": 689,
       "repo": "zephyrproject-rtos/hal_nxp",
@@ -6747,26 +6836,6 @@
       "mergedAt": null,
       "assignees": [],
       "requestedReviewers": [],
-      "ciStatus": null,
-      "labels": []
-    },
-    {
-      "type": "pr",
-      "id": 3357706609,
-      "number": 681,
-      "repo": "zephyrproject-rtos/hal_nxp",
-      "title": "mcux: wifi_nxp: add support for network channel list and band selection",
-      "url": "https://github.com/zephyrproject-rtos/hal_nxp/pull/681",
-      "author": "gangli02",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-05T09:22:54Z",
-      "updatedAt": "2026-03-09T02:51:53Z",
-      "mergedAt": null,
-      "assignees": [],
-      "requestedReviewers": [
-        "mmahadevan108"
-      ],
       "ciStatus": null,
       "labels": []
     },
