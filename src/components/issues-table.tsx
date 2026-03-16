@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
-import { formatISO9075 } from "date-fns";
+import { formatDistanceToNowStrict } from "date-fns";
 
 import type { ActivityItem } from "@/lib/types";
 
@@ -66,6 +66,17 @@ function ColumnFilterTh({ label, options, formatOption, selected, onChange }: Co
   );
 }
 
+// ── Labels chip cell ─────────────────────────────────────────────────────────
+
+function LabelsCell({ labels }: { labels?: string[] }) {
+  if (!labels?.length) return <span className="muted">—</span>;
+  return (
+    <span className="label-chips">
+      {labels.map((l) => <span key={l} className="label-chip">{l}</span>)}
+    </span>
+  );
+}
+
 // ── Issues table ──────────────────────────────────────────────────────────────
 
 type IssuesTableProps = {
@@ -73,7 +84,7 @@ type IssuesTableProps = {
 };
 
 export function IssuesTable({ items }: IssuesTableProps) {
-  const [stateFilter, setStateFilter] = useState<Set<string>>(new Set(["Assigned"]));
+  const [stateFilter, setStateFilter] = useState<Set<string>>(new Set(["Assigned", "Stale issue"]));
 
   const stateOptions = useMemo(
     () => [...new Set(items.map((i) => i.statusLabel))].sort(),
@@ -104,15 +115,18 @@ export function IssuesTable({ items }: IssuesTableProps) {
                 selected={stateFilter}
                 onChange={setStateFilter}
               />
+              <th>Assignee</th>
+              <th>Reporter</th>
+              <th>Labels</th>
+              <th>Created</th>
               <th>Updated</th>
               <th>Repository</th>
-              <th>Contributor</th>
             </tr>
           </thead>
           <tbody>
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={5} className="empty-state-cell">
+                <td colSpan={8} className="empty-state-cell">
                   No issues matched the current selection.
                 </td>
               </tr>
@@ -125,9 +139,21 @@ export function IssuesTable({ items }: IssuesTableProps) {
                     </a>
                   </td>
                   <td>{item.statusLabel}</td>
-                  <td>{formatISO9075(new Date(item.updatedAt))}</td>
-                  <td>{item.repo}</td>
                   <td>@{item.contributor}</td>
+                  <td>
+                    <a
+                      href={`https://github.com/${item.author}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="table-link"
+                    >
+                      @{item.author}
+                    </a>
+                  </td>
+                  <td><LabelsCell labels={item.labels} /></td>
+                  <td>{formatDistanceToNowStrict(new Date(item.createdAt), { addSuffix: true })}</td>
+                  <td>{formatDistanceToNowStrict(new Date(item.updatedAt), { addSuffix: true })}</td>
+                  <td>{item.repo}</td>
                 </tr>
               ))
             )}

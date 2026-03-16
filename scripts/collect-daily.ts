@@ -121,6 +121,7 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
       createdAt: item.created_at,
       updatedAt: item.updated_at,
       closedAt: item.closed_at,
+      labels: (item.labels ?? []).map((l: { name: string }) => l.name),
     };
     records.push(record);
   }
@@ -180,6 +181,7 @@ async function collectDay(date: string, token: string): Promise<DailyFile["recor
       mergedAt: detail.merged_at,
       assignees: detail.assignees.map((a) => a.login),
       requestedReviewers: detail.requested_reviewers.map((r) => r.login),
+      labels: (result.item.labels ?? []).map((l: { name: string }) => l.name),
     };
     records.push(prRecord);
 

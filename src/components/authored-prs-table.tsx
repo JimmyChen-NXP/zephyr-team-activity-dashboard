@@ -184,8 +184,17 @@ type AuthoredPrsTableProps = {
   items: ActivityItem[];
 };
 
+function LabelsCell({ labels }: { labels?: string[] }) {
+  if (!labels?.length) return <span className="muted">—</span>;
+  return (
+    <span className="label-chips">
+      {labels.map((l) => <span key={l} className="label-chip">{l}</span>)}
+    </span>
+  );
+}
+
 export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
-  const [stateFilter, setStateFilter] = useState<Set<string>>(new Set(["Open PR", "Draft PR"]));
+  const [stateFilter, setStateFilter] = useState<Set<string>>(new Set(["Open PR"]));
 
   const filtered = useMemo(() => {
     if (stateFilter.size === 0) return items;
@@ -213,6 +222,7 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
               />
               <th>Assignees</th>
               <th>Reviewers</th>
+              <th>Labels</th>
               <th>CI</th>
               <th>Contributor</th>
               <th>Created</th>
@@ -223,7 +233,7 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
           <tbody>
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={9} className="empty-state-cell">
+                <td colSpan={10} className="empty-state-cell">
                   No authored PRs matched the current selection.
                 </td>
               </tr>
@@ -238,6 +248,7 @@ export function AuthoredPrsTable({ items }: AuthoredPrsTableProps) {
                   <td>{item.statusLabel}</td>
                   <td>{item.prStatus ? <AssigneesCell prStatus={item.prStatus} /> : <span className="pr-badge-empty">—</span>}</td>
                   <td>{item.prStatus ? <ReviewersCell prStatus={item.prStatus} /> : <span className="pr-badge-empty">—</span>}</td>
+                  <td><LabelsCell labels={item.labels} /></td>
                   <td>{item.prStatus ? <CiCell ciStatus={item.prStatus.ciStatus} /> : <span className="pr-badge-empty">—</span>}</td>
                   <td>@{item.contributor}</td>
                   <td>{daysAgo(item.createdAt)}</td>
