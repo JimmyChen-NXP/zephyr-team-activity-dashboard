@@ -6,7 +6,7 @@
     "to": "2026-03-16T23:59:59Z",
     "timeZone": "UTC"
   },
-  "generatedAt": "2026-03-16T02:41:21.712Z",
+  "generatedAt": "2026-03-16T03:36:58.200Z",
   "rosterSize": 171,
   "rosterMembers": [
     {
@@ -1214,7 +1214,7 @@
     "openAuthoredPrs": 92,
     "mergedPrs": 21,
     "reviewsSubmitted": 127,
-    "pendingReviewRequests": 577,
+    "pendingReviewRequests": 579,
     "uniqueReviewedPrs": 51,
     "staleItems": 28,
     "repositoriesTouched": 3,
@@ -1243,7 +1243,7 @@
       "mergedPrs": 1,
       "closedUnmergedPrs": 0,
       "reviewsSubmitted": 5,
-      "pendingReviewRequests": 63,
+      "pendingReviewRequests": 64,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1253,7 +1253,7 @@
       "reviewExternalAuthored": 2,
       "uniqueReviewedPrs": 4,
       "repositoriesTouched": 2,
-      "activityScore": 158
+      "activityScore": 160
     },
     {
       "login": "Holt-Sun",
@@ -1289,7 +1289,7 @@
       "mergedPrs": 3,
       "closedUnmergedPrs": 2,
       "reviewsSubmitted": 22,
-      "pendingReviewRequests": 31,
+      "pendingReviewRequests": 32,
       "staleItems": 0,
       "reviewApproved": 0,
       "reviewChangesRequested": 0,
@@ -1299,7 +1299,7 @@
       "reviewExternalAuthored": 0,
       "uniqueReviewedPrs": 7,
       "repositoriesTouched": 2,
-      "activityScore": 101
+      "activityScore": 103
     },
     {
       "login": "butok",
@@ -2592,6 +2592,891 @@
   ],
   "activityItems": [
     {
+      "id": "pull_request-3226894128-Qingling-Wu",
+      "type": "pull_request",
+      "title": "hostap: net: add support for NAN",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103204",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Qingling-Wu",
+      "author": "Qingling-Wu",
+      "state": "open",
+      "createdAt": "2026-01-30T08:30:11Z",
+      "updatedAt": "2026-03-16T03:34:09Z",
+      "ageDays": 45,
+      "statusLabel": "Open PR",
+      "labels": [
+        "area: Networking",
+        "area: Samples",
+        "platform: NXP",
+        "area: Tests",
+        "platform: Silabs",
+        "area: Wi-Fi",
+        "area: MCUBoot",
+        "manifest",
+        "manifest-hal_nxp",
+        "manifest-hostap",
+        "DNM (manifest)",
+        "platform: Ameba"
+      ],
+      "prStatus": {
+        "assignees": [
+          "jukkar",
+          "krish2718"
+        ],
+        "requestedVerdicts": [
+          {
+            "login": "jukkar",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "krish2718",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "nordicjm",
+            "state": "CHANGES_REQUESTED",
+            "wasRequested": false
+          },
+          {
+            "login": "fengming-ye",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "Qingling-Wu",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "rettichschnidi",
+          "jerome-pouiller",
+          "mmahadevan108",
+          "rlubos",
+          "yonsch",
+          "JarmouniA",
+          "de-nordic",
+          "Martinhoff-maker",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
+        "pendingRequestedCount": 12,
+        "ciStatus": "failure",
+        "cooldownHours": 0,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3226894128-mmahadevan108",
+      "type": "review_request",
+      "title": "Review requested from Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103204",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "Qingling-Wu",
+      "state": "open",
+      "createdAt": "2026-01-30T08:30:11Z",
+      "updatedAt": "2026-03-16T03:34:09Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3226894128-ZhaoxiangJin",
+      "type": "review_request",
+      "title": "Review requested from Zhaoxiang Jin",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103204",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "Qingling-Wu",
+      "state": "open",
+      "createdAt": "2026-01-30T08:30:11Z",
+      "updatedAt": "2026-03-16T03:34:09Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3226894128-MaochenWang1",
+      "type": "review_request",
+      "title": "Review requested from Maochen Wang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103204",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "MaochenWang1",
+      "author": "Qingling-Wu",
+      "state": "open",
+      "createdAt": "2026-01-30T08:30:11Z",
+      "updatedAt": "2026-03-16T03:34:09Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3388219067-yongxu-wang15",
+      "type": "pull_request",
+      "title": "NXP support edac mecc driver",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "yongxu-wang15",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 4,
+      "statusLabel": "Open PR",
+      "labels": [
+        "platform: NXP",
+        "area: Tests",
+        "area: Devicetree Binding",
+        "area: EDAC",
+        "platform: NXP MCU",
+        "area: Boards/SoCs"
+      ],
+      "prStatus": {
+        "assignees": [
+          "finikorg"
+        ],
+        "requestedVerdicts": [],
+        "otherVerdicts": [],
+        "pendingRequestedLogins": [
+          "dbaluta",
+          "nashif",
+          "manuargue",
+          "butok",
+          "finikorg",
+          "Holt-Sun",
+          "bperseghetti",
+          "mmahadevan108",
+          "JiafeiPan",
+          "zejiang0jason",
+          "axelnxp",
+          "JarmouniA",
+          "PetervdPerk-NXP",
+          "iuliana-prodan",
+          "ZhaoxiangJin",
+          "MaochenWang1"
+        ],
+        "pendingRequestedCount": 16,
+        "ciStatus": "pending",
+        "cooldownHours": 0,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-dbaluta",
+      "type": "review_request",
+      "title": "Review requested from Daniel Baluta",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "dbaluta",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-manuargue",
+      "type": "review_request",
+      "title": "Review requested from Manuel Argüelles",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "manuargue",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-butok",
+      "type": "review_request",
+      "title": "Review requested from Andrej Butok",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "butok",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-Holt-Sun",
+      "type": "review_request",
+      "title": "Review requested from Holt Sun",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "Holt-Sun",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-mmahadevan108",
+      "type": "review_request",
+      "title": "Review requested from Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-JiafeiPan",
+      "type": "review_request",
+      "title": "Review requested from Jiafei Pan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "JiafeiPan",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-zejiang0jason",
+      "type": "review_request",
+      "title": "Review requested from zejiang0jason",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "zejiang0jason",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-axelnxp",
+      "type": "review_request",
+      "title": "Review requested from Axel Le Bourhis",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "axelnxp",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-PetervdPerk-NXP",
+      "type": "review_request",
+      "title": "Review requested from Peter van der Perk",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "PetervdPerk-NXP",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-iuliana-prodan",
+      "type": "review_request",
+      "title": "Review requested from Iulia Prodan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "iuliana-prodan",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-ZhaoxiangJin",
+      "type": "review_request",
+      "title": "Review requested from Zhaoxiang Jin",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "ZhaoxiangJin",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3388219067-MaochenWang1",
+      "type": "review_request",
+      "title": "Review requested from Maochen Wang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "MaochenWang1",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3320904991-MaochenWang1",
+      "type": "review_request",
+      "title": "Review requested from Maochen Wang",
+      "url": "https://github.com/zephyrproject-rtos/hostap/pull/125",
+      "repo": "zephyrproject-rtos/hostap",
+      "contributor": "MaochenWang1",
+      "author": "valeriosetti",
+      "state": "open",
+      "createdAt": "2026-02-24T13:57:18Z",
+      "updatedAt": "2026-03-16T03:24:05Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-3363186805-gangli02",
+      "type": "pull_request",
+      "title": "samples: net: add wireless coex shell sample",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105031",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "gangli02",
+      "author": "gangli02",
+      "state": "open",
+      "createdAt": "2026-03-06T10:25:59Z",
+      "updatedAt": "2026-03-16T03:09:48Z",
+      "ageDays": 10,
+      "statusLabel": "Open PR",
+      "labels": [
+        "area: Networking",
+        "area: Samples"
+      ],
+      "prStatus": {
+        "assignees": [
+          "jukkar",
+          "rlubos"
+        ],
+        "requestedVerdicts": [],
+        "otherVerdicts": [
+          {
+            "login": "jukkar",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "gangli02",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedLogins": [
+          "kartben",
+          "nashif",
+          "pdgendt",
+          "ssharks",
+          "rlubos",
+          "JarmouniA",
+          "MaochenWang1"
+        ],
+        "pendingRequestedCount": 7,
+        "ciStatus": "failure",
+        "cooldownHours": 0,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-3363186805-MaochenWang1",
+      "type": "review_request",
+      "title": "Review requested from Maochen Wang",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105031",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "MaochenWang1",
+      "author": "gangli02",
+      "state": "open",
+      "createdAt": "2026-03-06T10:25:59Z",
+      "updatedAt": "2026-03-16T03:09:48Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "pull_request-2718292133-AidenHu",
+      "type": "pull_request",
+      "title": "usb: host: class: support for usb host video class",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "AidenHu",
+      "author": "AidenHu",
+      "state": "open",
+      "createdAt": "2025-08-04T14:52:17Z",
+      "updatedAt": "2026-03-16T02:51:01Z",
+      "ageDays": 224,
+      "statusLabel": "Open PR",
+      "labels": [
+        "area: USB",
+        "area: Samples",
+        "area: Devicetree",
+        "area: Tests",
+        "area: Video",
+        "area: Devicetree Binding",
+        "area: Boards/SoCs"
+      ],
+      "prStatus": {
+        "assignees": [
+          "jfischer-no"
+        ],
+        "requestedVerdicts": [
+          {
+            "login": "dleach02",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "mmahadevan108",
+            "state": "COMMENTED",
+            "wasRequested": true
+          },
+          {
+            "login": "rruuaanng",
+            "state": "COMMENTED",
+            "wasRequested": true
+          }
+        ],
+        "otherVerdicts": [
+          {
+            "login": "AidenHu",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "josuah",
+            "state": "COMMENTED",
+            "wasRequested": false
+          },
+          {
+            "login": "kctan0805",
+            "state": "COMMENTED",
+            "wasRequested": false
+          }
+        ],
+        "pendingRequestedLogins": [
+          "mbolivar",
+          "kartben",
+          "nashif",
+          "jfischer-no",
+          "loicpoulain",
+          "JarmouniA",
+          "avolmat-st",
+          "decsny",
+          "tmon-nordic"
+        ],
+        "pendingRequestedCount": 9,
+        "ciStatus": null,
+        "cooldownHours": 0,
+        "cooldownMet": false
+      },
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 1,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 0,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
+      "id": "review-request-2718292133-mmahadevan108",
+      "type": "review_request",
+      "title": "Review requested from Mahesh Mahadevan",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
+      "repo": "zephyrproject-rtos/zephyr",
+      "contributor": "mmahadevan108",
+      "author": "AidenHu",
+      "state": "open",
+      "createdAt": "2025-08-04T14:52:17Z",
+      "updatedAt": "2026-03-16T02:51:01Z",
+      "ageDays": 0,
+      "statusLabel": "Pending review request",
+      "metrics": {
+        "openAssignedIssues": 0,
+        "closedIssues": 0,
+        "openAuthoredPrs": 0,
+        "draftPrs": 0,
+        "mergedPrs": 0,
+        "closedUnmergedPrs": 0,
+        "reviewsSubmitted": 0,
+        "pendingReviewRequests": 1,
+        "staleItems": 0,
+        "reviewApproved": 0,
+        "reviewChangesRequested": 0,
+        "reviewCommented": 0,
+        "reviewSelfAuthored": 0,
+        "reviewTeamAuthored": 0,
+        "reviewExternalAuthored": 0
+      }
+    },
+    {
       "id": "pull_request-3357706609-gangli02",
       "type": "pull_request",
       "title": "mcux: wifi_nxp: add support for network channel list and band selection",
@@ -2748,7 +3633,7 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": "failure",
-        "cooldownHours": 0,
+        "cooldownHours": 1,
         "cooldownMet": false
       },
       "metrics": {
@@ -3145,7 +4030,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": "failure",
-        "cooldownHours": 0,
+        "cooldownHours": 1,
         "cooldownMet": false
       },
       "metrics": {
@@ -3508,131 +4393,6 @@
       }
     },
     {
-      "id": "pull_request-2718292133-AidenHu",
-      "type": "pull_request",
-      "title": "usb: host: class: support for usb host video class",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "AidenHu",
-      "author": "AidenHu",
-      "state": "open",
-      "createdAt": "2025-08-04T14:52:17Z",
-      "updatedAt": "2026-03-16T02:22:10Z",
-      "ageDays": 224,
-      "statusLabel": "Open PR",
-      "labels": [
-        "area: USB",
-        "area: Samples",
-        "area: Devicetree",
-        "area: Tests",
-        "area: Video",
-        "area: Devicetree Binding",
-        "area: Boards/SoCs"
-      ],
-      "prStatus": {
-        "assignees": [
-          "jfischer-no"
-        ],
-        "requestedVerdicts": [
-          {
-            "login": "dleach02",
-            "state": "COMMENTED",
-            "wasRequested": true
-          },
-          {
-            "login": "mmahadevan108",
-            "state": "COMMENTED",
-            "wasRequested": true
-          },
-          {
-            "login": "rruuaanng",
-            "state": "COMMENTED",
-            "wasRequested": true
-          }
-        ],
-        "otherVerdicts": [
-          {
-            "login": "AidenHu",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "josuah",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "kctan0805",
-            "state": "COMMENTED",
-            "wasRequested": false
-          }
-        ],
-        "pendingRequestedLogins": [
-          "mbolivar",
-          "kartben",
-          "nashif",
-          "jfischer-no",
-          "loicpoulain",
-          "JarmouniA",
-          "avolmat-st",
-          "decsny",
-          "tmon-nordic"
-        ],
-        "pendingRequestedCount": 9,
-        "ciStatus": "pending",
-        "cooldownHours": 0,
-        "cooldownMet": false
-      },
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 1,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-2718292133-mmahadevan108",
-      "type": "review_request",
-      "title": "Review requested from Mahesh Mahadevan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "mmahadevan108",
-      "author": "AidenHu",
-      "state": "open",
-      "createdAt": "2025-08-04T14:52:17Z",
-      "updatedAt": "2026-03-16T02:22:10Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "review-request-3334588345-TomasBarakNXP",
       "type": "review_request",
       "title": "Review requested from Tomas Barak",
@@ -3762,7 +4522,7 @@
         ],
         "pendingRequestedCount": 10,
         "ciStatus": "failure",
-        "cooldownHours": 0,
+        "cooldownHours": 1,
         "cooldownMet": false
       },
       "metrics": {
@@ -3819,7 +4579,7 @@
         ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 0,
+        "cooldownHours": 1,
         "cooldownMet": false
       },
       "metrics": {
@@ -3916,7 +4676,7 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": "failure",
-        "cooldownHours": 0,
+        "cooldownHours": 1,
         "cooldownMet": false
       },
       "metrics": {
@@ -4279,446 +5039,6 @@
       }
     },
     {
-      "id": "pull_request-3388219067-yongxu-wang15",
-      "type": "pull_request",
-      "title": "NXP support edac mecc driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "yongxu-wang15",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 4,
-      "statusLabel": "Open PR",
-      "labels": [
-        "platform: NXP",
-        "area: Tests",
-        "area: Devicetree Binding",
-        "area: EDAC",
-        "platform: NXP MCU",
-        "area: Boards/SoCs"
-      ],
-      "prStatus": {
-        "assignees": [
-          "finikorg"
-        ],
-        "requestedVerdicts": [],
-        "otherVerdicts": [],
-        "pendingRequestedLogins": [
-          "dbaluta",
-          "nashif",
-          "manuargue",
-          "butok",
-          "finikorg",
-          "Holt-Sun",
-          "bperseghetti",
-          "mmahadevan108",
-          "JiafeiPan",
-          "zejiang0jason",
-          "axelnxp",
-          "JarmouniA",
-          "PetervdPerk-NXP",
-          "iuliana-prodan",
-          "ZhaoxiangJin",
-          "MaochenWang1"
-        ],
-        "pendingRequestedCount": 16,
-        "ciStatus": null,
-        "cooldownHours": 0,
-        "cooldownMet": false
-      },
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 1,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-dbaluta",
-      "type": "review_request",
-      "title": "Review requested from Daniel Baluta",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "dbaluta",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-manuargue",
-      "type": "review_request",
-      "title": "Review requested from Manuel Argüelles",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "manuargue",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-butok",
-      "type": "review_request",
-      "title": "Review requested from Andrej Butok",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "butok",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-Holt-Sun",
-      "type": "review_request",
-      "title": "Review requested from Holt Sun",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "Holt-Sun",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-mmahadevan108",
-      "type": "review_request",
-      "title": "Review requested from Mahesh Mahadevan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "mmahadevan108",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-JiafeiPan",
-      "type": "review_request",
-      "title": "Review requested from Jiafei Pan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "JiafeiPan",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-zejiang0jason",
-      "type": "review_request",
-      "title": "Review requested from zejiang0jason",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "zejiang0jason",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-axelnxp",
-      "type": "review_request",
-      "title": "Review requested from Axel Le Bourhis",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "axelnxp",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-PetervdPerk-NXP",
-      "type": "review_request",
-      "title": "Review requested from Peter van der Perk",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "PetervdPerk-NXP",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-iuliana-prodan",
-      "type": "review_request",
-      "title": "Review requested from Iulia Prodan",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "iuliana-prodan",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-ZhaoxiangJin",
-      "type": "review_request",
-      "title": "Review requested from Zhaoxiang Jin",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "ZhaoxiangJin",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3388219067-MaochenWang1",
-      "type": "review_request",
-      "title": "Review requested from Maochen Wang",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "MaochenWang1",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "ageDays": 0,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "review-request-3401980424-ngphibang",
       "type": "review_request",
       "title": "Review requested from Phi Bang Nguyen",
@@ -4802,7 +5122,7 @@
         ],
         "pendingRequestedCount": 17,
         "ciStatus": "failure",
-        "cooldownHours": 1,
+        "cooldownHours": 2,
         "cooldownMet": false
       },
       "metrics": {
@@ -6051,7 +6371,7 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 11,
+        "cooldownHours": 12,
         "cooldownMet": false
       },
       "metrics": {
@@ -6365,7 +6685,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 12,
+        "cooldownHours": 13,
         "cooldownMet": false
       },
       "metrics": {
@@ -6535,7 +6855,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 24,
+        "cooldownHours": 25,
         "cooldownMet": false
       },
       "metrics": {
@@ -6938,7 +7258,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 37,
+        "cooldownHours": 38,
         "cooldownMet": false
       },
       "metrics": {
@@ -7385,7 +7705,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 39,
+        "cooldownHours": 40,
         "cooldownMet": false
       },
       "metrics": {
@@ -7566,7 +7886,7 @@
         ],
         "pendingRequestedCount": 21,
         "ciStatus": null,
-        "cooldownHours": 41,
+        "cooldownHours": 42,
         "cooldownMet": false
       },
       "metrics": {
@@ -8432,7 +8752,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 52,
+        "cooldownHours": 53,
         "cooldownMet": false
       },
       "metrics": {
@@ -8696,7 +9016,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 53,
+        "cooldownHours": 54,
         "cooldownMet": false
       },
       "metrics": {
@@ -8792,7 +9112,7 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 53,
+        "cooldownHours": 54,
         "cooldownMet": false
       },
       "metrics": {
@@ -9227,7 +9547,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 53,
+        "cooldownHours": 54,
         "cooldownMet": false
       },
       "metrics": {
@@ -9590,37 +9910,6 @@
       }
     },
     {
-      "id": "review-request-3391408818-MaochenWang1",
-      "type": "review_request",
-      "title": "Review requested from Maochen Wang",
-      "url": "https://github.com/zephyrproject-rtos/hal_nxp/pull/689",
-      "repo": "zephyrproject-rtos/hal_nxp",
-      "contributor": "MaochenWang1",
-      "author": "ArchitAnant",
-      "state": "open",
-      "createdAt": "2026-03-12T19:23:57Z",
-      "updatedAt": "2026-03-13T20:02:43Z",
-      "ageDays": 3,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "pull_request-3364060403-axelnxp",
       "type": "pull_request",
       "title": "mcux: support ble on mcxw70",
@@ -9674,7 +9963,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 54,
+        "cooldownHours": 55,
         "cooldownMet": false
       },
       "metrics": {
@@ -9835,7 +10124,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 54,
+        "cooldownHours": 55,
         "cooldownMet": false
       },
       "metrics": {
@@ -10394,7 +10683,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 55,
+        "cooldownHours": 56,
         "cooldownMet": false
       },
       "metrics": {
@@ -10807,7 +11096,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 55,
+        "cooldownHours": 56,
         "cooldownMet": false
       },
       "metrics": {
@@ -11117,7 +11406,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 56,
+        "cooldownHours": 57,
         "cooldownMet": false
       },
       "metrics": {
@@ -11418,7 +11707,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 57,
+        "cooldownHours": 58,
         "cooldownMet": false
       },
       "metrics": {
@@ -11529,7 +11818,7 @@
         ],
         "pendingRequestedCount": 17,
         "ciStatus": null,
-        "cooldownHours": 58,
+        "cooldownHours": 59,
         "cooldownMet": false
       },
       "metrics": {
@@ -11965,7 +12254,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 58,
+        "cooldownHours": 59,
         "cooldownMet": false
       },
       "metrics": {
@@ -12431,7 +12720,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 61,
+        "cooldownHours": 62,
         "cooldownMet": false
       },
       "metrics": {
@@ -12544,7 +12833,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 61,
+        "cooldownHours": 62,
         "cooldownMet": false
       },
       "metrics": {
@@ -12756,7 +13045,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 63,
+        "cooldownHours": 64,
         "cooldownMet": false
       },
       "metrics": {
@@ -13082,7 +13371,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 63,
+        "cooldownHours": 64,
         "cooldownMet": false
       },
       "metrics": {
@@ -13191,7 +13480,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 63,
+        "cooldownHours": 64,
         "cooldownMet": false
       },
       "metrics": {
@@ -13223,116 +13512,6 @@
       "state": "open",
       "createdAt": "2026-02-24T08:38:00Z",
       "updatedAt": "2026-03-13T11:07:09Z",
-      "ageDays": 3,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "pull_request-3226894128-Qingling-Wu",
-      "type": "pull_request",
-      "title": "hostap: net: add support for NAN",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103204",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "Qingling-Wu",
-      "author": "Qingling-Wu",
-      "state": "open",
-      "createdAt": "2026-01-30T08:30:11Z",
-      "updatedAt": "2026-03-13T11:03:33Z",
-      "ageDays": 45,
-      "statusLabel": "Open PR",
-      "prStatus": {
-        "assignees": [],
-        "requestedVerdicts": [
-          {
-            "login": "jukkar",
-            "state": "COMMENTED",
-            "wasRequested": true
-          },
-          {
-            "login": "krish2718",
-            "state": "COMMENTED",
-            "wasRequested": true
-          }
-        ],
-        "otherVerdicts": [
-          {
-            "login": "nordicjm",
-            "state": "CHANGES_REQUESTED",
-            "wasRequested": false
-          },
-          {
-            "login": "fengming-ye",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "Qingling-Wu",
-            "state": "COMMENTED",
-            "wasRequested": false
-          }
-        ],
-        "pendingRequestedLogins": [
-          "kartben",
-          "nashif",
-          "rettichschnidi",
-          "jerome-pouiller",
-          "rlubos",
-          "yonsch",
-          "JarmouniA",
-          "de-nordic",
-          "Martinhoff-maker",
-          "MaochenWang1"
-        ],
-        "pendingRequestedCount": 10,
-        "ciStatus": null,
-        "cooldownHours": 63,
-        "cooldownMet": false
-      },
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 1,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
-      "id": "review-request-3226894128-MaochenWang1",
-      "type": "review_request",
-      "title": "Review requested from Maochen Wang",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103204",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "MaochenWang1",
-      "author": "Qingling-Wu",
-      "state": "open",
-      "createdAt": "2026-01-30T08:30:11Z",
-      "updatedAt": "2026-03-13T11:03:33Z",
       "ageDays": 3,
       "statusLabel": "Pending review request",
       "metrics": {
@@ -14263,7 +14442,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 80,
+        "cooldownHours": 81,
         "cooldownMet": true
       },
       "metrics": {
@@ -14508,37 +14687,6 @@
       }
     },
     {
-      "id": "review-request-3320904991-MaochenWang1",
-      "type": "review_request",
-      "title": "Review requested from Maochen Wang",
-      "url": "https://github.com/zephyrproject-rtos/hostap/pull/125",
-      "repo": "zephyrproject-rtos/hostap",
-      "contributor": "MaochenWang1",
-      "author": "valeriosetti",
-      "state": "open",
-      "createdAt": "2026-02-24T13:57:18Z",
-      "updatedAt": "2026-03-12T11:21:19Z",
-      "ageDays": 4,
-      "statusLabel": "Pending review request",
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 0,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 1,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "review-3935716478",
       "type": "review",
       "title": "crypto: mbedtls_crypto_alt: replace legacy Mbed TLS crypto with PSA API and prepare for TF-PSA-Crypto 1.0 review by Maochen Wang",
@@ -14662,7 +14810,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 91,
+        "cooldownHours": 92,
         "cooldownMet": true
       },
       "metrics": {
@@ -15014,7 +15162,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 101,
+        "cooldownHours": 102,
         "cooldownMet": true
       },
       "metrics": {
@@ -15181,7 +15329,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 102,
+        "cooldownHours": 103,
         "cooldownMet": true
       },
       "metrics": {
@@ -16001,7 +16149,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 107,
+        "cooldownHours": 108,
         "cooldownMet": true
       },
       "metrics": {
@@ -16239,7 +16387,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 108,
+        "cooldownHours": 109,
         "cooldownMet": true
       },
       "metrics": {
@@ -17399,7 +17547,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 111,
+        "cooldownHours": 112,
         "cooldownMet": true
       },
       "metrics": {
@@ -17605,7 +17753,7 @@
         ],
         "pendingRequestedCount": 8,
         "ciStatus": null,
-        "cooldownHours": 112,
+        "cooldownHours": 113,
         "cooldownMet": true
       },
       "metrics": {
@@ -17998,7 +18146,7 @@
         ],
         "pendingRequestedCount": 7,
         "ciStatus": null,
-        "cooldownHours": 113,
+        "cooldownHours": 114,
         "cooldownMet": true
       },
       "metrics": {
@@ -18080,7 +18228,7 @@
         ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 113,
+        "cooldownHours": 114,
         "cooldownMet": true
       },
       "metrics": {
@@ -18255,7 +18403,7 @@
         ],
         "pendingRequestedCount": 12,
         "ciStatus": null,
-        "cooldownHours": 113,
+        "cooldownHours": 114,
         "cooldownMet": true
       },
       "metrics": {
@@ -18530,7 +18678,7 @@
         ],
         "pendingRequestedCount": 16,
         "ciStatus": null,
-        "cooldownHours": 114,
+        "cooldownHours": 115,
         "cooldownMet": true
       },
       "metrics": {
@@ -19088,7 +19236,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 116,
+        "cooldownHours": 117,
         "cooldownMet": true
       },
       "metrics": {
@@ -19570,7 +19718,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 116,
+        "cooldownHours": 117,
         "cooldownMet": true
       },
       "metrics": {
@@ -19829,7 +19977,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 118,
+        "cooldownHours": 119,
         "cooldownMet": true
       },
       "metrics": {
@@ -19881,7 +20029,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 119,
+        "cooldownHours": 120,
         "cooldownMet": true
       },
       "metrics": {
@@ -20129,7 +20277,7 @@
         ],
         "pendingRequestedCount": 15,
         "ciStatus": null,
-        "cooldownHours": 120,
+        "cooldownHours": 121,
         "cooldownMet": true
       },
       "metrics": {
@@ -20549,7 +20697,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 120,
+        "cooldownHours": 121,
         "cooldownMet": true
       },
       "metrics": {
@@ -20854,7 +21002,7 @@
         ],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 120,
+        "cooldownHours": 121,
         "cooldownMet": true
       },
       "metrics": {
@@ -21731,7 +21879,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 130,
+        "cooldownHours": 131,
         "cooldownMet": true
       },
       "metrics": {
@@ -22212,7 +22360,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 131,
+        "cooldownHours": 132,
         "cooldownMet": true
       },
       "metrics": {
@@ -22458,7 +22606,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 134,
+        "cooldownHours": 135,
         "cooldownMet": true
       },
       "metrics": {
@@ -23267,7 +23415,7 @@
         ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 136,
+        "cooldownHours": 137,
         "cooldownMet": true
       },
       "metrics": {
@@ -23893,7 +24041,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 137,
+        "cooldownHours": 138,
         "cooldownMet": true
       },
       "metrics": {
@@ -24116,7 +24264,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 137,
+        "cooldownHours": 138,
         "cooldownMet": true
       },
       "metrics": {
@@ -24675,65 +24823,6 @@
       }
     },
     {
-      "id": "pull_request-3363186805-gangli02",
-      "type": "pull_request",
-      "title": "samples: net: add wireless coex shell sample",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105031",
-      "repo": "zephyrproject-rtos/zephyr",
-      "contributor": "gangli02",
-      "author": "gangli02",
-      "state": "open",
-      "createdAt": "2026-03-06T10:25:59Z",
-      "updatedAt": "2026-03-10T08:02:31Z",
-      "ageDays": 10,
-      "statusLabel": "Open PR",
-      "prStatus": {
-        "assignees": [],
-        "requestedVerdicts": [],
-        "otherVerdicts": [
-          {
-            "login": "jukkar",
-            "state": "COMMENTED",
-            "wasRequested": false
-          },
-          {
-            "login": "gangli02",
-            "state": "COMMENTED",
-            "wasRequested": false
-          }
-        ],
-        "pendingRequestedLogins": [
-          "kartben",
-          "nashif",
-          "pdgendt",
-          "ssharks",
-          "rlubos",
-          "JarmouniA"
-        ],
-        "pendingRequestedCount": 6,
-        "ciStatus": null,
-        "cooldownHours": 138,
-        "cooldownMet": true
-      },
-      "metrics": {
-        "openAssignedIssues": 0,
-        "closedIssues": 0,
-        "openAuthoredPrs": 1,
-        "draftPrs": 0,
-        "mergedPrs": 0,
-        "closedUnmergedPrs": 0,
-        "reviewsSubmitted": 0,
-        "pendingReviewRequests": 0,
-        "staleItems": 0,
-        "reviewApproved": 0,
-        "reviewChangesRequested": 0,
-        "reviewCommented": 0,
-        "reviewSelfAuthored": 0,
-        "reviewTeamAuthored": 0,
-        "reviewExternalAuthored": 0
-      }
-    },
-    {
       "id": "review-3920509397",
       "type": "review",
       "title": "samples: net: add wireless coex shell sample review by gangli02",
@@ -25286,7 +25375,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 140,
+        "cooldownHours": 141,
         "cooldownMet": true
       },
       "metrics": {
@@ -25954,7 +26043,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 144,
+        "cooldownHours": 145,
         "cooldownMet": true
       },
       "metrics": {
@@ -26185,7 +26274,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 146,
+        "cooldownHours": 147,
         "cooldownMet": true
       },
       "metrics": {
@@ -26749,7 +26838,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 161,
+        "cooldownHours": 162,
         "cooldownMet": true
       },
       "metrics": {
@@ -26908,7 +26997,7 @@
         ],
         "pendingRequestedCount": 2,
         "ciStatus": null,
-        "cooldownHours": 162,
+        "cooldownHours": 163,
         "cooldownMet": true
       },
       "metrics": {
@@ -26991,7 +27080,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 163,
+        "cooldownHours": 164,
         "cooldownMet": true
       },
       "metrics": {
@@ -27164,7 +27253,7 @@
         ],
         "pendingRequestedCount": 16,
         "ciStatus": null,
-        "cooldownHours": 166,
+        "cooldownHours": 167,
         "cooldownMet": true
       },
       "metrics": {
@@ -27546,7 +27635,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 169,
+        "cooldownHours": 170,
         "cooldownMet": true
       },
       "metrics": {
@@ -27636,7 +27725,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 193,
+        "cooldownHours": 194,
         "cooldownMet": true
       },
       "metrics": {
@@ -27949,7 +28038,7 @@
         ],
         "pendingRequestedCount": 6,
         "ciStatus": null,
-        "cooldownHours": 222,
+        "cooldownHours": 223,
         "cooldownMet": true
       },
       "metrics": {
@@ -28260,7 +28349,7 @@
         ],
         "pendingRequestedCount": 5,
         "ciStatus": null,
-        "cooldownHours": 233,
+        "cooldownHours": 234,
         "cooldownMet": true
       },
       "metrics": {
@@ -28332,7 +28421,7 @@
         ],
         "pendingRequestedCount": 13,
         "ciStatus": null,
-        "cooldownHours": 235,
+        "cooldownHours": 236,
         "cooldownMet": true
       },
       "metrics": {
@@ -28729,7 +28818,7 @@
         ],
         "pendingRequestedCount": 14,
         "ciStatus": null,
-        "cooldownHours": 255,
+        "cooldownHours": 256,
         "cooldownMet": true
       },
       "metrics": {
@@ -29091,7 +29180,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 257,
+        "cooldownHours": 258,
         "cooldownMet": true
       },
       "metrics": {
@@ -29143,7 +29232,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 258,
+        "cooldownHours": 259,
         "cooldownMet": true
       },
       "metrics": {
@@ -29195,7 +29284,7 @@
         ],
         "pendingRequestedCount": 10,
         "ciStatus": null,
-        "cooldownHours": 259,
+        "cooldownHours": 260,
         "cooldownMet": true
       },
       "metrics": {
@@ -29723,7 +29812,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 273,
+        "cooldownHours": 274,
         "cooldownMet": true
       },
       "metrics": {
@@ -29796,7 +29885,7 @@
         ],
         "pendingRequestedCount": 9,
         "ciStatus": null,
-        "cooldownHours": 274,
+        "cooldownHours": 275,
         "cooldownMet": true
       },
       "metrics": {
@@ -29992,7 +30081,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 275,
+        "cooldownHours": 276,
         "cooldownMet": true
       },
       "metrics": {
@@ -30173,7 +30262,7 @@
         ],
         "pendingRequestedCount": 3,
         "ciStatus": null,
-        "cooldownHours": 282,
+        "cooldownHours": 283,
         "cooldownMet": true
       },
       "metrics": {
@@ -30326,7 +30415,7 @@
         ],
         "pendingRequestedCount": 1,
         "ciStatus": null,
-        "cooldownHours": 287,
+        "cooldownHours": 288,
         "cooldownMet": true
       },
       "metrics": {
@@ -30373,7 +30462,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 289,
+        "cooldownHours": 290,
         "cooldownMet": true
       },
       "metrics": {
@@ -30533,7 +30622,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 301,
+        "cooldownHours": 302,
         "cooldownMet": true
       },
       "metrics": {
@@ -30597,7 +30686,7 @@
         ],
         "pendingRequestedCount": 11,
         "ciStatus": null,
-        "cooldownHours": 302,
+        "cooldownHours": 303,
         "cooldownMet": true
       },
       "metrics": {
@@ -31147,7 +31236,7 @@
         ],
         "pendingRequestedCount": 18,
         "ciStatus": null,
-        "cooldownHours": 304,
+        "cooldownHours": 305,
         "cooldownMet": true
       },
       "metrics": {
@@ -31591,7 +31680,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 307,
+        "cooldownHours": 308,
         "cooldownMet": true
       },
       "metrics": {
@@ -31664,7 +31753,7 @@
         "pendingRequestedLogins": [],
         "pendingRequestedCount": 0,
         "ciStatus": null,
-        "cooldownHours": 331,
+        "cooldownHours": 332,
         "cooldownMet": true
       },
       "metrics": {
@@ -31866,7 +31955,7 @@
         ],
         "pendingRequestedCount": 4,
         "ciStatus": null,
-        "cooldownHours": 5011,
+        "cooldownHours": 5012,
         "cooldownMet": true
       },
       "metrics": {
@@ -31921,10 +32010,10 @@
   ],
   "syncHealth": {
     "source": "cache",
-    "generatedAt": "2026-03-16T02:41:21.712Z",
+    "generatedAt": "2026-03-16T03:36:58.200Z",
     "freshnessMinutes": 0,
     "searchSamples": 25275,
-    "detailSamples": 1284,
+    "detailSamples": 1285,
     "liveEnabled": false
   },
   "filterOptions": {
@@ -32624,6 +32713,6 @@
     "hasToken": false,
     "connectionStatus": "configured",
     "message": "Snapshot aggregated from daily files by GitHub Actions. No token is available in the browser.",
-    "checkedAt": "2026-03-16T02:41:21.712Z"
+    "checkedAt": "2026-03-16T03:36:58.200Z"
   }
 }

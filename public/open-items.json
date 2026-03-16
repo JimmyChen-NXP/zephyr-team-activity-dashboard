@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-03-16T02:41:20.893Z",
+  "collectedAt": "2026-03-16T03:36:57.403Z",
   "repos": [
     "zephyrproject-rtos/zephyr",
     "zephyrproject-rtos/west",
@@ -2961,6 +2961,235 @@
     },
     {
       "type": "pr",
+      "id": 3316775084,
+      "number": 104416,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "drivers: sensor: hx711_spi: Add spi driver for HX711",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104416",
+      "author": "TerryGeng",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-02-23T16:36:55Z",
+      "updatedAt": "2026-03-16T03:34:29Z",
+      "mergedAt": null,
+      "assignees": [
+        "MaureenHelm"
+      ],
+      "requestedReviewers": [
+        "avisconti",
+        "teburd",
+        "nashif",
+        "jeppenodgaard",
+        "yperess",
+        "ubieda",
+        "tristan-google",
+        "asemjonovs"
+      ],
+      "ciStatus": "pending",
+      "labels": [
+        "area: Sensors",
+        "area: Tests",
+        "area: Devicetree Binding"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3226894128,
+      "number": 103204,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "hostap: net: add support for NAN",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103204",
+      "author": "Qingling-Wu",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-01-30T08:30:11Z",
+      "updatedAt": "2026-03-16T03:34:09Z",
+      "mergedAt": null,
+      "assignees": [
+        "jukkar",
+        "krish2718"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "rettichschnidi",
+        "jukkar",
+        "jerome-pouiller",
+        "mmahadevan108",
+        "rlubos",
+        "yonsch",
+        "JarmouniA",
+        "de-nordic",
+        "Martinhoff-maker",
+        "krish2718",
+        "ZhaoxiangJin",
+        "MaochenWang1"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "area: Networking",
+        "area: Samples",
+        "platform: NXP",
+        "area: Tests",
+        "platform: Silabs",
+        "area: Wi-Fi",
+        "area: MCUBoot",
+        "manifest",
+        "manifest-hal_nxp",
+        "manifest-hostap",
+        "DNM (manifest)",
+        "platform: Ameba"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3388219067,
+      "number": 105341,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "NXP support edac mecc driver",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
+      "author": "yongxu-wang15",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-12T08:35:15Z",
+      "updatedAt": "2026-03-16T03:33:44Z",
+      "mergedAt": null,
+      "assignees": [
+        "finikorg"
+      ],
+      "requestedReviewers": [
+        "dbaluta",
+        "nashif",
+        "manuargue",
+        "butok",
+        "finikorg",
+        "Holt-Sun",
+        "bperseghetti",
+        "mmahadevan108",
+        "JiafeiPan",
+        "zejiang0jason",
+        "axelnxp",
+        "JarmouniA",
+        "PetervdPerk-NXP",
+        "iuliana-prodan",
+        "ZhaoxiangJin",
+        "MaochenWang1"
+      ],
+      "ciStatus": "pending",
+      "labels": [
+        "platform: NXP",
+        "area: Tests",
+        "area: Devicetree Binding",
+        "area: EDAC",
+        "platform: NXP MCU",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3363186805,
+      "number": 105031,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "samples: net: add wireless coex shell sample",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105031",
+      "author": "gangli02",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-06T10:25:59Z",
+      "updatedAt": "2026-03-16T03:09:48Z",
+      "mergedAt": null,
+      "assignees": [
+        "jukkar",
+        "rlubos"
+      ],
+      "requestedReviewers": [
+        "kartben",
+        "nashif",
+        "pdgendt",
+        "ssharks",
+        "rlubos",
+        "JarmouniA",
+        "MaochenWang1"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "area: Networking",
+        "area: Samples"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 3387182927,
+      "number": 105333,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "west.yml: hal_realtek: add ameba scripts requirements.txt",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105333",
+      "author": "minyuan-xue",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-12T03:15:37Z",
+      "updatedAt": "2026-03-16T03:08:00Z",
+      "mergedAt": null,
+      "assignees": [
+        "zjian-zhang",
+        "Derek-RTK"
+      ],
+      "requestedReviewers": [
+        "zjian-zhang",
+        "Derek-RTK"
+      ],
+      "ciStatus": "failure",
+      "labels": [
+        "manifest",
+        "size: XS",
+        "manifest-hal_realtek",
+        "DNM (manifest)",
+        "platform: Ameba"
+      ]
+    },
+    {
+      "type": "pr",
+      "id": 2718292133,
+      "number": 94085,
+      "repo": "zephyrproject-rtos/zephyr",
+      "title": "usb: host: class: support for usb host video class",
+      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
+      "author": "AidenHu",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2025-08-04T14:52:17Z",
+      "updatedAt": "2026-03-16T02:51:01Z",
+      "mergedAt": null,
+      "assignees": [
+        "jfischer-no"
+      ],
+      "requestedReviewers": [
+        "mbolivar",
+        "kartben",
+        "nashif",
+        "jfischer-no",
+        "mmahadevan108",
+        "loicpoulain",
+        "dleach02",
+        "JarmouniA",
+        "avolmat-st",
+        "rruuaanng",
+        "decsny",
+        "tmon-nordic"
+      ],
+      "ciStatus": null,
+      "labels": [
+        "area: USB",
+        "area: Samples",
+        "area: Devicetree",
+        "area: Tests",
+        "area: Video",
+        "area: Devicetree Binding",
+        "area: Boards/SoCs"
+      ]
+    },
+    {
+      "type": "pr",
       "id": 3352216738,
       "number": 104872,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3380,47 +3609,6 @@
     },
     {
       "type": "pr",
-      "id": 2718292133,
-      "number": 94085,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "usb: host: class: support for usb host video class",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/94085",
-      "author": "AidenHu",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2025-08-04T14:52:17Z",
-      "updatedAt": "2026-03-16T02:22:10Z",
-      "mergedAt": null,
-      "assignees": [
-        "jfischer-no"
-      ],
-      "requestedReviewers": [
-        "mbolivar",
-        "kartben",
-        "nashif",
-        "jfischer-no",
-        "mmahadevan108",
-        "loicpoulain",
-        "dleach02",
-        "JarmouniA",
-        "avolmat-st",
-        "rruuaanng",
-        "decsny",
-        "tmon-nordic"
-      ],
-      "ciStatus": "pending",
-      "labels": [
-        "area: USB",
-        "area: Samples",
-        "area: Devicetree",
-        "area: Tests",
-        "area: Video",
-        "area: Devicetree Binding",
-        "area: Boards/SoCs"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3356866095,
       "number": 104936,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3768,39 +3956,6 @@
     },
     {
       "type": "pr",
-      "id": 3316775084,
-      "number": 104416,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: sensor: hx711: Add spi driver for HX711",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/104416",
-      "author": "TerryGeng",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-23T16:36:55Z",
-      "updatedAt": "2026-03-16T01:53:41Z",
-      "mergedAt": null,
-      "assignees": [
-        "MaureenHelm"
-      ],
-      "requestedReviewers": [
-        "avisconti",
-        "teburd",
-        "nashif",
-        "jeppenodgaard",
-        "yperess",
-        "ubieda",
-        "tristan-google",
-        "asemjonovs"
-      ],
-      "ciStatus": null,
-      "labels": [
-        "area: Sensors",
-        "area: Tests",
-        "area: Devicetree Binding"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3080605738,
       "number": 100652,
       "repo": "zephyrproject-rtos/zephyr",
@@ -3838,50 +3993,6 @@
         "DNM (manifest)",
         "Binary Blobs Added",
         "Binary Blobs Modified",
-        "area: Boards/SoCs"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3388219067,
-      "number": 105341,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "NXP support edac mecc driver",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105341",
-      "author": "yongxu-wang15",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-12T08:35:15Z",
-      "updatedAt": "2026-03-16T01:45:51Z",
-      "mergedAt": null,
-      "assignees": [
-        "finikorg"
-      ],
-      "requestedReviewers": [
-        "dbaluta",
-        "nashif",
-        "manuargue",
-        "butok",
-        "finikorg",
-        "Holt-Sun",
-        "bperseghetti",
-        "mmahadevan108",
-        "JiafeiPan",
-        "zejiang0jason",
-        "axelnxp",
-        "JarmouniA",
-        "PetervdPerk-NXP",
-        "iuliana-prodan",
-        "ZhaoxiangJin",
-        "MaochenWang1"
-      ],
-      "ciStatus": null,
-      "labels": [
-        "platform: NXP",
-        "area: Tests",
-        "area: Devicetree Binding",
-        "area: EDAC",
-        "platform: NXP MCU",
         "area: Boards/SoCs"
       ]
     },
@@ -6329,127 +6440,6 @@
     },
     {
       "type": "pr",
-      "id": 3399572418,
-      "number": 105509,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "Feature/configure ramp",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/105509",
-      "author": "jilaypandya",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-14T18:17:27Z",
-      "updatedAt": "2026-03-15T15:12:04Z",
-      "mergedAt": null,
-      "assignees": [
-        "MaureenHelm"
-      ],
-      "requestedReviewers": [
-        "ttmut",
-        "andre-stefanov",
-        "faxe1008",
-        "MaureenHelm",
-        "dipakgmx",
-        "ozersa",
-        "bjarki-andreasen",
-        "jbehrensnx",
-        "yasinustunerg",
-        "petejohanson-adi"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "platform: ADI",
-        "area: Stepper"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3194567366,
-      "number": 102626,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: display: misc fixes",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/102626",
-      "author": "ngphibang",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-01-21T10:00:35Z",
-      "updatedAt": "2026-03-15T14:58:09Z",
-      "mergedAt": null,
-      "assignees": [
-        "JarmouniA"
-      ],
-      "requestedReviewers": [
-        "dbaluta",
-        "nashif",
-        "manuargue",
-        "butok",
-        "VynDragon",
-        "Holt-Sun",
-        "jfischer-no",
-        "mmahadevan108",
-        "loicpoulain",
-        "zejiang0jason",
-        "danieldegrasse",
-        "KATE-WANG-NXP"
-      ],
-      "ciStatus": null,
-      "labels": [
-        "area: Samples",
-        "platform: NXP",
-        "area: Tests",
-        "area: Display",
-        "Release Notes",
-        "area: Video",
-        "area: Devicetree Binding"
-      ]
-    },
-    {
-      "type": "pr",
-      "id": 3270279867,
-      "number": 103887,
-      "repo": "zephyrproject-rtos/zephyr",
-      "title": "drivers: display: add new driver for qemu ramfb",
-      "url": "https://github.com/zephyrproject-rtos/zephyr/pull/103887",
-      "author": "Maxzuru",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-02-11T06:39:06Z",
-      "updatedAt": "2026-03-15T14:44:56Z",
-      "mergedAt": null,
-      "assignees": [
-        "JarmouniA"
-      ],
-      "requestedReviewers": [
-        "kartben",
-        "nashif",
-        "npitre",
-        "ruuddw",
-        "VynDragon",
-        "kgugala",
-        "faxe1008",
-        "evgeniy-paltsev",
-        "tgorochowik",
-        "katsuster",
-        "tejlmand",
-        "fkokosinski",
-        "danieldegrasse",
-        "dcpleung",
-        "avolmat-st",
-        "KATE-WANG-NXP",
-        "wearyzen",
-        "tbr-tt",
-        "duynguyenxa"
-      ],
-      "ciStatus": "failure",
-      "labels": [
-        "area: Samples",
-        "area: Display",
-        "area: Devicetree Binding",
-        "area: LVGL",
-        "area: Boards/SoCs"
-      ]
-    },
-    {
-      "type": "pr",
       "id": 3355050586,
       "number": 930,
       "repo": "zephyrproject-rtos/west",
@@ -6722,6 +6712,24 @@
     },
     {
       "type": "pr",
+      "id": 3391408818,
+      "number": 689,
+      "repo": "zephyrproject-rtos/hal_nxp",
+      "title": "wifi_nxp: wlcmgr: replace pure PRINTF with configurable log macros",
+      "url": "https://github.com/zephyrproject-rtos/hal_nxp/pull/689",
+      "author": "ArchitAnant",
+      "state": "open",
+      "isDraft": false,
+      "createdAt": "2026-03-12T19:23:57Z",
+      "updatedAt": "2026-03-16T03:02:35Z",
+      "mergedAt": null,
+      "assignees": [],
+      "requestedReviewers": [],
+      "ciStatus": null,
+      "labels": []
+    },
+    {
+      "type": "pr",
       "id": 3357706609,
       "number": 681,
       "repo": "zephyrproject-rtos/hal_nxp",
@@ -6736,26 +6744,6 @@
       "assignees": [],
       "requestedReviewers": [
         "mmahadevan108"
-      ],
-      "ciStatus": null,
-      "labels": []
-    },
-    {
-      "type": "pr",
-      "id": 3391408818,
-      "number": 689,
-      "repo": "zephyrproject-rtos/hal_nxp",
-      "title": "wifi_nxp: wlcmgr: replace pure PRINTF with configurable log macros",
-      "url": "https://github.com/zephyrproject-rtos/hal_nxp/pull/689",
-      "author": "ArchitAnant",
-      "state": "open",
-      "isDraft": false,
-      "createdAt": "2026-03-12T19:23:57Z",
-      "updatedAt": "2026-03-13T20:02:43Z",
-      "mergedAt": null,
-      "assignees": [],
-      "requestedReviewers": [
-        "MaochenWang1"
       ],
       "ciStatus": null,
       "labels": []
@@ -6924,6 +6912,27 @@
     },
     {
       "type": "pr",
+      "id": 3320904991,
+      "number": 125,
+      "repo": "zephyrproject-rtos/hostap",
+      "title": "crypto: mbedtls_crypto_alt: replace legacy Mbed TLS crypto with PSA API and prepare for TF-PSA-Crypto 1.0",
+      "url": "https://github.com/zephyrproject-rtos/hostap/pull/125",
+      "author": "valeriosetti",
+      "state": "open",
+      "isDraft": true,
+      "createdAt": "2026-02-24T13:57:18Z",
+      "updatedAt": "2026-03-16T03:24:05Z",
+      "mergedAt": null,
+      "assignees": [],
+      "requestedReviewers": [
+        "rlubos",
+        "MaochenWang1"
+      ],
+      "ciStatus": null,
+      "labels": []
+    },
+    {
+      "type": "pr",
       "id": 3226889031,
       "number": 119,
       "repo": "zephyrproject-rtos/hostap",
@@ -6960,27 +6969,6 @@
         "MaochenWang1"
       ],
       "ciStatus": "success",
-      "labels": []
-    },
-    {
-      "type": "pr",
-      "id": 3320904991,
-      "number": 125,
-      "repo": "zephyrproject-rtos/hostap",
-      "title": "crypto: mbedtls_crypto_alt: replace legacy Mbed TLS crypto with PSA API and prepare for TF-PSA-Crypto 1.0",
-      "url": "https://github.com/zephyrproject-rtos/hostap/pull/125",
-      "author": "valeriosetti",
-      "state": "open",
-      "isDraft": true,
-      "createdAt": "2026-02-24T13:57:18Z",
-      "updatedAt": "2026-03-12T11:21:19Z",
-      "mergedAt": null,
-      "assignees": [],
-      "requestedReviewers": [
-        "rlubos",
-        "MaochenWang1"
-      ],
-      "ciStatus": null,
       "labels": []
     },
     {
