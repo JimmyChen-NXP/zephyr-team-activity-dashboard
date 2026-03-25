@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { formatDistanceToNow, formatISO9075 } from "date-fns";
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { ActivityPageNav } from "@/components/activity-page-nav";
 import { AuthoredPrsTable } from "@/components/authored-prs-table";
@@ -41,6 +41,112 @@ function formatMetric(value: number | null, suffix = "") {
   return `${value}${suffix}`;
 }
 
+type ContributorFilterDropdownProps = {
+  contributorOptions: DashboardData["filterOptions"]["contributors"];
+  filters: DashboardFilters;
+  onOpenChange: (isOpen: boolean) => void;
+  pathname: string;
+  selectedContributor: string;
+};
+
+function ContributorFilterDropdown({
+  contributorOptions,
+  filters,
+  onOpenChange,
+  pathname,
+  selectedContributor,
+}: ContributorFilterDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const labelId = useId();
+  const panelId = useId();
+
+  useEffect(() => {
+    onOpenChange(isOpen);
+  }, [isOpen, onOpenChange]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!(event.target instanceof Node)) {
+        return;
+      }
+
+      if (!rootRef.current?.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
+  return (
+    <div className="filter-field" ref={rootRef}>
+      <span id={labelId}>Contributors</span>
+      <div className={clsx("filter-dropdown", isOpen && "is-open")}>
+        <button
+          ref={triggerRef}
+          type="button"
+          className="filter-dropdown-trigger"
+          aria-controls={panelId}
+          aria-expanded={isOpen}
+          aria-labelledby={labelId}
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          <span>{selectedContributor}</span>
+          <span className="filter-dropdown-caret" aria-hidden="true">▾</span>
+        </button>
+
+        <div
+          id={panelId}
+          className="filter-dropdown-panel"
+          role="group"
+          aria-labelledby={labelId}
+          hidden={!isOpen}
+        >
+          <a
+            className="filter-dropdown-clear"
+            href={buildDashboardHref(pathname, { ...filters, contributors: [], refresh: false })}
+          >
+            All contributors
+          </a>
+          <div className="filter-dropdown-options">
+            {contributorOptions.map((option) => (
+              <div key={option.login} className="filter-dropdown-option">
+                <input
+                  id={`contributor-${option.login}`}
+                  type="checkbox"
+                  name="contributor"
+                  value={option.login}
+                  defaultChecked={filters.contributors.includes(option.login)}
+                />
+                <label htmlFor={`contributor-${option.login}`}>{option.name}</label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot = false }: DashboardShellProps) {
   const actionPath = withBasePath(pathname);
@@ -60,6 +166,7 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
   );
 
   const [localContributor, setLocalContributor] = useState<string | null>(null);
+  const [isContributorDropdownOpen, setIsContributorDropdownOpen] = useState(false);
   const detailItems = localContributor
     ? viewData.activityItems.filter((item) => item.contributor === localContributor)
     : viewData.activityItems;
@@ -79,7 +186,7 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
         <ActivityPageNav currentView={view} filters={filters} />
       </div>
 
-      <section className="panel filter-panel">
+      <section className={clsx("panel", "filter-panel", isContributorDropdownOpen && "filter-panel-overlay-open")}>
         <div className="panel-header compact">
           <div>
             <p className="eyebrow">Controls</p>
@@ -99,31 +206,13 @@ export function DashboardShell({ data, filters, view, pathname, isHostedSnapshot
             </select>
           </label>
 
-          <div className="filter-field">
-            <span id="contributors-filter-label">Contributors</span>
-            <details className="filter-dropdown" aria-labelledby="contributors-filter-label">
-              <summary>{selectedContributor}</summary>
-              <div className="filter-dropdown-panel">
-                <a className="filter-dropdown-clear" href={buildDashboardHref(pathname, { ...filters, contributors: [], refresh: false })}>
-                  All contributors
-                </a>
-                <div className="filter-dropdown-options">
-                  {contributorOptions.map((option) => (
-                    <div key={option.login} className="filter-dropdown-option">
-                      <input
-                        id={`contributor-${option.login}`}
-                        type="checkbox"
-                        name="contributor"
-                        value={option.login}
-                        defaultChecked={filters.contributors.includes(option.login)}
-                      />
-                      <label htmlFor={`contributor-${option.login}`}>{option.name}</label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </details>
-          </div>
+          <ContributorFilterDropdown
+            contributorOptions={contributorOptions}
+            filters={filters}
+            onOpenChange={setIsContributorDropdownOpen}
+            pathname={pathname}
+            selectedContributor={selectedContributor}
+          />
 
           <label>
             <span>Repository</span>
